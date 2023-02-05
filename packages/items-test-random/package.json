@@ -1,0 +1,16 @@
+{
+  "name": "items-test-random",
+  "version": "1.0.0",
+  "description": "",
+  "main": "spec/gremlins-test.js",
+  "scripts": {
+    "test:random": "node run-gremlins.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gremlins.js": "^2.2.0",
+    "path": "^0.12.7",
+    "puppeteer": "^13.5.2"
+  }
+}

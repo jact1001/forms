@@ -1,0 +1,68 @@
+@import '../../index';
+
+.ml-search-bar {
+  background-color: $ml-color-yellow-primary;
+  padding: 8px;
+  text-align: center;
+  height: 40px;
+
+  &__input {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 0;
+    width: 60%;
+    height: 100%;
+    padding: 0 16px;
+    font-size: 1.125rem;
+    max-width: 67rem;
+
+    ::placeholder {
+      color: $ml-color-gray-Lighter;
+    }
+  }
+
+  &__button {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 0;
+    height: 100%;
+    width: 40px;
+    vertical-align: bottom;
+    cursor: pointer;
+  }
+
+  &__logo {
+    vertical-align: bottom;
+    margin-right: 8px;
+  }
+
+  &__icon {
+    margin: 0 4px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .ml-search-bar {
+    &__input {
+      width: 70%;
+    }
+
+    &__logo {
+      margin-right: 16px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .ml-search-bar {
+    &__input {
+      width: 80%;
+    }
+
+    &__logo {
+      margin-right: 32px;
+    }
+  }
+}

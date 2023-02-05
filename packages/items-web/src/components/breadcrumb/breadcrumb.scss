@@ -1,0 +1,13 @@
+@import '../../index';
+
+.ml-breadcrumb{
+  margin: 16px auto;
+  font-size: 0.875rem;
+  color: $ml-color-gray-light;
+  max-width: 1180px;
+  padding: 0 10px 0 10px;
+
+  &__item{
+    margin-right: 5px;
+  }
+}

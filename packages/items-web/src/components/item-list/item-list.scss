@@ -1,0 +1,18 @@
+@import "../../index";
+
+.list {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__list-wrapper {
+    list-style: none;
+    padding: 0 16px;
+    background-color: white;
+  }
+
+  &__breadcrumb {
+    max-width: 1200px;
+    margin: 15px auto;
+    background-color: inherit;
+  }
+}

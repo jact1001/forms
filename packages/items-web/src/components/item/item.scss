@@ -1,0 +1,50 @@
+@import "../../index";
+.ml-item {
+  background-color: $ml-color-white-primary;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+
+  &__image-wrapper{
+    padding: 16px 16px 16px 0;
+
+    &--image{
+      border-radius: 4px;
+    }
+  }
+
+  &__detail-wrapper {
+    width: 70%;
+    color: $ml-color-gray-dark;
+
+    &__title{
+      font-size: 1.5rem;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+
+      strong {
+        margin-right: 8px;
+      }
+    }
+    &__link{
+      text-decoration: none;
+      color: inherit;
+    }
+    &__description{
+      font-weight: 300;
+      font-size: 1.125rem;
+    }
+  }
+
+  &__address-wrapper {
+    width: 10%;
+  }
+
+  &__item-address{
+    padding: 10px 15px 0 0;
+    font-style: inherit;
+    font-size: 0.75rem;
+  }
+}

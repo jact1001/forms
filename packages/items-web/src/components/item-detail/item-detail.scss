@@ -1,0 +1,149 @@
+@import "../../index";
+
+.ml-item-detail {
+  max-width: 1200px;
+  margin: 16px auto;
+  background-color: $ml-color-white-primary;
+  border-radius: 5px;
+
+  &__message {
+    text-align: center;
+  }
+
+  &__item-wrapper {
+    padding: 0 0 16px;
+  }
+
+  &__product-detail {
+    padding: 0 4px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &__title-wrapper {
+    width: 16rem;
+    margin: 0 32px 32px;
+
+    &__sold {
+      font-size: 0.875rem;
+      color: $ml-color-gray-dark;
+      margin: 32px 0 16px;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+      margin: 0 0 32px;
+    }
+
+    &__price {
+      font-size: 2.875rem;
+    }
+
+    &__button {
+      margin-top: 32px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 14rem;
+      background-color: $ml-color-green-primary;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1rem;
+    }
+  }
+
+  &__image {
+    padding-top: 16px;
+    margin: 16px 0 0 16px;
+    height: 100%;
+    max-width: 680px;
+    width: 100%;
+  }
+
+  &__breadcrumb {
+    max-width: 1200px;
+    margin: 16px auto;
+    background-color: inherit;
+  }
+
+  &__detail {
+    padding: 0 32px;
+  }
+
+  &__description {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    color: $ml-color-gray-light;
+    white-space: pre-line;
+    word-wrap: anywhere;
+    font-size: 1rem;
+    max-width: 50rem;
+  }
+
+  &__title-description {
+    color: $ml-color-gray-dark;
+    margin: 32px 0 32px;
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+
+  &__description-empty {
+    height: 16px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .ml-item-detail {
+
+    &__product-detail {
+      padding: 0 5px;
+    }
+
+    &__title {
+      font-weight: 600;
+      font-size: 1.375rem;
+
+      &--description {
+        padding-left: 5px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 945px) {
+  .ml-item-detail {
+
+    &__product-detail {
+      flex-direction: row;
+    }
+
+    &__title-wrapper {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .ml-item-detail {
+
+    &__product-detail {
+      padding: 0 15px;
+    }
+
+    &__title {
+      font-weight: 600;
+      font-size: 1.375rem;
+
+      &--description {
+        padding-left: 15px;
+        font-weight: 600;
+      }
+    }
+  }
+}
