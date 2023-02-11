@@ -6,13 +6,6 @@ import {SignatureResponseFilter} from "../infraestructure/filter/signature-filte
 
 export const rootDir = Path.resolve(__dirname,'../');
 
-console.log('rootDir', rootDir);
-/*@Configuration({
-    rootDir,
-    port: 5000
-})*/
-
-
 @Configuration(
     {
         rootDir: Path.resolve(__dirname, '../'),

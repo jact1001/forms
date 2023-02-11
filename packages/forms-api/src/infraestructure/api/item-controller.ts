@@ -8,7 +8,6 @@ export class ItemController {
     public constructor(private readonly _itemUseCase: ItemUseCase) {
     }
 
-
     @Get("/")
     async getItems(@QueryParams("q") key: string,): Promise<IResult> {
         return await this._itemUseCase.searchItems(key);

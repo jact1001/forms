@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:bdt": "node ../../node_modules/cucumber/bin/cucumber-js -f ../../node_modules/cucumber-pretty"
+    "test:bdt": "node ../../../node_modules/cucumber/bin/cucumber-js -f ../../node_modules/cucumber-pretty"
   },
   "author": "",
   "license": "ISC",
