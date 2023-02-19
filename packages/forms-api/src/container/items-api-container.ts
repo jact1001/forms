@@ -5,6 +5,7 @@ import * as Path from "path";
 import {SignatureResponseFilter} from "../infraestructure/filter/signature-filter";
 
 export const rootDir = Path.resolve(__dirname,'../');
+const config = require("dotenv").config({path: "../../.env"});
 
 @Configuration(
     {
@@ -32,7 +33,11 @@ export const rootDir = Path.resolve(__dirname,'../');
             {
                 path: "/api-docs"
             }
-        ]
+        ],
+        mongoose: {
+            url: config.parsed.mongoose_url,
+            connectionOptions: {}
+        },
     }
 )
 export class ItemsApiContainer {
