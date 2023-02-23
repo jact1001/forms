@@ -8,8 +8,7 @@ import {ItemRepository} from "../../../infraestructure/repository/item-repositor
 @Scope('request')
 export class ItemService implements OnDestroy {
 
-    constructor(private readonly itemRepository: ItemRepository) {
-    }
+    constructor(private readonly itemRepository: ItemRepository) {}
 
     public async searchItems(keyWord: string): Promise<IResult> {
         let result: IResult = {

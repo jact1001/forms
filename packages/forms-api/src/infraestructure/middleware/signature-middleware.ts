@@ -1,7 +1,6 @@
 import {Req, Res} from "@tsed/common";
 import {Context} from "@tsed/platform-params";
 import {Middleware, MiddlewareMethods} from "@tsed/platform-middlewares";
-import {Forbidden, Unauthorized} from "@tsed/exceptions";
 
 @Middleware()
 export class SignatureMiddleware implements MiddlewareMethods {
@@ -9,6 +8,6 @@ export class SignatureMiddleware implements MiddlewareMethods {
         // retrieve options given to the @UseAuth decorator
         const options = ctx.endpoint.get(SignatureMiddleware) || {};
         console.log(response);
-
+        console.log(options);
     }
 }

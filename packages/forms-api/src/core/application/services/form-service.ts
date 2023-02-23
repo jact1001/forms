@@ -5,8 +5,7 @@ import {FormRepository} from "../../../infraestructure/repository/form-repositor
 @Scope('request')
 export class FormService implements OnDestroy {
 
-    constructor(private readonly formRepository: FormRepository) {
-    }
+    constructor(private readonly formRepository: FormRepository) {}
 
     public async getForm(): Promise<any> {
         const data = await this.formRepository.findForm();

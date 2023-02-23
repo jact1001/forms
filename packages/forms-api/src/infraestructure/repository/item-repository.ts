@@ -1,8 +1,6 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import IItems from "../../core/domain/IItem";
 import https from "https";
 import axios from "axios";
-import {IItemRepositoryPort} from "../../core/application/ports/iitem-repository-port";
 
 const clientAxios = axios.create({
     httpsAgent: new https.Agent({
@@ -18,9 +16,7 @@ export class ItemRepository implements  OnDestroy {
     }
 
     public async searchItems(keyWord: string): Promise<any> {
-
         const {data} = await clientAxios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${keyWord}`);
-
         return data;
     }
 

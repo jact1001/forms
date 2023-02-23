@@ -9,8 +9,7 @@ export class FormRepository implements OnDestroy {
 
     public async findForm () {
         const list = await this.model.find().exec();
-        // Model { Product }
-        //console.log(list[0].toClass()); // Product {}
+        console.log(list[0].toClass());
         return list;
     }
 

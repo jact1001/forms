@@ -5,8 +5,8 @@ export class SignatureResponseFilter implements ResponseFilterMethods {
     transform(data: any, ctx: Context) {
         let signature = {
             author: {
-                name: 'Ivan',
-                lastname: 'Taimal'
+                name: 'Johnny',
+                lastname: 'Chinchajoa'
             }
         }
         return {...signature, ...data};
