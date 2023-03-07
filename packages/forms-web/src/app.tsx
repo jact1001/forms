@@ -4,6 +4,7 @@ import './app.css';
 import {ItemList} from "./components/item-list/item-list";
 import {ItemDetail} from "./components/item-detail/item-detail";
 import {Breadcrumb} from "./components/breadcrumb/breadcrumb";
+import {Hola} from "./components/form/hola";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                     <ItemList/>
                 </Route>
             </Switch>
+            <Hola/>
         </Router>
     );
 }
