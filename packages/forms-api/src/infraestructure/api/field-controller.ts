@@ -8,7 +8,7 @@ export class FieldController {
     }
 
     @Get("/")
-    async getForm(): Promise<any> {
+    async getField(): Promise<any> {
         return await this._fieldUseCase.getField();
     }
 
