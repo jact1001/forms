@@ -1,16 +1,26 @@
-//import React, {useState} from 'react';
-import { Link } from "react-router-dom";
-import './fields-menu.scss';
+import React, {useEffect} from 'react';
+import { useDispatch } from 'react-redux';
+import { useCustomTypedSelector } from '../../hooks/custom-typed-selector';
+import { findField } from '../../redux/effects/field.effect';
 import logo from '../../assets/Logo_FA.svg';
 import iconSelect from '../../assets/Icon_Select.svg';
-//import searchIcon from '../../assets/ic_Search.png';
-//import {findItems} from "../../redux/effects/items.effect";
-// import {useDispatch} from 'react-redux';
-// import {useHistory} from "react-router-dom";
+import './fields-menu.scss';
 
 export const FieldsMenu = () => {
 
+    const dispatch = useDispatch();
+    const {field, loading, error} = useCustomTypedSelector((state: any) => state.field);
+
+    const findFieldComponent = () => {
+        dispatch(findField());
+    }
+
+    useEffect(() => {
+        findFieldComponent();
+    }, []);
+
     console.log('Form App');
+    console.log(field);
 
     return (
         <div className="fa-field-menu">

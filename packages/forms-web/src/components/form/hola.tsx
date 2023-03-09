@@ -16,8 +16,8 @@ export const Hola = () => {
         findFormComponent();
     }, []);
 
-    console.log(form);
-    console.log(loading);
+    //console.log(form);
+    //console.log(loading);
 
     return <h1>Hola mundo!</h1>;
     
