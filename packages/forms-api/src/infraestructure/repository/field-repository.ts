@@ -10,8 +10,7 @@ export class FieldRepository implements OnDestroy {
 
     public async findField () {
         const list = await this.model.find().exec();
-        console.log(list[0].toClass());
-        console.log('core/infraestructure/field-repository');
+        //console.log(list[0].toClass());
         return list;
     }
 

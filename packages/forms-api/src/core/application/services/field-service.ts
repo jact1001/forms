@@ -9,6 +9,7 @@ export class FieldService implements OnDestroy {
 
     public async getField(): Promise<any> {
         const data = await this.fieldRepository.findField();
+        //console.log('Field service: ', data);
         return data;
     }
 

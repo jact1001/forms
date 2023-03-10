@@ -9,7 +9,9 @@ export class FieldUseCase implements IFieldRepositoryPort, OnDestroy {
     constructor(private readonly fieldService: FieldService) {}
 
     public async getField(): Promise<any> {
-        return this.fieldService.getField();
+        const data = this.fieldService.getField();
+        //console.log('Use case: ', data);
+        return data;
     }
 
     $onDestroy(): void | Promise<any> {

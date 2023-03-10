@@ -85,8 +85,8 @@ export class Select {
     type: string;
     @Property()
     label: string;
-    @Property()
-    values: SelectValue;
+    @CollectionOf(SelectValue)
+    values: SelectValue[];
 }
 
 @Schema()
