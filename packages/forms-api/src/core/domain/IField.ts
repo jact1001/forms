@@ -34,7 +34,7 @@ export class TextArea {
     @Property()
     maxLength: string;
     @Property()
-    rows: string; 
+    rows: string;
 }
 
 @Schema()
@@ -102,7 +102,7 @@ export class Number {
     @Property()
     placeholder: string;
     @Property()
-    min: string; 
+    min: string;
 }
 
 @Schema()
@@ -118,7 +118,7 @@ export class Email {
     @Property()
     placeholder: string;
     @Property()
-    maxLength: string; 
+    maxLength: string;
 }
 
 @Schema()
@@ -148,7 +148,7 @@ export class Time {
 }
 
 @Schema()
-export class Fields {
+export class FieldsForm {
     @Property()
     fieldText: Text;
     @Property()
@@ -166,15 +166,17 @@ export class Fields {
     @Property()
     fieldDate: Date;
     @Property()
-    fieldTime: Time; 
+    fieldTime: Time;
 }
 
 @Model()
-export class Field {
+export class FieldForm {
     @ObjectID("id")
     _id: string;
     @Property()
     description: string;
     @Property()
-    fields: Fields; 
+    field_id: string;
+    @Property()
+    fields_form: FieldsForm;
 }

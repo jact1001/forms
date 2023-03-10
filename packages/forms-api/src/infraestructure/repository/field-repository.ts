@@ -1,16 +1,16 @@
 import {Inject, Injectable, OnDestroy} from "@tsed/common";
 import {MongooseModel} from "@tsed/mongoose";
-import {Field} from "../../core/domain/IField";
+import {FieldForm} from "../../core/domain/IField";
 
 @Injectable()
 export class FieldRepository implements OnDestroy {
-    
-    @Inject(Field)
-    private model: MongooseModel<Field>;
+
+    @Inject(FieldForm)
+    private model: MongooseModel<FieldForm>;
 
     public async findField () {
         const list = await this.model.find().exec();
-        //console.log(list[0].toClass());
+        console.log(list[0].toClass());
         return list;
     }
 

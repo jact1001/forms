@@ -9,10 +9,7 @@ export class FieldController {
 
     @Get("/")
     async getField(): Promise<any> {
-        const data = await this._fieldUseCase.getField();
-        console.log('Controller: ', data);
-        //console.log('Prueba: ', data.description);
-        return data;
+        return await this._fieldUseCase.getField();
     }
 
 }

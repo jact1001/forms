@@ -4,12 +4,11 @@ import {FieldRepository} from "../../../infraestructure/repository/field-reposit
 @Injectable()
 @Scope('request')
 export class FieldService implements OnDestroy {
-    
+
     constructor(private readonly fieldRepository: FieldRepository) {}
 
     public async getField(): Promise<any> {
         const data = await this.fieldRepository.findField();
-        //console.log('Field service: ', data);
         return data;
     }
 
