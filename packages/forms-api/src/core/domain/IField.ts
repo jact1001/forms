@@ -76,6 +76,14 @@ export class SelectValue {
 }
 
 @Schema()
+export class SelectValue2 {
+    @Property()
+    id: string;
+    @Property()
+    text: string;
+}
+
+@Schema()
 export class Select {
     @Property()
     id: string;
@@ -179,4 +187,6 @@ export class FieldForm {
     field_id: string;
     @Property()
     fields_form: FieldsForm;
+    @Property()
+    test: Array< Text | TextArea >;
 }

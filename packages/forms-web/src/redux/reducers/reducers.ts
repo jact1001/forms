@@ -8,7 +8,7 @@ const reducers = combineReducers({
     items: itemsReducer,
     detail: detailReducer,
     form: formReducer,
-    field: fieldReducer
+    fields: fieldReducer
 });
 
 export default reducers;

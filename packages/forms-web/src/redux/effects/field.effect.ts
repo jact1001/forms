@@ -7,17 +7,17 @@ const baseUrl = "http://localhost:5000";
 export const findField = () => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
-            type: FieldActionTypes.QUERY_FIELD_PENDING
+            type: FieldActionTypes.QUERY_FIELDS_PENDING
         });
         try {
             const {data} = await axios.get(`${baseUrl}/api/field`);
             dispatch({
-                type: FieldActionTypes.QUERY_FIELD_SUCCESS,
+                type: FieldActionTypes.QUERY_FIELDS_SUCCESS,
                 payload: data
             });
         } catch (err: any) {
             dispatch({
-                type: FieldActionTypes.QUERY_FIELD_FAIL,
+                type: FieldActionTypes.QUERY_FIELDS_FAIL,
                 payload: err.message
             });
         }

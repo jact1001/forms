@@ -1,41 +1,41 @@
 import {Action, ActionType} from '../actions/field.actions';
-// importar la interface de los datos 
+// importar la interface de los datos
 
 interface State {
-    field: any | null;
+    fields: any | null;
     loading: boolean;
     error: string | null;
 }
 
 const initialState: State = {
-    field: null,
+    fields: null,
     loading: false,
     error: null
 }
 
-const fieldReducer = (state: State = initialState, action: Action): State => {
+const fieldsReducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
-        case ActionType.QUERY_FIELD_PENDING:
+        case ActionType.QUERY_FIELDS_PENDING:
             return {
                 loading: true,
-                field: null,
+                fields: null,
                 error: null
             }
-        case ActionType.QUERY_FIELD_SUCCESS:
+        case ActionType.QUERY_FIELDS_SUCCESS:
             return {
                 loading: false,
-                field: action.payload,
+                fields: action.payload,
                 error: null
             }
-        case ActionType.QUERY_FIELD_FAIL:
+        case ActionType.QUERY_FIELDS_FAIL:
             return {
                 loading: false,
                 error: action.payload,
-                field: null
+                fields: null
             }
-        default: 
+        default:
             return state;
     }
 }
 
-export default fieldReducer;
+export default fieldsReducer;

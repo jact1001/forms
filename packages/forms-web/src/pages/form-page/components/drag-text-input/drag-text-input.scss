@@ -1,4 +1,4 @@
-@import '../../index';
+@import '../../../../index';
 //@import '../../assets/Icon_Arrow.svg';
 
 .fa-field-menu {
@@ -51,7 +51,7 @@
     transition: all 0.2s linear 0s;
 
     &:before {
-        content: url("../../assets/Icon_Arrow.svg");
+        content: url("../../../../assets/Icon_Arrow.svg");
         display: flex;
         align-items: center;
         justify-content: center;
