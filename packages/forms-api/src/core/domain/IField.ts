@@ -76,14 +76,6 @@ export class SelectValue {
 }
 
 @Schema()
-export class SelectValue2 {
-    @Property()
-    id: string;
-    @Property()
-    text: string;
-}
-
-@Schema()
 export class Select {
     @Property()
     id: string;
@@ -155,38 +147,14 @@ export class Time {
     value: string;
 }
 
-@Schema()
-export class FieldsForm {
-    @Property()
-    fieldText: Text;
-    @Property()
-    fieldTextArea: TextArea;
-    @Property()
-    fieldRadio: Radio;
-    @Property()
-    fieldCheckbox: Checkbox;
-    @Property()
-    fieldSelect: Select;
-    @Property()
-    fieldNumber: Number;
-    @Property()
-    fieldEmail: Email;
-    @Property()
-    fieldDate: Date;
-    @Property()
-    fieldTime: Time;
-}
-
 @Model()
 export class FieldForm {
     @ObjectID("id")
     _id: string;
     @Property()
-    description: string;
-    @Property()
     field_id: string;
     @Property()
-    fields_form: FieldsForm;
+    description: string;
     @Property()
-    test: Array< Text | TextArea >;
+    fields: Array< Text | TextArea | Radio | Checkbox | Select | Number | Email | Date | Time >;
 }

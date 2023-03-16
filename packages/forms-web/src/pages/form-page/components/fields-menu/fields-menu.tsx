@@ -9,7 +9,7 @@ import { DragTextInput } from "../drag-text-input/drag-text-input";
 export const FieldsMenu = () => {
 
     const dispatch = useDispatch();
-    const {fields, loading, error} = useCustomTypedSelector((state: any) => state.fields);
+    const {fieldForms, loading, error} = useCustomTypedSelector((state: any) => state.fieldForms);
 
     const findFieldComponent = () => {
         dispatch(findField());
@@ -18,8 +18,6 @@ export const FieldsMenu = () => {
     useEffect(() => {
         findFieldComponent();
     }, []);
-
-    console.log(fields);
 
     interface IDragInputs {
         [key: string]: (props: any) => React.ReactElement;
@@ -30,10 +28,13 @@ export const FieldsMenu = () => {
         number: DragTextInput,
     };
 
+    // Pruebas
+    console.log('Data: ', fieldForms);
+
     return (
         <div className="fa-field-menu">
             <img src={logo} alt="logo" className="fa-field-menu__logo" />
-            {fields && fields.test.map(({type, ...field}: any) => {
+            {fieldForms && fieldForms.fields.map(({type, ...field}: any) => {
                 const DragInput = dragInputs[`${type}`];
                 return DragInput ? <DragInput {...field} /> : <></>;
             })}

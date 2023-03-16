@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/main.ts",
+    "serve": "nodemon src/main.ts",
     "build": "tsc",
     "test": "echo testing node js project",
     "start:debug": "nodemon --watch \\\"src/**/*.ts\\\" --ignore \\\"node_modules/**/*\\\" --exec ts-node src/main.ts"
