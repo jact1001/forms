@@ -1,0 +1,17 @@
+@import '../../../../../index';
+
+.form-title {
+    color: $fa-color-white-primary;
+    text-align: center;
+    display: flex;
+    padding-left: 20px;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
+    position: relative;
+
+    &__icon {
+        width: 20px;
+        padding-right: 10px;
+    } 
+}

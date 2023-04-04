@@ -2,7 +2,6 @@
 
 .fa-field-menu {
     background-color: $fa-color-gray-light;
-    padding: 10px;
     text-align: center;
     width: 280px;
     height: 100vh;
@@ -13,65 +12,28 @@
         width: 70px;
     }
 
-    &__icon {
-        margin: 0 4px;
-        width: 30px;
-        height: 30px;
-    }
+    &__icon-add {
+        width: 18px;
+        padding-right: 10px;
+    } 
 
     &__h1 {
         padding-left: 20px;
         font-size: 1.125rem;
         max-width: 67rem;
-        //color: $fa-color-white-primary;
+        color: $fa-color-white-primary;
+    }
+
+    &__title {
+        margin-top: 20px;
+        margin-bottom: 15px;
+        height: 22px;
+        font-size: 32px;
+        text-align: left;
+        padding-left: 40px;
+        padding-bottom: 40px;
+        color: $fa-color-white-primary;
     }
 }
 
-// .button {
-//     border-radius: 20px;
-//     border: 0;
-//     height: 60px;
-//     width: 100%;
-//     text-align: center;
-//     padding-left: 40px;
-//     display: flex;
-//     justify-content: flex-start;
-//     align-items: center;
-//     position: relative;
-//     text-decoration: none;
-//     background-color: $fa-color-black;
-//     color: $fa-color-white-primary;
-//     text-transform: capitalize;
-//     overflow: hidden;
-//     cursor: move;
-//   }
 
-// .btn-effect {
-//     transition: all 0.2s linear 0s;
-
-//     &:before {
-//         content: url("../../../../assets/Icon_Arrow.svg");
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         position: absolute;
-//         top: 0;
-//         left: 0px;
-//         height: 100%;
-//         width: 30px;
-//         background-color: $fa-color-cyan-primary;
-//         border-radius: 0 50% 50% 0;
-//         transform: scale(0, 1);
-//         transform-origin: left center;
-//         transition: all 0.2s linear 0s;
-//     }
-
-//     &:hover {
-//         text-indent: 0px;
-
-//         &:before {
-//             transform: scale(0.8, 1);
-//             text-indent: 0;
-//         }
-//     }
-// }
