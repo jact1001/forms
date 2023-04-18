@@ -1,8 +1,7 @@
-export const IconTextArea = () => {
+const IconTextArea = ({ width='20px', color='#fff'}) => {
     return (
-        <svg version="1.1" id="line_height" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-            y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
-            <path id="Path_1267" d="M6,6.9999852h2.5L5.361208,3.8611934c-0.1994896-0.1994898-0.5229263-0.1994898-0.7224159,0L1.5,6.9999852H4
+        <svg version="1.1" id="line_height" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={width} viewBox="0 0 24 24">
+            <path fill={color} id="Path_1267" d="M6,6.9999852h2.5L5.361208,3.8611934c-0.1994896-0.1994898-0.5229263-0.1994898-0.7224159,0L1.5,6.9999852H4
             v10H1.5l3.138792,3.138792c0.1994896,0.1994896,0.5229263,0.1994896,0.7224159,0L8.5,16.9999847H6V6.9999852z M10,5.9999843
             v0.0000019c0,0.5522842,0.4477148,0.999999,0.999999,0.999999h10.0000029C21.5522861,6.9999852,22,6.5522704,22,5.9999862V5.9999843
             c0-0.5522842-0.4477139-0.999999-0.9999981-0.999999H10.999999C10.4477148,4.9999852,10,5.4477,10,5.9999843z M10.999999,18.9999847
@@ -14,3 +13,5 @@ export const IconTextArea = () => {
         </svg>
     )
 }
+
+export default IconTextArea;

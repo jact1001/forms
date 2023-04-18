@@ -1,7 +1,6 @@
-export const IconRadio = () => {
+const IconRadio = ({ width='20px', color='#fff'}) => {
     return (
-        <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+        <svg version="1.1" id="Icons" fill={color} width={width} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 32 32">
             <g>
                 <path d="M29,6H17c-0.6,0-1-0.4-1-1s0.4-1,1-1h12c0.6,0,1,0.4,1,1S29.6,6,29,6z" />
             </g>
@@ -21,3 +20,5 @@ export const IconRadio = () => {
         </svg>
     )
 }
+
+export default IconRadio;

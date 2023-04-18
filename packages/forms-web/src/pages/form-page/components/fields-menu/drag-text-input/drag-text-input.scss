@@ -1,32 +1,5 @@
 @import '../../../../../index';
 
-.fa-field-menu {
-    background-color: $fa-color-gray-light;
-    padding: 10px;
-    text-align: center;
-    width: 280px;
-    height: 100vh;
-
-    &__logo {
-        vertical-align: bottom;
-        margin: 30px;
-        width: 70px;
-    }
-
-    &__icon {
-        margin: 0 4px;
-        width: 30px;
-        height: 30px;
-        fill: $fa-color-white-primary;
-    }
-
-    &__h1 {
-        padding-left: 20px;
-        font-size: 1.125rem;
-        max-width: 67rem;
-    }
-}
-
 .button {
     border-radius: 20px;
     border: 0;

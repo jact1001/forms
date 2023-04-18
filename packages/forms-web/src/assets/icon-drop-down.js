@@ -1,4 +1,4 @@
-export const IconDropDown = () => {
+const IconDropDown = () => {
     return (
         <svg enable-background="new 0 0 32 32"  id="Слой_1" version="1.1" viewBox="0 0 32 32"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g id="Arrow_Drop_Down_Circle">
@@ -6,3 +6,5 @@ export const IconDropDown = () => {
         </svg>
     )
 }
+
+export default IconDropDown; 

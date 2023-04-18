@@ -7,7 +7,6 @@ import { DragTextInput } from "./drag-text-input/drag-text-input";
 import logo from '../../../../assets/Logo_FA.svg';
 import add from '../../../../assets/Icon_Add.svg';
 
-
 import './fields-menu.scss';
 
 export const FieldsMenu = () => {
@@ -29,7 +28,14 @@ export const FieldsMenu = () => {
 
     const dragInputs: IDragInputs = {
         text: DragTextInput,
+        textArea: DragTextInput,
+        radio: DragTextInput,
+        checkbox: DragTextInput,
+        select: DragTextInput,
         number: DragTextInput,
+        email: DragTextInput,
+        date: DragTextInput,
+        time: DragTextInput
     };
 
     //console.log('Data: ', fieldForms);
@@ -49,7 +55,7 @@ export const FieldsMenu = () => {
 
             {fieldForms && fieldForms.fields.map(({type, ...field}: any) => {
                 const DragInput = dragInputs[`${type}`];
-                return DragInput ? <DragInput key={field.id} {...field} /> : <></>;
+                return DragInput ? <DragInput key={field.field_id} text={field.label} iconType={type} /> : <></>;
             })}
 
         </div>
