@@ -3,6 +3,7 @@ import {PlatformApplication} from "@tsed/common";
 import "@tsed/platform-express";
 import * as Path from "path";
 import {SignatureResponseFilter} from "../infraestructure/filter/signature-filter";
+import * as rest from "../infraestructure/api/index";
 
 export const rootDir = Path.resolve(__dirname,'../');
 const config = require("dotenv").config({path: "../../.env"});
@@ -11,7 +12,8 @@ const config = require("dotenv").config({path: "../../.env"});
     {
         rootDir: Path.resolve(__dirname, '../'),
         mount: {
-            "/api": ["${rootDir}/**/**\/*-controller.ts",
+            "/api": [
+                ...Object.values(rest)
             ]
         },
         componentsScan: [
@@ -42,7 +44,7 @@ const config = require("dotenv").config({path: "../../.env"});
 )
 export class ItemsApiContainer {
     @Inject()
-    app: PlatformApplication;
+    protected app: PlatformApplication;
 
     public $beforeRoutesInit() {
         const cookieParser = require('cookie-parser'),
