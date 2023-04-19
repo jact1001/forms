@@ -1,4 +1,4 @@
-@import '../../../../../index';
+@import '../../../../../../index';
 
 .button {
     border-radius: 20px;
@@ -23,9 +23,9 @@
 
 .btn-effect {
     transition: all 0.2s linear 0s;
-    
+
     &:before {
-      content: url("../../../../../assets/Icon_Arrow.svg");
+      content: url("../../../../../../assets/Icon_Arrow.svg");
       display: flex;
       align-items: center;
       justify-content: center;
@@ -41,13 +41,13 @@
       text-align: center;
       transition: all 0.2s linear 0.1s;
     }
-    
+
     &:hover {
       text-indent: 0px;
       background-color: $fa-color-blue-dark;
       color: $fa-color-white-primary;
       fill: $fa-color-white-primary;
-      
+
       &:before {
         transform: scale(0.8, 1);
         right: 0;

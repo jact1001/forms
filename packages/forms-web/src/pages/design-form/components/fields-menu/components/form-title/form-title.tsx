@@ -1,11 +1,11 @@
 import React from 'react';
-import back from '../../../../../assets/Icon_Back.svg';
-import forward from '../../../../../assets/Icon_Forward.svg';
+import back from '../../../../../../assets/Icon_Back.svg';
+import forward from '../../../../../../assets/Icon_Forward.svg';
 import './form-title.scss';
 
 export const FormTitle = () => {
 
-    const title : String = 'Aa'; 
+    const title : String = 'Aa';
 
     return (
         <div className='form-title'>

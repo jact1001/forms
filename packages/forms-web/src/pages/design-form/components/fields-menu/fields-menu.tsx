@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { useCustomTypedSelector } from '../../../../hooks/custom-typed-selector';
 import { findField } from '../../../../redux/effects/field.effect';
-import { FormTitle } from './form-title/form-title';
-import { DragTextInput } from "./drag-text-input/drag-text-input";
+import { FormTitle } from './components/form-title/form-title';
+import { DragTextInput } from "./components/drag-text-input/drag-text-input";
 import logo from '../../../../assets/Logo_FA.svg';
 import add from '../../../../assets/Icon_Add.svg';
 
@@ -12,7 +12,7 @@ import './fields-menu.scss';
 export const FieldsMenu = () => {
 
     const dispatch = useDispatch();
-    const {fieldForms, loading, error} = useCustomTypedSelector((state: any) => state.fieldForms);
+    const { fieldForms } = useCustomTypedSelector((state: any) => state.fieldForms);
 
     const findFieldComponent = () => {
         dispatch(findField());
@@ -21,24 +21,6 @@ export const FieldsMenu = () => {
     useEffect(() => {
         findFieldComponent();
     }, []);
-
-    interface IDragInputs {
-        [key: string]: (props: any) => React.ReactElement;
-    }
-
-    const dragInputs: IDragInputs = {
-        text: DragTextInput,
-        textArea: DragTextInput,
-        radio: DragTextInput,
-        checkbox: DragTextInput,
-        select: DragTextInput,
-        number: DragTextInput,
-        email: DragTextInput,
-        date: DragTextInput,
-        time: DragTextInput
-    };
-
-    //console.log('Data: ', fieldForms);
 
     return (
         <div className="fa-field-menu">
@@ -54,8 +36,7 @@ export const FieldsMenu = () => {
             </div>
 
             {fieldForms && fieldForms.fields.map(({type, ...field}: any) => {
-                const DragInput = dragInputs[`${type}`];
-                return DragInput ? <DragInput key={field.field_id} text={field.label} iconType={type} /> : <></>;
+                return <DragTextInput key={field.field_id} text={field.label} iconType={type} />;
             })}
 
         </div>
