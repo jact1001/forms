@@ -1,5 +1,5 @@
 import React from 'react';
-import {FieldsMenu} from "./components/fields-menu/fields-menu";
+import {FieldsMenu} from "../components/fields-menu/src/fields-menu";
 
 export const DesignForm = () => {
 
