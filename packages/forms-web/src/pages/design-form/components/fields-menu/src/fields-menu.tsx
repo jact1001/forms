@@ -35,8 +35,8 @@ export const FieldsMenu = () => {
                 </a>
             </div>
 
-            {fieldForms && fieldForms.fields.map(({type, ...field}: any) => {
-                return <DragTextInput key={field.field_id} text={field.label} iconType={type} />;
+            {fieldForms && fieldForms.fields.map(({type, field_id, label}: any) => {
+                return <DragTextInput key={field_id} text={label} iconType={type} />;
             })}
 
         </div>
