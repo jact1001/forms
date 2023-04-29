@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import { useDispatch } from 'react-redux';
-import { useCustomTypedSelector } from '../../../../hooks/custom-typed-selector';
-import { findField } from '../../../../redux/effects/field.effect';
-import { FormTitle } from './components/form-title/form-title';
-import { DragTextInput } from "./components/drag-text-input/drag-text-input";
-import logo from '../../../../assets/Logo_FA.svg';
-import add from '../../../../assets/Icon_Add.svg';
+import { useCustomTypedSelector } from '../../../../../hooks/custom-typed-selector';
+import { findField } from '../../../../../redux/effects/field.effect';
+import { FormTitle } from '../components/form-title/form-title';
+import { DragTextInput } from "../components/drag-text-input/drag-text-input";
+import logo from '../../../../../assets/Logo_FA.svg';
+import add from '../../../../../assets/Icon_Add.svg';
 
-import './fields-menu.scss';
+import '../styles/fields-menu.scss';
 
 export const FieldsMenu = () => {
 
@@ -35,8 +35,8 @@ export const FieldsMenu = () => {
                 </a>
             </div>
 
-            {fieldForms && fieldForms.fields.map(({type, ...field}: any) => {
-                return <DragTextInput key={field.field_id} text={field.label} iconType={type} />;
+            {fieldForms && fieldForms.fields.map(({type, field_id, label}: any) => {
+                return <DragTextInput key={field_id} text={label} iconType={type} />;
             })}
 
         </div>

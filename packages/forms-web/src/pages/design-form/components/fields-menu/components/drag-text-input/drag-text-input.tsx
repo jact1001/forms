@@ -8,10 +8,11 @@ import IconNumber from '../../../../../../assets/icon-number';
 import IconDate from '../../../../../../assets/icon-date';
 import IconTime from '../../../../../../assets/icon-time';
 import './drag-text-input.scss';
+import {IIcon} from "../../../../interfaces/IIcon";
 import IconEmail from "../icons/icon-email";
 
 interface IIconType {
-    [key: string]: (props: any) => React.ReactElement;
+    [key: string]: (props: IIcon) => React.ReactElement;
 }
 
 interface IDragInput {
@@ -37,7 +38,7 @@ export const DragTextInput = ({text, iconType}: IDragInput) => {
 
     return (
         <button className="button btn-effect">
-            { Icon ? <Icon className='icon' /> : <></>}
+            { Icon ? <Icon /> : <></>}
             <h1 className="fa-field-menu__h1">{ text }</h1>
         </button>
     )

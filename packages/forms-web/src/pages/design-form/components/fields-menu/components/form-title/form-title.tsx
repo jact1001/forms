@@ -3,16 +3,17 @@ import back from '../../../../../../assets/Icon_Back.svg';
 import forward from '../../../../../../assets/Icon_Forward.svg';
 import './form-title.scss';
 
+const TITLE_VALUE = 'Titulo';
+const defaultClassName = 'form-title';
+
 export const FormTitle = () => {
 
-    const title : String = 'Aa';
-
     return (
-        <div className='form-title'>
-            <h1>{title}</h1>
+        <div className={defaultClassName}>
+            <h1>{TITLE_VALUE}</h1>
             <div>
-                <a className=""><img src={back} alt="add" className="form-title__icon" /></a>
-                <a className=""><img src={forward} alt="add" className="form-title__icon" /></a>
+                <a className=""><img src={back} alt="add" className={`${defaultClassName}__icon`}/></a>
+                <a className=""><img src={forward} alt="add" className={`${defaultClassName}__icon`}/></a>
             </div>
         </div>
     )
