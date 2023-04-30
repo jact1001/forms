@@ -9,7 +9,7 @@ To facilitate dependency management, this mono-repo uses Lerna to simplify depen
 For its execution, the following commands must be run
 in the root of the directory where the project was downloaded:
 
-1. `npm i`
+1. `nvm use && npm i`
 2. `npx lerna clean -y`
 3. `npx lerna bootstrap --hoist`
 4. `npm run start`
