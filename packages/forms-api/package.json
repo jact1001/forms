@@ -14,25 +14,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tsed/ajv": "7.23.1",
-    "@tsed/common": "7.23.1",
-    "@tsed/mongoose": "7.23.1",
-    "@tsed/platform-express": "7.23.1",
-    "axios": "^0.24.0",
-    "body-parser": "^1.19.0",
-    "compression": "^1.7.4",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.17.1",
-    "https": "^1.0.0",
-    "method-override": "^3.0.0",
-    "mongoose": "^6.9.1",
-    "typescript": "^4.5.2"
+    "@tsed/ajv": "7.27.2",
+    "@tsed/common": "7.27.2",
+    "@tsed/mongoose": "7.27.2",
+    "@tsed/platform-express": "7.27.2",
+    "axios": "0.24.0",
+    "body-parser": "1.19.0",
+    "compression": "1.7.4",
+    "cookie-parser": "1.4.6",
+    "cors": "2.8.5",
+    "dotenv": "16.0.3",
+    "express": "4.18.2",
+    "https": "1.0.0",
+    "method-override": "3.0.0",
+    "mongoose": "6.9.1",
+    "typescript": "4.9.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0"
+    "nodemon": "2.0.20",
+    "ts-node": "10.9.1",
+    "ts-node-dev": "2.0.0"
   }
 }
