@@ -1,19 +1,18 @@
-import React from 'react';
-import back from '../../../../../../assets/Icon_Back.svg';
-import forward from '../../../../../../assets/Icon_Forward.svg';
+import IconBack from '../icons/icon-back';
+import IconForward from '../icons/icon-forward';
 import './form-title.scss';
 
-const TITLE_VALUE = 'Titulo';
+const TITLE_VALUE = 'Título';
 const defaultClassName = 'form-title';
 
 export const FormTitle = () => {
 
     return (
         <div className={defaultClassName}>
-            <h1>{TITLE_VALUE}</h1>
+            <h2>{TITLE_VALUE}</h2>
             <div>
-                <a className=""><img src={back} alt="add" className={`${defaultClassName}__icon`}/></a>
-                <a className=""><img src={forward} alt="add" className={`${defaultClassName}__icon`}/></a>
+                <a className={`${defaultClassName}__icon`}><IconBack /></a>
+                <a className={`${defaultClassName}__icon`}><IconForward /></a>
             </div>
         </div>
     )

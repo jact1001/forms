@@ -1,9 +1,9 @@
-import React from 'react';
-import {FieldsMenu} from "../components/fields-menu/src/fields-menu";
+import { SlideMenu } from "../components/fields-menu/src/slide-menu";
 
 export const DesignForm = () => {
 
     return (
-        <FieldsMenu />
+        <SlideMenu />
+        // otros componentes, espacio para crear el formulario, donde se arrastra los DragInputs
     )
 }
