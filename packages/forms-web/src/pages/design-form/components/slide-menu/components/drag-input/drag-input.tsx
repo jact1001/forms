@@ -32,7 +32,7 @@ const iconsType: IIconType = {
     time: IconTime
 }
 
-const defaultClassName = 'fieldmenu-dragbutton';
+const defaultClassName = 'drag-input';
 
 export const DragInput = ({text, iconType}: IDragInput) => {
 
