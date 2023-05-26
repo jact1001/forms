@@ -1,4 +1,9 @@
 import React from 'react';
+
+// agregando drag
+import { ItemTypes } from '../../../drag-drop/item-types';
+import { useDrag } from 'react-dnd';
+
 import IconText from '../icons/icon-text';
 import IconTextArea from '../icons/icon-text-area';
 import IconRadio from '../icons/icon-radio';
@@ -8,7 +13,7 @@ import IconNumber from '../icons/icon-number';
 import IconDate from '../icons/icon-date';
 import IconTime from '../icons/icon-time';
 import IconEmail from "../icons/icon-email";
-import {IIcon} from "../../../../interfaces/IIcon";
+import { IIcon } from "../../../../interfaces/IIcon";
 import './drag-input.scss';
 
 interface IIconType {
@@ -34,12 +39,20 @@ const iconsType: IIconType = {
 
 const defaultClassName = 'drag-input';
 
+ // constante de arrastre
+ const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.DRAGINPUT,
+    collect: monitor => ({
+        isDragging: !!monitor.isDragging(),
+    }),
+}))
+
 export const DragInput = ({text, iconType}: IDragInput) => {
 
     const Icon = iconsType[`${iconType}`];
 
     return (
-        <button className={`${defaultClassName}`}>
+        <button className={`${defaultClassName}`} ref={drag}>
             { Icon ? <Icon /> : <></>}
             <h1 className={`${defaultClassName}__title`}>{ text }</h1>
         </button>
