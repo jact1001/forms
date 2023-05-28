@@ -1,5 +1,5 @@
 import {Controller, Get} from "@tsed/common";
-import {FormUseCase} from "../../core/application/use-cases/form-use-case";
+import {FormUseCase} from "../../core/use-cases/form-use-case";
 
 @Controller("/form")
 export class ItemController {

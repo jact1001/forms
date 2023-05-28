@@ -1,5 +1,5 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import {FormRepository} from "../../../infraestructure/repository/form-repository";
+import {FormRepository} from "../../infraestructure/repository/form-repository";
 
 @Injectable()
 @Scope('request')

@@ -1,11 +1,11 @@
-import {ItemsApiContainer} from "./container/items-api-container";
+import {Server} from "./server";
 import {PlatformExpress} from "@tsed/platform-express";
 import {$log} from "@tsed/common";
 
 async function main() {
     try {
         $log.debug("Start items API...");
-        const platform = await PlatformExpress.bootstrap(ItemsApiContainer);
+        const platform = await PlatformExpress.bootstrap(Server);
 
         await platform.listen();
         $log.debug("items API initialized");
