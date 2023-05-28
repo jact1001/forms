@@ -1,5 +1,3 @@
-import {IItem} from "../../shared/models/iitem-detail";
-
 export enum ActionType {
     QUERY_DETAIL_PENDING = 'QUERY_DETAIL_PENDING',
     QUERY_DETAIL_SUCCESS = 'QUERY_DETAIL_SUCCESS',
@@ -12,7 +10,7 @@ interface actionPending {
 
 interface actionSuccess {
     type: ActionType.QUERY_DETAIL_SUCCESS;
-    payload: IItem;
+    payload: any;
 }
 
 interface actionFail {

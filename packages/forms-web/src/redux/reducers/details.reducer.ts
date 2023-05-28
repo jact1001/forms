@@ -1,8 +1,7 @@
 import {Action, ActionType} from '../actions/detail.actions';
-import {IItem} from "../../shared/models/iitem-detail";
 
 interface State {
-    detail: IItem | null;
+    detail: any | null;
     loading: boolean;
     error: string | null;
 }
