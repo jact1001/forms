@@ -1,5 +1,4 @@
 import {Action, ActionType} from '../actions/form.actions';
-import {IItem} from "../../shared/models/iitem-detail";
 
 interface State {
     form: any | null;

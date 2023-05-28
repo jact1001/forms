@@ -2,8 +2,8 @@ import {Configuration, Inject} from "@tsed/di";
 import {PlatformApplication} from "@tsed/common";
 import "@tsed/platform-express";
 import * as Path from "path";
-import {SignatureResponseFilter} from "../infraestructure/filter/signature-filter";
-import * as rest from "../infraestructure/api/index";
+import {SignatureResponseFilter} from "./infraestructure/filters/signature-filter";
+import * as rest from "./infraestructure/api";
 
 export const rootDir = Path.resolve(__dirname,'../');
 const config = require("dotenv").config({path: "../../.env"});
@@ -18,10 +18,10 @@ const config = require("dotenv").config({path: "../../.env"});
         },
         componentsScan: [
             "${rootDir}/**/**/\/*-repository.ts",
-            "${rootDir}/**/**/**/\/*-service.ts",
-            "${rootDir}/**/**/**/\/*-use-case.ts",
-            "${rootDir}/**/**\/*-middleware.ts",
-            "${rootDir}/**/**\/*-filter.ts"
+            "${rootDir}/**/**/\/*-service.ts",
+            "${rootDir}/**/**/\/*-use-case.ts",
+            "${rootDir}/**/**/\/*-middlewares.ts",
+            "${rootDir}/**/**/\/*-filters.ts"
         ],
         responseFilters: [
             SignatureResponseFilter
@@ -31,18 +31,13 @@ const config = require("dotenv").config({path: "../../.env"});
         },
         acceptMimes: ["application/json", "multipart/form-data"],
         port: 5000,
-        swagger: [
-            {
-                path: "/api-docs"
-            }
-        ],
         mongoose: {
             url: config.parsed.mongoose_url,
             connectionOptions: {}
         },
     }
 )
-export class ItemsApiContainer {
+export class Server {
     @Inject()
     protected app: PlatformApplication;
 

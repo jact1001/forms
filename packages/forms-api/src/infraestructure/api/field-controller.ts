@@ -1,5 +1,5 @@
 import {Controller, Get} from "@tsed/common";
-import {FieldUseCase} from "../../core/application/use-cases/field-use-case";
+import {FieldUseCase} from "../../core/use-cases/field-use-case";
 
 @Controller("/field")
 export class FieldController {

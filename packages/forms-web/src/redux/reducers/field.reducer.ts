@@ -1,5 +1,4 @@
 import {Action, ActionType} from '../actions/field.actions';
-// importar la interface de los datos
 
 interface State {
     fieldForms: any | null;

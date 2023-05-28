@@ -1,5 +1,5 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import {FieldRepository} from "../../../infraestructure/repository/field-repository";
+import {FieldRepository} from "../../infraestructure/repository/field-repository";
 
 @Injectable()
 @Scope('request')
