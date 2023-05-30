@@ -30,7 +30,7 @@ const config = require("dotenv").config({path: "../../.env"});
             "/": Path.join(__dirname, "partner-platform.web")
         },
         acceptMimes: ["application/json", "multipart/form-data"],
-        port: 5000,
+        port: 5001,
         mongoose: {
             url: config.parsed.mongoose_url,
             connectionOptions: {}

@@ -17,7 +17,7 @@ in the root of the directory where the project was downloaded:
 ## Main packages
 The project has two defined components, Front-end and Back-end, which correspond to the following, respectively
 
-  * __items-api__ runs at http://localhost:5000
+  * __items-api__ runs at http://localhost:5001
   * __items-web__ runs at http://localhost:3000
 
 # Non-functional requirements
@@ -40,7 +40,7 @@ This application allows to expose 2 endpoints to obtain the items data, the item
 ![alt text](https://github.com/ir-taimal10/front-end-challenge/blob/master/packages/items-doc/images/hexagonal_arch.PNG?raw=true)
 
 
-This project is build with Node Js and Express, and makes a REST API available. Ex: http://localhost:5000/rest/items?q=piano
+This project is build with Node Js and Express, and makes a REST API available. Ex: http://localhost:5001/rest/items?q=piano
 Run with the next lines:
 1. `cd packages/items-api`
 2. `npm run start`

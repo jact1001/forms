@@ -2,7 +2,7 @@ import axios from 'axios';
 import {Dispatch} from 'redux';
 import {ActionType as DetailActionTypes, Action as DetailAction} from '../actions/detail.actions';
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "http://localhost:5001";
 
 export const findItem = (id: string) => {
     return async (dispatch: Dispatch<DetailAction>) => {
