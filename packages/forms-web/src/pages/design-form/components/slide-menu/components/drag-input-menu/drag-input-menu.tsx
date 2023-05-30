@@ -1,7 +1,3 @@
-// agregado 
-// import { ItemTypes } from '../../../drag-drop/item-types';
-// import { useDrag } from 'react-dnd';
-
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useCustomTypedSelector } from '../../../../../../hooks/custom-typed-selector';
@@ -16,14 +12,6 @@ export const DragInputMenu = () => {
     const findFieldComponent = () => {
         dispatch(findField());
     }
-
-    // // constante de arrastre
-    // const [{ isDragging }, drag] = useDrag(() => ({
-    //     type: ItemTypes.DRAGINPUT,
-    //     collect: monitor => ({
-    //         isDragging: !!monitor.isDragging(),
-    //     }),
-    // }))
 
     useEffect(() => {
         findFieldComponent();
