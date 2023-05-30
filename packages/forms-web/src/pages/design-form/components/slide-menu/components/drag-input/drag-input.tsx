@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
+import { ItemTypes } from '../../../drag-drop/item-types';
 import IconText from '../icons/icon-text';
 import IconTextArea from '../icons/icon-text-area';
 import IconRadio from '../icons/icon-radio';
@@ -41,7 +42,7 @@ export const DragInput = ({text, iconType}: IDragInput) => {
     const Icon = iconsType[`${iconType}`];
 
     const [{ isDragging }, drag] = useDrag(() => ({
-        type: 'drag-input',
+        type: ItemTypes.DRAGINPUT,
         item: 'test-item',
         end(item, monitor){
             const dropResult = monitor.getDropResult() as any;
