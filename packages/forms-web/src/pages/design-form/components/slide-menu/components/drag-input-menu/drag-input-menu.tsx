@@ -17,10 +17,12 @@ export const DragInputMenu = () => {
         findFieldComponent();
     }, []);
 
+    console.log('fieldForms', fieldForms);
+
     return (
         <div>
-            {fieldForms && fieldForms.fields.map(({ type, field_id, label }: any) => {
-                return <DragInput key={field_id} text={label} iconType={type} />;
+            { fieldForms && fieldForms.fields.map(({ field_id, ...arg }: any) => {
+                return <DragInput key={ field_id } data={ arg } />;
             })}
         </div>
     )

@@ -36,28 +36,34 @@ const iconsType: IIconType = {
 
 const defaultClassName = 'drag-input';
 
+export const DragInput = ({data}: any) => {
 
-export const DragInput = ({text, iconType}: IDragInput) => {
-
-    const Icon = iconsType[`${iconType}`];
+    const Icon = iconsType[`${data.type}`];
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.DRAGINPUT,
-        item: 'test-item',
-        end(item, monitor){
+        item: data,
+        end: (item, monitor) => {
             const dropResult = monitor.getDropResult() as any;
-            console.log(item);
-            console.log(dropResult);
+            
+            // pruebas
+            console.log('item', item);
+            console.log('dropResult', dropResult);
+            if (item && dropResult) {
+                alert(`You dropped ${item.label} into ${dropResult}!`)
+            }
+
         },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
+            handlerId: monitor.getHandlerId()
         }),
     }));
 
     return (
-        <button className={`${defaultClassName}`} ref={drag}>
-            { Icon ? <Icon /> : <></>}
-            <h1 className={`${defaultClassName}__title`}>{ text }</h1>
+        <button ref={ drag } className={ `${defaultClassName}` }>
+            { Icon ? <Icon /> : <></> }
+            <h1 className={ `${defaultClassName}__title` }>{ data.label }</h1>
         </button>
     )
 }

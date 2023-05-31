@@ -1,7 +1,7 @@
 @import '../../../../../../index';
 
 .form-header {
-    border-bottom-color: $fa-color-gray-lighter;
+    border-bottom-color: $fa-color-blue-light;
     border-bottom-style: solid;
     border-bottom-width: 0.1em;
     color: $fa-color-white-primary;
@@ -12,7 +12,7 @@
     padding-right: 40px;
 
     &__section-name {
-        background-color: $fa-color-blue-dark;
+        background-color: $fa-color-blue-light;
         border: 0;
         border-radius: 10px;
         color: $fa-color-white-primary;
@@ -28,14 +28,13 @@
         }
 
         &:focus {
-            border-bottom: 1px solid aqua;
             outline: none;
         }
     }
 }
 
 .select-user {
-    background-color: $fa-color-blue-dark;
+    background-color: $fa-color-blue-light;
     border: 0;
     border-radius: 10px;
     color: $fa-color-white-primary;
@@ -44,4 +43,8 @@
     margin-top: 18px;
     padding: 7px;
     width: 100px;
+
+    &:focus {
+        outline: none;
+    }
 }
