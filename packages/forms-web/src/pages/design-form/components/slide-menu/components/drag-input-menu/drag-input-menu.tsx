@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useCustomTypedSelector } from '../../../../../../hooks/custom-typed-selector';
-import { findField } from '../../../../../../redux/effects/field.effect';
+import { useDesignFormStore } from '../../../../data/hooks/custom-typed-selector';
+import { findField } from '../../../../data/state/effects/field.effect';
 import { DragInput } from "../drag-input/drag-input";
 
 export const DragInputMenu = () => {
 
     const dispatch = useDispatch();
-    const { fieldForms } = useCustomTypedSelector((state: any) => state.fieldForms);
+    const { formFields } = useDesignFormStore((state) => state.formFields);
 
     const findFieldComponent = () => {
         dispatch(findField());
@@ -17,11 +17,9 @@ export const DragInputMenu = () => {
         findFieldComponent();
     }, []);
 
-    console.log('fieldForms', fieldForms);
-
     return (
         <div>
-            { fieldForms && fieldForms.fields.map(({ field_id, ...arg }: any) => {
+            { formFields && formFields?.fields.map(({ field_id, ...arg }: any) => {
                 return <DragInput key={ field_id } data={ arg } />;
             })}
         </div>

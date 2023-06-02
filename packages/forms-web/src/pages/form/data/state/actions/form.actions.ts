@@ -1,5 +1,3 @@
-//import {IItem} from "../../shared/models/iitem-detail";
-
 export enum ActionType {
     QUERY_FORM_PENDING = 'QUERY_FORM_PENDING',
     QUERY_FORM_SUCCESS = 'QUERY_FORM_SUCCESS',

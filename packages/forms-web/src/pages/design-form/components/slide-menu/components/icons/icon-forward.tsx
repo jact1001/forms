@@ -1,4 +1,4 @@
-import { IIcon } from "../../../../interfaces/IIcon";
+import { IIcon } from "../../../../ui/interfaces/IIcon";
 
 const IconForward = ({ width = '20px', color = '#fff' }: IIcon) => {
     return (

@@ -1,4 +1,4 @@
-import {IIcon} from "../../../../interfaces/IIcon";
+import {IIcon} from "../../../../ui/interfaces/IIcon";
 
 const IconEmail = ({ width='20px', color='#fff'}: IIcon) => {
     return (

@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import './app.css';
 import { DesignForm } from "./pages/design-form/src/design-form";
 
 function App() {
