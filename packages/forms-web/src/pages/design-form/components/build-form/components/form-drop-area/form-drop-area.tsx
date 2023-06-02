@@ -5,24 +5,10 @@ import './form-drop-area.scss';
 
 export const FormDropArea = () => {
 
-    const [form, setForm] = useState([]);
-
-    // const [ drop ] = useDrop(
-    //     () => ({
-    //         accept: ItemTypes.DRAGINPUT,
-    //         drop: () => ({name: `Dustbin`}),
-    //         collect: (monitor: any) => {
-    //             // isOver: monitor.isOver();
-    //             console.log('monitor', monitor);
-    //             const dropResult = monitor.getDropResult() as any;
-    //             console.log('result', dropResult)
-    //         },
-    //     }),
-    // );
+    const [form, setForm] = useState<any>([]);
 
     const [ {isOver}, drop ] = useDrop(() => ({
         accept: ItemTypes.DRAGINPUT,
-
         drop: (field) => addField(field),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()           
@@ -30,12 +16,12 @@ export const FormDropArea = () => {
     }));
 
     const addField = (field: any) => {
-        console.log('field drop', field);
-        // setForm((field) => form.push(field));
-        //form.push(field);
+        // console.log('field drop', field);
+        form.push(field);
+        setForm(form);
     };
 
-    console.log('Form drop', form);
+    console.log('form drop', form);
 
     return (
         <div ref={ drop } className="drop-area">
