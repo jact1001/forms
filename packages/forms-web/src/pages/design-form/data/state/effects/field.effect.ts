@@ -1,8 +1,6 @@
-import axios from "axios";
-import {Dispatch} from 'redux';
-import {ActionType as FieldActionTypes, Action as FieldAction} from '../actions/field.actions';
-
-const baseUrl = "http://localhost:5000";
+import { Dispatch } from 'redux';
+import { ActionType as FieldActionTypes, Action as FieldAction } from '../actions/field.actions';
+import { getFormFields } from "../../../services/fileld-services";
 
 export const findField = () => {
     return async  (dispatch: Dispatch<FieldAction>) => {
@@ -10,7 +8,7 @@ export const findField = () => {
             type: FieldActionTypes.QUERY_FIELDS_PENDING
         });
         try {
-            const {data} = await axios.get(`${baseUrl}/api/field`);
+            const data = await getFormFields();
             dispatch({
                 type: FieldActionTypes.QUERY_FIELDS_SUCCESS,
                 payload: data

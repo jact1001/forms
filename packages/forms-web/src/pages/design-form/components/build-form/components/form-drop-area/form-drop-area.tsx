@@ -32,7 +32,7 @@ export const FormDropArea = () => {
     const addField = (field: any) => {
         console.log('field drop', field);
         // setForm((field) => form.push(field));
-        // form.push(field);
+        //form.push(field);
     };
 
     console.log('Form drop', form);

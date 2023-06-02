@@ -1,8 +1,6 @@
-import axios from 'axios';
-import {Dispatch} from 'redux';
-import {ActionType as DetailActionTypes, Action as DetailAction} from '../actions/form.actions';
-
-const baseUrl = "http://localhost:5000/";
+import { Dispatch } from 'redux';
+import { ActionType as DetailActionTypes, Action as DetailAction } from '../actions/form.actions';
+import {getForm} from "../../../services/form-services";
 
 export const findForm = () => {
     return async (dispatch: Dispatch<DetailAction>) => {
@@ -10,7 +8,7 @@ export const findForm = () => {
             type: DetailActionTypes.QUERY_FORM_PENDING
         });
         try {
-            const {data} = await axios.get(`${baseUrl}api/form`);
+            const data = await getForm();
             dispatch({
                 type: DetailActionTypes.QUERY_FORM_SUCCESS,
                 payload: data

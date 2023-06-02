@@ -1,4 +1,4 @@
-import {IIcon} from "../../../../interfaces/IIcon";
+import {IIcon} from "../../../../ui/interfaces/IIcon";
 
 const IconSelect = ({ width = '20px', color = '#fff' }: IIcon) => {
     return (
@@ -11,4 +11,4 @@ const IconSelect = ({ width = '20px', color = '#fff' }: IIcon) => {
     )
 }
 
-export default IconSelect; 
+export default IconSelect;

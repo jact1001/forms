@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
 
-// Mercado Libre App
-$ml-color-yellow-primary: #FFE600;
-$ml-color-gray-dark: #333333;
-$ml-color-gray-light: #999999;
-$ml-color-gray-Lighter: #EEEEEE;
-$ml-color-green-primary: #3483FA;
-$ml-color-white-primary: #fff;
-
-// definidos para Forms App
 $fa-color-cyan-primary: #0dd4c4;
 $fa-color-blue-dark: #201A30;
 $fa-color-blue-light: #31264e;
@@ -21,7 +12,7 @@ $fa-color-red-dark: #551221;
 $fa-color-black: #313131;
 
 body {
-  background-color: $ml-color-gray-Lighter;
+  background-color: $fa-color-gray-lighter;
   font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

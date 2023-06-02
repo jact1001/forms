@@ -10,7 +10,7 @@ import IconNumber from '../icons/icon-number';
 import IconDate from '../icons/icon-date';
 import IconTime from '../icons/icon-time';
 import IconEmail from "../icons/icon-email";
-import { IIcon } from "../../../../interfaces/IIcon";
+import { IIcon } from "../../../../ui/interfaces/IIcon";
 import './drag-input.scss';
 
 interface IIconType {
@@ -46,7 +46,7 @@ export const DragInput = ( {data}: any) => {
         // prueba 
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult() as any;
-            
+
             // pruebas
             // console.log('item', item);
             // console.log('dropResult', dropResult);
