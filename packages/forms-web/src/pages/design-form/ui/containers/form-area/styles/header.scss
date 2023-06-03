@@ -1,0 +1,50 @@
+@import '../../../../../../index';
+
+.header {
+    border-bottom-color: $fa-color-blue-light;
+    border-bottom-style: solid;
+    border-bottom-width: 0.1em;
+    color: $fa-color-white-primary;
+    display: flex;
+    height: 70px;
+    justify-content: flex-start;
+    padding-left: 50px;
+    padding-right: 40px;
+
+    &__select-user {
+        background-color: $fa-color-blue-light;
+        border: 0;
+        border-radius: 10px;
+        color: $fa-color-white-primary;
+        font-size: 15px;
+        margin-bottom: 18px;
+        margin-top: 18px;
+        padding: 7px;
+        width: 100px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__section-name {
+        background-color: $fa-color-blue-light;
+        border: 0;
+        border-radius: 10px;
+        color: $fa-color-white-primary;
+        font-size: 20px;
+        margin-bottom: 10px;
+        margin-left: 90px;
+        margin-top: 10px;
+        outline: none;
+        padding: 7px;
+
+        &::placeholder {
+            color: $fa-color-white-primary;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
