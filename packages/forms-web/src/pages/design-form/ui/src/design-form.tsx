@@ -5,10 +5,12 @@ import '../styles/design-form.scss';
 import SlideMenu from "../containers/slide-menu/src/SlideMenu";
 import FormArea from "../containers/form-area/src/FormArea";
 
+const defaultClass = 'design-form';
+
 export const DesignForm = () => {
 
     return (
-        <div className="design-form">
+        <div className={defaultClass}>
             <DndProvider backend={HTML5Backend} >
                 <SlideMenu>
                     <SlideMenu.Logo />

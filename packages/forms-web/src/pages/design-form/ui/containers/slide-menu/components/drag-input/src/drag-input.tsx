@@ -29,7 +29,7 @@ const iconsType: IIconType = {
     time: IconTime
 }
 
-const defaultClassName = 'drag-input';
+const defaultClass = 'drag-input';
 
 export const DragInput = ( {data}: any) => {
 
@@ -53,9 +53,9 @@ export const DragInput = ( {data}: any) => {
     }));
 
     return (
-        <button ref={ drag } className={ `${defaultClassName}` }>
+        <button ref={ drag } className={ `${defaultClass}` }>
             { Icon ? <Icon /> : <></> }
-            <h1 className={ `${defaultClassName}__title` }>{ data.label }</h1>
+            <h1 className={ `${defaultClass}__title` }>{ data.label }</h1>
         </button>
     )
 }
