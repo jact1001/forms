@@ -9,10 +9,12 @@ interface ISlideMenu {
     children: ReactNode;
 }
 
+const defaultClass = 'slide-menu';
+
 const SlideMenu = ({ children }: ISlideMenu) => {
 
     return (
-        <div className="slide-menu">
+        <div className={defaultClass}>
             {children}
         </div>
     )
