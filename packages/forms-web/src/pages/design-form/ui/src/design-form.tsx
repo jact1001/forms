@@ -1,9 +1,9 @@
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { BuildForm } from '../components/build-form/src/build-form';
 import '../styles/design-form.scss';
-import SlideMenu from "../components/slide-menu/src/slide-menu";
+import SlideMenu from "../containers/slide-menu/src/SlideMenu";
+import FormArea from "../containers/form-area/src/FormArea";
 
 export const DesignForm = () => {
 
@@ -13,10 +13,13 @@ export const DesignForm = () => {
                 <SlideMenu>
                     <SlideMenu.Logo />
                     <SlideMenu.FormTitle />
-                    <SlideMenu.TitleAddInput />
+                    <SlideMenu.AddTitle />
                     <SlideMenu.DragInputMenu />
                 </SlideMenu>
-                <BuildForm />
+                <FormArea>
+                    <FormArea.Header />
+                    <FormArea.DropArea />
+                </FormArea>
             </DndProvider>
         </div>
     )
