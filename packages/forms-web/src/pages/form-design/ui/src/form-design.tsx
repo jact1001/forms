@@ -1,11 +1,11 @@
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import '../styles/form-desing.scss';
+import '../styles/form-design.scss';
 import SlideMenu from "../containers/slide-menu/src/SlideMenu";
 import FormArea from "../containers/form-area/src/FormArea";
 
-const defaultClass = 'form-desing';
+const defaultClass = 'form-design';
 
 export const DesignForm = () => {
 
