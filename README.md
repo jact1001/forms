@@ -33,4 +33,4 @@ Run with the next lines:
 ## forms-web
 The items-web package was built using React and Redux, Redux makes it possible to manage the states of the application in a simple way.
 
- * design form page: http://localhost:3000/form-desing
+ * design form page: http://localhost:3000/form-design

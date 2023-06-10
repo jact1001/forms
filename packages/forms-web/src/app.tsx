@@ -1,12 +1,12 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import { DesignForm } from "./pages/form-desing/ui/src/form-desing";
+import { DesignForm } from "./pages/form-design/ui/src/form-design";
 
 function App() {
 
     return (
         <Router>
             <Switch>
-                <Route exact path='/form-desing'>
+                <Route exact path='/form-design'>
                     <DesignForm/>
                 </Route>
             </Switch>

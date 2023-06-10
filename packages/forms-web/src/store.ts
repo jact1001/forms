@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import formDesingReducer from "./pages/form-desing/data/state/reducers/index";
+import formDesignReducer from "./pages/form-design/data/state/reducers/index";
 import formReducer from "./pages/form/data/state/reducers/index";
 
 const reducers = combineReducers({
-    formDesing: formDesingReducer,
+    formDesign: formDesignReducer,
     form: formReducer
 });
 
