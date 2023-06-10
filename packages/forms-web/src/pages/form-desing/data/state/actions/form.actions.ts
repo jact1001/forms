@@ -1,5 +1,3 @@
-// Hace falta crear las interfaces de los datos
-
 export enum ActionType {
     SAVE_FORM_PENDING = 'SAVE_FORM_PENDING',
     SAVE_FORM_SUCCESS = 'SAVE_FORM_SUCCESS',
