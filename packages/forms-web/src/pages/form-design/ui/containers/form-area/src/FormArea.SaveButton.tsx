@@ -1,6 +1,7 @@
 import '../styles/header.scss';
 import { useDispatch } from "react-redux";
 import { saveForm } from "../../../../data/state/effects/form.effect";
+import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
 
 const defaultClass = 'save-button';
 
@@ -31,9 +32,10 @@ const mocks = {
 export const SaveButton = () => {
 
     const dispatch = useDispatch();
+    const { form } = useDesignFormStore((state) => state.form);
 
     const handleSaveForm = () => {
-        dispatch(saveForm(mocks));
+        dispatch(saveForm(form));
     }
 
     return (

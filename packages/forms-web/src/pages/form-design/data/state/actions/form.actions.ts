@@ -2,7 +2,7 @@ export enum ActionType {
     SAVE_FORM_PENDING = 'SAVE_FORM_PENDING',
     SAVE_FORM_SUCCESS = 'SAVE_FORM_SUCCESS',
     SAVE_FORM_FAIL = 'SAVE_FORM_FAIL',
-    UPDATE_FORM = 'UPDATE_FORM'
+    UPDATE_FIELD_FORM = 'UPDATE_FORM'
 }
 
 interface actionPending {
@@ -19,9 +19,9 @@ interface actionFail {
     payload: string;
 }
 
-interface updateAction {
-    type: ActionType.UPDATE_FORM;
+interface updateFieldAction {
+    type: ActionType.UPDATE_FIELD_FORM;
     payload: any;
 }
 
-export type Action = actionPending | actionSuccess | actionFail | updateAction;
+export type Action = actionPending | actionSuccess | actionFail | updateFieldAction;

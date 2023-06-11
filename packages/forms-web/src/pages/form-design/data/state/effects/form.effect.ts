@@ -21,3 +21,12 @@ export const saveForm = (form: any) => {
         }
     }
 }
+
+export const updateFieldForm = (field: any) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.UPDATE_FIELD_FORM,
+            payload: field
+        });
+    }
+}
