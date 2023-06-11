@@ -12,6 +12,11 @@ export class FormService implements OnDestroy {
         return data;
     }
 
+    public async saveForm(form): Promise<any> {
+        const data = await this.formRepository.saveForm(form);
+        return data;
+    }
+
     $onDestroy() {
         console.log('Service destroyed');
     }
