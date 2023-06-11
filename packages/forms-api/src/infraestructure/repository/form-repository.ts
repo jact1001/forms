@@ -2,6 +2,8 @@ import {Inject, Injectable, OnDestroy} from "@tsed/common";
 import {MongooseModel} from "@tsed/mongoose";
 import {Form} from "../../core/domain/IForm";
 
+
+
 @Injectable()
 export class FormRepository implements OnDestroy {
     @Inject(Form)
@@ -9,8 +11,13 @@ export class FormRepository implements OnDestroy {
 
     public async findForm () {
         const list = await this.model.find().exec();
-        console.log(list[0].toClass());
         return list;
+    }
+
+    public async saveForm (form: Form) {
+        const newUser = new this.model(form);
+        await newUser.save();
+        return 'exitoso';
     }
 
     $onDestroy(): void | Promise<any> {
