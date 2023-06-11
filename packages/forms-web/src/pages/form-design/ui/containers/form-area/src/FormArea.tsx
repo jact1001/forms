@@ -2,6 +2,7 @@ import '../styles/form-area.scss';
 import {ReactNode} from "react";
 import {FormAreaHeader} from "./FormArea.Header";
 import {FormAreaDropArea} from "./FormArea.DropArea";
+import {SaveButton} from "./FormArea.SaveButton";
 
 interface IFormArea {
     children: ReactNode;
@@ -21,5 +22,6 @@ const FormArea = ({ children }: IFormArea) => {
 
 FormArea.Header = FormAreaHeader;
 FormArea.DropArea = FormAreaDropArea;
+FormArea.SaveButton = SaveButton;
 
 export default FormArea;

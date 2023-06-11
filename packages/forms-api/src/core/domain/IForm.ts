@@ -45,8 +45,6 @@ export class Section {
 
 @Model()
 export class Form {
-    @ObjectID("id")
-    _id: string;
     @Property()
     formName: string;
     @CollectionOf(Section)

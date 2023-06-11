@@ -40,11 +40,7 @@ export const DragInput = ( {data}: any) => {
         item: data,
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult() as any;
-
-            if (item && dropResult) {
-                alert(`You dropped ${item.label} into ${dropResult}!`)
-            }
-
+            console.log(dropResult);
         },
 
         collect: (monitor) => ({

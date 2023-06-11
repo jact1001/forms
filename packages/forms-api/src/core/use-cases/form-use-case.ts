@@ -13,6 +13,10 @@ export class FormUseCase implements IFormRepositoryPort, OnDestroy {
         return this.formService.getForm();
     }
 
+    public async saveForm(form): Promise<any> {
+        return this.formService.saveForm(form);
+    }
+
     $onDestroy(): void | Promise<any> {
         throw new Error("Method not implemented.");
     }

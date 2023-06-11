@@ -21,6 +21,7 @@ export const DesignForm = () => {
                 <FormArea>
                     <FormArea.Header />
                     <FormArea.DropArea />
+                    <FormArea.SaveButton />
                 </FormArea>
             </DndProvider>
         </div>
