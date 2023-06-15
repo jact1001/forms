@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import '../styles/drop-area.scss';
-import {TextInput} from "../components/text-input/src/TextInput";
-import {TextArea} from "../components/text-area/src/TextArea";
-import {useDispatch} from "react-redux";
-import {updateFieldForm} from "../../../../data/state/effects/form.effect";
+import { TextInput } from "../components/text-input/src/TextInput";
+import { TextArea } from "../components/text-area/src/TextArea";
+import { Radio } from "../components/radio/src/Radio";
+import { Checkbox } from "../components/checkbox/src/Checkbox";
+
+import { useDispatch } from "react-redux";
+import { updateFieldForm } from "../../../../data/state/effects/form.effect";
 
 const defaultClass = 'drop-area';
 
@@ -16,7 +19,9 @@ interface IInputsType {
 
 const inputsType: IInputsType = {
     text: TextInput,
-    textArea: TextArea
+    textArea: TextArea,
+    radio: Radio,
+    checkbox: Checkbox
 }
 
 export const FormAreaDropArea = () => {

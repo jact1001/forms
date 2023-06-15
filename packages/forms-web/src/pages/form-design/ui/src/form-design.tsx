@@ -7,7 +7,7 @@ import FormArea from "../containers/form-area/src/FormArea";
 
 const defaultClass = 'form-design';
 
-export const DesignForm = () => {
+export const FormDesign = () => {
 
     return (
         <div className={defaultClass}>

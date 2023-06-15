@@ -3,12 +3,14 @@ import '../styles/text-area.scss';
 
 const defaultClass = 'text-input';
 
-export const TextArea = ({label}: any) => {
+export const TextArea = ({label, textArea}: any) => {
+
+    // const {row, key, col} = label;
 
     return (
         <div className={ `${defaultClass}` }>
             <label>{label}</label>
-            <textarea rows={4} cols={50} />
+            <textarea {...textArea} />
         </div>
 
     )
