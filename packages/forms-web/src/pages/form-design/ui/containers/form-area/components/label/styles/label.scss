@@ -1,0 +1,44 @@
+@import '../../../../../../../../index';
+
+.label {
+    display: flex;
+    justify-content: center;  
+    margin-bottom: 10px;  
+}
+
+.input-line {
+    position: relative;
+}
+
+.label-text {
+    background-color: $fa-color-blue-light;
+    border: none;
+    border-bottom: 1px solid $fa-color-gray-lighter;
+    border-radius: 0;
+    box-shadow: none; 
+    color: $fa-color-white-primary;
+    font-size: 15px;
+    outline: none;
+    padding: 7px;
+    padding-left: 12px;
+    width: 410px;
+
+    &:focus {
+        border-bottom: 1px solid $fa-color-blue-light;
+    }
+
+    &:focus + .line {
+        width: 100%;
+    }
+}
+
+.line {
+    background: $fa-color-cyan-primary;
+    bottom: 0;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: 0.3s all ease;
+    width: 0;
+}

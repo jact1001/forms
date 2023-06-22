@@ -1,0 +1,24 @@
+@import '../../../../../../../../index';
+
+.radio {
+    accent-color:  $fa-color-cyan-primary;
+    cursor: pointer;
+    height: 20px;
+    margin: 0.5rem;
+    margin-right: 15px;
+    transition: all 250ms ease;
+    width: 20px;
+
+    &:focus {
+        background-color: $fa-color-blue-light;
+    }
+
+    &:checked {
+        background-color: blue;
+    }
+}
+
+.radio-label {
+    color: $fa-color-white-primary;
+    display: inline-block;
+}

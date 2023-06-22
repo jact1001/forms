@@ -1,17 +1,14 @@
-import React from 'react';
+import { Label } from '../../label/src/Label';
 import '../styles/text-area.scss';
 
-const defaultClass = 'text-input';
+const defaultClass = 'text-area';
 
-export const TextArea = ({label, textArea}: any) => {
-
-    // const {row, key, col} = label;
+export const TextArea = ({label}: any) => {
 
     return (
-        <div className={ `${defaultClass}` }>
-            <label>{label}</label>
-            <textarea {...textArea} />
-        </div>
-
+        <>
+            <Label />
+            <textarea className={ `${defaultClass}` } placeholder={ label } disabled/>
+        </>
     )
 }
