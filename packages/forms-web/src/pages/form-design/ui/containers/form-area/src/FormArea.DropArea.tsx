@@ -43,11 +43,13 @@ export const FormAreaDropArea = () => {
     };
 
     return (
-        <div ref={ drop } className={defaultClass}>
-            {formFields.map((field: any) => {
-                const Input = inputsType[`${field.type}`];
-                return Input ? <Input key={field.label} {...field}></Input> : <></>
-            })}
+        <div className={defaultClass}>
+            <div ref={ drop } className={ `${defaultClass}__container` }>
+                {formFields.map((field: any) => {
+                    const Input = inputsType[`${field.type}`];
+                    return Input ? <Input key={field.label} {...field}></Input> : <></>
+                })}
+            </div>
         </div>
     );
 }
