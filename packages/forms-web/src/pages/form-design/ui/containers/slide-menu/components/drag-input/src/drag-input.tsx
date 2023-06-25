@@ -11,7 +11,7 @@ import IconTime from '../../icons/icon-time';
 import IconEmail from "../../icons/icon-email";
 import { IIcon } from "../../../../../interfaces/IIcon";
 import '../styles/drag-input.scss';
-import { DRAG_INPUT } from "../../../../form-area/src/FormArea.DropArea";
+import { DRAG_INPUT } from "../../../../form-area/src/FormArea.SectionArea";
 
 interface IIconType {
     [key: string]: (props: IIcon) => React.ReactElement;

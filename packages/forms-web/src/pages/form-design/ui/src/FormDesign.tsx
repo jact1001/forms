@@ -18,11 +18,11 @@ export const FormDesign = () => {
                     <SlideMenu.AddTitle />
                     <SlideMenu.DragInputMenu />
                 </SlideMenu>
-                <FormArea>
-                    <FormArea.Header />
-                    <FormArea.DropArea />
-                    <FormArea.SaveButton />
-                </FormArea>
+                <FormArea
+                    sectionHeader={<FormArea.SectionHeader />}
+                    sectionArea={<FormArea.SectionArea />}
+                    formSaveButton={<FormArea.SaveButton />}
+                />
             </DndProvider>
         </div>
     )

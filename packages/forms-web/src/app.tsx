@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import { FormDesign } from "./pages/form-design/ui/src/form-design";
+import { FormDesign } from "./pages/form-design/ui/src/FormDesign";
 
 function App() {
 

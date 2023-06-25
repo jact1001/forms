@@ -1,17 +1,17 @@
 @import '../../../../../../../../index';
 
 .text-input {
+    display: flex;
     background-color: $fa-color-blue-light;
     border: none;
     border-radius: 10px;
-    box-shadow: none; 
+    box-shadow: none;
     color: $fa-color-white-primary;
     font-size: 14px;
     font-style: italic;
     height: 25px;
     margin-bottom: 20px;
     outline: none;
-    padding: 7px;
-    padding-left: 12px;
+    padding: 7px 7px 7px 12px;
     width: 430px;
 }

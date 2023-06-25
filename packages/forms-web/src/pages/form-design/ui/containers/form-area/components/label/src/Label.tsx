@@ -1,20 +1,20 @@
 import '../styles/label.scss';
 
-const defaultClass = 'label-text';
-const labelText = 'Pregunta';
+const defaultClass = 'label';
+const labelText = 'Escribe aquí el nombre de tu campo';
 
 export const Label = () => {
 
     return (
-        <div className='label'>
-            <div className='input-line'>
-                <input 
-                    type='text' 
-                    className={ `${defaultClass}` }
+        <div className={defaultClass}>
+            <div className={`${defaultClass}__input-line`} >
+                <input
+                    type='text'
+                    className={`${defaultClass}__label-text`}
                     placeholder={ labelText }
                 />
-                <span className='line'></span>
-            </div>             
+                <span className={`${defaultClass}__line`}></span>
+            </div>
         </div>
     )
 
