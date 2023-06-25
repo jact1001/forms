@@ -7,7 +7,7 @@ import FormArea from "../containers/form-area/src/FormArea";
 
 const defaultClass = 'form-design';
 
-export const DesignForm = () => {
+export const FormDesign = () => {
 
     return (
         <div className={defaultClass}>
@@ -18,11 +18,11 @@ export const DesignForm = () => {
                     <SlideMenu.AddTitle />
                     <SlideMenu.DragInputMenu />
                 </SlideMenu>
-                <FormArea>
-                    <FormArea.Header />
-                    <FormArea.DropArea />
-                    <FormArea.SaveButton />
-                </FormArea>
+                <FormArea
+                    sectionHeader={<FormArea.SectionHeader />}
+                    sectionArea={<FormArea.SectionArea />}
+                    formSaveButton={<FormArea.SaveButton />}
+                />
             </DndProvider>
         </div>
     )

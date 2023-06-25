@@ -1,8 +1,8 @@
-import '../styles/header.scss';
+import '../styles/section-header.scss';
 
-const defaultClass = 'header'
+const defaultClass = 'section-header';
 
-export const FormAreaHeader = () => {
+export const SectionHeader = () => {
     return (
         <div className={defaultClass}>
             <select className={`${defaultClass}__select-user`} name='user'>

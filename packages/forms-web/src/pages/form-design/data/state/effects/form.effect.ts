@@ -22,10 +22,19 @@ export const saveForm = (form: any) => {
     }
 }
 
-export const updateFieldForm = (field: any) => {
+export const addSectionField = (field: any) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
-            type: FormActionTypes.UPDATE_FIELD_FORM,
+            type: FormActionTypes.ADD_SECTION_FIELD,
+            payload: field
+        });
+    }
+}
+
+export const updateSectionField = (field: any) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.UPDATE_SECTION_FIELD,
             payload: field
         });
     }
