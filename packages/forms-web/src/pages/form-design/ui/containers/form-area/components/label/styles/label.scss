@@ -1,8 +1,8 @@
 @import '../../../../../../../../index';
 
 .label {
-    margin-bottom: 10px;
     display: flex;
+    margin-bottom: 10px;
 
     &__input-line {
         position: relative;
@@ -35,7 +35,7 @@
             border-bottom: 1px solid $fa-color-blue-light;
         }
 
-        &:focus + .line {
+        &:focus + .label__line {
             width: 100%;
         }
     }
