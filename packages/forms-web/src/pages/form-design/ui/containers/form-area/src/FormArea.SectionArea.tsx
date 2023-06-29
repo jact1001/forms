@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDrop } from "react-dnd";
+import { Label } from "../components/label/src/Label";
 import { TextInput } from "../components/text-input/src/TextInput";
 import { TextArea } from "../components/text-area/src/TextArea";
 import { Radio } from "../components/radio/src/Radio";
 import { Checkbox } from "../components/checkbox/src/Checkbox";
 import { Select } from "../components/select/src/Select";
-import { Label } from "../components/label/src/Label";
+
 import { useDispatch } from "react-redux";
 import { addSectionField } from "../../../../data/state/effects/form.effect";
 import { v4 as uuidv4 } from 'uuid';
