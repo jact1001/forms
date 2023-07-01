@@ -1,11 +1,11 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import {FieldRepository} from "../../infraestructure/repository/field-repository";
+import {FormFieldsRepository} from "../../infraestructure/repository/form-fields-repository";
 
 @Injectable()
 @Scope('request')
 export class FieldService implements OnDestroy {
 
-    constructor(private readonly fieldRepository: FieldRepository) {}
+    constructor(private readonly fieldRepository: FormFieldsRepository) {}
 
     public async getField(): Promise<any> {
         const data = await this.fieldRepository.findField();

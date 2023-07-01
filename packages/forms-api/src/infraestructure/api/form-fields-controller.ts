@@ -1,8 +1,8 @@
 import {Controller, Get} from "@tsed/common";
 import {FieldUseCase} from "../../core/use-cases/field-use-case";
 
-@Controller("/field")
-export class FieldController {
+@Controller("/fields")
+export class FormFieldsController {
 
     public constructor(private readonly _fieldUseCase: FieldUseCase) {
     }

@@ -1,11 +1,11 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import {FormRepository} from "../../infraestructure/repository/form-repository";
+import {FormsRepository} from "../../infraestructure/repository/forms-repository";
 
 @Injectable()
 @Scope('request')
 export class FormService implements OnDestroy {
 
-    constructor(private readonly formRepository: FormRepository) {}
+    constructor(private readonly formRepository: FormsRepository) {}
 
     public async getForm(): Promise<any> {
         const data = await this.formRepository.findForm();

@@ -4,7 +4,9 @@ import {CollectionOf, Property} from "@tsed/schema";
 @Schema()
 export class Text {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -20,7 +22,9 @@ export class Text {
 @Schema()
 export class TextArea {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -40,7 +44,9 @@ export class TextArea {
 @Schema()
 export class Radio {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -54,7 +60,9 @@ export class Radio {
 @Schema()
 export class Checkbox {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -70,7 +78,9 @@ export class Checkbox {
 @Schema()
 export class SelectValue {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     text: string;
 }
@@ -78,7 +88,9 @@ export class SelectValue {
 @Schema()
 export class Select {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -92,7 +104,9 @@ export class Select {
 @Schema()
 export class Number {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -108,7 +122,9 @@ export class Number {
 @Schema()
 export class Email {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -124,7 +140,9 @@ export class Email {
 @Schema()
 export class Date {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -136,7 +154,9 @@ export class Date {
 @Schema()
 export class Time {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -148,11 +168,9 @@ export class Time {
 }
 
 @Model()
-export class FieldForm {
+export class FormFields {
     @ObjectID("id")
     _id: string;
-    @Property()
-    field_id: string;
     @Property()
     description: string;
     @Property()
