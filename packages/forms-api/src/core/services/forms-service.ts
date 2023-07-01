@@ -3,12 +3,12 @@ import {FormsRepository} from "../../infraestructure/repository/forms-repository
 
 @Injectable()
 @Scope('request')
-export class FormService implements OnDestroy {
+export class FormsService implements OnDestroy {
 
     constructor(private readonly formRepository: FormsRepository) {}
 
-    public async getForm(): Promise<any> {
-        const data = await this.formRepository.findForm();
+    public async getForms(): Promise<any> {
+        const data = await this.formRepository.findForms();
         return data;
     }
 

@@ -1,15 +1,14 @@
 import {Controller, Get} from "@tsed/common";
-import {FieldUseCase} from "../../core/use-cases/field-use-case";
+import {FormFieldsUseCase} from "../../core/use-cases/form-fields-use-case";
 
-@Controller("/fields")
+@Controller("/form-fields")
 export class FormFieldsController {
 
-    public constructor(private readonly _fieldUseCase: FieldUseCase) {
-    }
+    public constructor(private readonly _formFieldsUseCase: FormFieldsUseCase) {}
 
     @Get("/")
     async getField(): Promise<any> {
-        return await this._fieldUseCase.getField();
+        return await this._formFieldsUseCase.getFormFields();
     }
 
 }

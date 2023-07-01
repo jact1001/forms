@@ -1,6 +1,6 @@
 import { Inject, Injectable, OnDestroy } from "@tsed/common";
 import { MongooseModel } from "@tsed/mongoose";
-import { FormFields } from "./Schematics/form-fields-schema";
+import { FormFields } from "./schemas/form-fields-schema";
 
 @Injectable()
 export class FormFieldsRepository implements OnDestroy {
@@ -8,9 +8,9 @@ export class FormFieldsRepository implements OnDestroy {
     @Inject(FormFields)
     private model: MongooseModel<FormFields>;
 
-    public async findField () {
-        const list = await this.model.find().exec();
-        return list[0];
+    public async findFormFields () {
+        const formFields = await this.model.find().exec();
+        return formFields[0];
     }
 
     $onDestroy(): void | Promise<any> {

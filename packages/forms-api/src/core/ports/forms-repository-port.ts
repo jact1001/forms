@@ -1,4 +1,4 @@
 export interface IFormRepositoryPort {
-    getForm(): Promise<any>;
+    getForms(): Promise<any>;
     saveForm(form): Promise<any>;
 }
