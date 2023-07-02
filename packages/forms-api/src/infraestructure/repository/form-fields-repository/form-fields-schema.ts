@@ -1,12 +1,11 @@
-import {Model, ObjectID, Schema} from "@tsed/mongoose";
-import {CollectionOf, Property} from "@tsed/schema";
+import { Model, ObjectID, Schema } from "@tsed/mongoose";
+import { CollectionOf, Property } from "@tsed/schema";
 import {
     ICheckbox, IDate,
     IEmail, IFormFields,
-    INumber,
+    INumber, IOptionValue,
     IRadio,
     ISelect,
-    ISelectValue,
     IText,
     ITextArea, ITime
 } from "../../../core/domain/form-fields";
@@ -52,6 +51,14 @@ export class TextArea implements ITextArea {
 }
 
 @Schema()
+export class OptionValue implements IOptionValue {
+    @Property()
+    id: string;
+    @Property()
+    text: string;
+}
+
+@Schema()
 export class Radio implements IRadio {
     @Property()
     field_id: string;
@@ -64,7 +71,9 @@ export class Radio implements IRadio {
     @Property()
     label: string;
     @Property()
-    name: string
+    name: string;
+    @CollectionOf(OptionValue)
+    options: OptionValue[]
 }
 
 @Schema()
@@ -82,15 +91,9 @@ export class Checkbox implements ICheckbox {
     @Property()
     name: string;
     @Property()
-    checked: boolean
-}
-
-@Schema()
-export class SelectValue implements ISelectValue {
-    @Property()
-    id: string;
-    @Property()
-    text: string;
+    checked: boolean;
+    @CollectionOf(OptionValue)
+    options: OptionValue[]
 }
 
 @Schema()
@@ -105,8 +108,8 @@ export class Select implements ISelect {
     type: string;
     @Property()
     label: string;
-    @CollectionOf(SelectValue)
-    values: SelectValue[];
+    @CollectionOf(OptionValue)
+    values: OptionValue[]
 }
 
 @Schema()

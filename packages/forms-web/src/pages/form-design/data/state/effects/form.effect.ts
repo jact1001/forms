@@ -1,8 +1,10 @@
 import { Dispatch } from 'redux';
 import { ActionType as FormActionTypes, Action as FieldAction } from '../actions/form.actions';
 import { saveFormService } from "../../../services/form-services";
+import { IForm } from "../../domain/IForm";
+import {TField} from "../../domain/IFormFields";
 
-export const saveForm = (form: any) => {
+export const saveForm = (form: IForm) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.SAVE_FORM_PENDING
@@ -22,7 +24,7 @@ export const saveForm = (form: any) => {
     }
 }
 
-export const addSectionField = (field: any) => {
+export const addSectionField = (field: TField) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.ADD_SECTION_FIELD,
@@ -31,7 +33,7 @@ export const addSectionField = (field: any) => {
     }
 }
 
-export const updateSectionField = (field: any) => {
+export const updateSectionField = (field: TField) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.UPDATE_SECTION_FIELD,

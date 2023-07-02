@@ -1,4 +1,4 @@
-// Hace falta crear las interfaces de los datos
+import { IFormFields } from "../../domain/IFormFields";
 
 export enum ActionType {
     QUERY_FIELDS_PENDING = 'QUERY_FIELDS_PENDING',
@@ -12,7 +12,7 @@ interface actionPending {
 
 interface actionSuccess {
     type: ActionType.QUERY_FIELDS_SUCCESS;
-    payload: any;
+    payload: IFormFields;
 }
 
 interface actionFail {

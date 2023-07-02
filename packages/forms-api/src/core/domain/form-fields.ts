@@ -20,13 +20,18 @@ export interface ITextArea {
     rows: string;
 }
 
+export interface IOptionValue {
+    id: string;
+    text: string;
+}
+
 export interface IRadio {
     field_id: string;
     form_field_id: string;
     isRequired: boolean;
     type: string;
     label: string;
-    name: string
+    options: IOptionValue[];
 }
 
 export interface ICheckbox {
@@ -36,12 +41,8 @@ export interface ICheckbox {
     type: string;
     label: string;
     name: string;
-    checked: boolean
-}
-
-export interface ISelectValue {
-    id: string;
-    text: string;
+    checked: boolean;
+    options: IOptionValue[];
 }
 
 export interface ISelect {
@@ -50,7 +51,7 @@ export interface ISelect {
     isRequired: boolean;
     type: string;
     label: string;
-    values: ISelectValue[];
+    values: IOptionValue[];
 }
 
 export interface INumber {
@@ -90,8 +91,10 @@ export interface ITime {
     value: string;
 }
 
+export type TField = IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime;
+
 export interface IFormFields {
     _id: string;
     description: string;
-    fields: Array< IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime >;
+    fields: Array<TField>;
 }

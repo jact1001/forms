@@ -41,7 +41,8 @@ export interface ICheckbox {
     type: string;
     label: string;
     name: string;
-    checked: boolean
+    checked: boolean;
+    options: IOptionValue[];
 }
 
 export interface ISelect {
@@ -92,10 +93,10 @@ export interface ITime {
 
 export interface IFields extends IText, ITextArea, IRadio, ICheckbox, ISelect, INumber, IEmail, IDate, ITime {};
 
-export type TFields = IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime;
+export type TField = IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime;
 
 export interface IFormFields {
     _id: string;
     description: string;
-    fields: Array<TFields>;
+    fields: Array<TField>;
 }

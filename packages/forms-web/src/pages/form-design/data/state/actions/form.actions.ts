@@ -1,3 +1,6 @@
+import { IForm } from "../../domain/IForm";
+import { TField } from "../../domain/IFormFields";
+
 export enum ActionType {
     SAVE_FORM_PENDING = 'SAVE_FORM_PENDING',
     SAVE_FORM_SUCCESS = 'SAVE_FORM_SUCCESS',
@@ -12,7 +15,7 @@ interface actionPending {
 
 interface actionSuccess {
     type: ActionType.SAVE_FORM_SUCCESS;
-    payload: any;
+    payload: IForm;
 }
 
 interface actionFail {
@@ -22,12 +25,12 @@ interface actionFail {
 
 interface addSectionFieldAction {
     type: ActionType.ADD_SECTION_FIELD;
-    payload: any;
+    payload: TField;
 }
 
 interface updateSectionFieldAction {
     type: ActionType.UPDATE_SECTION_FIELD;
-    payload: any;
+    payload: TField;
 }
 
 export type Action = actionPending | actionSuccess | actionFail | addSectionFieldAction | updateSectionFieldAction;

@@ -7,6 +7,7 @@ import { Label } from "../components/label/src/Label";
 import { v4 as uuidv4 } from 'uuid';
 import { useDesignFormStore } from "../../../../data/hooks/custom-typed-selector";
 import { inputsType } from "../components/build-input/src/BuildInput";
+import '../styles/section-area.scss';
 
 const defaultClass = 'section-area';
 
@@ -40,7 +41,7 @@ export const SectionArea = () => {
                 const Input = inputsType[`${field.type}`];
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >
-                        <Label />
+                        <Label field={field} />
                         <Input key={field.label} {...field}></Input>
                     </div>
             })}

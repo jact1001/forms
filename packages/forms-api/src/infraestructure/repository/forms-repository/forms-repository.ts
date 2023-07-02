@@ -16,8 +16,7 @@ export class FormsRepository implements IFormRepositoryPort, OnDestroy {
 
     public async saveForm (form: IForm) {
         const newForm = new this.model(form);
-        await newForm.save();
-        return form;
+        return await newForm.save();
     }
 
     $onDestroy(): void | Promise<any> {

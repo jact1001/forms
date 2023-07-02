@@ -1,4 +1,4 @@
-import { ICheckbox, IDate, IEmail, INumber, IRadio, ISelect, IText, ITextArea, ITime } from "./form-fields";
+import { TField } from "./form-fields";
 
 export interface IAccess {
     userId: string;
@@ -10,7 +10,7 @@ export interface ISection {
     _id: string;
     sectionName: string;
     access: IAccess[];
-    fields: Array< IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime >;
+    fields: Array<TField>;
 }
 
 export interface IForm {

@@ -7,14 +7,14 @@ export interface IAccess {
 }
 
 export interface ISection {
-    _id: string;
+    _id?: string;
     sectionName: string;
     access: IAccess[];
     fields: Array< IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime >;
 }
 
 export interface IForm {
-    _id: string;
+    _id?: string;
     formName: string;
     state: string;
     sections: ISection[];
