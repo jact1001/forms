@@ -1,8 +1,18 @@
 import {Model, ObjectID, Schema} from "@tsed/mongoose";
 import {CollectionOf, Property} from "@tsed/schema";
+import {
+    ICheckbox, IDate,
+    IEmail, IFormFields,
+    INumber,
+    IRadio,
+    ISelect,
+    ISelectValue,
+    IText,
+    ITextArea, ITime
+} from "../../../core/domain/form-fields";
 
 @Schema()
-export class Text {
+export class Text implements IText {
     @Property()
     field_id: string;
     @Property()
@@ -20,7 +30,7 @@ export class Text {
 }
 
 @Schema()
-export class TextArea {
+export class TextArea implements ITextArea {
     @Property()
     field_id: string;
     @Property()
@@ -42,7 +52,7 @@ export class TextArea {
 }
 
 @Schema()
-export class Radio {
+export class Radio implements IRadio {
     @Property()
     field_id: string;
     @Property()
@@ -58,7 +68,7 @@ export class Radio {
 }
 
 @Schema()
-export class Checkbox {
+export class Checkbox implements ICheckbox {
     @Property()
     field_id: string;
     @Property()
@@ -76,17 +86,15 @@ export class Checkbox {
 }
 
 @Schema()
-export class SelectValue {
+export class SelectValue implements ISelectValue {
     @Property()
-    field_id: string;
-    @Property()
-    form_field_id: string;
+    id: string;
     @Property()
     text: string;
 }
 
 @Schema()
-export class Select {
+export class Select implements ISelect {
     @Property()
     field_id: string;
     @Property()
@@ -102,7 +110,7 @@ export class Select {
 }
 
 @Schema()
-export class Number {
+export class Number implements INumber {
     @Property()
     field_id: string;
     @Property()
@@ -120,7 +128,7 @@ export class Number {
 }
 
 @Schema()
-export class Email {
+export class Email implements IEmail {
     @Property()
     field_id: string;
     @Property()
@@ -138,7 +146,7 @@ export class Email {
 }
 
 @Schema()
-export class Date {
+export class Date implements IDate {
     @Property()
     field_id: string;
     @Property()
@@ -152,7 +160,7 @@ export class Date {
 }
 
 @Schema()
-export class Time {
+export class Time implements ITime {
     @Property()
     field_id: string;
     @Property()
@@ -168,7 +176,7 @@ export class Time {
 }
 
 @Model()
-export class FormFields {
+export class FormFields implements IFormFields {
     @ObjectID("id")
     _id: string;
     @Property()
