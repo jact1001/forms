@@ -1,5 +1,6 @@
-import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import {FormsRepository} from "../../infraestructure/repository/forms-repository";
+import { Injectable, OnDestroy, Scope } from "@tsed/common";
+import { FormsRepository } from "../../infraestructure/repository/forms-repository/forms-repository";
+import { IForm } from "../domain/form";
 
 @Injectable()
 @Scope('request')
@@ -7,12 +8,12 @@ export class FormsService implements OnDestroy {
 
     constructor(private readonly formRepository: FormsRepository) {}
 
-    public async getForms(): Promise<any> {
+    public async getForms(): Promise<IForm[]> {
         const data = await this.formRepository.findForms();
         return data;
     }
 
-    public async saveForm(form): Promise<any> {
+    public async saveForm(form: IForm): Promise<IForm> {
         const data = await this.formRepository.saveForm(form);
         return data;
     }

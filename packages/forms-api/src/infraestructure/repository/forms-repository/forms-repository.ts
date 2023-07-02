@@ -1,9 +1,11 @@
 import { Inject, Injectable, OnDestroy } from "@tsed/common";
 import { MongooseModel } from "@tsed/mongoose";
-import { Form } from "./schemas/forms-schema";
+import { Form } from "./forms-schema";
+import { IFormRepositoryPort } from "../../../core/ports/forms-ports/forms-repository-port";
+import { IForm } from "../../../core/domain/form";
 
 @Injectable()
-export class FormsRepository implements OnDestroy {
+export class FormsRepository implements IFormRepositoryPort, OnDestroy {
     @Inject(Form)
     private model: MongooseModel<Form>;
 
@@ -12,7 +14,7 @@ export class FormsRepository implements OnDestroy {
         return forms;
     }
 
-    public async saveForm (form: Form) {
+    public async saveForm (form: IForm) {
         const newForm = new this.model(form);
         await newForm.save();
         return form;
