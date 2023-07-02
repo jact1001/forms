@@ -1,10 +1,21 @@
-import {Model, ObjectID, Schema} from "@tsed/mongoose";
-import {CollectionOf, Property} from "@tsed/schema";
+import { Model, ObjectID, Schema } from "@tsed/mongoose";
+import { CollectionOf, Property } from "@tsed/schema";
+import {
+    ICheckbox, IDate,
+    IEmail, IFormFields,
+    INumber, IOptionValue,
+    IRadio,
+    ISelect,
+    IText,
+    ITextArea, ITime
+} from "../../../core/domain/form-fields";
 
 @Schema()
-export class Text {
+export class Text implements IText {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -18,9 +29,11 @@ export class Text {
 }
 
 @Schema()
-export class TextArea {
+export class TextArea implements ITextArea {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -38,9 +51,19 @@ export class TextArea {
 }
 
 @Schema()
-export class Radio {
+export class OptionValue implements IOptionValue {
     @Property()
     id: string;
+    @Property()
+    text: string;
+}
+
+@Schema()
+export class Radio implements IRadio {
+    @Property()
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -48,13 +71,17 @@ export class Radio {
     @Property()
     label: string;
     @Property()
-    name: string
+    name: string;
+    @CollectionOf(OptionValue)
+    options: OptionValue[]
 }
 
 @Schema()
-export class Checkbox {
+export class Checkbox implements ICheckbox {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -64,35 +91,33 @@ export class Checkbox {
     @Property()
     name: string;
     @Property()
-    checked: boolean
+    checked: boolean;
+    @CollectionOf(OptionValue)
+    options: OptionValue[]
 }
 
 @Schema()
-export class SelectValue {
+export class Select implements ISelect {
     @Property()
-    id: string;
+    field_id: string;
     @Property()
-    text: string;
-}
-
-@Schema()
-export class Select {
-    @Property()
-    id: string;
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
     type: string;
     @Property()
     label: string;
-    @CollectionOf(SelectValue)
-    values: SelectValue[];
+    @CollectionOf(OptionValue)
+    values: OptionValue[]
 }
 
 @Schema()
-export class Number {
+export class Number implements INumber {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -106,9 +131,11 @@ export class Number {
 }
 
 @Schema()
-export class Email {
+export class Email implements IEmail {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -122,9 +149,11 @@ export class Email {
 }
 
 @Schema()
-export class Date {
+export class Date implements IDate {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -134,9 +163,11 @@ export class Date {
 }
 
 @Schema()
-export class Time {
+export class Time implements ITime {
     @Property()
-    id: string;
+    field_id: string;
+    @Property()
+    form_field_id: string;
     @Property()
     isRequired: boolean;
     @Property()
@@ -148,11 +179,9 @@ export class Time {
 }
 
 @Model()
-export class FieldForm {
+export class FormFields implements IFormFields {
     @ObjectID("id")
     _id: string;
-    @Property()
-    field_id: string;
     @Property()
     description: string;
     @Property()

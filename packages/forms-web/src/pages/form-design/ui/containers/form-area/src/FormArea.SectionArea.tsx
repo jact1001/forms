@@ -1,30 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDrop } from "react-dnd";
-import { TextInput } from "../components/text-input/src/TextInput";
-import { TextArea } from "../components/text-area/src/TextArea";
-import { Radio } from "../components/radio/src/Radio";
-import { Checkbox } from "../components/checkbox/src/Checkbox";
 import { useDispatch } from "react-redux";
 import { addSectionField } from "../../../../data/state/effects/form.effect";
 import '../styles/section-area.scss';
-import {Label} from "../components/label/src/Label";
+import { Label } from "../components/label/src/Label";
 import { v4 as uuidv4 } from 'uuid';
-import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
+import { useDesignFormStore } from "../../../../data/hooks/custom-typed-selector";
+import { inputsType } from "../components/build-input/src/BuildInput";
+import '../styles/section-area.scss';
 
 const defaultClass = 'section-area';
 
 export const DRAG_INPUT = 'drag-input';
-
-interface IInputsType {
-    [key: string]: (props: any) => React.ReactElement;
-}
-
-const inputsType: IInputsType = {
-    text: TextInput,
-    textArea: TextArea,
-    radio: Radio,
-    checkbox: Checkbox
-}
 
 export const SectionArea = () => {
 
@@ -54,7 +41,7 @@ export const SectionArea = () => {
                 const Input = inputsType[`${field.type}`];
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >
-                        <Label />
+                        <Label field={field} />
                         <Input key={field.label} {...field}></Input>
                     </div>
             })}

@@ -1,18 +1,19 @@
-import {Action, ActionType} from '../actions/field.actions';
+import {Action, ActionType} from '../actions/form-fields.actions';
+import {IFormFields} from "../../domain/IFormFields";
 
-export interface IFormFieldState {
-    formFields: any | null;
+export interface IFormFieldsState {
+    formFields: IFormFields | null;
     loading: boolean;
     error: string | null;
 }
 
-const initialState: IFormFieldState = {
+const initialState: IFormFieldsState = {
     formFields: null,
     loading: false,
     error: null
 }
 
-const fieldsReducer = (state: IFormFieldState = initialState, action: Action): IFormFieldState => {
+const formFieldsReducer = (state: IFormFieldsState = initialState, action: Action): IFormFieldsState => {
     switch (action.type) {
         case ActionType.QUERY_FIELDS_PENDING:
             return {
@@ -37,4 +38,4 @@ const fieldsReducer = (state: IFormFieldState = initialState, action: Action): I
     }
 }
 
-export default fieldsReducer;
+export default formFieldsReducer;

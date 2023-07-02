@@ -1,19 +1,11 @@
 @import '../../../../../../../../index';
 
-.radio-group {
+.select-group {
     align-items: center;
     display: flex;
     gap: 20px;
     margin-bottom: 10px;
     text-align: left;
-
-    &__radio {
-        accent-color:  $fa-color-cyan-primary;
-        cursor: pointer;
-        height: 20px;
-        transition: all 250ms ease;
-        width: 20px;
-    }
 
     &__label {
         cursor: pointer;
@@ -47,7 +39,7 @@
             outline: none;
             padding: 7px;
             padding-left: 12px;
-            width: 350px;
+            width: 370px;
     
             &--add {
                 font-style: italic;
@@ -57,7 +49,7 @@
                 border-bottom: 1px solid $fa-color-blue-dark;
             }
     
-            &:focus + .radio-group__label__line {
+            &:focus + .select-group__label__line {
                 width: 100%;
             }
         }

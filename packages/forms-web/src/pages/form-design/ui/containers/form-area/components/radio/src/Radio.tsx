@@ -1,12 +1,14 @@
-import IconClose from '../../icons/icon-close';
 import '../styles/radio.scss';
-import AddIcon from "../../icons/icon-add";
-import {useDispatch} from "react-redux";
-import {updateSectionField} from "../../../../../../data/state/effects/form.effect";
+import { useDispatch } from "react-redux";
+import { updateSectionField } from "../../../../../../data/state/effects/form.effect";
+import { IOptionValue, IRadio } from "../../../../../../data/domain/IFormFields";
+import CloseIcon from '../../icons/close-icon';
+import '../styles/radio.scss';
+import AddIcon from "../../icons/add-icon";
 
 const defaultClass = 'radio-group';
 
-export const Radio = (field: any) => {
+export const Radio = (field: IRadio) => {
 
     const { type, options } = field;
     const dispatch = useDispatch();
@@ -21,8 +23,8 @@ export const Radio = (field: any) => {
 
     const addOption = () => {
         options.push({
-            label: '',
-            id: options.length + 1
+            id: (options.length + 1).toString(),
+            text: `Opción ${options.length + 1}`
         })
         updateStoreField();
     }
@@ -34,26 +36,32 @@ export const Radio = (field: any) => {
 
     return (
         <>
-            {options.map((option: any, index: number) => {
+            {options.map((option: IOptionValue, index: number) => {
                 return (
                     <div className={defaultClass}>
-                        <input type={type} id={option.id} name={option.label} className={`${defaultClass}__radio`} disabled />
+                        <input
+                            className={`${defaultClass}__radio`}
+                            type={type}
+                            id={option.id}
+                            name={option.text}
+                            disabled
+                        />
                         <div className={`${defaultClass}__label`}>
-                            <div className={`${defaultClass}__input-line`}>
+                            <div className={`${defaultClass}__label__input-line`}>
                                 <input
+                                    className={`${defaultClass}__label__input-text`}
                                     type='text'
-                                    className={`${defaultClass}__input-text`}
-                                    placeholder={option.label}
-                                    value={option.label}
+                                    placeholder={option.text}
+                                    value={option.text}
                                 />
-                                <span className={`${defaultClass}__line`}></span>
+                                <span className={`${defaultClass}__label__line`}></span>
                             </div>
-                            <div onClick={() => removeOption(index)}><IconClose /></div>
+                            <div className={ `${defaultClass}__icon` } onClick={() => removeOption(index)}><CloseIcon /></div>
                         </div>
                     </div>
                 )
             })}
-            <div onClick={addOption}>Añade otra opción <AddIcon /></div>
+            <div className={ `${defaultClass}__icon` } onClick={addOption}>Añade otra opción <AddIcon /></div>
         </>
     )
 }

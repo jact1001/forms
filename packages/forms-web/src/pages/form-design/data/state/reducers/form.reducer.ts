@@ -1,26 +1,29 @@
-import {Action, ActionType} from '../actions/form.actions';
-import {addSectionField} from "../../use-cases/use-add-section-field";
-import {updateSectionField} from "../../use-cases/use-update-section-field";
+import { Action, ActionType } from '../actions/form.actions';
+import { addSectionField } from "../../use-cases/use-add-section-field";
+import { updateSectionField } from "../../use-cases/use-update-section-field";
+import { IForm } from "../../domain/IForm";
 
-export interface IFormFieldState {
-    form: any | null;
+export interface IFormState {
+    form: IForm;
     loading: boolean;
     error: string | null;
 }
 
-const initialState: IFormFieldState = {
+const initialState: IFormState = {
     form: {
+        state: '',
         formName: "Estudio 2",
         sections: [
             {
-                permissions: [
+                access: [
                     {
-                        roleId: "0001",
-                        text: "Secretaria",
+                        userId: "0001",
+                        userName: "Secretaria",
                         permission: ["read", "write"]
                     }
                 ],
-                fields: []
+                fields: [],
+                sectionName: '',
             }
         ]
     },
@@ -28,7 +31,7 @@ const initialState: IFormFieldState = {
     error: null
 }
 
-const formReducer = (state: IFormFieldState = initialState, action: Action): IFormFieldState => {
+const formReducer = (state: IFormState = initialState, action: Action): IFormState => {
     switch (action.type) {
         case ActionType.SAVE_FORM_PENDING:
             return {

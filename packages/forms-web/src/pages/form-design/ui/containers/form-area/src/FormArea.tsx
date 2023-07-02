@@ -1,8 +1,8 @@
 import '../styles/form-area.scss';
-import {ReactNode} from "react";
-import {SectionHeader} from "./FormArea.SectionHeader";
-import {SectionArea} from "./FormArea.SectionArea";
-import {SaveButton} from "./FormArea.SaveButton";
+import { ReactNode } from "react";
+import { SectionHeader } from "./FormArea.SectionHeader";
+import { SectionArea } from "./FormArea.SectionArea";
+import { SaveButton } from "./FormArea.SaveButton";
 
 interface IFormArea {
     sectionArea: ReactNode;
