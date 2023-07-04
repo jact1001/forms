@@ -4,6 +4,7 @@ import FormIcon from "../icons/FormIcon";
 import ReturnIcon from "../icons/ReturnIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 import ArrowUpRightIcon from "../icons/ArrowUpRightIcon";
+import {SlideForm} from "./SlideForm";
 
 const defaultClass = 'forms-user-container';
 
@@ -18,58 +19,15 @@ export const Userforms = () => {
 
     return (
         <div className={`${defaultClass}`}>
-
             <div className={`${defaultClass}__forms-container`}>
                 <div className={`${defaultClass}__tittle`}>
                     <FormIcon />
                     <b>Mis Formularios</b>
                 </div>
                 <div className={`${defaultClass}__main`}>
-                    <div className={`${defaultClass}__slide`}>
-                        <div className={`${defaultClass}__content`}>
-                            <div  className={`${defaultClass}__name-icon`}>
-                                <div className={`${defaultClass}__icon`}>
-                                    <FormIcon />
-                                </div>
-                                <div className={`${defaultClass}__name`}>
-                                    <b>Form 1</b>
-                                </div>
-                            </div>
-                            <div className=" slide-button-container">
-                                <div  className={`${defaultClass}__slide-button`}>
-                                    <button  className={`${defaultClass}__arrow-button`} onClick={toggleCount}>
-                                        <div className={isArrowRotated ? `${defaultClass}__arrow-up` : ""}>
-                                            <ArrowDownIcon />
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={optionsClassName}>
-                            <a href="#">Opción 1</a>
-                            <div className="button-option-container">
-                                <button className={`${defaultClass}__button-option`}>
-                                    <ArrowUpRightIcon/>
-                                </button>
-                            </div>
-                        </div>
-                        <div className={optionsClassName}>
-                            <a href="#">Opción 2</a>
-                            <div className="button-option-container">
-                                <button  className={`${defaultClass}__button-option`}>
-                                    <ArrowUpRightIcon/>
-                                </button>
-                            </div>
-                        </div>
-                        <div className={optionsClassName}>
-                            <a href="#">Opción 3</a>
-                            <div className="button-option-container">
-                                <button  className={`${defaultClass}__button-option`}>
-                                    <ArrowUpRightIcon/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <SlideForm formName="Form1"/>
+                    <SlideForm formName="Form2"/>
+                    <SlideForm formName="Form3"/>
                 </div>
             </div>
             <div className={`${defaultClass}__return-container`}>
