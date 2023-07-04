@@ -1,24 +1,29 @@
-import {Action, ActionType} from '../actions/form.actions';
+import { Action, ActionType } from '../actions/form.actions';
+import { addSectionField } from "../../use-cases/use-add-section-field";
+import { updateSectionField } from "../../use-cases/use-update-section-field";
+import { IForm } from "../../domain/IForm";
 
-export interface IFormFieldState {
-    form: any | null;
+export interface IFormState {
+    form: IForm;
     loading: boolean;
     error: string | null;
 }
 
-const initialState: IFormFieldState = {
+const initialState: IFormState = {
     form: {
+        state: '',
         formName: "Estudio 2",
         sections: [
             {
-                permissions: [
+                access: [
                     {
-                        roleId: "0001",
-                        text: "Secretaria",
+                        userId: "0001",
+                        userName: "Secretaria",
                         permission: ["read", "write"]
                     }
                 ],
-                fields: []
+                fields: [],
+                sectionName: '',
             }
         ]
     },
@@ -26,36 +31,39 @@ const initialState: IFormFieldState = {
     error: null
 }
 
-const updateFieldsSection = (sectionId: string, field: any, sections: any[]) => {
-    return [{...sections[0], fields: [...sections[0].fields, field]}];
-}
-
-const formReducer = (state: IFormFieldState = initialState, action: Action): IFormFieldState => {
+const formReducer = (state: IFormState = initialState, action: Action): IFormState => {
     switch (action.type) {
         case ActionType.SAVE_FORM_PENDING:
             return {
+                ...state,
                 loading: true,
-                form: null,
-                error: null
             }
         case ActionType.SAVE_FORM_SUCCESS:
             return {
+                ...state,
                 loading: false,
-                form: action.payload,
                 error: null
             }
         case ActionType.SAVE_FORM_FAIL:
             return {
+                ...state,
                 loading: false,
                 error: action.payload,
-                form: null
             }
-        case ActionType.UPDATE_FIELD_FORM:
+        case ActionType.ADD_SECTION_FIELD:
             return {
                 ...state,
                 form: {
                     ...state.form,
-                    sections: updateFieldsSection('', action.payload, state.form.sections)
+                    sections: addSectionField('', action.payload, state.form.sections)
+                }
+            }
+        case ActionType.UPDATE_SECTION_FIELD:
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    sections: updateSectionField('', action.payload, state.form.sections)
                 }
             }
         default:

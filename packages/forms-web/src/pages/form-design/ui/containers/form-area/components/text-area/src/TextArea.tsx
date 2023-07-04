@@ -1,15 +1,11 @@
-import React from 'react';
 import '../styles/text-area.scss';
+import { ITextArea } from "../../../../../../data/domain/IFormFields";
 
-const defaultClass = 'text-input';
+const defaultClass = 'text-area';
 
-export const TextArea = ({label}: any) => {
+export const TextArea = ({label}: ITextArea) => {
 
     return (
-        <div className={ `${defaultClass}` }>
-            <label>{label}</label>
-            <textarea rows={4} cols={50} />
-        </div>
-
+        <textarea className={ `${defaultClass}` } placeholder={ label } disabled/>
     )
 }
