@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import fieldReducer from './field.reducer';
+import formFieldsReducer from './form-fields.reducer';
 import formReducer from "./form.reducer";
 
 const formDesignReducer = combineReducers({
-    formFields: fieldReducer,
+    formFields: formFieldsReducer,
     form: formReducer
 });
 

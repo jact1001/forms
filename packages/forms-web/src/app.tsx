@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import { DesignForm } from "./pages/form-design/ui/src/form-design";
 import { Userforms } from "./pages/user-forms/ui/src/user-forms";
+import { FormDesign } from "./pages/form-design/ui/src/FormDesign";
+
 
 function App() {
 
@@ -8,7 +9,7 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path='/form-design'>
-                    <DesignForm/>
+                    <FormDesign/>
                 </Route>
                 <Route exact path='/user-forms'>
                     <Userforms/>

@@ -1,18 +1,21 @@
 @import '../../../../../../index';
 
 .form-area {
-    width: 100%;
     background-color: $fa-color-gray-light;
     border-left-color: $fa-color-gray-lighter;
-    border-left-width: 0.1em;
     border-left-style: solid;
+    border-left-width: 0.1em;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    width: 100%;
+    padding: 70px;
 
     &__form-section {
         background-color: $fa-color-blue-dark;
         border-radius: 20px;
-        height: 400px;
-        margin-left: 70px;
-        margin-right: 70px;
-        margin-top: 50px;
+        min-height: auto;
+        text-align: center;
+        width: 100%;
     }
 }
