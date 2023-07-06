@@ -1,4 +1,4 @@
-.forms-user-container {
+.user-forms-container {
     width: 100%;
     min-width: 2100px;
     height: 100%;
@@ -19,57 +19,6 @@
         margin-bottom: 20px;
     }
 
-    &__tittle {
-        display: flex;
-        width: 100%;
-        min-width: 160px;
-        align-items: center;
-        height: 51px;
-        background: #201A30;
-        border-radius: 15px;
-        padding-left: 8px;
-        margin-bottom: 50px;
-
-        b {
-            width: 290px;
-            height: 50px;
-            font-size: 38px;
-            line-height: 44px;
-            color: white;
-        }
-    }
-
-    &__main {
-        width: 100%;
-    }
-
-    &__return-container {
-        display: flex;
-        width: 170px;
-        height: 50px;
-        align-items: center;
-        justify-content: flex-end;
-        background: #0DD4C4;
-        border-radius: 22px;
-        padding-right: 10px;
-    }
-
-    &__return-button-container {
-        display: flex;
-        align-items: center;
-        padding-right: 16px;
-    }
-
-    &__return-button {
-        background: #0DD4C4;
-        cursor: pointer;
-        border: none;
-    }
-
-    &__return-button-title {
-        font-size: 25px;
-        color: black;
-    }
 }
 
 

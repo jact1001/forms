@@ -1,0 +1,22 @@
+.form-title{
+
+  &__title {
+    display: flex;
+    width: 100%;
+    min-width: 160px;
+    align-items: center;
+    height: 51px;
+    background: #201A30;
+    border-radius: 15px;
+    padding-left: 8px;
+    margin-bottom: 50px;
+
+    b {
+      width: 290px;
+      height: 50px;
+      font-size: 38px;
+      line-height: 44px;
+      color: white;
+    }
+  }
+}

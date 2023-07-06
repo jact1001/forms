@@ -3,6 +3,7 @@ import '../styles/slide-form.scss';
 import FormIcon from "../icons/FormIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 import ArrowUpRightIcon from "../icons/ArrowUpRightIcon";
+import {SlideFormOption} from "./SlideFormOption";
 
 const defaultClass = 'slide-form';
 interface SlideFormProps {
@@ -18,53 +19,27 @@ export const SlideForm = ({formName}:SlideFormProps) => {
     return (
         <div className={defaultClass}>
             <div className={`${defaultClass}__content`}>
-                <div className={`${defaultClass}__name-icon`}>
-                    <div className={`${defaultClass}__icon`}>
-                        <FormIcon/>
-                    </div>
-                    <div className={`${defaultClass}__name`}><b>{formName}</b>
-                    </div>
-                </div>
-                <div>
-                    <div className={`${defaultClass}__slide-button`}>
-                        <button className={`${defaultClass}__arrow-button`} onClick={toggleCount}>
-                            <div className={isExpanded ? `${defaultClass}__arrow-up` : ""}>
-                                <ArrowDownIcon/>
+                <button className={`${defaultClass}__arrow-button`} onClick={toggleCount}>
+                        <div className={`${defaultClass}__name-icon`}>
+                            <div className={`${defaultClass}__icon`}>
+                                    <FormIcon/>
+                                </div>
+                            <div className={`${defaultClass}__name`}>
+                                <b>{formName}</b>
                             </div>
-                        </button>
-                    </div>
-                </div>
+                        </div>
+                        <div className={isExpanded ? `${defaultClass}__arrow-up` : ""}>
+                            <ArrowDownIcon/>
+                        </div>
+                    </button>
             </div>
-
             {isExpanded &&
                 <>
-                    <div className={`${defaultClass}__button-content`}>
-                        <a href="#">Opción 1</a>
-                        <div className="button-option-container">
-                            <button className={`${defaultClass}__button-option`}>
-                                <ArrowUpRightIcon/>
-                            </button>
-                        </div>
-                    </div>
-                    <div className={`${defaultClass}__button-content`}>
-                        <a href="#">Opción 2</a>
-                        <div className="button-option-container">
-                            <button className={`${defaultClass}__button-option`}>
-                                <ArrowUpRightIcon/>
-                            </button>
-                        </div>
-                    </div>
-                    <div className={`${defaultClass}__button-content`}>
-                        <a href="#">Opción 3</a>
-                        <div className="button-option-container">
-                            <button className={`${defaultClass}__button-option`}>
-                                <ArrowUpRightIcon/>
-                            </button>
-                        </div>
-                    </div>
+                    <SlideFormOption formOption="Opcion1"/>
+                    <SlideFormOption formOption="Opcion2"/>
+                    <SlideFormOption formOption="Opcion3"/>
                 </>
             }
-
         </div>
     );
 };
