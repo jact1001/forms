@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import '../styles/return-button.scss';
-
 import ReturnIcon from "../icons/ReturnIcon";
 
 
