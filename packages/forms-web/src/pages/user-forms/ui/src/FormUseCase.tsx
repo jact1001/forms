@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../styles/form-use-case.scss';
 import ArrowUpRightIcon from "../icons/ArrowUpRightIcon";
 import {StatusUseCase} from "./StatusUseCase";
