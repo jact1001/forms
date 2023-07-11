@@ -8,7 +8,7 @@ const defaultClass = 'slide-form';
 interface SlideFormProps {
     formName:string
 }
-export const SlideForm = ({formName}:SlideFormProps) => {
+export const DropDown = ({formName}:SlideFormProps) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const toggleCount = () => {
