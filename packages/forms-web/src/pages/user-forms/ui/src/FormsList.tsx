@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import '../styles/slide-forms-container.scss';
+import '../styles/form-list.scss';
 import {SlideForm} from "./SlideForm";
 
 
 const defaultClass = 'slide-forms-container';
 
-export const SlideFormsContainer = () => {
+export const FormsList = () => {
 
     return (
 

@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import '../styles/slide-form.scss';
 import FormIcon from "../icons/FormIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
-import ArrowUpRightIcon from "../icons/ArrowUpRightIcon";
-import {SlideFormOption} from "./SlideFormOption";
+import {FormUseCase} from "./FormUseCase";
 
 const defaultClass = 'slide-form';
 interface SlideFormProps {
@@ -35,9 +34,9 @@ export const SlideForm = ({formName}:SlideFormProps) => {
             </div>
             {isExpanded &&
                 <>
-                    <SlideFormOption formOption="Opcion1"/>
-                    <SlideFormOption formOption="Opcion2"/>
-                    <SlideFormOption formOption="Opcion3"/>
+                    <FormUseCase formOption="Opcion1"/>
+                    <FormUseCase formOption="Opcion2"/>
+                    <FormUseCase formOption="Opcion3"/>
                 </>
             }
         </div>
