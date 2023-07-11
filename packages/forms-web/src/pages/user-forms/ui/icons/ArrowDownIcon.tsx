@@ -1,5 +1,4 @@
 import {IIcon} from "../../../form-design/ui/interfaces/IIcon";
-import {useState} from "react";
 
 const defaultClass = 'slide-form';
 const FormIcon = ({ width = '20px', color = '#fff' }: IIcon) => {

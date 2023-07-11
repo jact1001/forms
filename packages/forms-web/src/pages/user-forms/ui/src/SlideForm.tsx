@@ -34,9 +34,9 @@ export const SlideForm = ({formName}:SlideFormProps) => {
             </div>
             {isExpanded &&
                 <>
-                    <FormUseCase formOption="Opcion1"/>
-                    <FormUseCase formOption="Opcion2"/>
-                    <FormUseCase formOption="Opcion3"/>
+                    <FormUseCase formOption="Opcion1" statusOption="Hecho"/>
+                    <FormUseCase formOption="Opcion2" statusOption="Pendiente"/>
+                    <FormUseCase formOption="Opcion3" statusOption="Proceso"/>
                 </>
             }
         </div>

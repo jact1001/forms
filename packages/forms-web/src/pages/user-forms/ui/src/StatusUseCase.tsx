@@ -3,29 +3,28 @@ import '../styles/status-use-case.scss';
 import StatusCaseIcon from "../icons/StatusCaseIcon";
 
 const defaultClass = 'status-use-case';
-let imageCase;
-let color;
 interface SlideFormProps {
-    formOption:string
+    statusCase:string
 }
 
-export const StatusUseCase = ({formOption}:SlideFormProps) => {
 
-    if (formOption === "Hecho") {
-        imageCase = <StatusCaseIcon/>;
-    } else if (formOption === "Pendiente") {
-        imageCase = <StatusCaseIcon/>;
-    } else if (formOption === "Proceso") {
-        imageCase = <StatusCaseIcon/>;
+export const StatusUseCase = ({ statusCase }: SlideFormProps) => {
+    let imageCase;
+
+    if (statusCase === "Hecho") {
+        imageCase = <StatusCaseIcon className={`${defaultClass}__green-icon`}/>;
+    } else if (statusCase === "Pendiente") {
+        imageCase = <StatusCaseIcon className={`${defaultClass}__yellow-icon`}/>;
+    } else if (statusCase === "Proceso") {
+        imageCase = <StatusCaseIcon className={`${defaultClass}__red-icon`}/>;
     } else {
-        // Valor predeterminado si formOption no coincide con ninguna opción conocida
-        imageCase = <StatusCaseIcon/>;
+        imageCase = <StatusCaseIcon className={`${defaultClass}__green-icon`}/>;
     }
 
     return (
         <div className={`${defaultClass}__container`}>
             {imageCase}
-            <b>{formOption}</b>
+            <b>{statusCase}</b>
         </div>
     );
 };
