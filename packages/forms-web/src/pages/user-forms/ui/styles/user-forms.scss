@@ -5,6 +5,9 @@
     min-height: 1040px;
     padding-bottom: 30px;
     background: #615E67;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     &__forms-container {
         display: flex;
@@ -16,11 +19,17 @@
         height: auto;
         min-height: 735px;
         background: #140B2A;
-        border-radius: 15px;
         margin-bottom: 20px;
-        margin-left: 50px;
+        margin-left: 100px;
+        border-radius: 15px;
     }
 
+    &__return-container {
+        display: flex;
+        align-items: start;
+        width: 80%;
+        min-width: 1500px;
+    }
 }
 
 

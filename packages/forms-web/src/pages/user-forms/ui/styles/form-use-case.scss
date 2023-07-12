@@ -36,4 +36,9 @@
     width: 100%;
     align-items: center;
   }
+
+  &__name-status-container {
+    display: flex;
+    flex-direction: row;
+  }
 }

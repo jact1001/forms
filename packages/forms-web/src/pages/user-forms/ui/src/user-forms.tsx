@@ -17,7 +17,9 @@ export const UserForms = () => {
                 <FormTitle/>
                 <FormsList/>
             </div>
-            <ReturnButton/>
+            <div className={`${defaultClass}__return-container`}>
+                <ReturnButton/>
+            </div>
         </div>
     );
 };

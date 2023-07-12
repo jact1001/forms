@@ -3,7 +3,6 @@
   &__content {
     display: flex;
     min-width: 160px;
-    height: 78px;
     background: #38304D;
     border-radius: 15px;
     margin-bottom: 2px;
@@ -19,7 +18,6 @@
   &__name {
     display: flex;
     align-items: center;
-    margin-top: 10px;
     b {
       font-size: 29px;
       line-height: 15px;
@@ -54,18 +52,15 @@
   }
 
   &__arrow-up {
-    margin-top: 75px;
-    margin-left: 20px;
     rotate: 180deg;
-    margin-right: 11px;
+    margin-right: 20px;
   }
 
   &__arrow-down {
-    margin-top: 40px;
-    margin-right: 11px;
+    margin-right: 20px;
   }
 
   &__arrow-up-right {
-    margin-right: 10px;
+    margin-right: 20px;
   }
 }

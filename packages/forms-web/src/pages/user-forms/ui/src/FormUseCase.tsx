@@ -12,8 +12,10 @@ export const FormUseCase = ({ formOption, statusOption }: SlideFormProps) =>  {
     return (
         <div className={`${defaultClass}__button-content`}>
             <button className={`${defaultClass}__button-option`}>
-                <b>{formOption}</b>
-                <StatusUseCase statusCase={statusOption}/>
+                <div className={`${defaultClass}__name-status-container`}>
+                    <b>{formOption}</b>
+                    <StatusUseCase statusCase={statusOption}/>
+                </div>
                 <ArrowUpRightIcon/>
             </button>
         </div>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../styles/slide-form.scss';
+import '../styles/drop-down.scss';
 import FormIcon from "../icons/FormIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 import {FormUseCase} from "./FormUseCase";

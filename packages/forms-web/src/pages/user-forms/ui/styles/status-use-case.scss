@@ -4,16 +4,15 @@
     flex-direction: row;
     align-items: center;
     font-family: 'Poppins', serif;
+    margin-left: 100px;
   }
   &__green-icon {
     fill: green;
   }
   &__yellow-icon{
-    margin-left: 35px;
     fill: yellow;
   }
   &__red-icon{
-    margin-left: 15px;
     fill: red;
   }
 }

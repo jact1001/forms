@@ -1,19 +1,5 @@
 .return-button{
 
-  &__return-container {
-    display: flex;
-    width: 170px;
-    height: 50px;
-    background: #0DD4C4;
-    border-radius: 22px;
-    margin-left: 50px;
-  }
-
-  &__return-button-container {
-    display: flex;
-    align-items: center;
-    padding-right: 16px;
-  }
 
   &__return-button {
     display: flex;
