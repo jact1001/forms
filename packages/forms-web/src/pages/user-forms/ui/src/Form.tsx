@@ -5,10 +5,20 @@ import ArrowDownIcon from "../icons/ArrowDownIcon";
 import {FormUseCase} from "./FormUseCase";
 
 const defaultClass = 'slide-form';
-interface SlideFormProps {
-    formName:string
+interface FormCase{
+    case_name: string;
+    case_id: string;
+    url: string;
+    status: {
+        id: string ;
+        name: string;
+    }
 }
-export const DropDown = ({formName}:SlideFormProps) => {
+interface SlideFormProps {
+    formName: string
+    formCases: FormCase[]
+}
+export const Form = ({formName, formCases}:SlideFormProps) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const toggleCount = () => {
@@ -34,9 +44,9 @@ export const DropDown = ({formName}:SlideFormProps) => {
             </div>
             {isExpanded &&
                 <>
-                    <FormUseCase formOption="Opcion1" statusOption="Hecho"/>
-                    <FormUseCase formOption="Opcion2" statusOption="Pendiente"/>
-                    <FormUseCase formOption="Opcion3" statusOption="Proceso"/>
+                    {formCases.map((formCase)=>{
+                        return <FormUseCase formOption={formCase.case_name} statusOption={formCase.status}/>
+                    })}
                 </>
             }
         </div>

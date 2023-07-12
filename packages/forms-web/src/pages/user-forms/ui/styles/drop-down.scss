@@ -2,7 +2,6 @@
 
   &__content {
     display: flex;
-    min-width: 160px;
     background: #38304D;
     border-radius: 15px;
     margin-bottom: 2px;
@@ -31,7 +30,6 @@
   &__slide-button {
     display: flex;
     width: 100%;
-    min-width: 160px;
     height: 78px;
     border-radius: 15px;
   }
