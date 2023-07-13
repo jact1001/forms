@@ -12,7 +12,7 @@ export interface IFormState {
 const initialState: IFormState = {
     form: {
         state: '',
-        formName: "Estudio 2",
+        form_name: "Estudio 2",
         sections: [
             {
                 access: [
