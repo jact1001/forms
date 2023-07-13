@@ -1,14 +1,19 @@
 .form-title{
 
+  &__icon{
+    width: 45px;
+    height: 45px;
+  }
+
   &__title {
     display: flex;
-    width: 100%;
-    min-width: 160px;
     align-items: center;
     background: #201A30;
     border-radius: 15px;
     padding: 15px;
     margin-bottom: 50px;
+    margin-top: 20px;
+    width: 90%;
 
     b {
       width: 290px;

@@ -8,7 +8,9 @@ export const FormTitle = () => {
 
     return (
         <div className={`${defaultClass}__title`}>
-            <FormIcon />
+            <div className={`${defaultClass}__icon`}>
+                <FormIcon />
+            </div>
             <b>Mis Formularios</b>
         </div>
     );

@@ -6,7 +6,10 @@ import {StatusUseCase} from "./StatusUseCase";
 const defaultClass = 'slide-form-option';
 interface SlideFormProps {
     formOption:string
-    statusOption:string
+    statusOption:{
+        id: string;
+        name: string;
+    }
 }
 export const FormUseCase = ({ formOption, statusOption }: SlideFormProps) =>  {
     return (
