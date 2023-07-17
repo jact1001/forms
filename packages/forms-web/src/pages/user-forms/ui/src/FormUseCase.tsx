@@ -3,20 +3,20 @@ import '../styles/form-use-case.scss';
 import ArrowUpRightIcon from "../icons/ArrowUpRightIcon";
 import {StatusUseCase} from "./StatusUseCase";
 
-const defaultClass = 'slide-form-option';
+const defaultClass = 'form-use-case';
 interface SlideFormProps {
-    formOption:string
-    statusOption:{
+    formName:string
+    statusOption: {
         id: string;
         name: string;
     }
 }
-export const FormUseCase = ({ formOption, statusOption }: SlideFormProps) =>  {
+export const FormUseCase = ({ formName, statusOption }: SlideFormProps) =>  {
     return (
         <div className={`${defaultClass}__button-content`}>
             <button className={`${defaultClass}__button-option`}>
                 <div className={`${defaultClass}__name-status-container`}>
-                    <b>{formOption}</b>
+                    <b>{formName}</b>
                     <StatusUseCase statusCase={statusOption}/>
                 </div>
                 <ArrowUpRightIcon/>

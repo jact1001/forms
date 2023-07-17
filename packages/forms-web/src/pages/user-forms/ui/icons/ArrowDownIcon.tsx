@@ -1,6 +1,6 @@
 import {IIcon} from "../../../form-design/ui/interfaces/IIcon";
 
-const defaultClass = 'slide-form';
+const defaultClass = 'form';
 const FormIcon = ({ width = '20px', color = '#fff' }: IIcon) => {
     return (
         <div className={`${defaultClass}__arrow-down`}>

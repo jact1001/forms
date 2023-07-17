@@ -1,8 +1,7 @@
-.form-title{
+.form-title {
 
-  &__icon{
-    width: 45px;
-    height: 45px;
+  &__container {
+    width: 90%;
   }
 
   &__title {
@@ -10,10 +9,9 @@
     align-items: center;
     background: #201A30;
     border-radius: 15px;
-    padding: 15px;
     margin-bottom: 50px;
     margin-top: 20px;
-    width: 90%;
+    padding: 15px;
 
     b {
       width: 290px;
@@ -22,6 +20,22 @@
       line-height: 44px;
       color: white;
       margin-left: 30px;
+    }
+  }
+
+  @media screen and (max-width: 455px) {
+    &__title{
+      b {
+        font-size: 25px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 355px) {
+    &__title{
+      b {
+        font-size: 17px;
+      }
     }
   }
 }

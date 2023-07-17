@@ -1,12 +1,9 @@
-.slide-form{
-
-  &__content {
-    display: flex;
-    background: #38304D;
-    border-radius: 15px;
-    margin-bottom: 2px;
-    margin-top: 30px;
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  margin-bottom: 2px;
+  margin-top: 30px;
 
   &__name-icon {
     display: flex;

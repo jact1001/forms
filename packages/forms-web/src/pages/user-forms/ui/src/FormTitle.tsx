@@ -7,11 +7,13 @@ const defaultClass = 'form-title';
 export const FormTitle = () => {
 
     return (
-        <div className={`${defaultClass}__title`}>
-            <div className={`${defaultClass}__icon`}>
-                <FormIcon />
+        <div className={`${defaultClass}__container`}>
+            <div className={`${defaultClass}__title`}>
+                <div className={`${defaultClass}__icon`}>
+                    <FormIcon />
+                </div>
+                <b>Mis Formularios</b>
             </div>
-            <b>Mis Formularios</b>
         </div>
     );
 };
