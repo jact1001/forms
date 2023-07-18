@@ -8,16 +8,6 @@
     margin-bottom: 2px;
     flex-direction: row;
     justify-content: space-between;
-
-    b {
-      display: block;
-      padding: 15px;
-      font-size: 25px;
-      text-decoration: none;
-      color: white;
-      font-weight: normal;
-      margin-left: 40px;
-    }
   }
 
   &__button-option {
@@ -38,5 +28,21 @@
   &__name-status-container {
     display: flex;
     flex-direction: row;
+  }
+
+  &__name-status{
+    display: block;
+    padding: 15px;
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+    font-weight: normal;
+    margin-left: 40px;
+  }
+
+  @media screen and (max-width: 800px) {
+    &__name-status {
+      display: none;
+    }
   }
 }

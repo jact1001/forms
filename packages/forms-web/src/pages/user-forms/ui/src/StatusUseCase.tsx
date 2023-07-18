@@ -27,7 +27,7 @@ export const StatusUseCase = ({ statusCase }: SlideFormProps) => {
     return (
         <div className={`${defaultClass}__container`}>
             {imageCase}
-            <b>{statusCase.name}</b>
+            <b className={`${defaultClass}__status`}>{statusCase.name}</b>
         </div>
     );
 };

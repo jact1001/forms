@@ -19,23 +19,29 @@
       font-size: 37px;
       line-height: 44px;
       color: white;
-      margin-left: 30px;
+      margin-left: 12px;
     }
   }
 
   @media screen and (max-width: 455px) {
-    &__title{
+
+    &__title {
+      padding: 5px;
       b {
         font-size: 25px;
+        margin-left: 5px;
       }
+    }
+
+    &__icon-container {
+      padding-right: 0;
     }
   }
 
   @media screen and (max-width: 355px) {
-    &__title{
-      b {
-        font-size: 17px;
-      }
+    &__title b {
+      font-size: 20px;
     }
   }
+
 }
