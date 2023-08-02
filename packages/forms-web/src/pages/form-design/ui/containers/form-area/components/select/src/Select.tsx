@@ -3,8 +3,8 @@ import CloseIcon from '../../icons/close-icon';
 import React, {ChangeEvent, FocusEvent, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSectionField } from '../../../../../../data/state/effects/form.effect';
-import '../styles/select.scss';
 import {IOptionValue, ISelect} from "../../../../../../data/domain/IFormFields";
+import '../styles/select.scss';
 
 const defaultClass = 'select-group';
 
@@ -36,7 +36,7 @@ export const Select = (field: ISelect) => {
     const addValue = () => {
         options.push({
             id: `0${values.length + 1}`,
-            text: `Ejemplo ${values.length + 1}`
+            text: `Opción ${values.length + 1}`
         })
         updateStoreField();
     }
