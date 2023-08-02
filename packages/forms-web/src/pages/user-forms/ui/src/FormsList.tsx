@@ -3,7 +3,7 @@ import '../styles/form-list.scss';
 import {Form} from "./Form";
 
 
-const defaultClass = 'slide-forms-container';
+const defaultClass = 'form-list';
 
 export const FormsList = () => {
     const mockForms = [

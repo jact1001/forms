@@ -1,5 +1,15 @@
-.status-use-case{
-  &__container{
+.status-use-case {
+
+  &__status{
+    display: block;
+    padding: 15px;
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+    font-weight: normal;
+  }
+
+  &__container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -7,11 +17,28 @@
   }
   &__green-icon {
     fill: green;
+
   }
   &__yellow-icon{
     fill: yellow;
   }
   &__red-icon{
     fill: red;
+  }
+
+  @media screen and (max-width: 800px) {
+    &__container {
+      margin-left: 0;
+    }
+
+    &__status {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    &__status {
+      font-size: 15px;
+    }
   }
 }

@@ -1,18 +1,30 @@
-.return-button{
+.return-button {
 
   &__return-button {
     display: flex;
-    width: 170px;
-    height: 50px;
+    width: auto;
     background: #0DD4C4;
     cursor: pointer;
     border: none;
     border-radius: 22px;
     align-items: center;
+    padding-right: 15px;
   }
 
   &__return-button-title {
     font-size: 25px;
     color: black;
+  }
+
+  @media screen and (max-width: 400px) {
+    &__return-button-title {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    &__return-button-title {
+      font-size: 15px;
+    }
   }
 }
