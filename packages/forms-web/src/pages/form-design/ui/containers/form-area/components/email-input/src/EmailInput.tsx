@@ -1,7 +1,10 @@
+import { IEmail } from '../../../../../../data/domain/IFormFields';
 import '../styles/email-input.scss';
 
-export const EmailInput = () => {
+const defaultClass = 'email-input';
+
+export const EmailInput = ({ type, placeholder }:IEmail) => {
     return (
-        <h1>Email</h1>
+        <input type={ type } placeholder={ placeholder } className={ defaultClass } disabled/>
     )
 }

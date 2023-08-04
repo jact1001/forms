@@ -1,7 +1,14 @@
+import { IDate } from '../../../../../../data/domain/IFormFields';
+import DateIcon from '../../icons/date-icon';
 import '../styles/date-input.scss';
 
-export const DateInput = () => {
+const defaultClass = 'date-input';
+
+export const DateInput = ({ type }: IDate) => {
     return (
-        <h1>Date</h1>
+        <div className={defaultClass}>
+            <input type={ type } className={ `${defaultClass}__format` } disabled/>
+            <DateIcon/>
+        </div>
     )
 }

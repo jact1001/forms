@@ -1,7 +1,14 @@
+import TimeIcon from '../../icons/time-icon';
+import { ITime } from '../../../../../../data/domain/IFormFields';
 import '../styles/time-input.scss';
 
-export const TimeInput = () => {
+const defaultClass = 'time-input';
+
+export const TimeInput = ({ type }: ITime) => {
     return (
-        <h1>Time</h1>
+        <div className={ defaultClass }>
+            <input type={ type } className={ `${defaultClass}__format` } disabled/>
+            <TimeIcon />
+        </div>
     )
 }

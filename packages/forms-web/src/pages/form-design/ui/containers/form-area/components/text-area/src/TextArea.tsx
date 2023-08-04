@@ -3,9 +3,9 @@ import { ITextArea } from "../../../../../../data/domain/IFormFields";
 
 const defaultClass = 'text-area';
 
-export const TextArea = ({label}: ITextArea) => {
+export const TextArea = ({ placeholder }: ITextArea) => {
 
     return (
-        <textarea className={ `${defaultClass}` } placeholder={ label } disabled/>
+        <textarea className={ `${defaultClass}` } placeholder={ placeholder } disabled/>
     )
 }

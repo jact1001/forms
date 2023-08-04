@@ -1,8 +1,11 @@
+import { INumber } from '../../../../../../data/domain/IFormFields';
 import '../styles/number-input.scss';
 
-export const NumberInput = () => {
+const defaultClass = 'number-input';
+
+export const NumberInput = ({ type, placeholder }: INumber) => {
 
     return (
-        <h1>Soy Number Input</h1>
+        <input type={ type } placeholder={ placeholder } className={ defaultClass } disabled/>
     )
 }
