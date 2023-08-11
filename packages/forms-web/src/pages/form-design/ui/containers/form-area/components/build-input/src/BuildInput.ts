@@ -1,14 +1,14 @@
 import React from "react";
 import { IFields } from "../../../../../../data/domain/IFormFields";
-import { TextInput } from "../../text-input/src/TextInput";
-import { TextArea } from "../../text-area/src/TextArea";
-import { Radio } from "../../radio/src/Radio";
-import { Checkbox } from "../../checkbox/src/Checkbox";
-import { Select } from "../../select/src/Select";
-import { NumberInput } from "../../number-input/src/NumberInput";
-import { EmailInput } from "../../email-input/src/EmailInput";
-import { DateInput } from "../../date-input/src/DateInput";
-import { TimeInput } from "../../time-input/src/TimeInput";
+import { TextInput } from "../../inputs/text-input/src/TextInput";
+import { TextArea } from "../../inputs/text-area/src/TextArea";
+import { Radio } from "../../inputs/radio/src/Radio";
+import { Checkbox } from "../../inputs/checkbox/src/Checkbox";
+import { Select } from "../../inputs/select/src/Select";
+import { NumberInput } from "../../inputs/number-input/src/NumberInput";
+import { EmailInput } from "../../inputs/email-input/src/EmailInput";
+import { DateInput } from "../../inputs/date-input/src/DateInput";
+import { TimeInput } from "../../inputs/time-input/src/TimeInput";
 
 interface IInputsType {
     [key: string]: (props: IFields) => React.ReactElement;
