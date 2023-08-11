@@ -49,9 +49,9 @@ export const DragInput = ( {data}: any) => {
     }));
 
     return (
-        <button ref={ drag } className={ `${defaultClass}` }>
+        <button ref={ drag } className={defaultClass}>
             { Icon ? <Icon /> : <></> }
-            <h1 className={ `${defaultClass}__title` }>{ data.label }</h1>
+            <h1 className={`${defaultClass}__title`}>{ data.label }</h1>
         </button>
     )
 }

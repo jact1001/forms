@@ -1,4 +1,45 @@
 .form-design {
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    padding-left: 339px;
+
+    &__sections-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+    }
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.event {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 8px 0;
+
+    .circle {
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        border-radius: 50%;
+        border: solid 2px #fff;
+    }
+
+    &:before {
+        content: "";
+        width: 2px;
+        height: 16px;
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        left: 47%;
+    }
 }
