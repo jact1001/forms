@@ -6,16 +6,18 @@ export interface IAccess {
     permission: string[];
 }
 
+export type TFields = Array< IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime >;
+
 export interface ISection {
-    _id?: string;
+    id: string;
     sectionName: string;
     access: IAccess[];
-    fields: Array< IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime >;
+    fields: TFields;
 }
 
 export interface IForm {
     _id?: string;
-    formName: string;
+    form_name: string;
     state: string;
     sections: ISection[];
 }

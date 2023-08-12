@@ -24,20 +24,29 @@ export const saveForm = (form: IForm) => {
     }
 }
 
-export const addSectionField = (field: TField) => {
+export const addSectionField = (field: TField, sectionId: string) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.ADD_SECTION_FIELD,
-            payload: field
+            payload: {field, sectionId}
         });
     }
 }
 
-export const updateSectionField = (field: TField) => {
+export const updateSectionField = (field: TField, sectionId: string) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.UPDATE_SECTION_FIELD,
-            payload: field
+            payload: {field, sectionId}
+        });
+    }
+}
+
+export const addSection = (id: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.ADD_SECTION,
+            payload: id
         });
     }
 }

@@ -20,7 +20,6 @@ export const FormDesign = () => {
                 </SlideMenu>
                 <FormArea
                     sectionHeader={<FormArea.SectionHeader />}
-                    sectionArea={<FormArea.SectionArea />}
                     formSaveButton={<FormArea.SaveButton />}
                     addSectionButton={<FormArea.AddSectionButton />}
                 />

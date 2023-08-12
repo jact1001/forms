@@ -15,7 +15,7 @@ export interface ISection {
 
 export interface IForm {
     _id: string;
-    formName: string;
+    form_name: string;
     state: string;
     sections: ISection[];
 }

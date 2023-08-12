@@ -1,5 +1,5 @@
 import React from "react";
-import { IFields } from "../../../../../../data/domain/IFormFields";
+import { IField } from "../../../../../../data/domain/IFormFields";
 import { TextInput } from "../../inputs/text-input/src/TextInput";
 import { TextArea } from "../../inputs/text-area/src/TextArea";
 import { Radio } from "../../inputs/radio/src/Radio";
@@ -11,7 +11,7 @@ import { DateInput } from "../../inputs/date-input/src/DateInput";
 import { TimeInput } from "../../inputs/time-input/src/TimeInput";
 
 interface IInputsType {
-    [key: string]: (props: IFields) => React.ReactElement;
+    [key: string]: (props: IField) => React.ReactElement;
 }
 
 export const inputsType: IInputsType = {

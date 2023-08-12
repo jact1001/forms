@@ -1,0 +1,78 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  margin-bottom: 2px;
+  margin-top: 30px;
+
+  &__name-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    b {
+      font-size: 29px;
+      line-height: 15px;
+      text-align: center;
+      color: #FFFFFF;
+      font-weight: normal;
+      margin-left: 20px;
+    }
+  }
+
+  &__slide-button {
+    display: flex;
+    width: 100%;
+    height: 78px;
+    border-radius: 15px;
+  }
+
+  &__arrow-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    font-size: 14px;
+    border: none;
+    background-color: #38304D;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  &__arrow-up {
+    rotate: 180deg;
+    margin-right: 20px;
+  }
+
+  &__arrow-down {
+    margin-right: 20px;
+  }
+
+  &__arrow-up-right {
+    margin-right: 20px;
+  }
+
+  @media screen and (max-width: 455px) {
+    &__name b {
+      font-size: 20px;
+      margin-left: 5px;
+    }
+
+    &__arrow-button {
+      padding: 5px;
+    }
+  }
+
+  @media screen and (max-width: 355px) {
+    &__name b {
+      font-size: 15px;
+    }
+  }
+
+}

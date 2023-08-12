@@ -91,7 +91,7 @@ export interface ITime {
     value: string;
 }
 
-export interface IFields extends IText, ITextArea, IRadio, ICheckbox, ISelect, INumber, IEmail, IDate, ITime {};
+export interface IField extends IText, ITextArea, IRadio, ICheckbox, ISelect, INumber, IEmail, IDate, ITime {};
 
 export type TField = IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime;
 

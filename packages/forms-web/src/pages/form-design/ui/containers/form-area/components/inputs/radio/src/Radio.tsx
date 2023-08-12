@@ -8,18 +8,22 @@ import '../styles/radio.scss';
 
 const defaultClass = 'radio-group';
 
-export const Radio = (field: IRadio) => {
+interface IRadioProps extends IRadio {
+    sectionId?: string,
+}
 
-    const { type, options } = field;
+export const Radio = ({sectionId = '0', ...fieldProps}: IRadioProps) => {
+
+    const { type, options } = fieldProps;
     const [values, setValues] = useState(options);
     const dispatch = useDispatch();
 
     const updateStoreField = () => {
         const newField = {
-            ...field,
+            ...fieldProps,
             options: values
         }
-        dispatch(updateSectionField(newField));
+        dispatch(updateSectionField(newField, sectionId));
     }
 
     const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {

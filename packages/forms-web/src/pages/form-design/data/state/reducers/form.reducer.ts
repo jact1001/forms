@@ -2,6 +2,8 @@ import { Action, ActionType } from '../actions/form.actions';
 import { addSectionField } from "../../use-cases/use-add-section-field";
 import { updateSectionField } from "../../use-cases/use-update-section-field";
 import { IForm } from "../../domain/IForm";
+import {addSection} from "../../use-cases/use-add-section";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface IFormState {
     form: IForm;
@@ -12,16 +14,11 @@ export interface IFormState {
 const initialState: IFormState = {
     form: {
         state: '',
-        formName: "Estudio 2",
+        form_name: '',
         sections: [
             {
-                access: [
-                    {
-                        userId: "0001",
-                        userName: "Secretaria",
-                        permission: ["read", "write"]
-                    }
-                ],
+                id: uuidv4(),
+                access: [],
                 fields: [],
                 sectionName: '',
             }
@@ -55,7 +52,7 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
                 ...state,
                 form: {
                     ...state.form,
-                    sections: addSectionField('', action.payload, state.form.sections)
+                    sections: addSectionField(action.payload.sectionId, action.payload.field, state.form.sections)
                 }
             }
         case ActionType.UPDATE_SECTION_FIELD:
@@ -63,7 +60,15 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
                 ...state,
                 form: {
                     ...state.form,
-                    sections: updateSectionField('', action.payload, state.form.sections)
+                    sections: updateSectionField(action.payload.sectionId, action.payload.field, state.form.sections)
+                }
+            }
+        case ActionType.ADD_SECTION:
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    sections: addSection(action.payload, state.form.sections, initialState)
                 }
             }
         default:

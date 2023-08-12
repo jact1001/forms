@@ -8,18 +8,22 @@ import '../styles/checkbox.scss';
 
 const defaultClass = 'checkbox-group';
 
-export const Checkbox = (field: ICheckbox) => {
+interface ICheckboxProps extends ICheckbox {
+    sectionId?: string
+}
 
-    const { type, options } = field;
+export const Checkbox = ({sectionId = '0', ...fieldProps}: ICheckboxProps) => {
+
+    const { type, options } = fieldProps;
     const [values, setValues] = useState(options);
     const dispatch = useDispatch();
 
     const updateStoreField = () => {
         const newField = {
-            ...field,
+            ...fieldProps,
             options: values
         }
-        dispatch(updateSectionField(newField));
+        dispatch(updateSectionField(newField, sectionId));
     }
 
     const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {

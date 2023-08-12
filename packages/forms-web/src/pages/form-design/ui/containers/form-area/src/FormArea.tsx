@@ -1,13 +1,13 @@
 import '../styles/form-area.scss';
-import { ReactNode } from "react";
-import { SectionHeader } from "./FormArea.SectionHeader";
-import { SectionArea } from "./FormArea.SectionArea";
-import { SaveButton } from "./FormArea.SaveButton";
-import { TimeLine } from "../components/time-line/src/TimeLine";
-import { AddSectionButton } from "./FormArea.AddSectionButton";
+import {ReactNode} from "react";
+import {SectionHeader} from "./FormArea.SectionHeader";
+import {SectionArea} from "./FormArea.SectionArea";
+import {SaveButton} from "./FormArea.SaveButton";
+import {AddSectionButton} from "./FormArea.AddSectionButton";
+import {TimeLine} from "../components/time-line/src/TimeLine";
+import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
 
 interface IFormArea {
-    sectionArea: ReactNode;
     sectionHeader: ReactNode;
     formSaveButton: ReactNode;
     addSectionButton: ReactNode;
@@ -15,34 +15,31 @@ interface IFormArea {
 
 const defaultClass = 'form-area';
 
-const FormArea = ({ sectionArea, sectionHeader, formSaveButton, addSectionButton }: IFormArea) => {
+const FormArea = ({sectionHeader, formSaveButton, addSectionButton}: IFormArea) => {
+
+    const {form: {sections}} = useDesignFormStore((state) => state.form);
+
     return (
         <div className={defaultClass}>
-            <div className={`${defaultClass}__section-container`}>
-                <TimeLine type='start' />
-                <div className={`${defaultClass}__form-section`}>
-                    {sectionHeader}
-                    {sectionArea}
-                </div>
-                <TimeLine type='line' />
-            </div>
-            <div className={`${defaultClass}__section-container`}>
-                <TimeLine type='line' />
-                <div className={`${defaultClass}__form-section`}>
-                    {sectionHeader}
-                    {sectionArea}
-                </div>
-                <TimeLine type='end' />
-            </div>
+            {sections.map(({id, fields}, index) => {
+                return (
+                    <div className={`${defaultClass}__section-container`}>
+                        {index === 0 ? <TimeLine type='start'/> : <TimeLine type='line'/>}
+                        <div className={`${defaultClass}__form-section`}>
+                            {sectionHeader}
+                            <SectionArea sectionFields={fields} sectionId={id} />
+                        </div>
+                        {index === sections.length - 1 ? <TimeLine type='end'/> : <TimeLine type='line'/>}
+                    </div>
+                )
+            })}
             {addSectionButton}
             {formSaveButton}
         </div>
-
     )
 }
 
 FormArea.SectionHeader = SectionHeader;
-FormArea.SectionArea = SectionArea;
 FormArea.SaveButton = SaveButton;
 FormArea.AddSectionButton = AddSectionButton;
 

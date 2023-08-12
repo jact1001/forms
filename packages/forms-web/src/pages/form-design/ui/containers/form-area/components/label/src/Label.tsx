@@ -2,13 +2,19 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSectionField } from '../../../../../../data/state/effects/form.effect';
 import '../styles/label.scss';
+import {TField} from "../../../../../../data/domain/IFormFields";
 
 const defaultClass = 'label';
 const labelText = 'Escribe aquí el nombre de tu campo';
 
-export const Label = ( {field}: any) => {
+interface LabelProps {
+    field: TField;
+    sectionId: string;
+}
 
-    const { label } = field; 
+export const Label = ( {field, sectionId}: LabelProps) => {
+
+    const { label } = field;
     const [text, setText] = useState(labelText);
     const dispatch = useDispatch();
 
@@ -17,9 +23,9 @@ export const Label = ( {field}: any) => {
             ...field,
             label: text
         }
-        dispatch(updateSectionField(newField));
+        dispatch(updateSectionField(newField, sectionId));
     }
-    
+
     const handleOnChange = ({ target }: any) => {
         setText(target.value);
     }
@@ -35,7 +41,7 @@ export const Label = ( {field}: any) => {
                     onChange={handleOnChange}
                     onBlur={updateStoreField}
                 />
-                <span className={`${defaultClass}__line`}></span>
+                <span className={`${defaultClass}__line`}/>
             </div>
         </div>
     )
