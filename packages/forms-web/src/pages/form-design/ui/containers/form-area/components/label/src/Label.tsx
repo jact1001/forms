@@ -8,8 +8,8 @@ const labelText = 'Escribe aquí el nombre de tu campo';
 
 export const Label = ( {field}: any) => {
 
-    const { type, label } = field; 
-    const [text, setText] = useState(label);
+    const { label } = field; 
+    const [text, setText] = useState(labelText);
     const dispatch = useDispatch();
 
     const updateStoreField = () => {
@@ -30,7 +30,7 @@ export const Label = ( {field}: any) => {
                 <input
                     type='text'
                     className={`${defaultClass}__label-text`}
-                    placeholder={ labelText }
+                    placeholder={ label }
                     value={text}
                     onChange={handleOnChange}
                     onBlur={updateStoreField}

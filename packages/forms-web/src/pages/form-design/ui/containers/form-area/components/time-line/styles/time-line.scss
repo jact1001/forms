@@ -1,0 +1,50 @@
+@import '../../../../../../../../index';
+
+.time-line {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: transparent;
+
+  &__line {
+    border-radius: initial;
+    height: 10px;
+    width: 0px;
+    border: solid 1px #fff;
+  }
+
+  &__start {
+    margin-bottom: 14px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: solid 2px #fff;
+    &:before {
+      content: "";
+      width: 2px;
+      height: 16px;
+      background-color: #fff;
+      position: absolute;
+      top: 100%;
+      left: 47%;
+    }
+  }
+
+  &__end {
+    margin-top: 14px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: solid 2px #fff;
+    &:before {
+      content: "";
+      width: 2px;
+      height: 16px;
+      background-color: #fff;
+      position: absolute;
+      bottom: 100%;
+      left: 47%;
+    }
+  }
+
+}
