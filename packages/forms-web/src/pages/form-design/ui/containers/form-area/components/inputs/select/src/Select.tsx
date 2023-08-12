@@ -3,23 +3,27 @@ import CloseIcon from '../../../icons/close-icon';
 import React, {ChangeEvent, FocusEvent, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSectionField } from '../../../../../../../data/state/effects/form.effect';
-import {IOptionValue, ISelect} from "../../../../../../../data/domain/IFormFields";
+import { IOptionValue, ISelect } from "../../../../../../../data/domain/IFormFields";
 import '../styles/select.scss';
 
 const defaultClass = 'select-group';
 
-export const Select = (field: ISelect) => {
+interface ISelectProps extends ISelect {
+    sectionId?: string;
+}
 
-    const { values } = field;
+export const Select = ({sectionId = '0', ...fileProps}: ISelectProps) => {
+
+    const { values } = fileProps;
     const [options, setOptions] = useState(values);
     const dispatch = useDispatch();
 
     const updateStoreField = () => {
         const newField = {
-            ...field,
+            ...fileProps,
             values: options
         }
-        dispatch(updateSectionField(newField));
+        dispatch(updateSectionField(newField, sectionId));
     }
 
     const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {
