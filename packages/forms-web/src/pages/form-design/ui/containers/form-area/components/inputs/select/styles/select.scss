@@ -7,6 +7,10 @@
     margin-bottom: 10px;
     text-align: left;
 
+    &__options-container {
+        width: 430px;
+    }
+
     &__label {
         cursor: pointer;
         display: flex;
@@ -38,7 +42,6 @@
             font-size: 15px;
             outline: none;
             padding: 7px;
-            padding-left: 12px;
             width: 370px;
 
             &--add {

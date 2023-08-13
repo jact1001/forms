@@ -14,7 +14,7 @@ interface ISelectProps extends ISelect {
 
 export const Select = ({sectionId = '0', ...fileProps}: ISelectProps) => {
 
-    const { values } = fileProps;
+    const { values, option_placeholder } = fileProps;
     const [options, setOptions] = useState(values);
     const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ export const Select = ({sectionId = '0', ...fileProps}: ISelectProps) => {
     const addValue = () => {
         options.push({
             id: `0${values.length + 1}`,
-            text: `Opción ${values.length + 1}`
+            text: ''
         })
         updateStoreField();
     }
@@ -52,27 +52,29 @@ export const Select = ({sectionId = '0', ...fileProps}: ISelectProps) => {
 
     return (
         <>
-            {options.map((option: IOptionValue, index: number) => {
-                return (
-                    <div className={defaultClass}>
-                        <div className={`${defaultClass}__label`}>
-                            <div className={`${defaultClass}__label__input-line`}>
-                                {`${index + 1}. `}
-                                <input
-                                    className={`${defaultClass}__label__input-text`}
-                                    type='text'
-                                    placeholder={option.text}
-                                    value={option.text}
-                                    onChange={(event: ChangeEvent<HTMLInputElement>) => handleOnChange(event, index)}
-                                    onBlur={(event: FocusEvent<HTMLInputElement>) => handleOnBlur(event, index)}
-                                />
-                                <span className={`${defaultClass}__label__line`}></span>
+            <div className={`${defaultClass}__options-container`}>
+                {options.map((option: IOptionValue, index: number) => {
+                    return (
+                        <div className={defaultClass}>
+                            <div className={`${defaultClass}__label`}>
+                                <div className={`${defaultClass}__label__input-line`}>
+                                    {`${index + 1}. `}
+                                    <input
+                                        className={`${defaultClass}__label__input-text`}
+                                        type='text'
+                                        placeholder={option_placeholder}
+                                        value={option.text}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => handleOnChange(event, index)}
+                                        onBlur={(event: FocusEvent<HTMLInputElement>) => handleOnBlur(event, index)}
+                                    />
+                                    <span className={`${defaultClass}__label__line`}/>
+                                </div>
+                                {index > 0 && <div className={ `${defaultClass}__icon` } onClick={() => removeValue(index)}><CloseIcon /></div>}
                             </div>
-                            <div className={ `${defaultClass}__icon` } onClick={() => removeValue(index)}><CloseIcon /></div>
                         </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
+            </div>
             <div className={ `${defaultClass}__icon` } onClick={addValue}>Añade otra opción <AddIcon /></div>
         </>
     )

@@ -22,7 +22,6 @@
     width: 210px;
 
     &:before {
-
       align-items: center;
       border-radius: 50% 0 0 50%;
       content: url("../../icons/icon-arrow.svg");
@@ -58,5 +57,9 @@
       font-size: 1.125rem;
       max-width: 67rem;
       padding-left: 20px;
+    }
+
+    svg {
+      color: $fa-color-white-primary;
     }
   }
