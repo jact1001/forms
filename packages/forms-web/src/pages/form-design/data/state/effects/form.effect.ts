@@ -42,6 +42,15 @@ export const updateSectionField = (field: TField, sectionId: string) => {
     }
 }
 
+export const updateSectionName = (name: string, sectionId: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.UPDATE_SECTION_NAME,
+            payload: {name, sectionId}
+        });
+    }
+}
+
 export const addSection = (id: string) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
