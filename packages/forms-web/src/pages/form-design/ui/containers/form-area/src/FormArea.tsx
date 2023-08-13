@@ -8,25 +8,24 @@ import {TimeLine} from "../components/time-line/src/TimeLine";
 import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
 
 interface IFormArea {
-    sectionHeader: ReactNode;
     formSaveButton: ReactNode;
     addSectionButton: ReactNode;
 }
 
 const defaultClass = 'form-area';
 
-const FormArea = ({sectionHeader, formSaveButton, addSectionButton}: IFormArea) => {
+const FormArea = ({formSaveButton, addSectionButton}: IFormArea) => {
 
     const {form: {sections}} = useDesignFormStore((state) => state.form);
 
     return (
         <div className={defaultClass}>
-            {sections.map(({id, fields}, index) => {
+            {sections.map(({id, fields, sectionName, access}, index) => {
                 return (
                     <div className={`${defaultClass}__section-container`}>
                         {index === 0 ? <TimeLine type='start'/> : <TimeLine type='line'/>}
                         <div className={`${defaultClass}__form-section`}>
-                            {sectionHeader}
+                            <SectionHeader sectionId={id} sectionName={sectionName} access={access} />
                             <SectionArea sectionFields={fields} sectionId={id} />
                         </div>
                         {index === sections.length - 1 ? <TimeLine type='end'/> : <TimeLine type='line'/>}
@@ -39,7 +38,6 @@ const FormArea = ({sectionHeader, formSaveButton, addSectionButton}: IFormArea) 
     )
 }
 
-FormArea.SectionHeader = SectionHeader;
 FormArea.SaveButton = SaveButton;
 FormArea.AddSectionButton = AddSectionButton;
 

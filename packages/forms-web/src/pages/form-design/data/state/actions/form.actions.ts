@@ -7,6 +7,7 @@ export enum ActionType {
     SAVE_FORM_FAIL = 'SAVE_FORM_FAIL',
     ADD_SECTION_FIELD = 'ADD_SECTION_FIELD',
     UPDATE_SECTION_FIELD = 'UPDATE_SECTION_FIELD',
+    UPDATE_SECTION_NAME = 'UPDATE_SECTION_NAME',
     ADD_SECTION = 'ADD_SECTION',
 }
 
@@ -39,4 +40,16 @@ interface addSectionAction {
     payload: string;
 }
 
-export type Action = actionPending | actionSuccess | actionFail | addSectionFieldAction | updateSectionFieldAction | addSectionAction;
+interface updateSectionName {
+    type: ActionType.UPDATE_SECTION_NAME;
+    payload: {name: string, sectionId: string};
+}
+
+export type Action =
+    actionPending |
+    actionSuccess |
+    actionFail |
+    addSectionFieldAction |
+    updateSectionFieldAction |
+    addSectionAction |
+    updateSectionName;
