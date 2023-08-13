@@ -5,7 +5,6 @@ import '../styles/label.scss';
 import {TField} from "../../../../../../data/domain/IFormFields";
 
 const defaultClass = 'label';
-const labelText = 'Escribe aquí el nombre de tu campo';
 
 interface LabelProps {
     field: TField;
@@ -14,8 +13,8 @@ interface LabelProps {
 
 export const Label = ( {field, sectionId}: LabelProps) => {
 
-    const { label } = field;
-    const [text, setText] = useState(labelText);
+    const { label_placeholder } = field;
+    const [text, setText] = useState('');
     const dispatch = useDispatch();
 
     const updateStoreField = () => {
@@ -36,7 +35,7 @@ export const Label = ( {field, sectionId}: LabelProps) => {
                 <input
                     type='text'
                     className={`${defaultClass}__label-text`}
-                    placeholder={ label }
+                    placeholder={label_placeholder}
                     value={text}
                     onChange={handleOnChange}
                     onBlur={updateStoreField}

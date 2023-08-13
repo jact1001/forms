@@ -15,6 +15,9 @@
     min-width: 430px;
     outline: none;
     padding: 7px;
-    padding-left: 12px;
     width: 430px;
+
+    &::placeholder {
+        color: $fa-color-gray-light;
+    }
 }
