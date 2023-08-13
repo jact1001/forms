@@ -6,6 +6,7 @@ export interface IText {
     label: string;
     placeholder: string;
     maxLength: string;
+    label_placeholder: string;
 }
 
 export interface ITextArea {
@@ -18,6 +19,7 @@ export interface ITextArea {
     minLength: string;
     maxLength: string;
     rows: string;
+    label_placeholder: string;
 }
 
 export interface IOptionValue {
@@ -32,6 +34,8 @@ export interface IRadio {
     type: string;
     label: string;
     options: IOptionValue[];
+    option_placeholder: string;
+    label_placeholder: string;
 }
 
 export interface ICheckbox {
@@ -43,6 +47,8 @@ export interface ICheckbox {
     name: string;
     checked: boolean;
     options: IOptionValue[];
+    option_placeholder: string;
+    label_placeholder: string;
 }
 
 export interface ISelect {
@@ -52,6 +58,8 @@ export interface ISelect {
     type: string;
     label: string;
     values: IOptionValue[];
+    option_placeholder: string;
+    label_placeholder: string;
 }
 
 export interface INumber {
@@ -62,6 +70,7 @@ export interface INumber {
     label: string;
     placeholder: string;
     min: string;
+    label_placeholder: string;
 }
 
 export interface IEmail {
@@ -72,6 +81,7 @@ export interface IEmail {
     label: string;
     placeholder: string;
     maxLength: string;
+    label_placeholder: string;
 }
 
 export interface IDate {
@@ -80,6 +90,7 @@ export interface IDate {
     isRequired: boolean;
     type: string;
     label: string;
+    label_placeholder: string;
 }
 
 export interface ITime {
@@ -89,6 +100,7 @@ export interface ITime {
     type: string;
     label: string;
     value: string;
+    label_placeholder: string;
 }
 
 export type TField = IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime;

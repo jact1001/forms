@@ -14,7 +14,7 @@ interface ICheckboxProps extends ICheckbox {
 
 export const Checkbox = ({sectionId = '0', ...fieldProps}: ICheckboxProps) => {
 
-    const { type, options } = fieldProps;
+    const { type, options, option_placeholder } = fieldProps;
     const [values, setValues] = useState(options);
     const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ export const Checkbox = ({sectionId = '0', ...fieldProps}: ICheckboxProps) => {
     const addOption = () => {
         values.push({
             id: `0${options.length + 1}`,
-            text: `Opción ${options.length + 1}`
+            text: ''
         })
         updateStoreField();
     }
@@ -52,33 +52,35 @@ export const Checkbox = ({sectionId = '0', ...fieldProps}: ICheckboxProps) => {
 
     return (
         <>
-            {values.map((value: IOptionValue, index: number) => {
-                return (
-                    <div className={defaultClass}>
-                        <input
-                            className={`${defaultClass}__checkbox`}
-                            type={type}
-                            id={value.id}
-                            name={value.text}
-                            disabled
-                        />
-                        <div className={`${defaultClass}__label`}>
-                            <div className={`${defaultClass}__label__input-line`} >
-                                <input
-                                    className={`${defaultClass}__label__input-text`}
-                                    type='text'
-                                    placeholder={value.text}
-                                    value={value.text}
-                                    onChange={(event: ChangeEvent<HTMLInputElement>) => handleOnChange(event, index)}
-                                    onBlur={(event: FocusEvent<HTMLInputElement>) => handleOnBlur(event, index)}
-                                />
-                                <span className={`${defaultClass}__label__line`}></span>
+            <div className={`${defaultClass}__options-container`}>
+                {values.map((value: IOptionValue, index: number) => {
+                    return (
+                        <div className={defaultClass}>
+                            <input
+                                className={`${defaultClass}__checkbox`}
+                                type={type}
+                                id={value.id}
+                                name={value.text}
+                                disabled
+                            />
+                            <div className={`${defaultClass}__label`}>
+                                <div className={`${defaultClass}__label__input-line`} >
+                                    <input
+                                        className={`${defaultClass}__label__input-text`}
+                                        type='text'
+                                        placeholder={option_placeholder}
+                                        value={value.text}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => handleOnChange(event, index)}
+                                        onBlur={(event: FocusEvent<HTMLInputElement>) => handleOnBlur(event, index)}
+                                    />
+                                    <span className={`${defaultClass}__label__line`}/>
+                                </div>
+                                {index > 0 && <div className={ `${defaultClass}__icon` } onClick={() => removeOption(index)}><CloseIcon /></div> }
                             </div>
-                            <div className={ `${defaultClass}__icon` } onClick={() => removeOption(index)}><CloseIcon /></div>
                         </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
+            </div>
             <div className={ `${defaultClass}__icon` } onClick={addOption}>Añade otra opción <AddIcon /></div>
         </>
     )

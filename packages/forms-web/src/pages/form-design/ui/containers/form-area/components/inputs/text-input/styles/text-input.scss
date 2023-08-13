@@ -10,8 +10,11 @@
     font-size: 14px;
     font-style: italic;
     height: 25px;
-    margin-bottom: 20px;
     outline: none;
-    padding: 7px 7px 7px 12px;
+    padding: 7px;
     width: 430px;
+
+    &::placeholder {
+        color: $fa-color-gray-light;
+    }
 }

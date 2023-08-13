@@ -38,5 +38,9 @@
         &:focus + .label__line {
             width: 100%;
         }
+
+        &::placeholder {
+            color: $fa-color-gray-lighter;
+        }
     }
 }
