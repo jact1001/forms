@@ -26,6 +26,8 @@ export class Text implements IText {
     placeholder: string;
     @Property()
     maxLength: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -48,6 +50,8 @@ export class TextArea implements ITextArea {
     maxLength: string;
     @Property()
     rows: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -74,6 +78,10 @@ export class Radio implements IRadio {
     name: string;
     @CollectionOf(OptionValue)
     options: OptionValue[]
+    @Property()
+    option_placeholder: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -94,6 +102,10 @@ export class Checkbox implements ICheckbox {
     checked: boolean;
     @CollectionOf(OptionValue)
     options: OptionValue[]
+    @Property()
+    option_placeholder: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -110,6 +122,10 @@ export class Select implements ISelect {
     label: string;
     @CollectionOf(OptionValue)
     values: OptionValue[]
+    @Property()
+    option_placeholder: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -128,6 +144,8 @@ export class Number implements INumber {
     placeholder: string;
     @Property()
     min: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -146,6 +164,8 @@ export class Email implements IEmail {
     placeholder: string;
     @Property()
     maxLength: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -160,6 +180,8 @@ export class Date implements IDate {
     type: string;
     @Property()
     label: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Schema()
@@ -176,6 +198,8 @@ export class Time implements ITime {
     label: string;
     @Property()
     value: string;
+    @Property()
+    label_placeholder: string;
 }
 
 @Model()
