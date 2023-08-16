@@ -15,6 +15,8 @@ export class User implements IUser {
     @ObjectID("id")
     _id: string;
     @Property()
+    number_id: string;
+    @Property()
     user_name: string;
     @Property()
     last_name: string;

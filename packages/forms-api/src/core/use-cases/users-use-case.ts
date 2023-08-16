@@ -14,7 +14,7 @@ export class UsersUseCase implements IUserApiPort, OnDestroy {
     }
 
     public async saveUser(user: IUser): Promise<IUser> {
-        return this.usersService.saveForm(user);
+        return this.usersService.saveUser(user);
     }
 
     $onDestroy(): void | Promise<any> {

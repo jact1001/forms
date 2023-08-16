@@ -13,7 +13,7 @@ export class UsersService implements OnDestroy {
         return data;
     }
 
-    public async saveForm(user: IUser): Promise<IUser> {
+    public async saveUser(user: IUser): Promise<IUser> {
         const data = await this.userRepository.saveUser(user);
         return data;
     }
