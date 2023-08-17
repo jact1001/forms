@@ -2,12 +2,12 @@ import React from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { addSectionField } from "../../../../data/state/effects/form.effect";
-import '../styles/section-area.scss';
 import { Label } from "../components/label/src/Label";
 import { v4 as uuidv4 } from 'uuid';
 import { inputsType } from "../components/build-input/src/BuildInput";
+import { TFields } from "../../../../data/domain/IForm"; 
+import { Delete } from '../components/options/src/Delete';
 import '../styles/section-area.scss';
-import { TFields } from "../../../../data/domain/IForm";
 
 const defaultClass = 'section-area';
 
@@ -45,6 +45,7 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
                     <div className={`${defaultClass}__field-container`} >
                         <Label field={field} sectionId={sectionId} />
                         <Input key={field.label} {...field}/>
+                        <Delete />
                     </div>
             })}
         </div>

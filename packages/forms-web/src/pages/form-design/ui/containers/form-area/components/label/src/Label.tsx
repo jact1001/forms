@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSectionField } from '../../../../../../data/state/effects/form.effect';
+import { TField } from "../../../../../../data/domain/IFormFields";
 import '../styles/label.scss';
-import {TField} from "../../../../../../data/domain/IFormFields";
 
 const defaultClass = 'label';
 
@@ -25,8 +26,8 @@ export const Label = ( {field, sectionId}: LabelProps) => {
         dispatch(updateSectionField(newField, sectionId));
     }
 
-    const handleOnChange = ({ target }: any) => {
-        setText(target.value);
+    const handleOnChange = ({ target: {value} }: ChangeEvent<HTMLInputElement>) => {
+        setText(value);
     }
 
     return (
