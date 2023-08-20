@@ -9,6 +9,6 @@ export class SignatureResponseFilter implements ResponseFilterMethods {
                 lastname: 'Chinchajoa'
             }
         }
-        return {...signature, ...data};
+        return {...signature, content: data};
     }
 }
