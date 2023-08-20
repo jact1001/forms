@@ -10,21 +10,6 @@
     justify-content: flex-start;
     padding: 0 16px;
 
-    &__select-user {
-        background-color: $fa-color-blue-light;
-        border: 0;
-        border-radius: 10px;
-        color: $fa-color-white-primary;
-        font-size: 15px;
-        margin: 16px;
-        padding: 0 16px;
-        width: 200px;
-
-        &:focus {
-            outline: none;
-        }
-    }
-
     &__section-name {
         background-color: $fa-color-blue-light;
         border: 0;

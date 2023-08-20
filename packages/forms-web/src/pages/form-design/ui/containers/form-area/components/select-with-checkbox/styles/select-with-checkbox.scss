@@ -3,15 +3,27 @@
 .select-with-checkbox {
     position: relative;
     display: inline-block;
+    margin: 16px;
+    width: 200px;
 
     &__select-button {
-        padding: 8px 12px;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
+        background-color: $fa-color-blue-light;
+        border: 0;
+        border-radius: 10px;
+        color: $fa-color-white-primary;
+        font-size: 15px;
+        padding: 0 16px;
+        height: 100%;
+        width: 100%;
         cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &__select-content {
+        background-color: $fa-color-blue-dark;
         position: absolute;
         top: 100%;
         left: 0;
@@ -20,15 +32,20 @@
         max-height: 200px;
         overflow-y: auto;
         z-index: 1;
+        padding: 6px 0;
+        border-radius: 10px;
 
         label {
-            display: block;
+            display: flex;
             padding: 6px 12px;
             cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         label:hover {
-            background-color: #f0f0f0;
+            background-color: $fa-color-blue-light;
         }
 
         input[type="checkbox"] {

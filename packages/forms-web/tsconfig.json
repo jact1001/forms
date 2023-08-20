@@ -23,6 +23,7 @@
     "noEmit": true
   },
   "include": [
-    "src"
+    "src",
+    "public/services-worker.js"
   ]
 }
