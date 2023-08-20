@@ -8,7 +8,7 @@ export const DateInput = ({ type }: IDate) => {
     return (
         <div className={defaultClass}>
             <input type={ type } className={ `${defaultClass}__format` } disabled/>
-            <DateIcon/>
+            <DateIcon />
         </div>
     )
 }
