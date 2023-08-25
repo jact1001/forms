@@ -36,9 +36,13 @@ export const SectionHeader = ({sectionName, access, sectionId}: ISectionHeaderPr
         return {id: user.number_id, text: `${user.number_id} - ${user.user_name}`}
     }) || [];
 
+    const selected: IOption[]  = access.map((user) => {
+        return {id: user.userId, text: user.userName}
+    })
+
     return (
         <div className={defaultClass}>
-            <SelectWithCheckbox options={dropdownOptions} onSelect={handleDropdownSelect} />
+            <SelectWithCheckbox selected={selected} options={dropdownOptions} onSelect={handleDropdownSelect} />
             <input className={`${defaultClass}__section-name`} type="text" id="name-section" placeholder="Sección #1" required minLength={4} maxLength={120} value={sectionName} onChange={handleOnChange} />
         </div>
 

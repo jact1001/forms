@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import '../styles/select-with-checkbox.scss';
+import ArrowDownIcon from "../../icons/ArrowDownIcon";
 
 const defaultClass = 'select-with-checkbox';
 
@@ -10,10 +11,11 @@ export interface IOption {
 
 interface SelectWithCheckboxProps {
     options: IOption[],
+    selected: IOption[],
     onSelect: (options: IOption[]) => void
 }
 
-export const SelectWithCheckbox = ({options, onSelect}: SelectWithCheckboxProps) => {
+export const SelectWithCheckbox = ({options, onSelect, selected}: SelectWithCheckboxProps) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOptions, setSelectedOptions] = useState<IOption[]>([]);
@@ -48,7 +50,8 @@ export const SelectWithCheckbox = ({options, onSelect}: SelectWithCheckboxProps)
     return (
         <div ref={dropdownRef}  className={defaultClass}>
             <button className={`${defaultClass}__select-button`} onClick={toggleDropdown}>
-                Seleccionar opciones
+                <span>Selecciona los usuarios</span>
+                <ArrowDownIcon />
             </button>
             {isOpen && (
                 <div className={`${defaultClass}__select-content`}>
