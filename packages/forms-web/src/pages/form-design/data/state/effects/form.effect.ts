@@ -1,8 +1,9 @@
 import { Dispatch } from 'redux';
 import { ActionType as FormActionTypes, Action as FieldAction } from '../actions/form.actions';
 import { saveFormService } from "../../../services/form-services";
-import { IForm } from "../../domain/IForm";
+import {IAccess, IForm} from "../../domain/IForm";
 import {TField} from "../../domain/IFormFields";
+import {IUser} from "../../domain/IUser";
 
 export const saveForm = (form: IForm) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
@@ -29,6 +30,15 @@ export const addSectionField = (field: TField, sectionId: string) => {
         dispatch({
             type: FormActionTypes.ADD_SECTION_FIELD,
             payload: {field, sectionId}
+        });
+    }
+}
+
+export const updateSectionAccess = (access: IAccess[], sectionId: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.UPDATE_SECTION_ACCESS,
+            payload: {access, sectionId}
         });
     }
 }

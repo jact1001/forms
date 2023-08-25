@@ -18,7 +18,7 @@ interface SelectWithCheckboxProps {
 export const SelectWithCheckbox = ({options, onSelect, selected}: SelectWithCheckboxProps) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOptions, setSelectedOptions] = useState<IOption[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<IOption[]>(selected);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     const toggleDropdown = () => {

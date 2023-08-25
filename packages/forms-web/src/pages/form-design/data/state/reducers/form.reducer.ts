@@ -5,6 +5,7 @@ import { IForm } from "../../domain/IForm";
 import { v4 as uuidv4 } from 'uuid';
 import { addSection } from "../../use-cases/use-add-section";
 import {updateSectionName} from "../../use-cases/use-update-section-name";
+import {updateSectionAccess} from "../../use-cases/use-update-section-access";
 
 export interface IFormState {
     form: IForm;
@@ -54,6 +55,14 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
                 form: {
                     ...state.form,
                     sections: addSectionField(action.payload.sectionId, action.payload.field, state.form.sections)
+                }
+            }
+        case ActionType.UPDATE_SECTION_ACCESS:
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    sections: updateSectionAccess(action.payload.sectionId, action.payload.access, state.form.sections)
                 }
             }
         case ActionType.UPDATE_SECTION_FIELD:

@@ -1,7 +1,7 @@
 import '../styles/section-header.scss';
 import {IAccess} from "../../../../data/domain/IForm";
 import {useDispatch} from "react-redux";
-import {updateSectionName} from "../../../../data/state/effects/form.effect";
+import {updateSectionAccess, updateSectionName} from "../../../../data/state/effects/form.effect";
 import React, {ChangeEvent, useEffect} from "react";
 import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
 import {findUsers} from "../../../../data/state/effects/users.effect";
@@ -28,8 +28,15 @@ export const SectionHeader = ({sectionName, access, sectionId}: ISectionHeaderPr
         dispatch(updateSectionName(value, sectionId));
     }
 
-    const handleDropdownSelect = (selectedOptions: any) => {
-        console.log('Opciones seleccionadas:', selectedOptions);
+    const handleDropdownSelect = (selectedOptions: IOption[]) => {
+        const newAccess: IAccess[] = selectedOptions.map((option) => {
+            return {
+                userName: option.text,
+                userId: option.id,
+                permission: ['read']
+            }
+        })
+        dispatch(updateSectionAccess(newAccess, sectionId));
     };
 
     const dropdownOptions: IOption[] = users?.map((user) => {
