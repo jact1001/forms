@@ -1,9 +1,8 @@
 import { Dispatch } from 'redux';
 import { ActionType as FormActionTypes, Action as FieldAction } from '../actions/form.actions';
 import { saveFormService } from "../../../services/form-services";
-import {IAccess, IForm} from "../../domain/IForm";
-import {TField} from "../../domain/IFormFields";
-import {IUser} from "../../domain/IUser";
+import { IAccess, IForm } from "../../domain/IForm";
+import { TField } from "../../domain/IFormFields";
 
 export const saveForm = (form: IForm) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
@@ -22,6 +21,15 @@ export const saveForm = (form: IForm) => {
                 payload: err.message
             });
         }
+    }
+}
+
+export const updateFormName = (name: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.UPDATE_FORM_NAME,
+            payload: name
+        });
     }
 }
 

@@ -49,6 +49,14 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
                 loading: false,
                 error: action.payload,
             }
+        case ActionType.UPDATE_FORM_NAME:
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    form_name: action.payload
+                }
+            }
         case ActionType.ADD_SECTION_FIELD:
             return {
                 ...state,
