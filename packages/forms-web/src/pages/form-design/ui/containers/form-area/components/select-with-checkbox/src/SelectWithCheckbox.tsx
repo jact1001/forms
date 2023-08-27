@@ -25,9 +25,13 @@ export const SelectWithCheckbox = ({options, onSelect, selected}: SelectWithChec
         setIsOpen(!isOpen);
     };
 
+    const optionIsChecked = (option: IOption) => {
+        return selectedOptions.some((selectedOption) => selectedOption.id === option.id);
+    }
+
     const handleCheckboxChange = (option: IOption) => {
-        const updatedSelectedOptions = selectedOptions.includes(option)
-            ? selectedOptions.filter(item => item !== option)
+        const updatedSelectedOptions = optionIsChecked(option)
+            ? selectedOptions.filter(item => item.id !== option.id)
             : [...selectedOptions, option];
 
         setSelectedOptions(updatedSelectedOptions);
@@ -59,7 +63,7 @@ export const SelectWithCheckbox = ({options, onSelect, selected}: SelectWithChec
                         <label key={option.id}>
                             <input
                                 type="checkbox"
-                                checked={selectedOptions.includes(option)}
+                                checked={optionIsChecked(option)}
                                 onChange={() => handleCheckboxChange(option)}
                             />
                             {option.text}
