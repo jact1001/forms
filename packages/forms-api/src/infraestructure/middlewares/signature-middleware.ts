@@ -5,6 +5,6 @@ import {Middleware, MiddlewareMethods} from "@tsed/platform-middlewares";
 @Middleware()
 export class SignatureMiddleware implements MiddlewareMethods {
     public use(@Req() request: Req, @Context() ctx: Context, @Res() response: Res) {
-        const options = ctx.endpoint.get(SignatureMiddleware) || {};
+        ctx.endpoint.get(SignatureMiddleware);
     }
 }

@@ -7,12 +7,8 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route exact path='/form-design'>
-                    <FormDesign/>
-                </Route>
-                <Route exact path='/user-forms'>
-                    <UserForms/>
-                </Route>
+                <Route exact path='/form-design/:formId?' component={FormDesign} />
+                <Route exact path='/user-forms' component={UserForms} />
             </Switch>
         </Router>
     );

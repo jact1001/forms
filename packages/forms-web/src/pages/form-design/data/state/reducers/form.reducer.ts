@@ -39,7 +39,7 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
             }
         case ActionType.SAVE_FORM_SUCCESS:
             return {
-                ...state,
+                form: action.payload,
                 loading: false,
                 error: null
             }
