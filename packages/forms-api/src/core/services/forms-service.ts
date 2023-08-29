@@ -23,6 +23,11 @@ export class FormsService implements OnDestroy {
         return data;
     }
 
+    public async updateForm(form: IForm): Promise<IForm> {
+        const data = await this.formRepository.updateForm(form);
+        return data;
+    }
+
     $onDestroy() {
         console.log('Service destroyed');
     }

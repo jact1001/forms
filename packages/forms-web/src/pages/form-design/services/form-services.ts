@@ -7,6 +7,11 @@ export const saveFormService = async (form: IForm) => {
     return data;
 }
 
+export const updateFormService = async (form: IForm) => {
+    const { data } = await axios.put(`${API_BASE_PATH}/forms/${form.id}`, form);
+    return data;
+}
+
 export const getFormService = async (formId: string) => {
     const { data } = await axios.get(`${API_BASE_PATH}/forms/${formId}`);
     return data;

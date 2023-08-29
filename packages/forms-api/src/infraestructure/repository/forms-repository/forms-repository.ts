@@ -24,6 +24,13 @@ export class FormsRepository implements IFormRepositoryPort, OnDestroy {
         return await newForm.save();
     }
 
+    public async updateForm (form: IForm) {
+        const formUpdated = await this.model.findById(form._id).exec();
+        formUpdated.set(form);
+        await formUpdated.save();
+        return formUpdated;
+    }
+
     $onDestroy(): void | Promise<any> {
         throw new Error("Method not implemented.");
     }

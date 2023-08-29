@@ -1,4 +1,4 @@
-import {BodyParams, Context, Controller, Get, PathParams, Post, Response} from "@tsed/common";
+import {BodyParams, Context, Controller, Get, PathParams, Post, Put, Response} from "@tsed/common";
 import { FormsUseCase } from "../../core/use-cases/forms-use-case";
 import { IForm } from "../../core/domain/form";
 import e, { Response as ExpressResponse } from 'express';
@@ -25,6 +25,11 @@ export class FormsController {
     @Post("/")
     async saveForm(@BodyParams() data: IForm): Promise<IForm> {
         return await this._formsUseCase.saveForm(data);
+    }
+
+    @Put("/:formId")
+    async updateForm(@BodyParams() data: IForm): Promise<IForm> {
+        return await this._formsUseCase.updateForm(data);
     }
 
 }

@@ -21,6 +21,10 @@ export class FormsUseCase implements IFormApiPort, OnDestroy {
         return this.formsService.saveForm(form);
     }
 
+    public async updateForm(form: IForm): Promise<IForm> {
+        return this.formsService.updateForm(form);
+    }
+
     $onDestroy(): void | Promise<any> {
         throw new Error("Method not implemented.");
     }
