@@ -13,6 +13,10 @@ export class FormsUseCase implements IFormApiPort, OnDestroy {
         return this.formsService.getForms();
     }
 
+    public async getFormById(formId: string): Promise<IForm> {
+        return this.formsService.getFormById(formId);
+    }
+
     public async saveForm(form: IForm): Promise<IForm> {
         return this.formsService.saveForm(form);
     }

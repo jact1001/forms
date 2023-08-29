@@ -5,7 +5,7 @@ import { useDesignFormStore } from "../../../../data/hooks/custom-typed-selector
 import { useHistory } from "react-router-dom";
 import {useEffect} from "react";
 import { toast } from 'react-toastify';
-import {validateForm} from "../../../../data/use-cases/use-validate-form";
+import { validateForm } from "../../../../data/use-cases/use-validate-form";
 
 const defaultClass = 'save-button';
 

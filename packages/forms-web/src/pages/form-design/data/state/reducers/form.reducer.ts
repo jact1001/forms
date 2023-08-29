@@ -32,18 +32,18 @@ const initialState: IFormState = {
 
 const formReducer = (state: IFormState = initialState, action: Action): IFormState => {
     switch (action.type) {
-        case ActionType.SAVE_FORM_PENDING:
+        case ActionType.ACTION_FORM_PENDING:
             return {
                 ...state,
                 loading: true,
             }
-        case ActionType.SAVE_FORM_SUCCESS:
+        case ActionType.ACTION_FORM_SUCCESS:
             return {
                 form: action.payload,
                 loading: false,
                 error: null
             }
-        case ActionType.SAVE_FORM_FAIL:
+        case ActionType.ACTION_FORM_FAIL:
             return {
                 ...state,
                 loading: false,

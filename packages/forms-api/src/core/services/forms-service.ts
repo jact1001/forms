@@ -13,6 +13,11 @@ export class FormsService implements OnDestroy {
         return data;
     }
 
+    public async getFormById(formId: string): Promise<IForm> {
+        const data = await this.formRepository.findForm(formId);
+        return data;
+    }
+
     public async saveForm(form: IForm): Promise<IForm> {
         const data = await this.formRepository.saveForm(form);
         return data;

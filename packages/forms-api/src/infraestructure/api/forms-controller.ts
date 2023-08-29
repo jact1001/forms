@@ -1,4 +1,4 @@
-import { BodyParams, Controller, Get, Post } from "@tsed/common";
+import {BodyParams, Controller, Get, PathParams, Post} from "@tsed/common";
 import { FormsUseCase } from "../../core/use-cases/forms-use-case";
 import { IForm } from "../../core/domain/form";
 
@@ -10,6 +10,11 @@ export class FormsController {
     @Get("/")
     async getForms(): Promise<IForm[]> {
         return await this._formsUseCase.getForms();
+    }
+
+    @Get("/:formId")
+    async getFormById(@PathParams('formId') formId: string): Promise<IForm> {
+        return await this._formsUseCase.getFormById(formId);
     }
 
     @Post("/")

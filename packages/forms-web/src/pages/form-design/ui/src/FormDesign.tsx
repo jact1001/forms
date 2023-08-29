@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import '../styles/form-design.scss';
@@ -7,17 +7,22 @@ import SlideMenu from "../containers/slide-menu/src/SlideMenu";
 import FormArea from "../containers/form-area/src/FormArea";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { getFormById } from "../../data/state/effects/form.effect";
 
 const defaultClass = 'form-design';
 
 export const FormDesign = () => {
 
     // @ts-ignore
-    const { productId } = useParams();
+    const { formId } = useParams();
+    const dispatch = useDispatch();
 
-    if (productId) {
-
-    }
+    useEffect(() => {
+        if (formId) {
+            dispatch(getFormById(formId));
+        }
+    }, [formId]);
 
     return (
         <div className={defaultClass}>

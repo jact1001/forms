@@ -1,23 +1,43 @@
 import { Dispatch } from 'redux';
 import { ActionType as FormActionTypes, Action as FieldAction } from '../actions/form.actions';
-import { saveFormService } from "../../../services/form-services";
+import {getFormService, saveFormService} from "../../../services/form-services";
 import { IAccess, IForm } from "../../domain/IForm";
 import { TField } from "../../domain/IFormFields";
 
 export const saveForm = (form: IForm) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
-            type: FormActionTypes.SAVE_FORM_PENDING
+            type: FormActionTypes.ACTION_FORM_PENDING
         });
         try {
             const data = await saveFormService(form);
             dispatch({
-                type: FormActionTypes.SAVE_FORM_SUCCESS,
+                type: FormActionTypes.ACTION_FORM_SUCCESS,
                 payload: data
             });
         } catch (err: any) {
             dispatch({
-                type: FormActionTypes.SAVE_FORM_FAIL,
+                type: FormActionTypes.ACTION_FORM_FAIL,
+                payload: err.message
+            });
+        }
+    }
+}
+
+export const getFormById = (formId: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.ACTION_FORM_PENDING
+        });
+        try {
+            const data = await getFormService(formId);
+            dispatch({
+                type: FormActionTypes.ACTION_FORM_SUCCESS,
+                payload: data
+            });
+        } catch (err: any) {
+            dispatch({
+                type: FormActionTypes.ACTION_FORM_FAIL,
                 payload: err.message
             });
         }
