@@ -7,17 +7,17 @@ import { TField } from "../../domain/IFormFields";
 export const saveForm = (form: IForm) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
-            type: FormActionTypes.ACTION_FORM_PENDING
+            type: FormActionTypes.SAVE_FORM_PENDING
         });
         try {
             const data = await saveFormService(form);
             dispatch({
-                type: FormActionTypes.ACTION_FORM_SUCCESS,
+                type: FormActionTypes.SAVE_FORM_SUCCESS,
                 payload: data
             });
         } catch (err: any) {
             dispatch({
-                type: FormActionTypes.ACTION_FORM_FAIL,
+                type: FormActionTypes.SAVE_FORM_FAIL,
                 payload: err.message
             });
         }
@@ -27,18 +27,18 @@ export const saveForm = (form: IForm) => {
 export const getFormById = (formId: string) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
-            type: FormActionTypes.ACTION_FORM_PENDING
+            type: FormActionTypes.GET_FORM_PENDING
         });
         try {
             const data = await getFormService(formId);
             dispatch({
-                type: FormActionTypes.ACTION_FORM_SUCCESS,
+                type: FormActionTypes.GET_FORM_SUCCESS,
                 payload: data
             });
         } catch (err: any) {
             dispatch({
-                type: FormActionTypes.ACTION_FORM_FAIL,
-                payload: err.message
+                type: FormActionTypes.GET_FORM_FAIL,
+                payload: err.response.data.error || err.message
             });
         }
     }

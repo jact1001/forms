@@ -3,9 +3,12 @@ import { TField } from "../../domain/IFormFields";
 import {IUser} from "../../domain/IUser";
 
 export enum ActionType {
-    ACTION_FORM_PENDING = 'ACTION_FORM_PENDING',
-    ACTION_FORM_SUCCESS = 'ACTION_FORM_SUCCESS',
-    ACTION_FORM_FAIL = 'ACTION_FORM_FAIL',
+    SAVE_FORM_PENDING = 'SAVE_FORM_PENDING',
+    SAVE_FORM_SUCCESS = 'SAVE_FORM_SUCCESS',
+    SAVE_FORM_FAIL = 'SAVE_FORM_FAIL',
+    GET_FORM_PENDING = 'GET_FORM_PENDING',
+    GET_FORM_SUCCESS = 'GET_FORM_SUCCESS',
+    GET_FORM_FAIL = 'GET_FORM_FAIL',
     UPDATE_FORM_NAME = 'UPDATE_FORM_NAME',
     ADD_SECTION_FIELD = 'ADD_SECTION_FIELD',
     UPDATE_SECTION_ACCESS = 'UPDATE_SECTION_ACCESS',
@@ -14,17 +17,31 @@ export enum ActionType {
     ADD_SECTION = 'ADD_SECTION',
 }
 
-interface actionPending {
-    type: ActionType.ACTION_FORM_PENDING;
+interface saveActionPending {
+    type: ActionType.SAVE_FORM_PENDING;
 }
 
-interface actionSuccess {
-    type: ActionType.ACTION_FORM_SUCCESS;
+interface saveActionSuccess {
+    type: ActionType.SAVE_FORM_SUCCESS;
     payload: IForm;
 }
 
-interface actionFail {
-    type: ActionType.ACTION_FORM_FAIL;
+interface saveActionFail {
+    type: ActionType.SAVE_FORM_FAIL;
+    payload: string;
+}
+
+interface getActionPending {
+    type: ActionType.GET_FORM_PENDING;
+}
+
+interface getActionSuccess {
+    type: ActionType.GET_FORM_SUCCESS;
+    payload: IForm;
+}
+
+interface getActionFail {
+    type: ActionType.GET_FORM_FAIL;
     payload: string;
 }
 
@@ -59,9 +76,12 @@ interface updateSectionName {
 }
 
 export type Action =
-    actionPending |
-    actionSuccess |
-    actionFail |
+    saveActionPending |
+    saveActionSuccess |
+    saveActionFail |
+    getActionPending |
+    getActionSuccess |
+    getActionFail |
     updateFormNameAction |
     addSectionFieldAction |
     updateSectionAccessAction |

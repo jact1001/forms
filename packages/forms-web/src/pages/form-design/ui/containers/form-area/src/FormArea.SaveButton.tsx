@@ -13,7 +13,7 @@ export const SaveButton = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const { form, loading, error } = useDesignFormStore((state) => state.form);
+    const { form, saveLoading: loading, saveError: error } = useDesignFormStore((state) => state.form);
 
     useEffect(() => {
         if (!loading && !error && form.id) {

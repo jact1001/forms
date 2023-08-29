@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { getFormById } from "../../data/state/effects/form.effect";
+import {useDesignFormStore} from "../../data/hooks/custom-typed-selector";
 
 const defaultClass = 'form-design';
 
@@ -16,6 +17,7 @@ export const FormDesign = () => {
 
     // @ts-ignore
     const { formId } = useParams();
+    const { getError } = useDesignFormStore((state) => state.form);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,10 +35,13 @@ export const FormDesign = () => {
                     <SlideMenu.AddTitle />
                     <SlideMenu.DragInputMenu />
                 </SlideMenu>
-                <FormArea
-                    formSaveButton={<FormArea.SaveButton />}
-                    addSectionButton={<FormArea.AddSectionButton />}
-                />
+                {getError ?
+                    <div>{getError}</div> :
+                    <FormArea
+                        formSaveButton={<FormArea.SaveButton />}
+                        addSectionButton={<FormArea.AddSectionButton />}
+                    />
+                }
                 <ToastContainer />
             </DndProvider>
         </div>

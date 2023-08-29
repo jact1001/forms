@@ -20,7 +20,7 @@ const FormArea = ({formSaveButton, addSectionButton}: IFormArea) => {
 
     return (
         <div className={defaultClass}>
-            {sections.map(({id, fields, sectionName, access}, index) => {
+            {sections?.map(({id, fields, sectionName, access}, index) => {
                 return (
                     <div className={`${defaultClass}__section-container`}>
                         {index === 0 ? <TimeLine type='start'/> : <TimeLine type='line'/>}
