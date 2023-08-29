@@ -1,7 +1,7 @@
 import '../styles/section-header.scss';
 import {IAccess} from "../../../../data/domain/IForm";
 import {useDispatch} from "react-redux";
-import {updateSectionName} from "../../../../data/state/effects/form.effect";
+import {updateSectionAccess, updateSectionName} from "../../../../data/state/effects/form.effect";
 import React, {ChangeEvent, useEffect} from "react";
 import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
 import {findUsers} from "../../../../data/state/effects/users.effect";
@@ -28,17 +28,28 @@ export const SectionHeader = ({sectionName, access, sectionId}: ISectionHeaderPr
         dispatch(updateSectionName(value, sectionId));
     }
 
-    const handleDropdownSelect = (selectedOptions: any) => {
-        console.log('Opciones seleccionadas:', selectedOptions);
+    const handleDropdownSelect = (selectedOptions: IOption[]) => {
+        const newAccess: IAccess[] = selectedOptions.map((option) => {
+            return {
+                userName: option.text,
+                userId: option.id,
+                permission: ['read']
+            }
+        })
+        dispatch(updateSectionAccess(newAccess, sectionId));
     };
 
     const dropdownOptions: IOption[] = users?.map((user) => {
         return {id: user.number_id, text: `${user.number_id} - ${user.user_name}`}
     }) || [];
 
+    const selected: IOption[]  = access.map((user) => {
+        return {id: user.userId, text: user.userName}
+    })
+
     return (
         <div className={defaultClass}>
-            <SelectWithCheckbox options={dropdownOptions} onSelect={handleDropdownSelect} />
+            <SelectWithCheckbox selected={selected} options={dropdownOptions} onSelect={handleDropdownSelect} />
             <input className={`${defaultClass}__section-name`} type="text" id="name-section" placeholder="Sección #1" required minLength={4} maxLength={120} value={sectionName} onChange={handleOnChange} />
         </div>
 

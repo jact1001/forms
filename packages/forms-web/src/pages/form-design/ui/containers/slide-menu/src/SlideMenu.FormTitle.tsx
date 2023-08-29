@@ -1,19 +1,24 @@
-import IconBack from '../components/icons/icon-back';
-import IconForward from '../components/icons/icon-forward';
 import '../styles/form-title.scss';
+import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
+import {useDispatch} from "react-redux";
+import {updateFormName} from "../../../../data/state/effects/form.effect";
+import {ChangeEvent} from "react";
 
-const TITLE_VALUE = 'Título';
+const PLACEHOLDER= 'Ingresa el título del formulario';
 const defaultClassName = 'form-title';
 
 export const SlideMenuFormTitle = () => {
 
+    const dispatch = useDispatch();
+    const {form: {form_name}} = useDesignFormStore((state) => state.form);
+
+    const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>) => {
+        dispatch(updateFormName(value));
+    }
+
     return (
         <div className={defaultClassName}>
-            <h2>{TITLE_VALUE}</h2>
-            <div>
-                <a className={`${defaultClassName}__icon`}><IconBack /></a>
-                <a className={`${defaultClassName}__icon`}><IconForward /></a>
-            </div>
+            <input type="text" placeholder={PLACEHOLDER} value={form_name} onChange={handleOnChange} />
         </div>
     )
 }

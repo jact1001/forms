@@ -9,6 +9,7 @@ export class SignatureResponseFilter implements ResponseFilterMethods {
                 lastname: 'Chinchajoa'
             }
         }
-        return {...signature, content: data};
+        //return {...signature, content: data};
+        return data;
     }
 }

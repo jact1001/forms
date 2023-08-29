@@ -4,9 +4,10 @@
     position: relative;
     display: inline-block;
     margin: 16px;
-    width: 200px;
+    width: 228px;
 
     &__select-button {
+        display: flex;
         background-color: $fa-color-blue-light;
         border: 0;
         border-radius: 10px;
@@ -16,6 +17,8 @@
         height: 100%;
         width: 100%;
         cursor: pointer;
+        align-items: center;
+        justify-content: space-around;
 
         &:focus {
             outline: none;
