@@ -9,8 +9,10 @@ import {updateSectionAccess} from "../../use-cases/use-update-section-access";
 
 export interface IFormState {
     form: IForm;
-    loading: boolean;
-    error: string | null;
+    saveLoading: boolean;
+    saveError: string | null;
+    getLoading: boolean;
+    getError: string | null;
 }
 
 const initialState: IFormState = {
@@ -26,8 +28,10 @@ const initialState: IFormState = {
             }
         ]
     },
-    loading: false,
-    error: null
+    saveLoading: false,
+    saveError: null,
+    getLoading: false,
+    getError: null
 }
 
 const formReducer = (state: IFormState = initialState, action: Action): IFormState => {
@@ -35,19 +39,38 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
         case ActionType.SAVE_FORM_PENDING:
             return {
                 ...state,
-                loading: true,
+                saveLoading: true,
             }
         case ActionType.SAVE_FORM_SUCCESS:
             return {
+                ...state,
                 form: action.payload,
-                loading: false,
-                error: null
+                saveLoading: false,
+                saveError: null
             }
         case ActionType.SAVE_FORM_FAIL:
             return {
                 ...state,
-                loading: false,
-                error: action.payload,
+                saveLoading: false,
+                saveError: action.payload,
+            }
+        case ActionType.GET_FORM_PENDING:
+            return {
+                ...state,
+                getLoading: true,
+            }
+        case ActionType.GET_FORM_SUCCESS:
+            return {
+                ...state,
+                form: action.payload,
+                getLoading: false,
+                getError: null
+            }
+        case ActionType.GET_FORM_FAIL:
+            return {
+                ...state,
+                getLoading: false,
+                getError: action.payload,
             }
         case ActionType.UPDATE_FORM_NAME:
             return {

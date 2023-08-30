@@ -28,7 +28,7 @@ export class Section implements ISection {
 @Model()
 export class Form implements IForm {
     @ObjectID("id")
-    _id: string;
+    id: string;
     @Property()
     form_name: string;
     @Property()

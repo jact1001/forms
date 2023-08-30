@@ -1,16 +1,16 @@
 import { Dispatch } from 'redux';
 import { ActionType as FormActionTypes, Action as FieldAction } from '../actions/form.actions';
-import { saveFormService } from "../../../services/form-services";
+import {getFormService, saveFormService, updateFormService} from "../../../services/form-services";
 import { IAccess, IForm } from "../../domain/IForm";
 import { TField } from "../../domain/IFormFields";
 
-export const saveForm = (form: IForm) => {
+export const saveForm = (form: IForm, isUpdated: boolean) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.SAVE_FORM_PENDING
         });
         try {
-            const data = await saveFormService(form);
+            const data = isUpdated ? await updateFormService(form) : await saveFormService(form);
             dispatch({
                 type: FormActionTypes.SAVE_FORM_SUCCESS,
                 payload: data
@@ -19,6 +19,26 @@ export const saveForm = (form: IForm) => {
             dispatch({
                 type: FormActionTypes.SAVE_FORM_FAIL,
                 payload: err.message
+            });
+        }
+    }
+}
+
+export const getFormById = (formId: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.GET_FORM_PENDING
+        });
+        try {
+            const data = await getFormService(formId);
+            dispatch({
+                type: FormActionTypes.GET_FORM_SUCCESS,
+                payload: data
+            });
+        } catch (err: any) {
+            dispatch({
+                type: FormActionTypes.GET_FORM_FAIL,
+                payload: err.response.data.error || err.message
             });
         }
     }

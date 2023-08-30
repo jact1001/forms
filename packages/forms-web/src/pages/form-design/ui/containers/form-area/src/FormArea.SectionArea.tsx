@@ -5,9 +5,10 @@ import { addSectionField } from "../../../../data/state/effects/form.effect";
 import { Label } from "../components/label/src/Label";
 import { v4 as uuidv4 } from 'uuid';
 import { inputsType } from "../components/build-input/src/BuildInput";
-import { TFields } from "../../../../data/domain/IForm"; 
+import { TFields } from "../../../../data/domain/IForm";
 import { Delete } from '../components/options/src/Delete';
 import '../styles/section-area.scss';
+import {TField} from "../../../../data/domain/IFormFields";
 
 const defaultClass = 'section-area';
 
