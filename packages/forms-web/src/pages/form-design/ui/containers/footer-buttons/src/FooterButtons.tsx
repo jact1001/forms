@@ -1,34 +1,38 @@
-import '../styles/save-button.scss';
+import '../styles/footer-buttons.scss';
 import { useDispatch } from "react-redux";
 import { saveForm } from "../../../../data/state/effects/form.effect";
 import { useDesignFormStore } from "../../../../data/hooks/custom-typed-selector";
 import {useHistory, useParams} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import { toast } from 'react-toastify';
 import { validateForm } from "../../../../data/use-cases/use-validate-form";
 
-const defaultClass = 'save-button';
+const defaultClass = 'footer-buttons';
 
-export const SaveButton = () => {
+export const FooterButtons = () => {
 
     const dispatch = useDispatch();
     // @ts-ignore
     const { formId } = useParams();
+    const [isSaving, setIsSaving] = useState(false);
     const history = useHistory();
     const { form, saveLoading: loading, saveError: error } = useDesignFormStore((state) => state.form);
 
     useEffect(() => {
-        if (!loading && !error && form.id) {
-            toast.success("Operación exitosa");
-            history.push(`/form-design/${form.id}`);
+        if (isSaving && !loading) {
+            if (error) {
+                toast.error("Error en la operación");
+            } else if (form.id) {
+                toast.success("Operación exitosa");
+                history.push(`/form-design/${form.id}`);
+            }
+            setIsSaving(false);
         }
-        if (!loading && error){
-            toast.error("Error en la operación");
-        }
-    }, [loading, error]);
+    }, [isSaving, loading, error, form.id, history]);
 
     const handleSaveForm = () => {
         dispatch(saveForm(form, formId));
+        setIsSaving(true);
     }
 
     const disabledButton = () => {

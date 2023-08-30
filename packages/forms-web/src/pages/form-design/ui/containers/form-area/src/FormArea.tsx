@@ -1,20 +1,13 @@
 import '../styles/form-area.scss';
-import {ReactNode} from "react";
 import {SectionHeader} from "./FormArea.SectionHeader";
 import {SectionArea} from "./FormArea.SectionArea";
-import {SaveButton} from "./FormArea.SaveButton";
 import {AddSectionButton} from "./FormArea.AddSectionButton";
 import {TimeLine} from "../components/time-line/src/TimeLine";
 import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
 
-interface IFormArea {
-    formSaveButton: ReactNode;
-    addSectionButton: ReactNode;
-}
-
 const defaultClass = 'form-area';
 
-const FormArea = ({formSaveButton, addSectionButton}: IFormArea) => {
+const FormArea = () => {
 
     const {form: {sections}} = useDesignFormStore((state) => state.form);
 
@@ -32,13 +25,8 @@ const FormArea = ({formSaveButton, addSectionButton}: IFormArea) => {
                     </div>
                 )
             })}
-            {addSectionButton}
-            {formSaveButton}
+            <AddSectionButton />
         </div>
     )
 }
-
-FormArea.SaveButton = SaveButton;
-FormArea.AddSectionButton = AddSectionButton;
-
 export default FormArea;

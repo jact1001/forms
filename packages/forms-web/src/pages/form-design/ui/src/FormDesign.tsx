@@ -9,7 +9,8 @@ import { useParams } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { getFormById } from "../../data/state/effects/form.effect";
-import {useDesignFormStore} from "../../data/hooks/custom-typed-selector";
+import { useDesignFormStore } from "../../data/hooks/custom-typed-selector";
+import { FooterButtons } from "../containers/footer-buttons/src/FooterButtons";
 
 const defaultClass = 'form-design';
 
@@ -17,7 +18,7 @@ export const FormDesign = () => {
 
     // @ts-ignore
     const { formId } = useParams();
-    const { getError } = useDesignFormStore((state) => state.form);
+    const { getError, getLoading } = useDesignFormStore((state) => state.form);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,13 +36,10 @@ export const FormDesign = () => {
                     <SlideMenu.AddTitle />
                     <SlideMenu.DragInputMenu />
                 </SlideMenu>
-                {getError ?
-                    <div>{getError}</div> :
-                    <FormArea
-                        formSaveButton={<FormArea.SaveButton />}
-                        addSectionButton={<FormArea.AddSectionButton />}
-                    />
-                }
+                { getError && <div>{getError}</div> }
+                { getLoading && <div>Cargando...</div> }
+                { !getError && !getLoading && <FormArea/> }
+                <FooterButtons />
                 <ToastContainer />
             </DndProvider>
         </div>
