@@ -1,0 +1,37 @@
+.Header {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  background-color: #615E67;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #9b9292c1;
+
+  &__button {
+    position: relative;
+    margin: 12px;
+    display: flex;
+    background: #0DD4C4;
+    cursor: pointer;
+    border: none;
+    border-radius: 22px;
+    align-items: center;
+    padding: 8px;
+    width: 148px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      left: 10px;
+    }
+  }
+
+  &__button-title {
+    font-size: 16px;
+    color: black;
+  }
+}

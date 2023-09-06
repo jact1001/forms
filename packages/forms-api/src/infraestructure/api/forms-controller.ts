@@ -1,9 +1,11 @@
-import {BodyParams, Context, Controller, Get, PathParams, Post, Put, Response} from "@tsed/common";
+import {BodyParams, Controller, Get, PathParams, Post, Put, Response, UseBefore} from "@tsed/common";
 import { FormsUseCase } from "../../core/use-cases/forms-use-case";
 import { IForm } from "../../core/domain/form";
 import e, { Response as ExpressResponse } from 'express';
+import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
 
 @Controller("/forms")
+@UseBefore(AuthTokenMiddleware)
 export class FormsController {
 
     public constructor(private readonly _formsUseCase: FormsUseCase) {}
