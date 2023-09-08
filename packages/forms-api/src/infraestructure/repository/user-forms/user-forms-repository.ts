@@ -1,9 +1,8 @@
 import { Inject, Injectable, OnDestroy } from "@tsed/common";
 import { MongooseModel } from "@tsed/mongoose";
 import { UserForms } from "./user-forms-schema";
-import { IUser } from "../../../core/domain/user";
 import { IUserFormsRepositoryPort } from "../../../core/ports/user-forms-ports/user-forms-repository-port";
-import {IUserForms} from "../../../core/domain/user-forms";
+import { IUserForms } from "../../../core/domain/user-forms";
 
 @Injectable()
 export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy {
@@ -16,8 +15,7 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
     }
 
     public async findUserForms (userId: string) {
-        const userForms = await this.model.findOne({ user_id: userId }).exec();
-        return userForms;
+        return await this.model.findOne({user_id: userId}).exec();
     }
 
     $onDestroy(): void | Promise<any> {

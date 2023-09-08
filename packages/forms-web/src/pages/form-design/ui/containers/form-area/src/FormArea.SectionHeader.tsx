@@ -1,11 +1,11 @@
 import '../styles/section-header.scss';
-import {IAccess} from "../../../../data/domain/IForm";
-import {useDispatch} from "react-redux";
-import {updateSectionAccess, updateSectionName} from "../../../../data/state/effects/form.effect";
-import React, {ChangeEvent, useEffect} from "react";
-import {useDesignFormStore} from "../../../../data/hooks/custom-typed-selector";
-import {findUsers} from "../../../../data/state/effects/users.effect";
-import {IOption, SelectWithCheckbox} from "../components/select-with-checkbox/src/SelectWithCheckbox";
+import { IAccess } from "../../../../data/domain/IForm";
+import { useDispatch } from "react-redux";
+import { updateSectionAccess, updateSectionName } from "../../../../data/state/effects/form.effect";
+import React, { ChangeEvent, useEffect } from "react";
+import { useDesignFormStore } from "../../../../data/hooks/custom-typed-selector";
+import { findUsers } from "../../../../data/state/effects/users.effect";
+import { IOption, SelectWithCheckbox } from "../components/select-with-checkbox/src/SelectWithCheckbox";
 
 const defaultClass = 'section-header';
 
@@ -40,7 +40,7 @@ export const SectionHeader = ({sectionName, access, sectionId}: ISectionHeaderPr
     };
 
     const dropdownOptions: IOption[] = users?.map((user) => {
-        return {id: user.number_id, text: `${user.number_id} - ${user.user_name}`}
+        return {id: user.email, text: user.user_name}
     }) || [];
 
     const selected: IOption[]  = access.map((user) => {

@@ -11,7 +11,7 @@ export class FormCase implements IFormCase {
 }
 
 @Schema()
-export class Form implements IUserForm {
+export class UserForm implements IUserForm {
     @ObjectID("id")
     form_id: string;
     @Property()
@@ -24,6 +24,6 @@ export class Form implements IUserForm {
 export class UserForms implements IUserForms {
     @ObjectID("id")
     user_id: string;
-    @CollectionOf(Form)
-    forms: Form[];
+    @CollectionOf(UserForm)
+    forms: UserForm[];
 }

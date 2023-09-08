@@ -33,9 +33,12 @@ export const Header = () => {
 
     return (
         <div className={defaultClass}>
-            <button onClick={logoutHandler} className={`${defaultClass}__button`}>
+            <div className={`${defaultClass}__menu`}>
+                <a href="/user-forms">Mis formularios</a>
+            </div>
+            <button onClick={logoutHandler} className={`${defaultClass}__logout`}>
                 <ReturnIcon />
-                <b className={`${defaultClass}__button-title`}>Salir</b>
+                <b className={`${defaultClass}__logout-title`}>Salir</b>
             </button>
         </div>
     );
