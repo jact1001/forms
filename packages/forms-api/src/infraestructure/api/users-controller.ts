@@ -3,6 +3,7 @@ import { IUser } from "../../core/domain/user";
 import { UsersUseCase } from "../../core/use-cases/users-use-case";
 import { Response as ExpressResponse } from "express";
 import { OAuth2Client } from "google-auth-library";
+import * as jwt from 'jsonwebtoken';
 const config = require("dotenv").config({path: "../../.env"});
 
 @Controller("/users")
@@ -24,17 +25,14 @@ export class UsersController {
     @Post("/login")
     async login(@Request() request, @Context() ctx: Context, @Response() res: ExpressResponse): Promise<any> {
         const token = request.headers["authorization"].split(" ")[1];
-        const secretKey = {
-            key: '123'
-        }
         try {
             const ticket = await this.googleClient.verifyIdToken({
                 idToken: token,
                 audience: config.parsed.client_id,
             });
-            const { email } = ticket.getPayload();
-            //const loginToken = jwt.sign(`${email}`, secretKey.key);
-            const loginToken = 'prueba';
+            const { email, name, family_name } = ticket.getPayload();
+            const loginToken = jwt.sign(`${email}`, config.parsed.secret_key);
+            await this._usersUseCase.saveUser({ email: email, user_name: name, last_name: family_name });
             res.cookie("login", loginToken, {
                 httpOnly: true,
                 maxAge: 3600000,

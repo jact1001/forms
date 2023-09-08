@@ -1,8 +1,10 @@
-import {BodyParams, Controller, Get, PathParams, Post, Put, Response, UseBefore} from "@tsed/common";
+import {BodyParams, Controller, Get, PathParams, Post, Put, Request, Response, UseBefore} from "@tsed/common";
 import { FormsUseCase } from "../../core/use-cases/forms-use-case";
 import { IForm } from "../../core/domain/form";
 import e, { Response as ExpressResponse } from 'express';
 import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
+import * as jwt from 'jsonwebtoken';
+const config = require("dotenv").config({path: "../../.env"});
 
 @Controller("/forms")
 @UseBefore(AuthTokenMiddleware)
@@ -25,8 +27,10 @@ export class FormsController {
     }
 
     @Post("/")
-    async saveForm(@BodyParams() data: IForm): Promise<IForm> {
-        return await this._formsUseCase.saveForm(data);
+    async saveForm(@BodyParams() data: IForm, @Request() request): Promise<IForm> {
+        const oauthToken = request.headers["x-access-token"];
+        const email = jwt.verify(oauthToken, config.parsed.secret_key);
+        return await this._formsUseCase.saveForm(data, email);
     }
 
     @Put("/:formId")

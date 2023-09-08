@@ -16,7 +16,12 @@ export class UsersRepository implements IUserRepositoryPort, OnDestroy {
 
     public async saveUser (user: IUser) {
         const newUser = new this.model(user);
-        return await newUser.save();
+        return newUser.save();
+    }
+
+    public async findUserByEmail (email: string) {
+        const user = await this.model.findOne({email: email}).exec();
+        return user;
     }
 
     $onDestroy(): void | Promise<any> {
