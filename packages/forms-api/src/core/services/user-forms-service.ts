@@ -8,10 +8,14 @@ import {IUserForms} from "../domain/user-forms";
 @Scope('request')
 export class UserFormsService implements OnDestroy {
 
-    constructor(private readonly userFormsRepository: UserFormsRepository) {}
+    constructor(
+        private readonly userFormsRepository: UserFormsRepository,
+        private readonly userRepository: UsersRepository
+    ) {}
 
-    public async getUserForms(): Promise<IUserForms[]> {
-        const data = await this.userFormsRepository.findUserForms();
+    public async getUserForms(email: string): Promise<IUserForms> {
+        const user: IUser = await this.userRepository.findUserByEmail(email);
+        const data = await this.userFormsRepository.findUserForms(user._id);
         return data;
     }
 

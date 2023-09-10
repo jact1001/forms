@@ -28,9 +28,7 @@ export class FormsService implements OnDestroy {
 
     public async saveForm(form: IForm, email: string): Promise<IForm> {
         const user: IUser = await this.userRepository.findUserByEmail(email);
-        console.log('user: ', user);
         const userForms: IUserForms = await this.userFormsRepository.findUserForms(user._id);
-        console.log('userforms: ', userForms);
         const newForm = await this.formRepository.saveForm(form);
         const newUserForm: IUserForm = {
             form_id: newForm.id,

@@ -12,8 +12,8 @@ export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
 
     constructor(private readonly userFormService: UserFormsService) {}
 
-    public async getUserForms(): Promise<IUserForms[]> {
-        return this.userFormService.getUserForms();
+    public async getUserForms(email: string): Promise<IUserForms> {
+        return this.userFormService.getUserForms(email);
     }
 
     public async saveUserForms(userForm: IUserForms): Promise<IUserForms> {

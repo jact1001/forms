@@ -1,4 +1,4 @@
-import {BodyParams, Controller, Get, PathParams, Post, Put, Request, Response, UseBefore} from "@tsed/common";
+import {BodyParams, Context, Controller, Get, PathParams, Post, Put, Request, Response, UseBefore} from "@tsed/common";
 import { FormsUseCase } from "../../core/use-cases/forms-use-case";
 import { IForm } from "../../core/domain/form";
 import e, { Response as ExpressResponse } from 'express';
@@ -27,9 +27,8 @@ export class FormsController {
     }
 
     @Post("/")
-    async saveForm(@BodyParams() data: IForm, @Request() request): Promise<IForm> {
-        const oauthToken = request.headers["x-access-token"];
-        const email = jwt.verify(oauthToken, config.parsed.secret_key);
+    async saveForm(@BodyParams() data: IForm, @Request() request, @Context() ctx: Context): Promise<IForm> {
+        const email = ctx.get("email");
         return await this._formsUseCase.saveForm(data, email);
     }
 

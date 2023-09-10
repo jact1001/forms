@@ -14,8 +14,8 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
         return newUserForms.save();
     }
 
-    public async findUserForms (userId: string) {
-        return await this.model.findOne({user_id: userId}).exec();
+    public async findUserForms (email: string) {
+        return await this.model.findOne({email: email}).exec();
     }
 
     $onDestroy(): void | Promise<any> {
