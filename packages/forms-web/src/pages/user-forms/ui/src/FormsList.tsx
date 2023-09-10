@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../styles/form-list.scss';
-import {Form} from "./Form";
-
+import { Form } from "./Form";
+import { useUserFormsStore } from "../../data/hooks/custom-typed-selector";
 
 const defaultClass = 'form-list';
 
@@ -39,11 +39,13 @@ export const FormsList = () => {
         }
     ]
 
+    const { userForms } = useUserFormsStore((state) => state.userForms);
+
     return (
 
         <div className={`${defaultClass}__main`}>
             {
-                mockForms.map((form)=>{
+                userForms?.forms.map((form)=>{
                     return <Form formName={form.form_name} formCases={form.cases}/>
                 })
             }

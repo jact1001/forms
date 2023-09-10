@@ -6,6 +6,9 @@ import { HeadUserForm } from "./HeadUserForm";
 import { useLoginStore } from "../../../login/data/hooks/custom-typed-selector";
 import {Redirect, useHistory} from "react-router-dom";
 import {Header} from "../../../header/src/Header";
+import {getFormById} from "../../../form-design/data/state/effects/form.effect";
+import {useDispatch} from "react-redux";
+import {findUserForms} from "../../data/state/effects/user-forms.effects";
 
 const defaultClass = 'user-forms-container';
 
@@ -14,6 +17,7 @@ export const UserForms = () => {
     const isAuthenticated = sessionStorage.getItem('session');
     const { isLogin } = useLoginStore((state) => state.login);
     const history = useHistory();
+    const dispatch = useDispatch();
 
 
     /*useEffect(() => {
@@ -21,6 +25,10 @@ export const UserForms = () => {
             history.push('/login');
         }
     }, [isLogin]);*/
+
+    useEffect(() => {
+        dispatch(findUserForms());
+    }, []);
 
     if (!isAuthenticated) {
         return <Redirect to="/login" />;

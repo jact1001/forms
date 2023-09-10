@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { UserForms } from "./pages/user-forms/ui/src/user-forms";
+import { UserForms } from "./pages/user-forms/ui/src/UserForms";
 import { FormDesign } from "./pages/form-design/ui/src/FormDesign";
 import { Login } from "./pages/login/ui/src/Login";
 import { useEffect } from "react";

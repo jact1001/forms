@@ -1,7 +1,8 @@
-import {Action, ActionType} from '../actions/user-forms.actions';
+import { Action, ActionType } from '../actions/user-forms.actions';
+import { IUserForms } from "../../domain/IUserForms";
 
 interface State {
-    userForms: any | null;
+    userForms: IUserForms | null;
     loading: boolean;
     error: string | null;
 }

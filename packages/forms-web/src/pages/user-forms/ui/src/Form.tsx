@@ -2,22 +2,16 @@ import React, {useState} from 'react';
 import '../styles/form.scss';
 import FormIcon from "../icons/FormIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
-import {FormUseCase} from "./FormUseCase";
+import { FormUseCase } from "./FormUseCase";
+import {IFormCase} from "../../data/domain/IUserForms";
 
 const defaultClass = 'form';
-interface FormCase{
-    case_name: string;
-    case_id: string;
-    url: string;
-    status: {
-        id: string ;
-        name: string;
-    }
-}
+
 interface SlideFormProps {
     formName: string
-    formCases: FormCase[]
+    formCases?: IFormCase[]
 }
+
 export const Form = ({formName, formCases}:SlideFormProps) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -43,8 +37,8 @@ export const Form = ({formName, formCases}:SlideFormProps) => {
             </button>
             {isExpanded &&
                 <>
-                    {formCases.map((formCase)=>{
-                        return <FormUseCase formName={formCase.case_name} statusOption={formCase.status}/>
+                    {formCases?.map((formCase)=>{
+                        return <FormUseCase formName={formCase.case_name} statusOption={formCase.state}/>
                     })}
                 </>
             }

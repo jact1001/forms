@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 import userFormsReducer from './user-forms.reducer';
 
-const formReducers = combineReducers({
-    form: userFormsReducer,
+const userFormsReducers = combineReducers({
+    userForms: userFormsReducer,
 });
 
-export default formReducers;
-export type RootFormState = ReturnType<typeof formReducers>;
+export default userFormsReducers;
+export type RootUserFormsState = ReturnType<typeof userFormsReducers>;
