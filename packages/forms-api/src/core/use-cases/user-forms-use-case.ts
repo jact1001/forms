@@ -3,7 +3,7 @@ import { UsersService } from "../services/users-service";
 import { IUserApiPort } from "../ports/users-ports/users-api-port";
 import { IUser } from "../domain/user";
 import {IUserFormsApiPort} from "../ports/user-forms-ports/user-forms-port";
-import {IUserForms} from "../domain/user-forms";
+import {IFormCase, IUserForms} from "../domain/user-forms";
 import {UserFormsService} from "../services/user-forms-service";
 
 @Injectable()
@@ -18,6 +18,10 @@ export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
 
     public async saveUserForms(userForm: IUserForms): Promise<IUserForms> {
         return this.userFormService.saveUserForms(userForm);
+    }
+
+    public async createCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms> {
+        return this.userFormService.createCase(userForm, formId, email);
     }
 
     $onDestroy(): void | Promise<any> {

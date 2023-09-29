@@ -17,11 +17,6 @@ export class UsersController {
         return await this._usersUseCase.getUsers();
     }
 
-    @Post("/")
-    async saveUser(@BodyParams() data: IUser): Promise<IUser> {
-        return await this._usersUseCase.saveUser(data);
-    }
-
     @Post("/login")
     async login(@Request() request, @Context() ctx: Context, @Response() res: ExpressResponse): Promise<any> {
         const token = request.headers["authorization"].split(" ")[1];

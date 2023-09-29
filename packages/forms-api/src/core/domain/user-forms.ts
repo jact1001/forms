@@ -1,6 +1,7 @@
 export interface IFormCase {
     case_id: string;
     state: string;
+    name: string;
 }
 
 export interface IUserForm {

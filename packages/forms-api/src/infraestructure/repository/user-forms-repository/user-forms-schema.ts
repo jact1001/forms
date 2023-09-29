@@ -8,11 +8,13 @@ export class FormCase implements IFormCase {
     case_id: string;
     @Property()
     state: string;
+    @Property()
+    name: string;
 }
 
 @Schema()
 export class UserForm implements IUserForm {
-    @ObjectID("id")
+    @Property()
     form_id: string;
     @Property()
     form_name: string;
@@ -22,7 +24,7 @@ export class UserForm implements IUserForm {
 
 @Model()
 export class UserForms implements IUserForms {
-    @ObjectID("id")
+    @Property()
     user_id: string;
     @CollectionOf(UserForm)
     forms: UserForm[];

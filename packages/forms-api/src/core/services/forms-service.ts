@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { FormsRepository } from "../../infraestructure/repository/forms-repository/forms-repository";
 import { IForm } from "../domain/form";
-import {UserFormsRepository} from "../../infraestructure/repository/user-forms/user-forms-repository";
+import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 import {UsersRepository} from "../../infraestructure/repository/users-repository/users-repository";
 import {IUser} from "../domain/user";
 import {IUserForm, IUserForms} from "../domain/user-forms";
@@ -35,7 +35,7 @@ export class FormsService implements OnDestroy {
             form_name: newForm.form_name
         };
         await this.userFormsRepository.saveUserForms({
-            user_id: user._id,
+            user_id: user.email,
             forms: userForms ? [...userForms.forms, newUserForm] : [newUserForm]
         });
 

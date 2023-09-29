@@ -6,9 +6,9 @@ export interface ICaseState {
 }
 
 export interface IUseCase {
-    _id: string;
+    _id?: string;
     case_name: string;
     case_state: ICaseState;
     form_id: string;
-    sections: ISection[];
+    sections?: ISection[];
 }

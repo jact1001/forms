@@ -4,11 +4,10 @@ import { FormTitle } from "./FormTitle";
 import { FormsList } from "./FormsList";
 import { HeadUserForm } from "./HeadUserForm";
 import { useLoginStore } from "../../../login/data/hooks/custom-typed-selector";
-import {Redirect, useHistory} from "react-router-dom";
-import {Header} from "../../../header/src/Header";
-import {getFormById} from "../../../form-design/data/state/effects/form.effect";
-import {useDispatch} from "react-redux";
-import {findUserForms} from "../../data/state/effects/user-forms.effects";
+import { Redirect, useHistory } from "react-router-dom";
+import { Header } from "../../../header/src/Header";
+import { useDispatch } from "react-redux";
+import { findUserForms } from "../../data/state/effects/user-forms.effects";
 
 const defaultClass = 'user-forms-container';
 

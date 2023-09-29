@@ -1,22 +1,29 @@
-import { Inject, Injectable, OnDestroy } from "@tsed/common";
-import { MongooseModel } from "@tsed/mongoose";
-import { Form } from "./use-case-schema";
-import { IFormRepositoryPort } from "../../../core/ports/forms-ports/forms-repository-port";
-import { IForm } from "../../../core/domain/form";
+import {Inject, Injectable, OnDestroy} from "@tsed/common";
+import {MongooseModel} from "@tsed/mongoose";
+import {UseCase} from "./use-case-schema";
+import {IUseCaseRepositoryPort} from "../../../core/ports/use-case-ports/use-case-repository-port";
+import {IUseCase} from "../../../core/domain/use-case";
 
 @Injectable()
-export class UseCaseRepository implements IFormRepositoryPort, OnDestroy {
-    @Inject(Form)
-    private model: MongooseModel<Form>;
+export class UseCaseRepository implements IUseCaseRepositoryPort, OnDestroy {
+    @Inject(UseCase)
+    private model: MongooseModel<UseCase>;
 
-    public async findForms () {
-        const forms = await this.model.find().exec();
-        return forms;
+    public async findUseCase (useCaseId: string) {
+        return  await this.model.findOne({ id: useCaseId }).exec();
     }
 
-    public async saveForm (form: IForm) {
-        const newForm = new this.model(form);
+    public async saveUseCase (useCase: IUseCase) {
+        const newForm = new this.model(useCase);
         return await newForm.save();
+    }
+
+    public async updateUseCase (useCase: IUseCase) {
+        return await this.model.findOneAndUpdate(
+            {id: useCase._id},
+            {$set: useCase},
+            {new: true}
+        ).exec();
     }
 
     $onDestroy(): void | Promise<any> {

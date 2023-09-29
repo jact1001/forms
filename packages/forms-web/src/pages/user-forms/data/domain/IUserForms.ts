@@ -1,6 +1,6 @@
 export interface IFormCase {
-    case_id: string;
-    case_name: string;
+    case_id?: string;
+    name: string;
     state: {
         id: string;
         name: string;
