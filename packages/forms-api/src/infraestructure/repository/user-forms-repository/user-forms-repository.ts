@@ -19,18 +19,16 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
     }
 
     public async addUseCase (formCase: IFormCase, formId: string, email: string) {
-        return this.model.findOneAndUpdate(
-            {
-                'user_id': email,
-                'forms.form_id': formId
-            },
-            {
-                $push: {
-                    'forms.$.cases': formCase,
-                },
-            },
-            { new: true }
-        );
+
+        const formCaseTest = await this.model.findOne({'user_id': email});
+
+        const form = formCaseTest.forms.find((form) => form.form_id === formId);
+        form.cases.push(formCase);
+
+        await formCaseTest.save();
+
+        return formCaseTest;
+
     }
 
     $onDestroy(): void | Promise<any> {

@@ -32,7 +32,7 @@ export class UserFormsService implements OnDestroy {
             case_state: { id: 'pending', name: 'Pendiente'}
         }
         const newUseCase = await this.useCaseRepository.saveUseCase(useCase);
-        const newFormCase = {...formCase, case_id: newUseCase.id}
+        const newFormCase = {...formCase, case_id: newUseCase.id};
         return await this.userFormsRepository.addUseCase(newFormCase, formId, email);
     }
 

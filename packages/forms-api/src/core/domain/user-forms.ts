@@ -1,6 +1,11 @@
+export interface IUseCaseState {
+    id: string;
+    name: string;
+}
+
 export interface IFormCase {
     case_id: string;
-    state: string;
+    state: IUseCaseState;
     name: string;
 }
 
