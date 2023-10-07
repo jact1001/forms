@@ -1,7 +1,7 @@
 // before rum
 //npm install express
 
-// to run 
+// to run
 // npm start
 
 'use strict';
@@ -12,7 +12,7 @@ const express = require('express');
 const PORT = 8080;
 const HOST = '0.0.0.0';
 const OS = require('os');
-const ENV = 'DEV';
+const ENV = process.env.GOOGLE_CLIENT_ID;
 
 
 // App

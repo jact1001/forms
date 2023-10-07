@@ -2,7 +2,7 @@ FROM node:17-alpine
 
 # Create app directory
 WORKDIR /packages/forms-api
-
+ENV GOOGLE_CLIENT_ID = 'johnny'
 # COPY . .
 COPY ./packages/forms-api /packages/forms-api
 
