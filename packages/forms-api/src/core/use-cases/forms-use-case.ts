@@ -17,8 +17,8 @@ export class FormsUseCase implements IFormApiPort, OnDestroy {
         return this.formsService.getFormById(formId);
     }
 
-    public async saveForm(form: IForm): Promise<IForm> {
-        return this.formsService.saveForm(form);
+    public async saveForm(form: IForm, email: string): Promise<IForm> {
+        return this.formsService.saveForm(form, email);
     }
 
     public async updateForm(form: IForm): Promise<IForm> {

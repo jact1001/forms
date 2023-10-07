@@ -5,12 +5,14 @@ import '../styles/form-design.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import SlideMenu from "../containers/slide-menu/src/SlideMenu";
 import FormArea from "../containers/form-area/src/FormArea";
-import { useParams } from "react-router-dom";
+import {Redirect, useHistory, useParams} from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { getFormById } from "../../data/state/effects/form.effect";
 import { useDesignFormStore } from "../../data/hooks/custom-typed-selector";
 import { FooterButtons } from "../containers/footer-buttons/src/FooterButtons";
+import { useLoginStore } from "../../../login/data/hooks/custom-typed-selector";
+import {Header} from "../../../header/src/Header";
 
 const defaultClass = 'form-design';
 
@@ -19,7 +21,10 @@ export const FormDesign = () => {
     // @ts-ignore
     const { formId } = useParams();
     const { getError, getLoading } = useDesignFormStore((state) => state.form);
+    const { isLogin } = useLoginStore((state) => state.login);
+    const isAuthenticated = sessionStorage.getItem('session');
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         if (formId) {
@@ -27,21 +32,35 @@ export const FormDesign = () => {
         }
     }, [formId]);
 
+    /*useEffect(() => {
+        if (!isLogin) {
+            history.push('/login');
+        }
+    }, [isLogin]);*/
+
+    if (!isAuthenticated) {
+        return <Redirect to="/login" />;
+    }
+
     return (
-        <div className={defaultClass}>
-            <DndProvider backend={HTML5Backend} >
-                <SlideMenu>
-                    <SlideMenu.Logo />
-                    <SlideMenu.FormTitle />
-                    <SlideMenu.AddTitle />
-                    <SlideMenu.DragInputMenu />
-                </SlideMenu>
-                { getError && <div>{getError}</div> }
-                { getLoading && <div>Cargando...</div> }
-                { !getError && !getLoading && <FormArea/> }
-                <FooterButtons />
-                <ToastContainer />
-            </DndProvider>
-        </div>
+        <>
+            <Header />
+            <div className={defaultClass}>
+                <DndProvider backend={HTML5Backend} >
+                    <SlideMenu>
+                        <SlideMenu.Logo />
+                        <SlideMenu.FormTitle />
+                        <SlideMenu.AddTitle />
+                        <SlideMenu.DragInputMenu />
+                    </SlideMenu>
+                    { getError && <div>{getError}</div> }
+                    { getLoading && <div>Cargando...</div> }
+                    { !getError && !getLoading && <FormArea/> }
+                    <FooterButtons />
+                    <ToastContainer />
+                </DndProvider>
+            </div>
+        </>
+
     )
 }

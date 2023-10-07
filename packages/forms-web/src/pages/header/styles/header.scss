@@ -1,0 +1,48 @@
+.Header {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  background-color: #615E67;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #9b9292c1;
+
+  &__menu {
+    margin: 16px;
+    a {
+      text-decoration: none;
+      color: #fff;
+      margin: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  &__logout {
+    position: relative;
+    margin: 12px;
+    display: flex;
+    background: #0DD4C4;
+    cursor: pointer;
+    border: none;
+    border-radius: 22px;
+    align-items: center;
+    padding: 8px;
+    width: 148px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      left: 10px;
+    }
+  }
+
+  &__logout-title {
+    font-size: 16px;
+    color: black;
+  }
+}

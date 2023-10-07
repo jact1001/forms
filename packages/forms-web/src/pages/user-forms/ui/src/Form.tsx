@@ -2,28 +2,34 @@ import React, {useState} from 'react';
 import '../styles/form.scss';
 import FormIcon from "../icons/FormIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
-import {FormUseCase} from "./FormUseCase";
+import { FormUseCase } from "./FormUseCase";
+import { IFormCase, IUserForm } from "../../data/domain/IUserForms";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUseCase } from "../../data/state/effects/user-forms.effects";
 
 const defaultClass = 'form';
-interface FormCase{
-    case_name: string;
-    case_id: string;
-    url: string;
-    status: {
-        id: string ;
-        name: string;
-    }
-}
-interface SlideFormProps {
-    formName: string
-    formCases: FormCase[]
-}
-export const Form = ({formName, formCases}:SlideFormProps) => {
 
+export const Form = ({ form_name, cases, form_id }:IUserForm) => {
+
+    const history = useHistory();
+    const dispatch = useDispatch();
     const [isExpanded, setIsExpanded] = useState(false);
     const toggleCount = () => {
         setIsExpanded(!isExpanded);
     };
+
+    const editHandler = () => {
+        history.push(`form-design/${form_id}`)
+    }
+
+    const createCase = () => {
+        const newUseCase: IFormCase = {
+            name: `caso - ${cases?.length ? (cases?.length + 1) : 1}`,
+            state: {id: 'pending', name: 'Pendiente'}
+        }
+        dispatch(addUseCase(newUseCase, form_id));
+    }
 
     return (
         <div className={defaultClass}>
@@ -34,17 +40,19 @@ export const Form = ({formName, formCases}:SlideFormProps) => {
                         <FormIcon/>
                     </div>
                     <div className={`${defaultClass}__name`}>
-                        <b>{formName}</b>
+                        <b>{form_name}</b>
                     </div>
                 </div>
+                <button onClick={editHandler} >Editar formulario</button>
+                <button onClick={createCase} >Crear caso</button>
                 <div className={isExpanded ? `${defaultClass}__arrow-up` : ""}>
                     <ArrowDownIcon/>
                 </div>
             </button>
             {isExpanded &&
                 <>
-                    {formCases.map((formCase)=>{
-                        return <FormUseCase formName={formCase.case_name} statusOption={formCase.status}/>
+                    {cases?.map((formCase)=>{
+                        return <FormUseCase formName={formCase.name} statusOption={formCase.state}/>
                     })}
                 </>
             }

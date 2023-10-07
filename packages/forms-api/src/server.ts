@@ -7,6 +7,7 @@ import * as rest from "./infraestructure/api";
 
 export const rootDir = Path.resolve(__dirname,'../');
 const config = require("dotenv").config({path: "../../.env"});
+import * as cors from "cors";
 
 @Configuration(
     {
@@ -48,8 +49,14 @@ export class Server {
             methodOverride = require('method-override'),
             cors = require('cors');
 
+        const corsOptions: cors.CorsOptions = {
+            origin: "http://localhost:3000",
+            methods: ["GET", "POST", "PUT", "DELETE"],
+            credentials: true,
+        };
+
         this.app
-            .use(cors())
+            .use(cors(corsOptions))
             .use(cookieParser())
             .use(compress({}))
             .use(methodOverride())
