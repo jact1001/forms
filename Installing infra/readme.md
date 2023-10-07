@@ -6,3 +6,4 @@
     create github_deployer user with some permissions
     aws configure
     eksctl create cluster --name dynamic-forms-eks1 --region us-east-2 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2
+    eksctl delete cluster --region=us-east-2 --name=dynamic-forms-eks
