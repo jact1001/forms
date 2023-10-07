@@ -1,10 +1,10 @@
 FROM node:17-alpine
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # COPY . .
-COPY ./packages/forms-api /usr/src/app
+COPY ./packages/forms-api /app/packages/forms-api
 
 RUN npm install
 
