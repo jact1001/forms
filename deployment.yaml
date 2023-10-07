@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dynamic-forms-container
-          image: 274127640471.dkr.ecr.us-east-2.amazonaws.com/dynamic-forms:1.1
+          image: 624534814971.dkr.ecr.us-east-2.amazonaws.com/dynamic-forms-rep:1.1          
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
