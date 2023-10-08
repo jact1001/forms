@@ -50,6 +50,10 @@ jobs:
         run: |
           kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}" ANOTHER_KEY=other_value
 
+      - name: Apply Custom Resource Definitions (CRDs)
+        run: |
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/vertical-pod-autoscaler/config/crd/bases/autoscaling.k8s.io_verticalpodautoscalers.yaml 
+
       - name: Apply HPA
         run: |
           kubectl apply -f hpa.yaml          
