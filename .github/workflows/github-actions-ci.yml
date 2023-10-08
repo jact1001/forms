@@ -45,3 +45,7 @@ jobs:
         run: |
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
+
+      - name: Apply env vars
+        run: |
+          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID=ivan
