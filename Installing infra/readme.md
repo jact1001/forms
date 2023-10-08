@@ -12,3 +12,13 @@
 
     kubectl logs dynamic-forms-7db8b74d88-s2mns --logs
     kubectl exec -it dynamic-forms-7db8b74d88-s2mns -- /bin/sh  --consola dinamica
+
+
+    Esto crea un conjunto de sercretos:
+
+      - name: Create ConfigMap from Secrets
+        run: |
+          kubectl delete configmap app-forms-dynamic-configs
+          kubectl create configmap app-forms-dynamic-configs \
+            --from-literal=GOOGLE_CLIENT_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
+            --from-literal=OTHER_KEY="${{ secrets.AWS_ACCESS_KEY_ID }}" 

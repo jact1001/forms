@@ -41,13 +41,6 @@ jobs:
       - name: Update kube config
         run: aws eks update-kubeconfig --name dynamic-forms-eks1
 
-      - name: Create ConfigMap from Secrets
-        run: |
-          kubectl delete configmap app-forms-dynamic-configs
-          kubectl create configmap app-forms-dynamic-configs \
-            --from-literal=GOOGLE_CLIENT_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
-            --from-literal=OTHER_KEY="${{ secrets.AWS_ACCESS_KEY_ID }}"         
-
       - name: Deploy to EKS
         run: |
           kubectl apply -f deployment.yaml
@@ -55,5 +48,5 @@ jobs:
 
       - name: Apply env vars
         run: |
-          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
+          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
    
