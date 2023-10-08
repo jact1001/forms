@@ -49,3 +49,9 @@ jobs:
       - name: Apply env vars
         run: |
           kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID=ivan
+
+      - name: Create ConfigMap from Secrets
+        run: |
+          kubectl create configmap my-config \
+            --from-literal=GOOGLE_CLIENT_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
+            --from-literal=OTHER_KEY="${{ secrets.AWS_ACCESS_KEY_ID }}"    
