@@ -54,5 +54,5 @@ jobs:
 
       - name: Apply env vars
         run: |
-          kubectl set env deployment/dynamic-forms OTHER_KEY_FOR_OTHER_THING=ivan
+          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
    
