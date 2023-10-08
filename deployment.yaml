@@ -22,4 +22,4 @@ spec:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: my-config
+                name: app-forms-dynamic-configs
