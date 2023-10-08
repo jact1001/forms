@@ -10,7 +10,7 @@ spec:
   minReplicas: 1
   maxReplicas: 10  # Ajusta esto según tus necesidades
   metrics:
-    - type: Pods
-      pods:
-        metricName: http_requests_total  # Nombre de la métrica personalizada
-        targetAverageValue: "30"  # Ajusta el umbral según tus necesidades
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50  # Target CPU utilization percentage
