@@ -48,5 +48,9 @@ jobs:
 
       - name: Apply env vars
         run: |
-          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
+          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}" ANOTHER_KEY=other_value
+
+      - name: Apply HPA
+        run: |
+          kubectl apply -f hpa.yaml          
    
