@@ -50,5 +50,5 @@ jobs:
         run: |
           kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
 
-      - name: Apply HPA
-        run: kubectl apply -f hpa.yaml
+      #- name: Apply HPA
+      #  run: kubectl apply -f hpa.yaml
