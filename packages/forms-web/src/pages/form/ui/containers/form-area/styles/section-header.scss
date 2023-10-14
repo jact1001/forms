@@ -1,0 +1,32 @@
+@import '../../../../../../index';
+
+.section-header {
+    border-bottom-color: $fa-color-blue-light;
+    border-bottom-style: solid;
+    border-bottom-width: 0.1em;
+    color: $fa-color-white-primary;
+    display: flex;
+    height: 70px;
+    justify-content: flex-start;
+    padding: 0 16px;
+
+    &__section-name {
+        background-color: $fa-color-blue-light;
+        border: 0;
+        border-radius: 10px;
+        color: $fa-color-white-primary;
+        font-size: 20px;
+        margin: 16px;
+        outline: none;
+        padding: 0 16px;
+        width: 50%;
+
+        &::placeholder {
+            color: $fa-color-gray-lighter;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

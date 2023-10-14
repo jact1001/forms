@@ -1,0 +1,25 @@
+@import '../../../../../../index';
+
+.section-area {
+    color: $fa-color-white-primary;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px;
+    min-height: 300px;
+
+    &__field-container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin: 16px 0;
+        width: 50%;
+    }
+
+    &__icon {
+        fill: transparent;
+        
+        &:hover {
+            stroke: $fa-color-white-primary;
+        }
+    }
+}
