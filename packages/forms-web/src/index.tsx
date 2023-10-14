@@ -7,7 +7,7 @@ import {Provider} from "react-redux";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {store} from "./store";
 import swDev from './swDev';
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '';
 
 ReactDOM.render(
     <React.StrictMode>
