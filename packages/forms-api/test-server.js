@@ -13,7 +13,6 @@ const PORT = 8080;
 const HOST = '0.0.0.0';
 const OS = require('os');
 const ENV = process.env.GOOGLE_CLIENT_ID;
-const another_key = process.env.ANOTHER_KEY;
 
 // App
 const app = express();
@@ -82,7 +81,7 @@ function getPage(message) {
     + "\n"
     + "<div class=\"bgimg\">\n"
     + "  <div class=\"topleft\">\n"
-    + "    <p>ENVIRONMENT de prueba: " + ENV + " with config: "+another_key +"</p>\n"
+    + "    <p>ENVIRONMENT de prueba: " + ENV +"</p>\n"
     + "  </div>\n"
     + "  <div class=\"middle\">\n"
     + "    <h1>Host/container name</h1>\n"
