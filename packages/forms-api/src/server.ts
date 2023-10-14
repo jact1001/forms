@@ -4,10 +4,8 @@ import "@tsed/platform-express";
 import * as Path from "path";
 import {SignatureResponseFilter} from "./infraestructure/filters/signature-filter";
 import * as rest from "./infraestructure/api";
-
-export const rootDir = Path.resolve(__dirname,'../');
-const config = require("dotenv").config({path: "../../.env"});
 import * as cors from "cors";
+const MONGOOSE_URL = process.env.MONGOOSE_URL || '';
 
 @Configuration(
     {
@@ -31,9 +29,9 @@ import * as cors from "cors";
             "/": Path.join(__dirname, "partner-platform.web")
         },
         acceptMimes: ["application/json", "multipart/form-data"],
-        port: 5001,
+        port: 8080,
         mongoose: {
-            url: config.parsed.mongoose_url,
+            url: MONGOOSE_URL,
             connectionOptions: {}
         },
     }

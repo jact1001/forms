@@ -4,7 +4,6 @@ import { IForm } from "../../core/domain/form";
 import e, { Response as ExpressResponse } from 'express';
 import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
 import * as jwt from 'jsonwebtoken';
-const config = require("dotenv").config({path: "../../.env"});
 
 @Controller("/forms")
 @UseBefore(AuthTokenMiddleware)
