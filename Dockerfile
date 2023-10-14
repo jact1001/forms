@@ -6,6 +6,7 @@ WORKDIR /packages/forms-api
 COPY ./packages/forms-api /packages/forms-api
 
 RUN npm install
+RUN npm install ts-node
 
 EXPOSE 8080
 
