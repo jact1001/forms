@@ -32,7 +32,7 @@ app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
 function getPage(message) {
-
+  const result = consumeCPU();
   let body = "<!DOCTYPE html>\n"
     + "<html>\n"
     + "<style>\n"
@@ -81,7 +81,7 @@ function getPage(message) {
     + "\n"
     + "<div class=\"bgimg\">\n"
     + "  <div class=\"topleft\">\n"
-    + "    <p>ENVIRONMENT de prueba: " + ENV +"</p>\n"
+    + "    <p>result: " + result +"</p>\n"
     + "  </div>\n"
     + "  <div class=\"middle\">\n"
     + "    <h1>Host/container name</h1>\n"
@@ -96,4 +96,16 @@ function getPage(message) {
     + "</body>\n"
     + "</html>\n";
   return body;
+}
+
+function consumeCPU() {
+  const start = Date.now();
+  const duration = 5000; // Duración en milisegundos (5 segundos en este caso)
+  let result = 0;
+  while (Date.now() - start < duration) {
+    // Realiza cálculos intensivos (simulación de carga de CPU)
+    // Aquí puedes poner cualquier tarea que requiera tiempo de CPU
+     result = Math.pow(Math.random(), Math.random());
+  }
+  return result
 }

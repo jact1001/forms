@@ -1,0 +1,14 @@
+{
+  "name": "items-test-load",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:load": "k6 run load-test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "k6": "0.0.0"
+  }
+}
