@@ -2,9 +2,10 @@ import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { UsersRepository } from "../../infraestructure/repository/users-repository/users-repository";
 import { IUser } from "../domain/user";
 import { UserFormsRepository } from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
-import { IFormCase, IUserForms } from "../domain/user-forms";
+import {IFormCase, IUserForm, IUserForms} from "../domain/user-forms";
 import {UseCaseRepository} from "../../infraestructure/repository/use-case-repository/use-case-repository";
 import {IUseCase} from "../domain/use-case";
+import {IForm} from "../domain/form";
 
 @Injectable()
 @Scope('request')
@@ -21,8 +22,13 @@ export class UserFormsService implements OnDestroy {
         return await this.userFormsRepository.findUserForms(user._id);
     }
 
-    public async saveUserForms(userForm: IUserForms): Promise<IUserForms> {
-        return await this.userFormsRepository.saveUserForms(userForm);
+    public async saveUserForms(form: IForm, userId: string): Promise<IUserForms> {
+        const userFormsFound: IUserForms = await this.userFormsRepository.findUserForms(userId);
+        const newUserForm: IUserForm = { form_id: form.id, form_name: form.form_name };
+        return await this.userFormsRepository.saveUserForms({
+            user_id: userId,
+            forms: userFormsFound ? [...userFormsFound.forms, newUserForm] : [newUserForm]
+        });
     }
 
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {

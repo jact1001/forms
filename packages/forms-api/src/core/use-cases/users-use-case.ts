@@ -13,6 +13,10 @@ export class UsersUseCase implements IUserApiPort, OnDestroy {
         return this.usersService.getUsers();
     }
 
+    public async getUserByEmail(email: string): Promise<IUser> {
+        return this.usersService.getUserByEmail(email);
+    }
+
     public async saveUser(user: IUser): Promise<IUser> {
         return this.usersService.saveUser(user);
     }

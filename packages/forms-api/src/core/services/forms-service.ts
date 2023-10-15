@@ -1,10 +1,9 @@
-import { Injectable, OnDestroy, Scope } from "@tsed/common";
-import { FormsRepository } from "../../infraestructure/repository/forms-repository/forms-repository";
-import { IForm } from "../domain/form";
-import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
-import {UsersRepository} from "../../infraestructure/repository/users-repository/users-repository";
+import {Injectable, OnDestroy, Scope} from "@tsed/common";
+import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
+import {IForm} from "../domain/form";
 import {IUser} from "../domain/user";
-import {IUserForm, IUserForms} from "../domain/user-forms";
+import {UsersUseCase} from "../use-cases/users-use-case";
+import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
 
 @Injectable()
 @Scope('request')
@@ -12,33 +11,37 @@ export class FormsService implements OnDestroy {
 
     constructor(
         private readonly formRepository: FormsRepository,
-        private readonly userFormsRepository: UserFormsRepository,
-        private readonly userRepository: UsersRepository
+        private readonly usersUseCase: UsersUseCase,
+        private readonly userFormsUseCase: UserFormsUseCase
     ) {}
 
     public async getForms(): Promise<IForm[]> {
-        const data = await this.formRepository.findForms();
-        return data;
+        return await this.formRepository.findForms();
     }
 
     public async getFormById(formId: string): Promise<IForm> {
-        const data = await this.formRepository.findForm(formId);
-        return data;
+        return await this.formRepository.findForm(formId);
+    }
+
+    private async saveSectionsUsers(form: IForm) {
+        const { sections } = form;
+        for (const section of sections) {
+            for (const access of section.access) {
+                console.log('')
+                await this.userFormsUseCase.saveUserForms(form, access.userId);
+            }
+        }
+    }
+
+    private async saveAdminUserForm(form: IForm, userId: string) {
+        await this.userFormsUseCase.saveUserForms(form, userId);
     }
 
     public async saveForm(form: IForm, email: string): Promise<IForm> {
-        const user: IUser = await this.userRepository.findUserByEmail(email);
-        const userForms: IUserForms = await this.userFormsRepository.findUserForms(user._id);
         const newForm = await this.formRepository.saveForm(form);
-        const newUserForm: IUserForm = {
-            form_id: newForm.id,
-            form_name: newForm.form_name
-        };
-        await this.userFormsRepository.saveUserForms({
-            user_id: user.email,
-            forms: userForms ? [...userForms.forms, newUserForm] : [newUserForm]
-        });
-
+        const user: IUser = await this.usersUseCase.getUserByEmail(email);
+        await this.saveAdminUserForm(newForm, user.email);
+        await this.saveSectionsUsers(newForm);
         return newForm;
     }
 
