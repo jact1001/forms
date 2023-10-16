@@ -14,3 +14,4 @@ packages/forms-api/.env
 .DS_Store
 
 */build/
+**/build/*
