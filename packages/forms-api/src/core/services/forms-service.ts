@@ -27,7 +27,6 @@ export class FormsService implements OnDestroy {
         const { sections } = form;
         for (const section of sections) {
             for (const access of section.access) {
-                console.log('')
                 await this.userFormsUseCase.saveUserForms(form, access.userId);
             }
         }
@@ -37,17 +36,22 @@ export class FormsService implements OnDestroy {
         await this.userFormsUseCase.saveUserForms(form, userId);
     }
 
+    private async createUserForms(form: IForm, email: string){
+        const user: IUser = await this.usersUseCase.getUserByEmail(email);
+        await this.saveAdminUserForm(form, user.email);
+        await this.saveSectionsUsers(form);
+    }
+
     public async saveForm(form: IForm, email: string): Promise<IForm> {
         const newForm = await this.formRepository.saveForm(form);
-        const user: IUser = await this.usersUseCase.getUserByEmail(email);
-        await this.saveAdminUserForm(newForm, user.email);
-        await this.saveSectionsUsers(newForm);
+        await this.createUserForms(newForm, email);
         return newForm;
     }
 
-    public async updateForm(form: IForm): Promise<IForm> {
-        const data = await this.formRepository.updateForm(form);
-        return data;
+    public async updateForm(form: IForm, email): Promise<IForm> {
+        const newForm = await this.formRepository.updateForm(form);
+        await this.createUserForms(newForm, email);
+        return newForm;
     }
 
     $onDestroy() {

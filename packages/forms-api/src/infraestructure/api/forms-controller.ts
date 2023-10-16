@@ -26,14 +26,15 @@ export class FormsController {
     }
 
     @Post("/")
-    async saveForm(@BodyParams() data: IForm, @Request() request, @Context() ctx: Context): Promise<IForm> {
+    async saveForm(@BodyParams() data: IForm, @Context() ctx: Context): Promise<IForm> {
         const email = ctx.get("email");
         return await this._formsUseCase.saveForm(data, email);
     }
 
     @Put("/:formId")
-    async updateForm(@BodyParams() data: IForm): Promise<IForm> {
-        return await this._formsUseCase.updateForm(data);
+    async updateForm(@BodyParams() data: IForm,  @Context() ctx: Context): Promise<IForm> {
+        const email = ctx.get("email");
+        return await this._formsUseCase.updateForm(data, email);
     }
 
 }

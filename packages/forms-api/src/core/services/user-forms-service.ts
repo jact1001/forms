@@ -23,12 +23,7 @@ export class UserFormsService implements OnDestroy {
     }
 
     public async saveUserForms(form: IForm, userId: string): Promise<IUserForms> {
-        const userFormsFound: IUserForms = await this.userFormsRepository.findUserForms(userId);
-        const newUserForm: IUserForm = { form_id: form.id, form_name: form.form_name };
-        return await this.userFormsRepository.saveUserForms({
-            user_id: userId,
-            forms: userFormsFound ? [...userFormsFound.forms, newUserForm] : [newUserForm]
-        });
+        return await this.userFormsRepository.saveUserForms(form, userId);
     }
 
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
