@@ -22,3 +22,34 @@
           kubectl create configmap app-forms-dynamic-configs \
             --from-literal=GOOGLE_CLIENT_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
             --from-literal=OTHER_KEY="${{ secrets.AWS_ACCESS_KEY_ID }}" 
+
+
+# Para configurar el cloud front
+
+Configurar el cloud front con Origin access control settings (recommended)
+Bucket can restrict access to only CloudFront.
+
+y actualizar la bucket policy
+
+```json
+    {
+    "Version": "2008-10-17",
+    "Id": "PolicyForCloudFrontPrivateContent",
+    "Statement": [
+    {
+    "Sid": "AllowCloudFrontServicePrincipal",
+    "Effect": "Allow",
+    "Principal": {
+    "Service": "cloudfront.amazonaws.com"
+    },
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::dynamic-forms-s3/*",
+    "Condition": {
+    "StringEquals": {
+    "AWS:SourceArn": "arn:aws:cloudfront::624534814971:distribution/E3NEU6VKVZ5FHT"
+    }
+    }
+    }
+    ]
+    }
+```

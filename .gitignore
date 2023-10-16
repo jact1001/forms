@@ -12,3 +12,6 @@ packages/forms-api/.env
 .idea/
 
 .DS_Store
+
+*/build/
+**/build/*

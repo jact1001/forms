@@ -1,15 +1,15 @@
-name: Node js app deploy to EKS
+name: deploy dynamic-forms-api to EKS
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "mainx" ] # disabled
   pull_request:
-    branches: [ "main" ]
+    branches: [ "mainx" ] # disabled
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code for dynamic-forms-api
         uses: actions/checkout@v3
 
       - name: Install kubectl
