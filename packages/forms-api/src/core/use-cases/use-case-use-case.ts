@@ -13,6 +13,10 @@ export class UseCaseUseCase implements IUseCasePort, OnDestroy {
         return this.useCaseService.saveUseCase(useCase);
     }
 
+    public async getUseCasesByFormId(formId: string): Promise<IUseCase[]> {
+        return this.useCaseService.getUseCasesByFormId(formId);
+    }
+
     $onDestroy(): void | Promise<any> {
         throw new Error("Method not implemented.");
     }

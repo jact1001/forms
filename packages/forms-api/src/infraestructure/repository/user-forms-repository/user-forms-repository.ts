@@ -4,15 +4,16 @@ import {UserForms} from "./user-forms-schema";
 import {IUserFormsRepositoryPort} from "../../../core/ports/user-forms-ports/user-forms-repository-port";
 import {IFormCase, IUserForm, IUserForms} from "../../../core/domain/user-forms";
 import {IForm} from "../../../core/domain/form";
+import {IUseCase} from "../../../core/domain/use-case";
 
 @Injectable()
 export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy {
     @Inject(UserForms)
     private model: MongooseModel<UserForms>;
 
-    public async saveUserForms (form: IForm, email: string) {
+    public async saveUserForms (form: IForm, email: string, formCases: IFormCase[]) {
         const userForms = await this.model.findOne({ 'user_id': email });
-        const userForm: IUserForm = { form_id: form.id, form_name: form.form_name, cases: [] }
+        const userForm: IUserForm = { form_id: form.id, form_name: form.form_name, cases: formCases }
         if (!userForms) {
             const newUserForms = new this.model({'user_id': email, forms: [userForm]});
             await newUserForms.save();
@@ -32,7 +33,8 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
     }
 
     public async findUserForms (email: string) {
-        return await this.model.findOne({email: email}).exec();
+        const userForms = await this.model.findOne({'user_id': email}).exec();
+        return userForms;
     }
 
     public async addUseCase (formCase: IFormCase, formId: string, email: string) {
