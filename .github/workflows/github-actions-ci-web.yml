@@ -9,14 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code for dynamic-forms-web
         uses: actions/checkout@v3
-
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v2.0
-        with:
-          version: 'v1.24.0' # default is latest stable
-        id: install
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -28,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-            node-version: 14  # Use the Node.js version you need
+            node-version: 17  # Use the Node.js version you need
 
       - name: Install dependencies
         run: cd packages/forms-web && npm install
