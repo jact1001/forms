@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy, Scope} from "@tsed/common";
+import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { UsersService } from "../services/users-service";
 import { IUserApiPort } from "../ports/users-ports/users-api-port";
 import { IUser } from "../domain/user";

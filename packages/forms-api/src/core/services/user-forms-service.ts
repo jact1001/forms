@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy, Scope } from "@tsed/common";
-import { UsersRepository } from "../../infraestructure/repository/users-repository/users-repository";
 import { IUser } from "../domain/user";
 import { UserFormsRepository } from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 import { IFormCase, IUserForms } from "../domain/user-forms";
 import { IUseCase } from "../domain/use-case";
 import { IForm } from "../domain/form";
-import { UseCaseService } from "./use-case-service";
+import { UsersUseCase } from "../use-cases/users-use-case";
+import { UseCaseUseCase } from "../use-cases/use-case-use-case";
 
 @Injectable()
 @Scope('request')
@@ -13,12 +13,12 @@ export class UserFormsService implements OnDestroy {
 
     constructor(
         private readonly userFormsRepository: UserFormsRepository,
-        private readonly userRepository: UsersRepository,
-        private readonly useCaseService: UseCaseService
+        private readonly usersUseCase: UsersUseCase,
+        private readonly useCaseUseCase: UseCaseUseCase
     ) {}
 
     public async getUserForms(email: string): Promise<IUserForms> {
-        const user: IUser = await this.userRepository.findUserByEmail(email);
+        const user: IUser = await this.usersUseCase.getUserByEmail(email);
         return await this.userFormsRepository.findUserForms(user._id);
     }
 
@@ -32,7 +32,7 @@ export class UserFormsService implements OnDestroy {
             form_id: formId,
             case_state: { id: 'pending', name: 'Pendiente'}
         }
-        return await this.useCaseService.saveUseCase(useCase);
+        return await this.useCaseUseCase.saveUseCase(useCase);
     }
 
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
