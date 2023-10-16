@@ -20,7 +20,7 @@ export class UseCaseRepository implements IUseCaseRepositoryPort, OnDestroy {
 
     public async updateUseCase (useCase: IUseCase) {
         return await this.model.findOneAndUpdate(
-            {id: useCase._id},
+            {id: useCase.id},
             {$set: useCase},
             {new: true}
         ).exec();

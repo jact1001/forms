@@ -27,7 +27,7 @@ export class UserForm implements IUserForm {
     @Property()
     form_name: string;
     @CollectionOf(FormCase)
-    cases: FormCase[];
+    cases?: FormCase[];
 }
 
 @Model()

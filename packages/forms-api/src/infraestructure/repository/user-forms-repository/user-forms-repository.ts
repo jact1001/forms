@@ -2,7 +2,7 @@ import {Inject, Injectable, OnDestroy} from "@tsed/common";
 import {MongooseModel} from "@tsed/mongoose";
 import {UserForms} from "./user-forms-schema";
 import {IUserFormsRepositoryPort} from "../../../core/ports/user-forms-ports/user-forms-repository-port";
-import {IFormCase, IUserForms} from "../../../core/domain/user-forms";
+import {IFormCase, IUserForm, IUserForms} from "../../../core/domain/user-forms";
 import {IForm} from "../../../core/domain/form";
 
 @Injectable()
@@ -12,21 +12,15 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
 
     public async saveUserForms (form: IForm, email: string) {
         const userForms = await this.model.findOne({ 'user_id': email });
+        const userForm: IUserForm = { form_id: form.id, form_name: form.form_name, cases: [] }
         if (!userForms) {
-            const newUserForms = new this.model({
-                'user_id': email,
-                forms: [{ form_id: form.id, form_name: form.form_name, cases: [] }]
-            });
+            const newUserForms = new this.model({'user_id': email, forms: [userForm]});
             await newUserForms.save();
             return newUserForms;
         }
         const existingForm = userForms.forms.find((f) => f.form_id === form.id.toString());
         if (!existingForm) {
-            userForms.forms.push({
-                form_id: form.id,
-                form_name: form.form_name,
-                cases: []
-            });
+            userForms.forms.push(userForm);
             await userForms.save();
         }
         return userForms;
