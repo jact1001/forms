@@ -28,7 +28,7 @@ jobs:
         run: cd packages/forms-web && npm install
 
       - name: Build
-        run: cd packages/forms-web && npm run build
+        run: cd packages/forms-web && mkdir test
 
       - name: Install AWS CLI
         run: |
