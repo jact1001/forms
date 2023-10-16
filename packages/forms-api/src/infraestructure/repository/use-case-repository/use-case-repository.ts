@@ -13,6 +13,10 @@ export class UseCaseRepository implements IUseCaseRepositoryPort, OnDestroy {
         return  await this.model.findOne({ id: useCaseId }).exec();
     }
 
+    public async findUseCasesByFormId (formId: string) {
+        return  await this.model.find({ form_id: formId.toString() }).exec();
+    }
+
     public async saveUseCase (useCase: IUseCase) {
         const newForm = new this.model(useCase);
         return await newForm.save();

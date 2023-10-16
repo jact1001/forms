@@ -14,6 +14,10 @@ export class UseCaseService implements OnDestroy {
         return await this.useCaseRepository.saveUseCase(useCase);
     }
 
+    public async getUseCasesByFormId(formId: string): Promise<IUseCase[]> {
+        return await this.useCaseRepository.findUseCasesByFormId(formId);
+    }
+
     $onDestroy() {
         console.log('Service destroyed');
     }

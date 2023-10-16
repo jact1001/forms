@@ -1,5 +1,4 @@
 import { Injectable, OnDestroy, Scope } from "@tsed/common";
-import { IUser } from "../domain/user";
 import { UserFormsRepository } from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 import { IFormCase, IUserForms } from "../domain/user-forms";
 import { IUseCase } from "../domain/use-case";
@@ -18,12 +17,18 @@ export class UserFormsService implements OnDestroy {
     ) {}
 
     public async getUserForms(email: string): Promise<IUserForms> {
-        const user: IUser = await this.usersUseCase.getUserByEmail(email);
-        return await this.userFormsRepository.findUserForms(user._id);
+        return await this.userFormsRepository.findUserForms(email);
     }
 
-    public async saveUserForms(form: IForm, userId: string): Promise<IUserForms> {
-        return await this.userFormsRepository.saveUserForms(form, userId);
+    public async saveUserForms(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
+        const formCases: IFormCase[] = useCases.map((useCase) => {
+            return {
+                case_id: useCase.id,
+                state: useCase.case_state,
+                name: useCase.case_name
+            }
+        })
+        return await this.userFormsRepository.saveUserForms(form, userId, formCases);
     }
 
     private async saveUseCase(formCase: IFormCase, formId: string): Promise<IUseCase>{
