@@ -1,16 +1,12 @@
 import { INumber } from '../../../../../../../data/domain/IFormFields';
+import { Label } from '../../../label/src/Label';
 import '../styles/number-input.scss';
 
 const defaultClass = 'number-input';
 
-export const NumberInput = ({ type, placeholder }: INumber) => {
+export const NumberInput = ({ type, min, label }: INumber) => {
 
     return (
-        <div className={defaultClass}>
-            <label htmlFor="quantity">Quantity between 1 and 5:</label>
-            <input type="number" id="quantity" name="quantity" min="1" max="5" />
-
-        </div>
-        
+            <input type={ type } min={ min } className={ defaultClass } />
     )
 }

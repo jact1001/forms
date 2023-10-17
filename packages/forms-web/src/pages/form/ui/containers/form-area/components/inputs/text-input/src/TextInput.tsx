@@ -1,11 +1,11 @@
-
+import { IText } from "../../../../../../../data/domain/IFormFields";
 import '../styles/text-input.scss';
 
 const defaultClass = 'text-input';
 
-export const TextInput = () => {
+export const TextInput = ({type, placeholder}: IText) => {
 
     return (
-        <input type='text' placeholder='placeholder text' className={ `${defaultClass}` } />
+        <input type={ type } placeholder={ placeholder } className={ `${defaultClass}` } />
     )
 }

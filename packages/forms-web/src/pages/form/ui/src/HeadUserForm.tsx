@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/head-user-form.scss';
 
-
-const defaultClass = 'head-user-form';
+const defaultClass = 'head-form';
 
 export const HeadUserForm = () => {
 

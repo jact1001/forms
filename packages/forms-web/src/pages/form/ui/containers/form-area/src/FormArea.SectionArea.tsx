@@ -21,18 +21,14 @@ export const SectionArea = ({fields}:ISectionArea) => {
 
     return (
         <div className={defaultClass} >
+            {fields.map((field)=>{
+                const Input = inputsType[`${field.type}`];
+                return Input &&
                     <div className={`${defaultClass}__field-container`} >
-                        
-                        {fields.map((field)=>{
-                            const Input = inputsType[`${field.type}`];
-                            return Input &&
-                                <div className={`${defaultClass}__field-container`} >
-                                    <Label label={field.label} />
-                                    <Input key={field.label} {...field} />
-                                </div>
-                        })}
+                        <Label label={field.label} />
+                        <Input key={field.label} {...field} />
                     </div>
-
+            })}
         </div>
     );
 }

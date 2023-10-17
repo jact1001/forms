@@ -10,15 +10,17 @@ import { IOption, SelectWithCheckbox } from "../components/select-with-checkbox/
 const defaultClass = 'section-header';
 
 interface ISectionHeader {
-    sectionName: String;
+  sectionName: String;
 }
 
 export const SectionHeader = ({sectionName}:ISectionHeader) => {
 
-    return (
-        <div className={defaultClass}>
-            {sectionName}
-        </div>
+  return (
+    <div className={`${defaultClass}`}>
+      <div className={`${defaultClass}__section-name`}>
+        {sectionName}
+      </div>
+    </div>
 
     )
 }

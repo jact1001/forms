@@ -9,7 +9,6 @@ export const FormTitle = () => {
     return (
         <div className={`${defaultClass}__container`}>
             <div className={`${defaultClass}__title`}>
-
                 <b>Mi Formulario</b>
             </div>
         </div>

@@ -4,7 +4,7 @@ import {SectionArea} from "./FormArea.SectionArea";
 import {TimeLine} from "../components/time-line/src/TimeLine";
 import { ISection } from '../../../../data/domain/IForm';
 
-const defaultClass = 'form-area';
+const defaultClass = 'form-area-container';
 
 const sections:ISection[] = [
       {
@@ -53,6 +53,10 @@ const sections:ISection[] = [
               {
                 "id": "01",
                 "text": "opción 1"
+              },
+              {
+                "id": "02",
+                "text": "opción 2"
               }
             ],
             "label_placeholder": "Escribe aquí el nombre de tu campo",
@@ -68,7 +72,11 @@ const sections:ISection[] = [
             "options": [
               {
                 "id": "01",
-                "text": ""
+                "text": "check 1"
+              },
+              {
+                "id": "02",
+                "text": "check 2"
               }
             ],
             "label_placeholder": "Escribe aquí el nombre de tu campo",
@@ -83,7 +91,11 @@ const sections:ISection[] = [
             "values": [
               {
                 "id": "01",
-                "text": ""
+                "text": "opcion 1"
+              },
+              {
+                "id": "02",
+                "text": "opcion 2"
               }
             ],
             "label_placeholder": "Escribe aquí el nombre de tu campo",
@@ -137,7 +149,7 @@ const sections:ISection[] = [
 
 const FormArea = () => {
     return (
-        <div className={defaultClass}>
+        <div className={`${defaultClass}`}>
             {sections.map((section)=>{
                 return(
                 <div className={`${defaultClass}__section-container`}>

@@ -5,8 +5,7 @@ import { HeadUserForm } from "./HeadUserForm";
 import { FormTitle } from "./FormTitle";
 import FormArea from "../containers/form-area/src/FormArea";
 
-
-const defaultClass = 'form';
+const defaultClass = 'form-container';
 
 export const Form = () => {
 
@@ -17,7 +16,6 @@ export const Form = () => {
                 <HeadUserForm/>
                 <div className={`${defaultClass}__forms-container`}>
                     <FormTitle/>
-                    Hola Mundo
                     <FormArea/>
                 </div>
             </div>
