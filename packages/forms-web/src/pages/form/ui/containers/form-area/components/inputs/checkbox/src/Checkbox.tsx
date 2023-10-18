@@ -7,7 +7,7 @@ import '../styles/checkbox.scss';
 
 const defaultClass = 'checkbox-group';
 
-export const Checkbox = ({type, options}:ICheckbox) => {
+export const Checkbox = ({field_id, type, options}:ICheckbox) => {
 
         return (
             <>
@@ -15,15 +15,14 @@ export const Checkbox = ({type, options}:ICheckbox) => {
                 {options.map((option)=>{
                     return (
                         <div className={defaultClass}>
-                            <input
-                                className={`${defaultClass}__checkbox`}
-                                type={type}
-                                id={option.id}
-                                value={option.text}
-                                name={option.id}
-                            />
-                            <label htmlFor={option.id} className={`${defaultClass}__label`}>
-                                {option.text}
+                            <label htmlFor={field_id+option.id} className={`${defaultClass}__label`}>
+                                <input
+                                    className={`${defaultClass}__checkbox`}
+                                    type={ type }
+                                    id={ field_id + option.id }
+                                    name={ field_id }
+                                    value={ option.text }
+                                />{ option.text }
                             </label>
                         </div>
                     )

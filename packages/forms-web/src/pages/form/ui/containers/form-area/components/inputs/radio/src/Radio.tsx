@@ -6,7 +6,7 @@ import '../styles/radio.scss';
 
 const defaultClass = 'radio-group';
 
-export const Radio = ({type, label, options}:IRadio) => {
+export const Radio = ({field_id, type, options}:IRadio) => {
 
     return (
         <>
@@ -14,15 +14,14 @@ export const Radio = ({type, label, options}:IRadio) => {
                 {options.map((option)=>{
                     return (
                         <div className={defaultClass}>
-                            <input
-                                className={`${defaultClass}__radio`}
-                                type={type}
-                                id={option.id}
-                                value={option.text}
-                                name={label}
-                            />
                             <label htmlFor={option.id} className={`${defaultClass}__label`}>
-                                {option.text}
+                                <input
+                                    className={`${defaultClass}__radio`}
+                                    type={ type }
+                                    id={ option.id }
+                                    name={ field_id }
+                                    value={ option.text }
+                                />{option.text}
                             </label>
                         </div>
                     )
