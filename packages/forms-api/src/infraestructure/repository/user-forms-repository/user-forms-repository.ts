@@ -4,7 +4,6 @@ import {UserForms} from "./user-forms-schema";
 import {IUserFormsRepositoryPort} from "../../../core/ports/user-forms-ports/user-forms-repository-port";
 import {IFormCase, IUserForm, IUserForms} from "../../../core/domain/user-forms";
 import {IForm} from "../../../core/domain/form";
-import {IUseCase} from "../../../core/domain/use-case";
 
 @Injectable()
 export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy {
@@ -33,8 +32,14 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
     }
 
     public async findUserForms (email: string) {
-        const userForms = await this.model.findOne({'user_id': email}).exec();
-        return userForms;
+        return await this.model.findOne({'user_id': email}).exec();
+    }
+
+    public async findUsersByFormId (formId: string, excludedUserId: string) {
+        const users = await this.model.find({ 'forms.form_id': formId, user_id: { $ne: excludedUserId } }, 'user_id');
+        const userIds = users.map(user => user.user_id);
+        console.log(userIds);
+        return userIds;
     }
 
     public async addUseCase (formCase: IFormCase, formId: string, email: string) {

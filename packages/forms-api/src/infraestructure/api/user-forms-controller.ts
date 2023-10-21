@@ -16,7 +16,7 @@ export class UserFormsController {
     }
 
     @Post("/use-case")
-    async createCase(@BodyParams() {useCase, formId, ...props }, @Context() ctx: Context): Promise<IUserForms> {
+    async createCase(@BodyParams() { useCase, formId }, @Context() ctx: Context): Promise<IUserForms> {
         const email = ctx.get("email");
         return await this._userFormsUseCase.createCase(useCase, formId, email);
     }

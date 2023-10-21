@@ -40,9 +40,18 @@ export class UserFormsService implements OnDestroy {
         return await this.useCaseUseCase.saveUseCase(useCase);
     }
 
+    private async saveUseCaseToOtherUsers(formCase: IFormCase, userIds: string[], formId: string) {
+        for (const userId of userIds) {
+            console.log('User id que se esta creando: ', userId);
+            await this.userFormsRepository.addUseCase(formCase, formId, userId);
+        }
+    }
+
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
         const newUseCase = await this.saveUseCase(formCase, formId);
         const newFormCase = {...formCase, case_id: newUseCase.id};
+        const userIds = await this.userFormsRepository.findUsersByFormId(formId, email);
+        await this.saveUseCaseToOtherUsers(newFormCase, userIds, formId);
         return await this.userFormsRepository.addUseCase(newFormCase, formId, email);
     }
 
