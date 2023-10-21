@@ -1,21 +1,15 @@
-.form-container {
+@import '../../../../index.scss';
+
+.forms-container {
   width: 100%;
   height: auto;
   min-height: 1040px;
   padding-bottom: 30px;
-  background: #615E67;
+  background: $fa-color-gray-lighter;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  &__forms-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
-      height: auto;
-      min-height: 735px;
-  }
+  margin-top: 58px;
 
   &__return-container {
       display: flex;

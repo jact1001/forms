@@ -1,12 +1,35 @@
 import { IOptionValue, IRadio } from "../../../../../../../data/domain/IFormFields";
 import React, { ChangeEvent, FocusEvent, useState } from 'react';
 import { useDispatch } from "react-redux";
+import { updateSectionField } from "../../../../../../../data/state/effects/form.effects";
 
 import '../styles/radio.scss';
 
 const defaultClass = 'radio-group';
 
-export const Radio = ({field_id, type, options}:IRadio) => {
+interface IInputRadio {
+    field: IRadio;
+    sectionId: string;
+}
+
+export const Radio = ({field, sectionId}:IInputRadio) => {
+
+    const dispatch = useDispatch();
+
+    const {type, field_id, options}= field;
+
+    const handleOnChange = ({ target: {value} }: ChangeEvent<HTMLInputElement>) => {
+        const newValue=options.find((option)=>option.id===value)||options[0];
+        updateStoreField(newValue);
+    }
+
+    const updateStoreField = (value:IOptionValue) => {
+        const newField = {
+            ...field,
+            value
+        }
+        dispatch(updateSectionField(newField, sectionId));
+    }
 
     return (
         <>
@@ -16,11 +39,12 @@ export const Radio = ({field_id, type, options}:IRadio) => {
                         <div className={defaultClass}>
                             <label htmlFor={option.id} className={`${defaultClass}__label`}>
                                 <input
+                                    onChange={handleOnChange}
                                     className={`${defaultClass}__radio`}
                                     type={ type }
                                     id={ option.id }
                                     name={ field_id }
-                                    value={ option.text }
+                                    value={ option.id }
                                 />{option.text}
                             </label>
                         </div>

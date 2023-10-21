@@ -1,7 +1,10 @@
+import { TField } from "../../domain/IFormFields";
+
 export enum ActionType {
     QUERY_FORM_PENDING = 'QUERY_FORM_PENDING',
     QUERY_FORM_SUCCESS = 'QUERY_FORM_SUCCESS',
-    QUERY_FORM_FAIL = 'QUERY_FORM_FAIL'
+    QUERY_FORM_FAIL = 'QUERY_FORM_FAIL',
+    UPDATE_FORM_FIELD = 'UPDATE_FORM_FIELD'
 }
 
 interface actionPending {
@@ -18,4 +21,9 @@ interface actionFail {
     payload: string;
 }
 
-export type Action = actionPending | actionSuccess | actionFail;
+interface actionUpdateFormField {
+    type: ActionType.UPDATE_FORM_FIELD;
+    payload: {sectionId:string, field: TField};
+}
+
+export type Action = actionPending | actionSuccess | actionFail | actionUpdateFormField;

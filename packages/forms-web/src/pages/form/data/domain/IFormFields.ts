@@ -4,6 +4,7 @@ export interface IText {
     is_required: boolean;
     type: string;
     label: string;
+    value: string;
     placeholder: string;
     max_length: string;
     label_placeholder: string;
@@ -33,6 +34,7 @@ export interface IRadio {
     is_required: boolean;
     type: string;
     label: string;
+    value: IOptionValue;
     options: IOptionValue[];
     option_placeholder: string;
     label_placeholder: string;
@@ -104,7 +106,7 @@ export interface ITime {
     label_placeholder: string;
 }
 
-export interface IField extends IText, ITextArea, IRadio, ICheckbox, ISelect, INumber, IEmail, IDate, ITime {};
+//export interface IField extends IText, ITextArea, IRadio, ICheckbox, ISelect, INumber, IEmail, IDate, ITime {};
 
 export type TField = IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime;
 

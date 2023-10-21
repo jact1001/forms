@@ -1,17 +1,15 @@
-.form-title {
+@import '../../../../index.scss';
 
-  &__container {
-    width: 90%;
-  }
-
+.forms-title {
   &__title {
     display: flex;
     align-items: center;
-    background: #201A30;
+    background: $fa-color-blue-dark;
     border-radius: 15px;
     margin-bottom: 50px;
     margin-top: 20px;
-    padding: 15px;
+    padding: 15px 0;
+    width: 90%;
 
     b {
       width: 290px;

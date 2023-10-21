@@ -5,7 +5,7 @@ import {TimeLine} from "../components/time-line/src/TimeLine";
 import { ISection } from '../../../../data/domain/IForm';
 
 const defaultClass = 'form-area-container';
-
+/*
 const sections:ISection[] = [
       {
         "id": "6518a8998929100f76faaecf",
@@ -145,22 +145,24 @@ const sections:ISection[] = [
           }
         ]
       }
-    ]
+    ]*/
 
-const FormArea = () => {
+    interface IFormSection {sections?: ISection[]}
+
+const FormArea = ({sections}:IFormSection) => {
     return (
-        <div className={`${defaultClass}`}>
-            {sections.map((section)=>{
+        <>
+            {sections?.map((section)=>{
                 return(
                 <div className={`${defaultClass}__section-container`}>
                         <div className={`${defaultClass}__form-section`}>
                             <SectionHeader sectionName={section.sectionName} />
-                            <SectionArea fields={section.fields} />
+                            <SectionArea fields={section.fields} sectionId={section.id} />
                         </div>
                 </div>
                 )
             })}
-        </div>
+        </>
     )
 }
 export default FormArea;

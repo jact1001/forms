@@ -15,9 +15,10 @@ const defaultClass = 'section-area';
 
 interface ISectionArea {
     fields:TFields;
+    sectionId: string;
 }
 
-export const SectionArea = ({fields}:ISectionArea) => {
+export const SectionArea = ({fields, sectionId}:ISectionArea) => {
 
     return (
         <div className={defaultClass} >
@@ -26,7 +27,7 @@ export const SectionArea = ({fields}:ISectionArea) => {
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >
                         <Label label={field.label} />
-                        <Input key={field.label} {...field} />
+                        <Input key={field.label} field={field} sectionId={sectionId} />
                     </div>
             })}
         </div>

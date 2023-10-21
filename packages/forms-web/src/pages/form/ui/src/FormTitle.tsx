@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import '../styles/form-title.scss';
+import '../styles/forms-title.scss';
 //import FormIcon from "../icons/FormIcon";
 
-const defaultClass = 'form-title';
+const defaultClass = 'forms-title';
 
-export const FormTitle = () => {
+interface IFormTitle {formName?: string}
+
+export const FormTitle = ({formName}:IFormTitle) => {
 
     return (
-        <div className={`${defaultClass}__container`}>
             <div className={`${defaultClass}__title`}>
-                <b>Mi Formulario</b>
+                <b>{formName}</b>
             </div>
-        </div>
     );
 };
