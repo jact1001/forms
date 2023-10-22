@@ -24,7 +24,7 @@ export const Header = () => {
             }
             setIsLogoutAction(false);
         }
-    }, [isLogin, loading, error]);
+    }, [isLogin, loading, error, history, isLogoutAction]);
 
     const logoutHandler = () => {
         dispatch(logout());

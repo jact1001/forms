@@ -8,7 +8,6 @@ import { inputsType } from "../components/build-input/src/BuildInput";
 import { TFields } from "../../../../data/domain/IForm";
 import { Delete } from '../components/options/src/Delete';
 import '../styles/section-area.scss';
-import {TField} from "../../../../data/domain/IFormFields";
 
 const defaultClass = 'section-area';
 
@@ -38,6 +37,7 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
         dispatch(addSectionField(newField, sectionId));
     };
 
+    console.info(isOver);
     return (
         <div className={defaultClass} ref={ drop }>
             {sectionFields.map((field: any) => {

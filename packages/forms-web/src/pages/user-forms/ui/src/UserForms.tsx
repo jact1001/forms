@@ -27,12 +27,12 @@ export const UserForms = () => {
 
     useEffect(() => {
         dispatch(findUserForms());
-    }, []);
+    }, [dispatch]);
 
     if (!isAuthenticated) {
         return <Redirect to="/login" />;
     }
-
+    console.info(isLogin, history);
     return (
         <>
             <Header />

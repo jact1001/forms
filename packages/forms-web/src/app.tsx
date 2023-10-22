@@ -15,7 +15,7 @@ function App() {
         if (isAuthenticated) {
             dispatch(setAccessAccepted());
         }
-    }, []);
+    }, [dispatch, isAuthenticated]);
 
     return (
         <Router>
