@@ -28,6 +28,8 @@ jobs:
         run: cd packages/forms-web && npm install
 
       - name: Build
+        env:
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
         run: cd packages/forms-web && npm run build
 
       #- name: Install AWS CLI
