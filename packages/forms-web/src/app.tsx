@@ -1,30 +1,24 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { UserForms } from "./pages/user-forms/ui/src/UserForms";
-import { FormDesign } from "./pages/form-design/ui/src/FormDesign";
-import { Login } from "./pages/login/ui/src/Login";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setAccessAccepted } from "./pages/login/data/state/effects/login.effects";
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-
-    const dispatch = useDispatch();
-    const isAuthenticated = sessionStorage.getItem('session');
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            dispatch(setAccessAccepted());
-        }
-    }, []);
-
     return (
-        <Router>
-            <Switch>
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/user-forms' component={UserForms} />
-                <Route exact path="/form-design/:formId?" component={FormDesign}/>
-            </Switch>
-        </Router>
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <p>
+                    Este es Main, Negris, una app simple si la compila y la sube <code>src/App.js</code>
+                </p>
+                <a
+                    className="App-link"
+                    href="https://reactjs.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Learn React
+                </a>
+            </header>
+        </div>
     );
 }
 
