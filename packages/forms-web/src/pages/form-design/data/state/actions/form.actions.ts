@@ -1,6 +1,5 @@
 import {IAccess, IForm} from "../../domain/IForm";
 import { TField } from "../../domain/IFormFields";
-import {IUser} from "../../domain/IUser";
 
 export enum ActionType {
     SAVE_FORM_PENDING = 'SAVE_FORM_PENDING',

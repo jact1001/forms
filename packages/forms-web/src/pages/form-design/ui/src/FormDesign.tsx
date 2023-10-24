@@ -30,7 +30,7 @@ export const FormDesign = () => {
         if (formId) {
             dispatch(getFormById(formId));
         }
-    }, [formId]);
+    }, [formId, dispatch]);
 
     /*useEffect(() => {
         if (!isLogin) {
@@ -41,7 +41,7 @@ export const FormDesign = () => {
     if (!isAuthenticated) {
         return <Redirect to="/login" />;
     }
-
+    console.info(isLogin, history);
     return (
         <>
             <Header />
