@@ -37,9 +37,7 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
 
     public async findUsersByFormId (formId: string, excludedUserId: string) {
         const users = await this.model.find({ 'forms.form_id': formId, user_id: { $ne: excludedUserId } }, 'user_id');
-        const userIds = users.map(user => user.user_id);
-        console.log(userIds);
-        return userIds;
+        return users.map(user => user.user_id);
     }
 
     public async addUseCase (formCase: IFormCase, formId: string, email: string) {
