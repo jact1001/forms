@@ -1,0 +1,23 @@
+@import '../../../../../../../../../index';
+
+.text-area {
+    background-color: $fa-color-blue-light;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none;
+    color: $fa-color-white-primary;
+    font-size: 14px;
+    font-style: italic;
+    height: 35px;
+    margin-bottom: 10px;
+    max-width: 430px;
+    min-height: 20px;
+    min-width: 430px;
+    outline: none;
+    padding: 7px;
+    width: 430px;
+
+    &::placeholder {
+        color: $fa-color-gray-light;
+    }
+}

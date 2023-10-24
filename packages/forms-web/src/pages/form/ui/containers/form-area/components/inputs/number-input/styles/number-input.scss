@@ -1,0 +1,17 @@
+@import '../../../../../../../../../index';
+
+.number-input {
+    background-color: $fa-color-blue-light;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none;
+    color: $fa-color-white-primary;
+    display: flex;
+    font-size: 14px;
+    font-style: italic;
+    height: 25px;
+    margin-bottom: 10px;
+    outline: none;
+    padding: 7px 7px 7px 12px;
+    width: 430px;
+}
