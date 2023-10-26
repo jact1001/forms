@@ -53,12 +53,13 @@ const mock: IForm = {
         "label_placeholder": "Escribe aquí el nombre de tu campo",
         "option_placeholder": "Escribe tu opción",
         "form_field_id": "3aa1d13c-35f4-4156-9b39-ac1634ad201c"
-      }/*,
+      },
       {
         "field_id": "0002",
         "is_required": true,
         "type": "textArea",
         "label": "Párrafo",
+        "value": "value TextArea",
         "placeholder": "Texto largo",
         "min_length": "10",
         "max_length": "60",
@@ -66,7 +67,7 @@ const mock: IForm = {
         "label_placeholder": "Escribe aquí el nombre de tu campo",
         "option_placeholder": "Escribe tu opción",
         "form_field_id": "09ffff3f-3a27-4169-8e39-a3faea77c61b"
-      },
+      }/*,
       {
         "field_id": "0003",
         "is_required": true,

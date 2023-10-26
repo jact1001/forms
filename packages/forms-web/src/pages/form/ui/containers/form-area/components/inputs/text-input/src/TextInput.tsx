@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
 
-const defaultClass = 'text-input';
+const defaultClass = 'form-text-input';
 
 interface ITextInput {
     field: IText;
@@ -29,6 +29,17 @@ export const TextInput = ({field, sectionId}: ITextInput) => {
     }
 
     return (
-        <input onChange={handleOnChange} type={ field.type } placeholder={ field.placeholder } value={ field.value } className={ `${defaultClass}` } />
+        <div className={defaultClass}>
+
+            <input 
+                type={ field.type } 
+                className={ `${defaultClass}__text` }
+                placeholder={ field.placeholder } 
+                value={ field.value } 
+                onChange={handleOnChange}
+            />
+            <span className={`${defaultClass}__line`}/>
+        </div>
+
     )
 }

@@ -7,7 +7,7 @@ import React, { ChangeEvent, useEffect } from "react";
 
 import { IOption, SelectWithCheckbox } from "../components/select-with-checkbox/src/SelectWithCheckbox";
 
-const defaultClass = 'section-header';
+const defaultClass = 'form-section-header';
 
 interface ISectionHeader {
   sectionName: String;

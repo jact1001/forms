@@ -16,6 +16,7 @@ export interface ITextArea {
     is_required: boolean;
     type: string;
     label: string;
+    value: string;
     placeholder: string;
     min_length: string;
     max_length: string;
