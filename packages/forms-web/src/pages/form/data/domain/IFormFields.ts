@@ -72,6 +72,7 @@ export interface INumber {
     is_required: boolean;
     type: string;
     label: string;
+    value: string;
     placeholder: string;
     min: string;
     label_placeholder: string;
@@ -80,11 +81,12 @@ export interface INumber {
 export interface IEmail {
     field_id: string;
     form_field_id: string;
-    isRequired: boolean;
+    is_required: boolean;
     type: string;
     label: string;
+    value: string;
     placeholder: string;
-    maxLength: string;
+    max_length: string;
     label_placeholder: string;
 }
 

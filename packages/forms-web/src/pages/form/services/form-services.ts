@@ -87,6 +87,30 @@ const mock: IForm = {
         "label_placeholder": "Escribe aquí el nombre de tu campo",
         "option_placeholder": "Escribe tu opción",
         "form_field_id": "3ce53a17-63a0-48a6-8868-d18f289ea163"
+      },
+      {
+        "field_id": "0006",
+        "is_required": true,
+        "type": "number",
+        "label": "Número",
+        "value": "9",
+        "placeholder": "Número",
+        "min": "0",
+        "label_placeholder": "Escribe aquí el nombre de tu campo",
+        "option_placeholder": "Escribe tu opción",
+        "form_field_id": "97b81a2c-7eac-49e2-928c-9e1559f0e065"
+      },
+      {
+        "field_id": "0007",
+        "is_required": true,
+        "type": "email",
+        "label": "Correo",
+        "value": "email@example.com",
+        "placeholder": "Correo electrónico",
+        "max_length": "60",
+        "label_placeholder": "Escribe aquí el nombre de tu campo",
+        "option_placeholder": "Escribe tu opción",
+        "form_field_id": "2c98dec8-b9a3-4509-9289-fa086a59d2a6"
       }/*,
       {
         "field_id": "0003",
