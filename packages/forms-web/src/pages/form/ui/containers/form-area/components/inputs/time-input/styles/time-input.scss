@@ -1,13 +1,12 @@
 @import '../../../../../../../../../index';
 
-.time-input {
+.form-time-input {
     background-color: $fa-color-blue-light;
     border: none;
     border-radius: 10px;
     box-shadow: none;
-    color: $fa-color-white-primary;
     display: flex;
-    height: 25px;
+    height: 32px;
     justify-content: space-between;
     margin-bottom: 10px;
     outline: none;
@@ -17,8 +16,8 @@
     &__format {
         background-color: transparent;
         border: none;
-        font-size: 14px;
-        font-style: italic;
+        font-size: 15px;
+        color: $fa-color-white-primary;
     }
 
     svg {

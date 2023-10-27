@@ -94,6 +94,7 @@ export interface IDate {
     is_required: boolean;
     type: string;
     label: string;
+    value: string;
     label_placeholder: string;
 }
 
