@@ -1,6 +1,5 @@
-import axios from "axios";
-import { API_BASE_PATH } from "../../../config";
 import {IForm} from "../data/domain/IForm";
+import axiosInstance from "../../form-design/interceptor/api-interceptor";
 
 const mock: IForm = {
     "id": "6526dcdc10999f9546a16a39",
@@ -77,7 +76,7 @@ const mock: IForm = {
         "label_placeholder": "Escribe aquí el nombre de tu campo",
         "option_placeholder": "Escribe tu opción",
         "form_field_id": "f9ec5ef6-2a02-4f2c-834f-3974eaba08cf"
-      }, 
+      },
       {
         "field_id": "0009",
         "is_required": true,
@@ -219,9 +218,7 @@ const mock: IForm = {
     }]
 }
 
-export const getForm = async () => {
-    //const response = await axios.get(`${API_BASE_PATH}/form`);
+export const getUseCase = async (caseId: string) => {
+    const response = await axiosInstance.get(`/use-case/${caseId}`);
     return mock;
-
-    
 }

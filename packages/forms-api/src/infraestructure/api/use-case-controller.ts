@@ -5,18 +5,18 @@ import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
 
 @Controller("/use-case")
 @UseBefore(AuthTokenMiddleware)
-export class UsecaseController {
+export class UseCaseController {
 
     public constructor(private readonly _useCaseUseCase: UseCaseUseCase) {}
+
     @Get("/:caseId")
     async getUseCaseById(@PathParams('caseId') caseId: string, @Response() res: ExpressResponse): Promise<e.Response<any, Record<string, any>>> {
         const useCase = await this._useCaseUseCase.getUseCasesByUseCaseId(caseId);
-        if (!useCase) { 
+        if (!useCase) {
             return res.status(404).json({ error: `El caso de uso con el ID: ${caseId} no pudo ser encontrado` });
         }
         return res.status(200).json(useCase);
     }
 
-    
-}
 
+}

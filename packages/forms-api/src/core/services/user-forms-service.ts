@@ -5,6 +5,7 @@ import { IUseCase } from "../domain/use-case";
 import { IForm } from "../domain/form";
 import { UsersUseCase } from "../use-cases/users-use-case";
 import { UseCaseUseCase } from "../use-cases/use-case-use-case";
+import { FormsRepository } from "../../infraestructure/repository/forms-repository/forms-repository";
 
 @Injectable()
 @Scope('request')
@@ -12,6 +13,7 @@ export class UserFormsService implements OnDestroy {
 
     constructor(
         private readonly userFormsRepository: UserFormsRepository,
+        private readonly formsRepository: FormsRepository,
         private readonly usersUseCase: UsersUseCase,
         private readonly useCaseUseCase: UseCaseUseCase
     ) {}
@@ -32,17 +34,18 @@ export class UserFormsService implements OnDestroy {
     }
 
     private async saveUseCase(formCase: IFormCase, formId: string): Promise<IUseCase>{
+        const form: IForm = await this.formsRepository.findForm(formId);
         const useCase: IUseCase = {
             case_name: formCase.name,
             form_id: formId,
-            case_state: { id: 'pending', name: 'Pendiente'}
+            case_state: { id: 'pending', name: 'Pendiente'},
+            sections: form.sections
         }
         return await this.useCaseUseCase.saveUseCase(useCase);
     }
 
     private async saveUseCaseToOtherUsers(formCase: IFormCase, userIds: string[], formId: string) {
         for (const userId of userIds) {
-            console.log('User id que se esta creando: ', userId);
             await this.userFormsRepository.addUseCase(formCase, formId, userId);
         }
     }
