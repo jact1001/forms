@@ -4,7 +4,7 @@ import {SectionArea} from "./FormArea.SectionArea";
 import {TimeLine} from "../components/time-line/src/TimeLine";
 import { ISection } from '../../../../data/domain/IForm';
 
-const defaultClass = 'form-area-container';
+const defaultClass = 'form-section-container';
 /*
 const sections:ISection[] = [
       {
@@ -154,11 +154,10 @@ const FormArea = ({sections}:IFormSection) => {
         <>
             {sections?.map((section)=>{
                 return(
-                <div className={`${defaultClass}__section-container`}>
-                        <div className={`${defaultClass}__form-section`}>
-                            <SectionHeader sectionName={section.sectionName} />
-                            <SectionArea fields={section.fields} sectionId={section.id} />
-                        </div>
+                    <div className={`${defaultClass}`}>
+                        <SectionHeader sectionName={section.sectionName} />
+                        <SectionArea fields={section.fields} sectionId={section.id} 
+                    />
                 </div>
                 )
             })}

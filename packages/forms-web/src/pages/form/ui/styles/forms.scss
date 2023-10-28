@@ -3,13 +3,13 @@
 .forms-container {
   width: 100%;
   height: auto;
-  min-height: 1040px;
   padding-bottom: 30px;
   background: $fa-color-gray-lighter;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 58px;
+  min-height: 580px;
 
   &__return-container {
       display: flex;
