@@ -15,3 +15,5 @@ packages/forms-api/.env
 
 */build/
 **/build/*
+
+packages/forms-web/.env

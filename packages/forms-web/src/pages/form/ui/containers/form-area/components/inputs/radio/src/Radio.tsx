@@ -1,9 +1,8 @@
-import { IOptionValue, IRadio } from "../../../../../../../data/domain/IFormFields";
+import { IRadio, IOptionValue } from "../../../../../../../data/domain/IFormFields";
+import '../styles/radio.scss';
+import { updateSectionField } from "../../../../../../../data/state/effects/form.effects";
 import React, { ChangeEvent, FocusEvent, useState } from 'react';
 import { useDispatch } from "react-redux";
-import { updateSectionField } from "../../../../../../../data/state/effects/form.effects";
-
-import '../styles/radio.scss';
 
 const defaultClass = 'radio-group';
 
