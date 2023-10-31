@@ -12,7 +12,7 @@ export const Checkbox = ({field_id, type, options}:ICheckbox) => {
         return (
             <>
             <div className={`${defaultClass}__options-container`}>
-                {options.map((option)=>{
+                {options?.map((option)=>{
                     return (
                         <div className={defaultClass}>
                             <label htmlFor={field_id+option.id} className={`${defaultClass}__label`}>
