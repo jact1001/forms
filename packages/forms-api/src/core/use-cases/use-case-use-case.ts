@@ -13,10 +13,14 @@ export class UseCaseUseCase implements IUseCasePort, OnDestroy {
         return this.useCaseService.saveUseCase(useCase);
     }
 
+    public async updateUseCase(useCase: IUseCase): Promise<IUseCase> {
+        return this.useCaseService.updateUseCase(useCase);
+    }
+
     public async getUseCasesByUseCaseId(caseId: string): Promise<IUseCase> {
         return this.useCaseService.getUseCasesByUseCaseId(caseId);
     }
-    
+
     public async getUseCasesByFormId(formId: string): Promise<IUseCase[]> {
         return this.useCaseService.getUseCasesByFormId(formId);
     }
