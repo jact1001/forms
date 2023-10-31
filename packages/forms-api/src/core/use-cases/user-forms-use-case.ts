@@ -5,6 +5,8 @@ import { IUser } from "../domain/user";
 import {IUserFormsApiPort} from "../ports/user-forms-ports/user-forms-port";
 import {IFormCase, IUserForms} from "../domain/user-forms";
 import {UserFormsService} from "../services/user-forms-service";
+import {IForm} from "../domain/form";
+import {IUseCase} from "../domain/use-case";
 
 @Injectable()
 @Scope('request')
@@ -16,8 +18,8 @@ export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
         return this.userFormService.getUserForms(email);
     }
 
-    public async saveUserForms(userForm: IUserForms): Promise<IUserForms> {
-        return this.userFormService.saveUserForms(userForm);
+    public async saveUserForms(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
+        return this.userFormService.saveUserForms(form, userId, useCases);
     }
 
     public async createCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms> {

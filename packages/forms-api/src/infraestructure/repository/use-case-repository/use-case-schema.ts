@@ -37,7 +37,7 @@ export class CaseState implements ICaseState {
 @Model()
 export class UseCase implements IUseCase {
     @ObjectID("id")
-    _id: string;
+    id: string;
     @Property()
     case_name: string;
     @Property()

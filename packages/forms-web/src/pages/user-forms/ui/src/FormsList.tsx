@@ -13,7 +13,7 @@ export const FormsList = () => {
 
         <div className={`${defaultClass}__main`}>
             {
-                userForms?.forms.map((form)=>{
+                userForms?.forms?.map((form)=>{
                     return <Form {...form}/>
                 })
             }

@@ -22,7 +22,7 @@ export const SectionHeader = ({sectionName, access, sectionId}: ISectionHeaderPr
 
     useEffect(() => {
         dispatch(findUsers());
-    }, []);
+    }, [dispatch]);
 
     const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>) => {
         dispatch(updateSectionName(value, sectionId));

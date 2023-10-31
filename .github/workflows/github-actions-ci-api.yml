@@ -1,15 +1,15 @@
-name: Node js app deploy to EKS
+name: deploy dynamic-forms-api to EKS
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "mainx" ] # disabled
   pull_request:
-    branches: [ "main" ]
+    branches: [ "mainx" ] # disabled
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code for dynamic-forms-api
         uses: actions/checkout@v3
 
       - name: Install kubectl
@@ -48,4 +48,7 @@ jobs:
 
       - name: Apply env vars
         run: |
-          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
+          kubectl set env deployment/dynamic-forms GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}" MONGOOSE_URL="${{ secrets.MONGOOSE_URL }}" SECRET_KEY="${{ secrets.SECRET_KEY }}"
+
+      - name: Apply HPA
+        run: kubectl apply -f hpa.yaml

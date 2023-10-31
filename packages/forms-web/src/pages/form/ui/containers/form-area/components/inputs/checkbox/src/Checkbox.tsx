@@ -28,9 +28,9 @@ export const Checkbox = ({field, sectionId}:CheckboxProps) => {
             const newValue=values.filter((option)=>option.id!==value)||values[0];
             updateStoreField2(newValue);
         }
-        
+
     }
-    
+
     const updateStoreField = (value:IOptionValue) => {
         const newField = {
             ...field,

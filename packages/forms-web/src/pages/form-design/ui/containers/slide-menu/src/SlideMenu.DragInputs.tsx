@@ -11,7 +11,7 @@ export const SlideMenuDragInputs = () => {
 
     useEffect(() => {
         dispatch(findFormFields());
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

@@ -16,12 +16,12 @@ function App() {
         if (isAuthenticated) {
             dispatch(setAccessAccepted());
         }
-    }, []);
+    }, [dispatch, isAuthenticated]);
 
     return (
         <Router>
             <Switch>
-                <Route exact path='/form' component={Form} />
+                <Route exact path='/form/:caseId?' component={Form} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/user-forms' component={UserForms} />
                 <Route exact path="/form-design/:formId?" component={FormDesign}/>

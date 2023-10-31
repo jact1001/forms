@@ -48,6 +48,7 @@ export const DragInput = ( {data}: any) => {
         }),
     }));
 
+    console.info(isDragging);
     return (
         <button ref={ drag } className={defaultClass}>
             { Icon ? <Icon /> : <></> }

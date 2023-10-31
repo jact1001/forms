@@ -1,16 +1,18 @@
-import { BodyParams, Context, Controller, Get, Post, Request, Response } from "@tsed/common";
+import { Context, Controller, Get, Post, Request, Response } from "@tsed/common";
 import { IUser } from "../../core/domain/user";
 import { UsersUseCase } from "../../core/use-cases/users-use-case";
 import { Response as ExpressResponse } from "express";
 import { OAuth2Client } from "google-auth-library";
 import * as jwt from 'jsonwebtoken';
-const config = require("dotenv").config({path: "../../.env"});
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
+const SECRET_KEY = process.env.SECRET_KEY || '';
 
 @Controller("/users")
 export class UsersController {
 
     public constructor(private readonly _usersUseCase: UsersUseCase) {}
-    private googleClient = new OAuth2Client(config.parsed.client_id);
+    private googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
     @Get("/")
     async getUsers(): Promise<IUser[]> {
@@ -23,10 +25,10 @@ export class UsersController {
         try {
             const ticket = await this.googleClient.verifyIdToken({
                 idToken: token,
-                audience: config.parsed.client_id,
+                audience:GOOGLE_CLIENT_ID,
             });
             const { email, name, family_name } = ticket.getPayload();
-            const loginToken = jwt.sign(`${email}`, config.parsed.secret_key);
+            const loginToken = jwt.sign(`${email}`, SECRET_KEY);
             await this._usersUseCase.saveUser({ email: email, user_name: name, last_name: family_name });
             res.cookie("login", loginToken, {
                 httpOnly: true,
