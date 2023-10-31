@@ -8,6 +8,7 @@ import { findUseCase } from "../../data/state/effects/form.effects";
 import { useFormStore } from "../../data/hooks/custom-typed-selector";
 import {useParams} from "react-router-dom";
 import { FooterButtons } from '../containers/footer-buttons/src/FooterButtons';
+import { ToastContainer } from 'react-toastify';
 
 const defaultClass = 'forms-container';
 
@@ -33,6 +34,7 @@ export const Form = () => {
                     <FormTitle formName={form?.form_name}/>
                     <FormArea sections={form?.sections}/>
                     <FooterButtons />
+                    <ToastContainer />
                 </div>
 
         </>

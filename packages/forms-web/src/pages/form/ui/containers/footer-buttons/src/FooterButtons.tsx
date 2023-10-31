@@ -16,7 +16,6 @@ export const FooterButtons = () => {
     const dispatch = useDispatch();
 
     const [isSaving, setIsSaving] = useState(false);
-    const history = useHistory();
     const { form, updateLoading, updateError  } = useFormStore((state) => state.form);
 
     useEffect(() => {
@@ -28,7 +27,7 @@ export const FooterButtons = () => {
             }
             setIsSaving(false);
         }
-    }, [isSaving, updateLoading, updateError, form.id, history]);
+    }, [isSaving, updateLoading, updateError]);
 
     const handleSaveForm = () => {
         dispatch(updateUseCase(form));
