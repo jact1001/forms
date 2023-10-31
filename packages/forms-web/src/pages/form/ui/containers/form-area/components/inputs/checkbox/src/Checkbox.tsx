@@ -15,34 +15,28 @@ export const Checkbox = ({field, sectionId}:CheckboxProps) => {
 
     const dispatch = useDispatch();
 
-    const {type, field_id, options, values}= field;
+    const {type, field_id, options, value}= field;
 
-    const handleOnChange = ({ target: {value, checked} }: ChangeEvent<HTMLInputElement>) => {
-
+    const handleOnChange = ({ target: {value:val, checked} }: ChangeEvent<HTMLInputElement>) => {
         if(checked){
-            const newValue=options.find((option)=>option.id===value)||options[0];
-            const newVal=values.find((val)=>val.id===value)||values[0];
-            updateStoreField(newValue);
-            updateStoreField(newVal);
+            console.log("Dentro de if");
+            const newValue=options.find((option)=>option.id===val)||options[0];
+            console.log("newValue", newValue);
+            value?.push(newValue);
+            console.log("value", value);
+            updateStoreField(value);
         } else {
-            const newValue=values.filter((option)=>option.id!==value)||values[0];
-            updateStoreField2(newValue);
+            console.log("Dentro de else");
+            const newValue=value.filter((option)=>option.id!==val)||value[0];
+            console.log("newValue", newValue);
+            updateStoreField(newValue);
         }
-
     }
 
-    const updateStoreField = (value:IOptionValue) => {
+    const updateStoreField = (value:IOptionValue[]) => {
         const newField = {
             ...field,
             value
-        }
-        dispatch(updateSectionField(newField, sectionId));
-    }
-
-    const updateStoreField2 = (values:IOptionValue[]) => {
-        const newField = {
-            ...field,
-            values
         }
         dispatch(updateSectionField(newField, sectionId));
     }
