@@ -1,0 +1,27 @@
+@import '../../../../../../../../../index';
+
+.form-date-input {
+    background-color: $fa-color-blue-light;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none;
+    display: flex;
+    height: 32px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    outline: none;
+    padding: 7px 7px 7px 12px;
+    width: 430px;
+
+    &__format {
+        background-color: transparent;
+        border: none;
+        font-size: 15px;
+        color: $fa-color-white-primary;
+    }
+
+    svg {
+        fill: transparent;
+        opacity: 0.5;
+    }
+}

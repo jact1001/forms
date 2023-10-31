@@ -1,0 +1,45 @@
+@import '../../../../index.scss';
+
+.forms-title {
+  &__title {
+    display: flex;
+    align-items: center;
+    background: $fa-color-blue-dark;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    padding: 15px 0;
+    width: 90%;
+
+    b {
+      width: 290px;
+      height: 50px;
+      font-size: 37px;
+      line-height: 44px;
+      color: white;
+      margin-left: 20px;
+    }
+  }
+
+  @media screen and (max-width: 455px) {
+
+    &__title {
+      padding: 5px;
+      b {
+        font-size: 25px;
+        margin-left: 5px;
+      }
+    }
+
+    &__icon-container {
+      padding-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 355px) {
+    &__title b {
+      font-size: 20px;
+    }
+  }
+
+}

@@ -9,8 +9,11 @@ export class UsersService implements OnDestroy {
     constructor(private readonly userRepository: UsersRepository) {}
 
     public async getUsers(): Promise<IUser[]> {
-        const data = await this.userRepository.findUsers();
-        return data;
+        return await this.userRepository.findUsers();
+    }
+
+    public async getUserByEmail(email: string): Promise<IUser> {
+        return await this.userRepository.findUserByEmail(email);
     }
 
     public async saveUser(user: IUser): Promise<IUser> {

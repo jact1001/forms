@@ -52,7 +52,7 @@ export const Form = ({ form_name, cases, form_id }:IUserForm) => {
             {isExpanded &&
                 <>
                     {cases?.map((formCase)=>{
-                        return <FormUseCase formName={formCase.name} statusOption={formCase.state}/>
+                        return <FormUseCase {...formCase} />
                     })}
                 </>
             }

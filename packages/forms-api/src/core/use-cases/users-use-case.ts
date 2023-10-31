@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy, Scope} from "@tsed/common";
+import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { UsersService } from "../services/users-service";
 import { IUserApiPort } from "../ports/users-ports/users-api-port";
 import { IUser } from "../domain/user";
@@ -11,6 +11,10 @@ export class UsersUseCase implements IUserApiPort, OnDestroy {
 
     public async getUsers(): Promise<IUser[]> {
         return this.usersService.getUsers();
+    }
+
+    public async getUserByEmail(email: string): Promise<IUser> {
+        return this.usersService.getUserByEmail(email);
     }
 
     public async saveUser(user: IUser): Promise<IUser> {

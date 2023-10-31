@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dynamic-forms
+  labels:
+    app: dynamic-forms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dynamic-forms
+  template:
+    metadata:
+      labels:
+        app: dynamic-forms
+    spec:
+      containers:
+        - name: dynamic-forms-container
+          image: 624534814971.dkr.ecr.us-east-2.amazonaws.com/dynamic-forms-rep:1.1          
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+

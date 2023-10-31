@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v2
+# https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dynamic-forms-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: dynamic-forms
+  minReplicas: 1
+  maxReplicas: 10  # Ajusta esto según tus necesidades
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 30

@@ -1,0 +1,24 @@
+@import '../../../../../../index';
+
+.footer-buttons {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+
+    button {
+        background-color: $fa-color-green;
+        color: $fa-color-blue-dark;
+        font-size: 20px;
+        width: 250px;
+        height: 50px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: none;
+        }
+    }
+}

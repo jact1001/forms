@@ -1,0 +1,18 @@
+@import '../../../../../../index';
+
+.form-section-area {
+    color: $fa-color-white-primary;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+
+    &__field-container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin: 16px 0;
+        width: 100%;
+        max-width: 560px;
+    }
+}

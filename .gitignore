@@ -7,8 +7,13 @@
 
 node_modules/
 
-.env
+packages/forms-api/.env
 
 .idea/
 
 .DS_Store
+
+*/build/
+**/build/*
+
+packages/forms-web/.env
