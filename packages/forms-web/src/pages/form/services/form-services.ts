@@ -46,7 +46,7 @@ const mock: IForm = {
             "text": "opción 2"
           }
         ],
-        value: {
+        "value": {
             "id": "02",
             "text": "opción 2"
           },
@@ -111,6 +111,53 @@ const mock: IForm = {
         "label_placeholder": "Escribe aquí el nombre de tu campo",
         "option_placeholder": "Escribe tu opción",
         "form_field_id": "2c98dec8-b9a3-4509-9289-fa086a59d2a6"
+      },
+      {
+        "field_id": "0004",
+        "is_required": true,
+        "type": "checkbox",
+        "label": "Casillas",
+        "values": [
+          {
+          "id": "02",
+          "text": "check 2"
+          }
+        ],
+        "name": "check1",
+        "checked": true,
+        "options": [
+          {
+            "id": "01",
+            "text": "check 1"
+          },
+          {
+            "id": "02",
+            "text": "check 2"
+          }
+        ],
+        "label_placeholder": "Escribe aquí el nombre de tu campo",
+        "option_placeholder": "Escribe tu opción",
+        "form_field_id": "a7f41555-a25a-4a69-bba7-29fd2ff4e92f"
+      },
+      {
+        "field_id": "0005",
+        "is_required": true,
+        "type": "select",
+        "label": "Desplegable",
+        "value":  "opcion 2",
+        "values": [
+          {
+            "id": "01",
+            "text": "opcion 1"
+          },
+          {
+            "id": "02",
+            "text": "opcion 2"
+          }
+        ],
+        "label_placeholder": "Escribe aquí el nombre de tu campo",
+        "option_placeholder": "Escribe tu opción",
+        "form_field_id": "6e151999-8810-48cc-86cf-aa5769f716d6"
       }/*,
       {
         "field_id": "0003",
