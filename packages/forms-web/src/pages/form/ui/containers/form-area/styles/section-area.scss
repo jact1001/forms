@@ -1,6 +1,6 @@
 @import '../../../../../../index';
 
-.form-section-area {
+.form-use-case-section-area {
     color: $fa-color-white-primary;
     display: flex;
     flex-wrap: wrap;
@@ -8,11 +8,12 @@
     width: 100%;
 
     &__field-container {
-        align-items: center;
         display: flex;
         flex-direction: column;
-        margin: 16px 0;
+        align-items: start;
+        justify-content: left;
+        padding: 16px;
         width: 100%;
-        max-width: 560px;
+        max-width: 450px;
     }
 }
