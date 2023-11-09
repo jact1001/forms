@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import '../styles/label.scss';
 
-const defaultClass = 'label';
+const defaultClass = 'form-use-case-label';
 
 interface ILabel {
     label:string;
