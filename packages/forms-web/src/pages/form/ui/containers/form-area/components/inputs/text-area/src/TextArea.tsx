@@ -4,7 +4,7 @@ import { updateSectionField } from "../../../../../../../data/state/effects/form
 import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
 
-const defaultClass = 'form-text-area';
+const defaultClass = 'form-use-case-text-area';
 
 interface TextAreaProps {
     field: ITextArea;
@@ -28,11 +28,15 @@ export const TextArea = ({field, sectionId}:TextAreaProps) => {
     }
 
     return (
-        <textarea 
-            className={ `${defaultClass}` } 
-            placeholder={ field.placeholder } 
-            value={ field.value } 
-            onChange={handleOnChange}
-        />
+        <div className={`${defaultClass}`}>
+            <textarea 
+                className={ `${defaultClass}__text` } 
+                placeholder={ field.placeholder } 
+                value={ field.value } 
+                onChange={handleOnChange}
+                required
+            />
+            <span className={`${defaultClass}__line`}/>
+        </div>
     )
 }
