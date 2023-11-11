@@ -4,7 +4,7 @@ import { updateSectionField } from "../../../../../../../data/state/effects/form
 import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
 
-const defaultClass = 'form-number-input';
+const defaultClass = 'form-use-case-number-input';
 
 interface NumberInputProps {
     field: INumber;
@@ -28,13 +28,17 @@ export const NumberInput = ({ field, sectionId }: NumberInputProps) => {
     }
 
     return (
+        <div className={`${defaultClass}`}>
             <input 
                 type={ field.type } 
-                className={ `${defaultClass}` }
+                className={ `${defaultClass}__text` }
                 placeholder={ field.placeholder }
                 min={ field.min } 
                 value={ field.value }
                 onChange={ handleOnChange }
+                required
             />
+            <span className={`${defaultClass}__line`}/>
+        </div>
     )
 }
