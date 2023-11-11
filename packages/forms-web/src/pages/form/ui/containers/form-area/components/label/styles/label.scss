@@ -1,46 +1,9 @@
 @import '../../../../../../../../index';
 
-.label {
+.form-use-case-label {
     display: flex;
     margin-bottom: 10px;
-
-    &__input-line {
-        position: relative;
-    }
-
-    &__line {
-        background: $fa-color-cyan-primary;
-        bottom: 0;
-        height: 1px;
-        left: 50%;
-        position: absolute;
-        transform: translateX(-50%);
-        transition: 0.3s all ease;
-        width: 0;
-    }
-
-    &__label-text {
-        background-color: $fa-color-blue-light;
-        border: none;
-        border-bottom: 1px solid $fa-color-gray-lighter;
-        border-radius: 0;
-        box-shadow: none;
-        color: $fa-color-white-primary;
-        font-size: 15px;
-        outline: none;
-        padding: 7px 7px 7px 12px;
-        width: 430px;
-
-        &:focus {
-            border-bottom: 1px solid $fa-color-blue-light;
-        }
-
-        &:focus + .label__line {
-            width: 100%;
-        }
-
-        &::placeholder {
-            color: $fa-color-gray-lighter;
-        }
-    }
+    padding-left: 20px;
+    width: 100%;
+    max-width: 450px;
 }

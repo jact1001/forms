@@ -11,7 +11,7 @@ import { TimeInput } from "../components/inputs/time-input/src/TimeInput";
 import { TFields } from "../../../../data/domain/IForm";
 import { inputsType } from "../components/build-input/src/BuildInput";
 
-const defaultClass = 'form-section-area';
+const defaultClass = 'form-use-case-section-area';
 
 interface ISectionArea {
     fields:TFields;
