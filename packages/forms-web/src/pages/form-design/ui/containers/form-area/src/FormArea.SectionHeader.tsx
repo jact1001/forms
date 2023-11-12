@@ -33,7 +33,7 @@ export const SectionHeader = ({sectionName, access, sectionId}: ISectionHeaderPr
             return {
                 userName: option.text,
                 userId: option.id,
-                permission: ['read']
+                permission: ['write']
             }
         })
         dispatch(updateSectionAccess(newAccess, sectionId));

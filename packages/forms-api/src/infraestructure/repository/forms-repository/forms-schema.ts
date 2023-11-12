@@ -33,6 +33,8 @@ export class Form implements IForm {
     form_name: string;
     @Property()
     state: string;
+    @Property()
+    author: string;
     @CollectionOf(Section)
     sections: Section[];
 }

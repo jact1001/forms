@@ -89,11 +89,11 @@ export const updateSectionName = (name: string, sectionId: string) => {
     }
 }
 
-export const addSection = (id: string) => {
+export const addSection = (id: string, authorAccess: IAccess) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.ADD_SECTION,
-            payload: id
+            payload: {id, authorAccess}
         });
     }
 }

@@ -27,7 +27,7 @@ export const Login = () => {
     }, [isLogin, loading, error, history, isLoginAction]);
 
     const onSuccessLogin = (credentialResponse: any) => {
-        dispatch(login(credentialResponse.credential));
+        dispatch(login(credentialResponse.credential, credentialResponse.email));
         setIsLoginAction(true);
     }
 
