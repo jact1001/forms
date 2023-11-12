@@ -14,9 +14,14 @@
     a {
       text-decoration: none;
       color: #fff;
-      margin: 10px;
-      font-size: 24px;
+      border-left: solid 1px;
+      padding: 0 24px;
+      font-size: 18px;
       font-weight: bold;
+
+      &:nth-child(1) {
+        border-left: none;
+      }
     }
   }
 

@@ -17,5 +17,6 @@ export interface IForm {
     id: string;
     form_name: string;
     state: string;
+    author: string;
     sections: ISection[];
 }

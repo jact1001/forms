@@ -35,6 +35,7 @@ export const Header = () => {
         <div className={defaultClass}>
             <div className={`${defaultClass}__menu`}>
                 <a href="/user-forms">Mis formularios</a>
+                <a href="/form-design">Diseño de formulario</a>
             </div>
             <button onClick={logoutHandler} className={`${defaultClass}__logout`}>
                 <ReturnIcon />

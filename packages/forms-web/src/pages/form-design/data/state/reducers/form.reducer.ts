@@ -117,7 +117,7 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
                 ...state,
                 form: {
                     ...state.form,
-                    sections: addSection(action.payload, state.form.sections, initialState)
+                    sections: addSection(action.payload.id, state.form.sections, initialState, action.payload.authorAccess)
                 }
             }
         default:

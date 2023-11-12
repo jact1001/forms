@@ -10,13 +10,14 @@ import { Form } from "./pages/form/ui/src/Form";
 function App() {
 
     const dispatch = useDispatch();
-    const isAuthenticated = sessionStorage.getItem('session');
+    const session = sessionStorage.getItem('session');
 
     useEffect(() => {
-        if (isAuthenticated) {
-            dispatch(setAccessAccepted());
+        if (session) {
+            const sessionObject = JSON.parse(session);
+            dispatch(setAccessAccepted(sessionObject?.email));
         }
-    }, [dispatch, isAuthenticated]);
+    }, [dispatch, session]);
 
     return (
         <Router>
