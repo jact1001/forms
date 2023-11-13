@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { ActionType as LoginActionTypes, Action as LoginAction } from '../actions/login.actions';
 import { callLogin, callLogout } from "../../../services/login-services";
 
-export const login = (tokenId: string, email: string) => {
+export const login = (tokenId: string) => {
     return async (dispatch: Dispatch<LoginAction>) => {
         dispatch({
             type: LoginActionTypes.LOGIN_PENDING
@@ -14,8 +14,7 @@ export const login = (tokenId: string, email: string) => {
                 type: LoginActionTypes.LOGIN_SUCCESS,
                 payload: data
             });
-            const session = {token: backendSession, email: email}
-            sessionStorage.setItem('session', JSON.stringify(session));
+            sessionStorage.setItem('session', backendSession);
         } catch (err: any) {
             dispatch({
                 type: LoginActionTypes.LOGIN_FAIL,
@@ -46,11 +45,10 @@ export const logout = () => {
     }
 }
 
-export const setAccessAccepted = (email: string) => {
+export const setAccessAccepted = () => {
     return async  (dispatch: Dispatch<LoginAction>) => {
         dispatch({
-            type: LoginActionTypes.SET_ACCESS_ACCEPTED,
-            payload: email
+            type: LoginActionTypes.SET_ACCESS_ACCEPTED
         });
     }
 }
