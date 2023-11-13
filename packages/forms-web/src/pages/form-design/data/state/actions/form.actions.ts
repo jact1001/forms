@@ -66,7 +66,7 @@ interface updateSectionFieldAction {
 
 interface addSectionAction {
     type: ActionType.ADD_SECTION;
-    payload: {id: string, authorAccess: IAccess};
+    payload: string;
 }
 
 interface updateSectionName {

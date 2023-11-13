@@ -13,6 +13,7 @@ export interface IUserForm {
     form_id: string;
     form_name: string;
     form_author: string;
+    is_author?: boolean;
     cases?: IFormCase [];
 }
 

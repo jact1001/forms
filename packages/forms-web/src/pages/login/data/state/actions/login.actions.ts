@@ -43,7 +43,6 @@ interface setAccessDenied {
 
 interface setAccessAccepted {
     type: ActionType.SET_ACCESS_ACCEPTED;
-    payload: string;
 };
 
 export type Action =

@@ -14,8 +14,7 @@ function App() {
 
     useEffect(() => {
         if (session) {
-            const sessionObject = JSON.parse(session);
-            dispatch(setAccessAccepted(sessionObject?.email));
+            dispatch(setAccessAccepted());
         }
     }, [dispatch, session]);
 

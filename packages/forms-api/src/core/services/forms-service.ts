@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
 import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
-import {IForm} from "../domain/form";
+import {IAccess, IForm, ISection} from "../domain/form";
 import {UsersUseCase} from "../use-cases/users-use-case";
 import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
 import {UseCaseUseCase} from "../use-cases/use-case-use-case";
@@ -43,8 +43,27 @@ export class FormsService implements OnDestroy {
         await this.saveSectionsUsers(form, useCases);
     }
 
+    private async setAccessSectionsToAuthor(form: IForm, author: string) {
+        const user = await this.usersUseCase.getUserByEmail(author);
+        const newAccess: IAccess = {
+            userId: author,
+            userName: `${user.user_name}`,
+            permission: ['write']
+        }
+        return {
+            ...form,
+            sections: form.sections.map((section:ISection) => {
+                return {
+                    ...section,
+                    access: section.access.concat(newAccess)
+                }
+            })
+        }
+    }
+
     public async saveForm(form: IForm, email: string): Promise<IForm> {
-        const newForm = await this.formRepository.saveForm({author: email, ...form});
+        const formUpdated = await this.setAccessSectionsToAuthor(form, email);
+        const newForm = await this.formRepository.saveForm({author: email, ...formUpdated});
         await this.createUserForms(newForm, email, []);
         return newForm;
     }

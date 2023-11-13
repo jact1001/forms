@@ -1,11 +1,11 @@
-import { Injectable, OnDestroy, Scope } from "@tsed/common";
-import { UserFormsRepository } from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
-import { IFormCase, IUserForms } from "../domain/user-forms";
-import { IUseCase } from "../domain/use-case";
-import { IForm } from "../domain/form";
-import { UsersUseCase } from "../use-cases/users-use-case";
-import { UseCaseUseCase } from "../use-cases/use-case-use-case";
-import { FormsRepository } from "../../infraestructure/repository/forms-repository/forms-repository";
+import {Injectable, OnDestroy, Scope} from "@tsed/common";
+import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
+import {IFormCase, IUserForm, IUserForms} from "../domain/user-forms";
+import {IUseCase} from "../domain/use-case";
+import {IForm} from "../domain/form";
+import {UsersUseCase} from "../use-cases/users-use-case";
+import {UseCaseUseCase} from "../use-cases/use-case-use-case";
+import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
 
 @Injectable()
 @Scope('request')
@@ -18,8 +18,28 @@ export class UserFormsService implements OnDestroy {
         private readonly useCaseUseCase: UseCaseUseCase
     ) {}
 
+    private async setIsAuthorToForm(userForms: IUserForms, userSession: string) {
+        const userFormsUpdated: IUserForms = {
+            user_id: userForms.user_id,
+            forms: userForms.forms.map((form: IUserForm) => {
+                if (form.form_author === userSession){
+                    return {
+                        form_id: form.form_id,
+                        form_name: form.form_name,
+                        form_author: form.form_author,
+                        cases: form.cases,
+                        is_author: true
+                    }
+                }
+                return form;
+            }),
+        }
+        return userFormsUpdated;
+    }
+
     public async getUserForms(email: string): Promise<IUserForms> {
-        return await this.userFormsRepository.findUserForms(email);
+        const userForms = await this.userFormsRepository.findUserForms(email);
+        return await this.setIsAuthorToForm(userForms, email);
     }
 
     public async saveUserForms(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
