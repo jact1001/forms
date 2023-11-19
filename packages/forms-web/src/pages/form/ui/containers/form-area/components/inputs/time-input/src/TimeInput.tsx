@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
 import TimeIcon from '../../../icons/time-icon';
 
-const defaultClass = 'form-time-input';
+const defaultClass = 'form-use-case-time-input';
 
 interface TimeInputProps {
     field: ITime;
@@ -29,14 +29,15 @@ export const TimeInput = ({field, sectionId}:TimeInputProps) => {
     }
 
     return (
-        <div className={ defaultClass }>
+        <div className={`${defaultClass}`}>
             <input 
                 type={ field.type }
-                className={ `${defaultClass}__format` } 
+                className={ `${defaultClass}__text` } 
                 value={ field.value }
                 onChange={ handleOnChange }
+                required
             />
-            <TimeIcon />
+            <span className={`${defaultClass}__line`}/>
         </div>
     )
 }
