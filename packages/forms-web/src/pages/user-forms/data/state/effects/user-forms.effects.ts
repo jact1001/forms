@@ -16,6 +16,7 @@ export const findUserForms = () => {
             });
 
         } catch (err: any) {
+            console.log('error', err);
             dispatch({
                 type: DetailActionTypes.QUERY_USER_FORMS_FAIL,
                 payload: err.message
