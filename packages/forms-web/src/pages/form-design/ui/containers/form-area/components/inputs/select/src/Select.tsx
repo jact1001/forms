@@ -26,14 +26,18 @@ export const Select = ({sectionId = '0', ...fileProps}: ISelectProps) => {
         dispatch(updateSectionField(newField, sectionId));
     }
 
-    const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {
+    const updateNewValues = (index: number, value: string) => {
         let newOptions = [...options];
         newOptions[index].text = value;
         setOptions(() => newOptions);
     }
 
+    const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {
+        updateNewValues(index, value);
+    }
+
     const handleOnBlur = ({target: {value}}: FocusEvent<HTMLInputElement>, index: number) => {
-        values[index].text = value;
+        updateNewValues(index, value);
         updateStoreField();
     }
 
