@@ -75,7 +75,8 @@ export class UserFormsService implements OnDestroy {
         const newFormCase = {...formCase, case_id: newUseCase.id};
         const userIds = await this.userFormsRepository.findUsersByFormId(formId, email);
         await this.saveUseCaseToOtherUsers(newFormCase, userIds, formId);
-        return await this.userFormsRepository.addUseCase(newFormCase, formId, email);
+        const userForms = await this.userFormsRepository.addUseCase(newFormCase, formId, email);
+        return await this.setIsAuthorToForm(userForms, email);
     }
 
     $onDestroy() {

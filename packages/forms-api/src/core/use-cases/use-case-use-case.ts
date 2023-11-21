@@ -17,8 +17,8 @@ export class UseCaseUseCase implements IUseCasePort, OnDestroy {
         return this.useCaseService.updateUseCase(useCase);
     }
 
-    public async getUseCasesByUseCaseId(caseId: string): Promise<IUseCase> {
-        return this.useCaseService.getUseCasesByUseCaseId(caseId);
+    public async getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase> {
+        return this.useCaseService.getUseCasesByUseCaseId(caseId, email);
     }
 
     public async getUseCasesByFormId(formId: string): Promise<IUseCase[]> {

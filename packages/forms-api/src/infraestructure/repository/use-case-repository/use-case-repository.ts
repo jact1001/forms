@@ -9,7 +9,7 @@ export class UseCaseRepository implements IUseCaseRepositoryPort, OnDestroy {
     @Inject(UseCase)
     private model: MongooseModel<UseCase>;
 
-    public async findUseCase (useCaseId: string) {
+    public async findUseCase (useCaseId: string, email: string) {
         return  await this.model.findOne({ id: useCaseId }).exec();
     }
 

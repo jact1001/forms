@@ -11,8 +11,9 @@ export class UseCaseController {
     public constructor(private readonly _useCaseUseCase: UseCaseUseCase) {}
 
     @Get("/:caseId")
-    async getUseCaseById(@PathParams('caseId') caseId: string, @Response() res: ExpressResponse): Promise<e.Response<any, Record<string, any>>> {
-        const useCase = await this._useCaseUseCase.getUseCasesByUseCaseId(caseId);
+    async getUseCaseById(@PathParams('caseId') caseId: string, @Response() res: ExpressResponse, @Context() ctx: Context): Promise<e.Response<string, Record<string, IUseCase>>> {
+        const email = ctx.get("email");
+        const useCase = await this._useCaseUseCase.getUseCasesByUseCaseId(caseId, email);
         if (!useCase) {
             return res.status(404).json({ error: `El caso de uso con el ID: ${caseId} no pudo ser encontrado` });
         }
