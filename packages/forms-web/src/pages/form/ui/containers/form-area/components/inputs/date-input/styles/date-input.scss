@@ -1,27 +1,45 @@
 @import '../../../../../../../../../index';
 
-.form-date-input {
-    background-color: $fa-color-blue-light;
-    border: none;
-    border-radius: 10px;
-    box-shadow: none;
+.form-use-case-date-input {
     display: flex;
-    height: 32px;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     margin-bottom: 10px;
-    outline: none;
-    padding: 7px 7px 7px 12px;
-    width: 430px;
 
-    &__format {
-        background-color: transparent;
-        border: none;
-        font-size: 15px;
-        color: $fa-color-white-primary;
+    &__line {
+        background: $fa-color-cyan-primary;
+        height: 1px;
+        transform: translateX(0%);
+        transition: 0.3s all ease;
+        width: 0;
+        max-width: 450px;
     }
 
-    svg {
-        fill: transparent;
-        opacity: 0.5;
+    &__text {
+        background-color: $fa-color-blue-light;
+        border: none;
+        border-bottom: 1px solid $fa-color-gray-lighter;
+        border-radius: 0;
+        box-shadow: none;
+        color: $fa-color-white-primary;
+        font-size: 15px;
+        outline: none;
+        padding: 7px 7px 7px 12px;
+        width: 100%;
+        height:35px;
+        max-width: 450px;
+
+        &:focus {
+            border-bottom: 1px solid $fa-color-blue-light;
+        }
+
+        &:focus + .form-use-case-date-input__line {
+            width: 100%;
+        }
+
+        &::placeholder {
+            color: $fa-color-gray-lighter;
+        }
     }
 }
