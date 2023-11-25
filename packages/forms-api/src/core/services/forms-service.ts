@@ -34,12 +34,7 @@ export class FormsService implements OnDestroy {
         }
     }
 
-    private async saveAdminUserForm(form: IForm, userId: string, useCases: IUseCase[]) {
-        await this.userFormsUseCase.saveUserForms(form, userId, useCases);
-    }
-
-    private async createUserForms(form: IForm, email: string, useCases: IUseCase[]){
-        await this.saveAdminUserForm(form, email, useCases);
+    private async createUserForms(form: IForm, useCases: IUseCase[]){
         await this.saveSectionsUsers(form, useCases);
     }
 
@@ -55,7 +50,7 @@ export class FormsService implements OnDestroy {
             sections: form.sections.map((section:ISection) => {
                 return {
                     ...section,
-                    access: section.access.concat(newAccess)
+                    access: section.access.find((access) => access.userId === author) ? section.access : section.access.concat(newAccess)
                 }
             })
         }
@@ -64,15 +59,15 @@ export class FormsService implements OnDestroy {
     public async saveForm(form: IForm, email: string): Promise<IForm> {
         const formUpdated = await this.setAccessSectionsToAuthor(form, email);
         const newForm = await this.formRepository.saveForm({author: email, ...formUpdated});
-        await this.createUserForms(newForm, email, []);
+        await this.createUserForms(newForm,[]);
         return newForm;
     }
 
     public async updateForm(form: IForm, email): Promise<IForm> {
         const formUpdated = await this.setAccessSectionsToAuthor(form, email);
         const newForm = await this.formRepository.updateForm(formUpdated);
-        const useCases = await this.caseUseCase.getUseCasesByFormId(newForm.id);
-        await this.createUserForms(newForm, email, useCases);
+        const useCases = await this.caseUseCase.updateFormUseCases(newForm);
+        await this.createUserForms(newForm, useCases);
         return newForm;
     }
 
