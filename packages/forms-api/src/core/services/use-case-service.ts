@@ -29,16 +29,20 @@ export class UseCaseService implements OnDestroy {
 
     public async updateFormUseCases(form: IForm): Promise<IUseCase[]> {
         const useCases = await this.useCaseRepository.findUseCasesByFormId(form.id);
-        form.sections.forEach((section) => {
-            useCases.forEach((useCase) => {
-                const updatedSection = useCase.sections.find((useCaseSection) => useCaseSection._id === section._id);
+        useCases.forEach((useCase) => {
+            form.sections.forEach((section) => {
+                const updatedSection = useCase.sections.find((useCaseSection) => useCaseSection.id.toString() === section.id.toString());
+                console.log('seccion a actualizar: ', updatedSection);
                 if (updatedSection) {
                     updatedSection.fields = updatedSection.fields.map((field) =>
                         field?.value ? field : section.fields.find((f) => f.form_field_id === field.form_field_id) || field
                     );
+                } else {
+                    useCase.sections.push(section);
                 }
             });
         });
+        console.log('Casos de uso actualizados',useCases);
         return useCases;
     }
 
