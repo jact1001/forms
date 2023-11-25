@@ -7,7 +7,7 @@ export interface IAccess {
 }
 
 export interface ISection {
-    _id: string;
+    id: string;
     sectionName: string;
     access: IAccess[];
     fields: Array<IField>;
