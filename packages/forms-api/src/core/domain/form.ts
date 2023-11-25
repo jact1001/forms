@@ -1,4 +1,4 @@
-import { TField } from "./form-fields";
+import { IField } from "./form-fields";
 
 export interface IAccess {
     userId: string;
@@ -10,7 +10,7 @@ export interface ISection {
     _id: string;
     sectionName: string;
     access: IAccess[];
-    fields: Array<TField>;
+    fields: Array<IField>;
 }
 
 export interface IForm {

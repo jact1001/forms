@@ -99,11 +99,14 @@ export interface ITime {
     isRequired: boolean;
     type: string;
     label: string;
-    value: string;
     label_placeholder: string;
 }
 
 export type TField = IText | ITextArea | IRadio | ICheckbox | ISelect | INumber | IEmail | IDate | ITime;
+
+export interface IField extends IText, ITextArea, IRadio, ICheckbox, ISelect, INumber, IEmail, IDate, ITime {
+    value: unknown
+}
 
 export interface IFormFields {
     _id: string;

@@ -1,7 +1,7 @@
 import { Model, ObjectID, Schema } from "@tsed/mongoose";
 import { CollectionOf, Property } from "@tsed/schema";
 import { IAccess, IForm, ISection } from "../../../core/domain/form";
-import { Checkbox, Date, Email, Number, Radio, Select, Text, TextArea, Time } from "../form-fields-repository/form-fields-schema";
+import {IField} from "../../../core/domain/form-fields";
 
 @Schema()
 export class Access implements IAccess {
@@ -22,7 +22,7 @@ export class Section implements ISection {
     @CollectionOf(Access)
     access: Access[];
     @Property()
-    fields: Array< Text | TextArea | Radio | Checkbox | Select | Number | Email | Date | Time >;
+    fields: Array<IField>;
 }
 
 @Model()
