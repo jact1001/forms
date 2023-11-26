@@ -1,7 +1,5 @@
 import { Dispatch } from 'redux';
 import { ActionType as DetailActionTypes, Action as DetailAction } from '../actions/form.actions';
-//import { ActionType as FormActionTypes, Action as FieldAction } from '../actions/form.actions';
-//import {getFormService, saveFormService, updateFormService} from "../../../services/form-services";
 import { getUseCase, updateUseCaseService } from "../../../services/form-services";
 import { TField } from '../../domain/IFormFields';
 import { IForm } from '../../domain/IForm';

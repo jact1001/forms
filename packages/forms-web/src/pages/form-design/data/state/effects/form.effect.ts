@@ -62,6 +62,15 @@ export const addSectionField = (field: TField, sectionId: string) => {
     }
 }
 
+export const removeSectionField = (fieldId: string, sectionId: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.REMOVE_SECTION_FIELD,
+            payload: {fieldId, sectionId}
+        });
+    }
+}
+
 export const updateSectionAccess = (access: IAccess[], sectionId: string) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
@@ -93,6 +102,15 @@ export const addSection = (id: string) => {
     return async  (dispatch: Dispatch<FieldAction>) => {
         dispatch({
             type: FormActionTypes.ADD_SECTION,
+            payload: id
+        });
+    }
+}
+
+export const removeSection = (id: string) => {
+    return async  (dispatch: Dispatch<FieldAction>) => {
+        dispatch({
+            type: FormActionTypes.REMOVE_SECTION,
             payload: id
         });
     }

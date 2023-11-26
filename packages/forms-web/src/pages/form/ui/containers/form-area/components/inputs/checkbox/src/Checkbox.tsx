@@ -19,16 +19,11 @@ export const Checkbox = ({field, sectionId}:CheckboxProps) => {
 
     const handleOnChange = ({ target: {value:val, checked} }: ChangeEvent<HTMLInputElement>) => {
         if(checked){
-            console.log("Dentro de if");
             const newValue=options.find((option)=>option.id===val)||options[0];
-            console.log("newValue", newValue);
             value?.push(newValue);
-            console.log("value", value);
             updateStoreField(value);
         } else {
-            console.log("Dentro de else");
             const newValue=value.filter((option)=>option.id!==val)||value[0];
-            console.log("newValue", newValue);
             updateStoreField(newValue);
         }
     }
@@ -53,6 +48,7 @@ export const Checkbox = ({field, sectionId}:CheckboxProps) => {
                                 id={ field_id + option.id }
                                 name={ field_id }
                                 value={ option.id }
+                                checked={Boolean(value.find((value)=>value.id === option.id))}
                                 onChange={ handleOnChange }
                             />{ option.text }
                         </label>
