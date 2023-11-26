@@ -20,7 +20,16 @@ export class UseCaseService implements OnDestroy {
     }
 
     public async getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase> {
-        return await this.useCaseRepository.findUseCase(caseId, email);
+        let useCase = await this.useCaseRepository.findUseCase(caseId, email);
+        return {
+            id: useCase.id,
+            case_name: useCase.case_name,
+            case_state: useCase.case_state,
+            form_id: useCase.form_id,
+            sections: useCase.sections.filter((section) => {
+                if (section.access.find((access) => access.userId === email)) return section;
+            })
+        }
     }
 
     public async getUseCasesByFormId(formId: string): Promise<IUseCase[]> {

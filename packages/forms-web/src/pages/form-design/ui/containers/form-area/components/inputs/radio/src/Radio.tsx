@@ -34,11 +34,12 @@ export const Radio = ({sectionId = '0', ...fieldProps}: IRadioProps) => {
 
     const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {
         updateNewValues(index, value);
+        updateStoreField();
     }
 
     const handleOnBlur = ({target: {value}}: FocusEvent<HTMLInputElement>, index: number) => {
-        updateNewValues(index, value);
-        updateStoreField();
+        /*updateNewValues(index, value);
+        updateStoreField();*/
     }
 
     const addOption = () => {
