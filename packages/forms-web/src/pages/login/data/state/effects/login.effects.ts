@@ -48,7 +48,7 @@ export const logout = () => {
 export const setAccessAccepted = () => {
     return async  (dispatch: Dispatch<LoginAction>) => {
         dispatch({
-            type: LoginActionTypes.SET_ACCESS_ACCEPTED,
+            type: LoginActionTypes.SET_ACCESS_ACCEPTED
         });
     }
 }

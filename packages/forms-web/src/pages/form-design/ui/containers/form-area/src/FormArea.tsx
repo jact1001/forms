@@ -18,7 +18,7 @@ const FormArea = () => {
                     <div className={`${defaultClass}__section-container`}>
                         {index === 0 ? <TimeLine type='start'/> : <TimeLine type='line'/>}
                         <div className={`${defaultClass}__form-section`}>
-                            <SectionHeader sectionId={id} sectionName={sectionName} access={access} />
+                            <SectionHeader sectionId={id} sectionName={sectionName} access={access} sectionsLength={sections.length} />
                             <SectionArea sectionFields={fields} sectionId={id} />
                         </div>
                         {index === sections.length - 1 ? <TimeLine type='end'/> : <TimeLine type='line'/>}

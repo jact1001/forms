@@ -20,7 +20,8 @@ axiosInstance.interceptors.response.use(
 
 axiosInstance.interceptors.request.use((config) => {
     if (config && config.headers){
-        config.headers['x-access-token'] = sessionStorage.getItem('session') || '';
+        const session = sessionStorage.getItem('session');
+        config.headers['x-access-token'] = session || '';
     }
     return config;
 })

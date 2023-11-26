@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
 import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
-import {IForm} from "../domain/form";
+import {IAccess, IForm, ISection} from "../domain/form";
 import {UsersUseCase} from "../use-cases/users-use-case";
 import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
 import {UseCaseUseCase} from "../use-cases/use-case-use-case";
@@ -34,25 +34,41 @@ export class FormsService implements OnDestroy {
         }
     }
 
-    private async saveAdminUserForm(form: IForm, userId: string, useCases: IUseCase[]) {
-        await this.userFormsUseCase.saveUserForms(form, userId, useCases);
-    }
-
-    private async createUserForms(form: IForm, email: string, useCases: IUseCase[]){
-        await this.saveAdminUserForm(form, email, useCases);
+    private async createUserForms(form: IForm, useCases: IUseCase[]){
         await this.saveSectionsUsers(form, useCases);
     }
 
+    private async setAccessSectionsToAuthor(form: IForm, author: string) {
+        const user = await this.usersUseCase.getUserByEmail(author);
+        const newAccess: IAccess = {
+            userId: author,
+            userName: `${user.user_name}`,
+            permission: ['write']
+        }
+        return {
+            ...form,
+            sections: form.sections.map((section:ISection) => {
+                return {
+                    ...section,
+                    access: section.access.find((access) => access.userId === author) ? section.access : section.access.concat(newAccess)
+                }
+            })
+        }
+    }
+
     public async saveForm(form: IForm, email: string): Promise<IForm> {
-        const newForm = await this.formRepository.saveForm(form);
-        await this.createUserForms(newForm, email, []);
+        const formUpdated = await this.setAccessSectionsToAuthor(form, email);
+        const newForm = await this.formRepository.saveForm({author: email, ...formUpdated});
+        await this.createUserForms(newForm,[]);
         return newForm;
     }
 
     public async updateForm(form: IForm, email): Promise<IForm> {
-        const newForm = await this.formRepository.updateForm(form);
-        const useCases = await this.caseUseCase.getUseCasesByFormId(newForm.id);
-        await this.createUserForms(newForm, email, useCases);
+        const formUpdated = await this.setAccessSectionsToAuthor(form, email);
+        const newForm = await this.formRepository.updateForm(formUpdated);
+        const useCases = await this.caseUseCase.updateFormUseCases(newForm);
+        console.log('useCases: ', useCases);
+        await this.createUserForms(newForm, useCases);
         return newForm;
     }
 
