@@ -29,21 +29,40 @@ export class UseCaseService implements OnDestroy {
 
     public async updateFormUseCases(form: IForm): Promise<IUseCase[]> {
         const useCases = await this.useCaseRepository.findUseCasesByFormId(form.id);
-        useCases.forEach((useCase) => {
-            form.sections.forEach((section) => {
-                const updatedSection = useCase.sections.find((useCaseSection) => useCaseSection.id.toString() === section.id.toString());
-                console.log('seccion a actualizar: ', updatedSection);
-                if (updatedSection) {
-                    updatedSection.fields = updatedSection.fields.map((field) =>
-                        field?.value ? field : section.fields.find((f) => f.form_field_id === field.form_field_id) || field
-                    );
+        const updatedUseCases: IUseCase[] = [];
+        for (const useCase of useCases) {
+            const updatedSections = useCase.sections.map((useCaseSection) => {
+                const matchingSection = form.sections.find((section, index) => useCaseSection.id.toString() === section.id.toString());
+                if (matchingSection) {
+                    return {
+                        id: useCaseSection.id,
+                        sectionName: matchingSection.sectionName,
+                        access: matchingSection.access,
+                        fields: useCaseSection.fields.map((field) =>
+                            field?.value ? field : matchingSection.fields.find((f) => f.form_field_id === field.form_field_id) || field
+                        )
+                    };
                 } else {
-                    useCase.sections.push(section);
+                    return useCaseSection;
                 }
             });
-        });
-        console.log('Casos de uso actualizados',useCases);
-        return useCases;
+
+            const updatedUseCase: IUseCase = {
+                id: useCase.id,
+                case_name: useCase.case_name,
+                case_state: useCase.case_state,
+                form_id: useCase.form_id,
+                sections: updatedSections
+            };
+
+            try {
+                const newUseCase = await this.updateUseCase(updatedUseCase);
+                updatedUseCases.push(newUseCase);
+            } catch (error) {
+                console.error(`Error updating use case: ${error.message}`);
+            }
+        }
+        return updatedUseCases;
     }
 
     $onDestroy() {
