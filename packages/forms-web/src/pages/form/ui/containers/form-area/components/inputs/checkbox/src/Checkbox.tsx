@@ -15,34 +15,23 @@ export const Checkbox = ({field, sectionId}:CheckboxProps) => {
 
     const dispatch = useDispatch();
 
-    const {type, field_id, options, values}= field;
+    const {type, field_id, options, value}= field;
 
-    const handleOnChange = ({ target: {value, checked} }: ChangeEvent<HTMLInputElement>) => {
-
+    const handleOnChange = ({ target: {value:val, checked} }: ChangeEvent<HTMLInputElement>) => {
         if(checked){
-            const newValue=options.find((option)=>option.id===value)||options[0];
-            const newVal=values.find((val)=>val.id===value)||values[0];
-            updateStoreField(newValue);
-            updateStoreField(newVal);
+            const newValue=options.find((option)=>option.id===val)||options[0];
+            value?.push(newValue);
+            updateStoreField(value);
         } else {
-            const newValue=values.filter((option)=>option.id!==value)||values[0];
-            updateStoreField2(newValue);
+            const newValue=value.filter((option)=>option.id!==val)||value[0];
+            updateStoreField(newValue);
         }
-
     }
 
-    const updateStoreField = (value:IOptionValue) => {
+    const updateStoreField = (value:IOptionValue[]) => {
         const newField = {
             ...field,
             value
-        }
-        dispatch(updateSectionField(newField, sectionId));
-    }
-
-    const updateStoreField2 = (values:IOptionValue[]) => {
-        const newField = {
-            ...field,
-            values
         }
         dispatch(updateSectionField(newField, sectionId));
     }
@@ -59,6 +48,7 @@ export const Checkbox = ({field, sectionId}:CheckboxProps) => {
                                 id={ field_id + option.id }
                                 name={ field_id }
                                 value={ option.id }
+                                checked={Boolean(value.find((value)=>value.id === option.id))}
                                 onChange={ handleOnChange }
                             />{ option.text }
                         </label>

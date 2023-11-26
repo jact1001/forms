@@ -11,11 +11,6 @@ export class FormsController {
 
     public constructor(private readonly _formsUseCase: FormsUseCase) {}
 
-    @Get("/")
-    async getForms(): Promise<IForm[]> {
-        return await this._formsUseCase.getForms();
-    }
-
     @Get("/:formId")
     async getFormById(@PathParams('formId') formId: string, @Response() res: ExpressResponse): Promise<e.Response<any, Record<string, any>>> {
         const form = await this._formsUseCase.getFormById(formId);

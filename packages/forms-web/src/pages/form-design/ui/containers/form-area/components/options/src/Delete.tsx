@@ -3,12 +3,16 @@ import '../styles/delete.scss';
 
 const defaultClass = 'delete';
 
-export const Delete = () => {
+interface IDeleteProps {
+    onClick: () => void;
+}
+
+export const Delete = ({onClick}: IDeleteProps) => {
 
     return (
-        <div className={`${defaultClass}`}>
+        <button onClick={onClick} className={`${defaultClass}`}>
             <DeleteIcon />
             <span className={`${defaultClass}__text`}>Eliminar</span>
-        </div>
+        </button>
     )
 }

@@ -5,7 +5,7 @@ import { ChangeEvent } from 'react';
 import DateIcon from '../../../icons/date-icon';
 import '../styles/date-input.scss';
 
-const defaultClass = 'form-date-input';
+const defaultClass = 'form-use-case-date-input';
 
 interface DateInputProps {
     field: IDate;
@@ -29,14 +29,15 @@ export const DateInput = ({ field, sectionId }: DateInputProps) => {
     }
 
     return (
-        <div className={defaultClass}>
+        <div className={`${defaultClass}`}>
             <input 
                 type={ field.type } 
-                className={ `${defaultClass}__format` } 
+                className={ `${defaultClass}__text` } 
                 value={ field.value }
                 onChange={ handleOnChange }
+                required
             />
-            <DateIcon />
+            <span className={`${defaultClass}__line`}/>
         </div>
     )
 }

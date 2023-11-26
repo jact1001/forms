@@ -1,7 +1,6 @@
-import axios from "axios";
-import { API_BASE_PATH } from "../../../config";
+import axiosInstance from "../interceptor/api-interceptor";
 
 export const getUsersService = async () => {
-    const { data } = await axios.get(`${API_BASE_PATH}/users`);
+    const { data } = await axiosInstance.get(`/users`);
     return data;
 }

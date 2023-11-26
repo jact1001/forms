@@ -10,7 +10,7 @@ import { addUseCase } from "../../data/state/effects/user-forms.effects";
 
 const defaultClass = 'form';
 
-export const Form = ({ form_name, cases, form_id }:IUserForm) => {
+export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -43,10 +43,12 @@ export const Form = ({ form_name, cases, form_id }:IUserForm) => {
                         <b>{form_name}</b>
                     </div>
                 </div>
-                <button onClick={editHandler} >Editar formulario</button>
-                <button onClick={createCase} >Crear caso</button>
-                <div className={isExpanded ? `${defaultClass}__arrow-up` : ""}>
-                    <ArrowDownIcon/>
+                <div className={`${defaultClass}__actions-container`}>
+                    <button className={`${defaultClass}__action-button`} onClick={editHandler} disabled={!is_author} >Editar formulario</button>
+                    <button className={`${defaultClass}__action-button`} onClick={createCase} >Crear caso</button>
+                    <div className={isExpanded ? `${defaultClass}__arrow-up` : `${defaultClass}__arrow-down`}>
+                        <ArrowDownIcon/>
+                    </div>
                 </div>
             </button>
             {isExpanded &&

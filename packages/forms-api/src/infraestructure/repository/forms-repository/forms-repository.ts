@@ -23,12 +23,11 @@ export class FormsRepository implements IFormRepositoryPort, OnDestroy {
     }
 
     public async updateForm (form: IForm) {
-        const formUpdated = await this.model.findOneAndUpdate(
-            { id: form.id },
-            { $set: form },
-            { new: true }
+        return await this.model.findOneAndUpdate(
+            {id: form.id},
+            {$set: form},
+            {new: true}
         ).exec();
-        return formUpdated;
     }
 
     $onDestroy(): void | Promise<any> {

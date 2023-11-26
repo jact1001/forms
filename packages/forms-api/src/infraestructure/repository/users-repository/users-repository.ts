@@ -1,17 +1,16 @@
-import { Inject, Injectable, OnDestroy } from "@tsed/common";
-import { MongooseModel } from "@tsed/mongoose";
-import { User } from "./users-schema";
-import { IUserRepositoryPort } from "../../../core/ports/users-ports/users-repository-port";
-import { IUser } from "../../../core/domain/user";
+import {Inject, Injectable, OnDestroy} from "@tsed/common";
+import {MongooseModel} from "@tsed/mongoose";
+import {User} from "./users-schema";
+import {IUserRepositoryPort} from "../../../core/ports/users-ports/users-repository-port";
+import {IUser} from "../../../core/domain/user";
 
 @Injectable()
 export class UsersRepository implements IUserRepositoryPort, OnDestroy {
     @Inject(User)
     private model: MongooseModel<User>;
 
-    public async findUsers () {
-        const users = await this.model.find().exec();
-        return users;
+    public async findUsers (email: string) {
+        return this.model.find({email: {$ne: email}});
     }
 
     public async saveUser (user: IUser) {
@@ -20,8 +19,7 @@ export class UsersRepository implements IUserRepositoryPort, OnDestroy {
     }
 
     public async findUserByEmail (email: string) {
-        const user = await this.model.findOne({email: email}).exec();
-        return user;
+        return await this.model.findOne({email: email}).exec();
     }
 
     $onDestroy(): void | Promise<any> {

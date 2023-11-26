@@ -4,7 +4,7 @@ import { updateSectionField } from "../../../../../../../data/state/effects/form
 import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
 
-const defaultClass = 'form-email-input';
+const defaultClass = 'form-use-case-email-input';
 
 interface EmailInputProps {
     field: IEmail;
@@ -28,12 +28,16 @@ export const EmailInput = ({ field, sectionId }:EmailInputProps) => {
     }
 
     return (
-        <input 
-            type={ field.type } 
-            className={ `${defaultClass}` }
-            placeholder={ field.placeholder } 
-            value={ field.value }
-            onChange={ handleOnChange }
-        />
+        <div className={`${defaultClass}`}>
+            <input 
+                type={ field.type } 
+                className={ `${defaultClass}__text` }
+                placeholder={ field.placeholder } 
+                value={ field.value }
+                onChange={ handleOnChange }
+                required
+            />
+            <span className={`${defaultClass}__line`}/>
+        </div>
     )
 }

@@ -26,15 +26,20 @@ export const Radio = ({sectionId = '0', ...fieldProps}: IRadioProps) => {
         dispatch(updateSectionField(newField, sectionId));
     }
 
-    const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {
+    const updateNewValues = (index: number, value: string) => {
         let newValues = [...options];
         newValues[index].text = value;
         setValues(() => newValues);
     }
 
-    const handleOnBlur = ({target: {value}}: FocusEvent<HTMLInputElement>, index: number) => {
-        options[index].text = value;
+    const handleOnChange = ({target: {value}}: ChangeEvent<HTMLInputElement>, index: number) => {
+        updateNewValues(index, value);
         updateStoreField();
+    }
+
+    const handleOnBlur = ({target: {value}}: FocusEvent<HTMLInputElement>, index: number) => {
+        /*updateNewValues(index, value);
+        updateStoreField();*/
     }
 
     const addOption = () => {

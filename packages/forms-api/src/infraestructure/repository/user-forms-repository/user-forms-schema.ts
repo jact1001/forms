@@ -26,6 +26,8 @@ export class UserForm implements IUserForm {
     form_id: string;
     @Property()
     form_name: string;
+    @Property()
+    form_author: string;
     @CollectionOf(FormCase)
     cases?: FormCase[];
 }

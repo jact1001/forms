@@ -47,7 +47,7 @@ export interface ICheckbox {
     is_required: boolean;
     type: string;
     label: string;
-    values: IOptionValue[];
+    value: IOptionValue[];
     name: string;
     checked: boolean;
     options: IOptionValue[];

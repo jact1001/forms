@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { addSectionField } from "../../../../data/state/effects/form.effect";
+import {addSectionField, removeSectionField} from "../../../../data/state/effects/form.effect";
 import { Label } from "../components/label/src/Label";
 import { v4 as uuidv4 } from 'uuid';
 import { inputsType } from "../components/build-input/src/BuildInput";
@@ -37,7 +37,10 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
         dispatch(addSectionField(newField, sectionId));
     };
 
-    console.info(isOver);
+    const removeField = (fieldId: string) => {
+        dispatch(removeSectionField(fieldId, sectionId));
+    }
+
     return (
         <div className={defaultClass} ref={ drop }>
             {sectionFields.map((field: any) => {
@@ -45,8 +48,8 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >
                         <Label field={field} sectionId={sectionId} />
-                        <Input key={field.label} {...field}/>
-                        <Delete />
+                        <Input key={field.label} sectionId={sectionId} {...field}/>
+                        {sectionFields.length > 1 && <Delete onClick={() => removeField(field.form_field_id)} />}
                     </div>
             })}
         </div>

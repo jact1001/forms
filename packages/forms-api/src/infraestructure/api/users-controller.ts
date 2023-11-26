@@ -1,9 +1,10 @@
-import { Context, Controller, Get, Post, Request, Response } from "@tsed/common";
+import {Context, Controller, Get, Post, Request, Response, UseBefore} from "@tsed/common";
 import { IUser } from "../../core/domain/user";
 import { UsersUseCase } from "../../core/use-cases/users-use-case";
 import { Response as ExpressResponse } from "express";
 import { OAuth2Client } from "google-auth-library";
 import * as jwt from 'jsonwebtoken';
+import {AuthTokenMiddleware} from "../middlewares/auth-middleware";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 const SECRET_KEY = process.env.SECRET_KEY || '';
@@ -14,9 +15,11 @@ export class UsersController {
     public constructor(private readonly _usersUseCase: UsersUseCase) {}
     private googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
+    @UseBefore(AuthTokenMiddleware)
     @Get("/")
-    async getUsers(): Promise<IUser[]> {
-        return await this._usersUseCase.getUsers();
+    async getUsers(@Context() ctx: Context): Promise<IUser[]> {
+        const email = ctx.get("email");
+        return await this._usersUseCase.getUsers(email);
     }
 
     @Post("/login")
@@ -40,6 +43,7 @@ export class UsersController {
         }
     }
 
+    @UseBefore(AuthTokenMiddleware)
     @Get("/logout")
     async logout(@Request() request, @Context() ctx: Context, @Response() res: ExpressResponse): Promise<any> {
         try {
