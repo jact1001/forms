@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { addSection } from "../../use-cases/use-add-section";
 import {updateSectionName} from "../../use-cases/use-update-section-name";
 import {updateSectionAccess} from "../../use-cases/use-update-section-access";
+import {removeSectionField} from "../../use-cases/use-remove-section-field";
+import {removeSection} from "../../use-cases/use-remove-section";
 
 export interface IFormState {
     form: IForm;
@@ -88,6 +90,14 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
                     sections: addSectionField(action.payload.sectionId, action.payload.field, state.form.sections)
                 }
             }
+        case ActionType.REMOVE_SECTION_FIELD:
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    sections: removeSectionField(action.payload.sectionId, action.payload.fieldId, state.form.sections)
+                }
+            }
         case ActionType.UPDATE_SECTION_ACCESS:
             return {
                 ...state,
@@ -118,6 +128,14 @@ const formReducer = (state: IFormState = initialState, action: Action): IFormSta
                 form: {
                     ...state.form,
                     sections: addSection(action.payload, state.form.sections, initialState)
+                }
+            }
+        case ActionType.REMOVE_SECTION:
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    sections: removeSection(action.payload, state.form.sections)
                 }
             }
         default:

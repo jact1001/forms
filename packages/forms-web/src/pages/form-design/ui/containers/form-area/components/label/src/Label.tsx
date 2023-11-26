@@ -15,7 +15,7 @@ interface LabelProps {
 export const Label = ( {field, sectionId}: LabelProps) => {
 
     const { label_placeholder } = field;
-    const [text, setText] = useState('');
+    const [text, setText] = useState(field.label);
     const dispatch = useDispatch();
 
     const updateStoreField = () => {
