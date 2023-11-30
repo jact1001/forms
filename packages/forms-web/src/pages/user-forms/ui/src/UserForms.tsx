@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import '../styles/user-forms.scss';
 import { FormTitle } from "./FormTitle";
 import { FormsList } from "./FormsList";
-import { HeadUserForm } from "./HeadUserForm";
 import { Redirect } from "react-router-dom";
 import { Header } from "../../../header/src/Header";
 import { useDispatch } from "react-redux";
@@ -27,7 +26,6 @@ export const UserForms = () => {
         <>
             <Header />
             <div className={`${defaultClass}`}>
-                <HeadUserForm/>
                 <div className={`${defaultClass}__forms-container`}>
                     <FormTitle/>
                     <FormsList/>
