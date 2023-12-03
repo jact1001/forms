@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { ActionType as DetailActionTypes, Action as DetailAction } from '../actions/form.actions';
 import { getUseCase, updateUseCaseService } from "../../../services/form-services";
 import { TField } from '../../domain/IFormFields';
-import { IForm } from '../../domain/IForm';
+import { IUseCase } from '../../domain/IUseCase';
 
 export const updateSectionField = (field: TField, sectionId: string) => {
     return async  (dispatch: Dispatch<DetailAction>) => {
@@ -34,7 +34,7 @@ export const findUseCase = (caseId: string) => {
     }
 }
 
-export const updateUseCase = (form: IForm) => {
+export const updateUseCase = (form: IUseCase) => {
     return async  (dispatch: Dispatch<DetailAction>) => {
         dispatch({
             type: DetailActionTypes.UPDATE_FORM_PENDING

@@ -1,4 +1,4 @@
-import { IForm } from "../../domain/IForm";
+import { IUseCase } from "../../domain/IUseCase";
 import { TField } from "../../domain/IFormFields";
 
 export enum ActionType {
@@ -17,7 +17,7 @@ interface updateActionPending {
 
 interface updateActionSuccess {
     type: ActionType.UPDATE_FORM_SUCCESS;
-    payload: IForm;
+    payload: IUseCase;
 }
 
 interface updateActionFail {
@@ -44,11 +44,11 @@ interface actionUpdateFormField {
     payload: {sectionId:string, field: TField};
 }
 
-export type Action = 
+export type Action =
     updateActionPending |
     updateActionSuccess |
     updateActionFail |
-    actionPending | 
-    actionSuccess | 
-    actionFail | 
+    actionPending |
+    actionSuccess |
+    actionFail |
     actionUpdateFormField;

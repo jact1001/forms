@@ -3,7 +3,8 @@
 .forms-title {
   &__title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
     background: $fa-color-blue-dark;
     border-radius: 15px;
     margin-bottom: 30px;
@@ -12,12 +13,15 @@
     width: 90%;
 
     b {
-      width: 290px;
-      height: 50px;
-      font-size: 37px;
-      line-height: 44px;
+      font-size: 24px;
       color: white;
       margin-left: 20px;
+    }
+
+    p {
+      font-size: 20px;
+      color: white;
+      margin: 0 0 0 20px;
     }
   }
 

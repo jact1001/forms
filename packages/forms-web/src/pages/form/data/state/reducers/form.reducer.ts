@@ -1,10 +1,10 @@
 import {Action, ActionType} from '../actions/form.actions';
-import {IForm} from '../../domain/IForm';
+import {IUseCase} from '../../domain/IUseCase';
 import {updateFormField} from "../../use-cases/use-update-form-field";
 
 
 interface State {
-    form: IForm ;
+    form: IUseCase ;
     loading: boolean;
     error: string | null;
     updateLoading: boolean;
@@ -12,7 +12,16 @@ interface State {
 }
 
 const initialState: State = {
-    form: {form_name:"",state:"",sections:[]},
+    form: {
+        form_name: "",
+        case_state: {
+            id: '',
+            name: ''
+        },
+        case_name: '',
+        form_id: '',
+        sections: []
+    },
     loading: false,
     error: null,
     updateLoading: false,

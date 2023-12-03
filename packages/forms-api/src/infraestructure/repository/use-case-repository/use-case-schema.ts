@@ -45,6 +45,8 @@ export class UseCase implements IUseCase {
     case_state: CaseState;
     @Property()
     form_id: string;
+    @Property()
+    form_name: string;
     @CollectionOf(Section)
     sections: Section[];
 }
