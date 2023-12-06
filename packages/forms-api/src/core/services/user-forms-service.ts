@@ -58,6 +58,7 @@ export class UserFormsService implements OnDestroy {
         const useCase: IUseCase = {
             case_name: formCase.name,
             form_id: formId,
+            form_name: form.form_name,
             case_state: { id: 'pending', name: 'Pendiente'},
             sections: form.sections
         }

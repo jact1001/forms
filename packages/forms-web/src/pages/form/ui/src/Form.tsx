@@ -19,8 +19,7 @@ interface RouteParams {
 export const Form = () => {
 
     const dispatch = useDispatch();
-    const { form, loading, error } = useFormStore((state) => state.form);
-    console.log("form: ",form); // Borrar console log
+    const { form, loading } = useFormStore((state) => state.form);
     const { caseId } = useParams<RouteParams>();
 
     useEffect(() => {
@@ -30,13 +29,15 @@ export const Form = () => {
     return (
         <>
             <Header />
-            <div className={`${defaultClass}`}>
-                    <FormTitle formName={form?.form_name}/>
+            {loading ?
+                <div>cargando...</div> :
+                <div className={`${defaultClass}`}>
+                    <FormTitle formName={form?.form_name} caseName={form.case_name}/>
                     <FormArea sections={form?.sections}/>
                     <FooterButtons />
                     <ToastContainer />
                 </div>
-
+            }
         </>
 
     );

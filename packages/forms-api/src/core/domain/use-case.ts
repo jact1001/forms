@@ -10,5 +10,6 @@ export interface IUseCase {
     case_name: string;
     case_state: ICaseState;
     form_id: string;
+    form_name: string;
     sections?: ISection[];
 }

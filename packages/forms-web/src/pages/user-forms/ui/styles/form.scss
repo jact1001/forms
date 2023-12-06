@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  margin-bottom: 2px;
-  margin-top: 30px;
+  margin: 12px 0;
 
   &__name-icon {
     display: flex;
@@ -15,12 +14,11 @@
     display: flex;
     align-items: center;
     b {
-      font-size: 29px;
-      line-height: 15px;
-      text-align: center;
+      font-size: 24px;
       color: #FFFFFF;
       font-weight: normal;
-      margin-left: 20px;
+      margin-left: 18px;
+      text-align: start;
     }
   }
 
@@ -77,14 +75,30 @@
     }
   }
 
-  @media screen and (max-width: 455px) {
+  @media screen and (max-width: 945px) {
+
+    &__arrow-button {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media screen and (max-width: 710px) {
     &__name b {
       font-size: 20px;
       margin-left: 5px;
     }
 
     &__arrow-button {
-      padding: 5px;
+      align-items: center;
+    }
+
+    &__actions-container {
+      flex-direction: column;
+    }
+
+    &__action-button {
+      margin: 8px;
     }
   }
 

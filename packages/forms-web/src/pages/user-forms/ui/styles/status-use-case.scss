@@ -32,13 +32,7 @@
     }
 
     &__status {
-      font-size: 20px;
-    }
-  }
-
-  @media screen and (max-width: 300px) {
-    &__status {
-      font-size: 15px;
+      display: none;
     }
   }
 }

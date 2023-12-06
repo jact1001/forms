@@ -8,7 +8,7 @@ import { TextInput } from "../components/inputs/text-input/src/TextInput";
 import { TextArea } from "../components/inputs/text-area/src/TextArea";
 import { Radio } from "../components/inputs/radio/src/Radio";
 import { TimeInput } from "../components/inputs/time-input/src/TimeInput";
-import { TFields } from "../../../../data/domain/IForm";
+import { TFields } from "../../../../data/domain/IUseCase";
 import { inputsType } from "../components/build-input/src/BuildInput";
 
 const defaultClass = 'form-use-case-section-area';

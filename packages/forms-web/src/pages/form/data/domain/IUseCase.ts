@@ -1,5 +1,10 @@
 import { ICheckbox, IDate, IEmail, INumber, IRadio, ISelect, IText, ITextArea, ITime } from "./IFormFields";
 
+export interface ICaseState {
+    id: string;
+    name: string;
+}
+
 export interface IAccess {
     userId: string;
     userName: string;
@@ -15,9 +20,11 @@ export interface ISection {
     fields: TFields;
 }
 
-export interface IForm {
+export interface IUseCase {
     id?: string;
+    case_name: string;
+    case_state: ICaseState;
+    form_id: string;
     form_name: string;
-    state: string;
     sections: ISection[];
 }
