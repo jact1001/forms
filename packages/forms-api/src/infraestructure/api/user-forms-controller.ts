@@ -4,6 +4,7 @@ import { UserFormsUseCase } from "../../core/use-cases/user-forms-use-case";
 import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
 import { Response as ExpressResponse } from "express";
 import * as ExcelJS from 'exceljs';
+import {IUseCase} from "../../core/domain/use-case";
 
 @Controller("/user-forms")
 @UseBefore(AuthTokenMiddleware)
@@ -25,44 +26,53 @@ export class UserFormsController {
 
     @Get("/export/:formId")
     async export(@PathParams('formId') formId: string, @Response() res: ExpressResponse, @Context() ctx: Context): Promise<any> {
-
         try {
             const email = ctx.get("email");
-            const useCases = await this._userFormsUseCase.exportUseCasesByFormId(formId, email);
-            // Crear un nuevo libro de Excel
+            const useCases: IUseCase[] = await this._userFormsUseCase.exportUseCasesByFormId(formId, email);
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet('Datos');
-
-            // Función para convertir los campos de las secciones en columnas
-            const convertirSeccionesEnColumnas = (section) => {
-                const columnas = {};
+            const fieldsSectionsToColumns = (section) => {
+                const columns = {};
                 section.fields.forEach((field) => {
-                    columnas[field.label] = field.value;
+                    columns[field.label] = field.value;
                 });
-                return columnas;
+                return columns;
             }
 
-            // Encabezados de columna basados en los campos de la primera sección
             const primerSeccion = useCases[0].sections[0];
             const encabezados = primerSeccion.fields.map(field => field.label);
 
+            const buildColumnsFieldsHeaders = () => {
+                const sectionsMapFields = new Map();
+                useCases.forEach((useCase) => {
+                    useCase.sections.forEach((section) => {
+                        const sectionFilesNames = section.fields.map(field => field.label);
+                        const lastSectionFilesNames = sectionsMapFields.get(section.id);
+                        const newSections = lastSectionFilesNames ?
+                            sectionFilesNames.concat(lastSectionFilesNames.filter(value => !sectionFilesNames.includes(value))): sectionFilesNames;
+                        sectionsMapFields.set(section.id.toString(), newSections);
+                    })
+                });
+                return Array.from(sectionsMapFields.values()).flatMap(array => array);
+            }
+
+            console.log(buildColumnsFieldsHeaders());
+
             // Agregar encabezados a la hoja de cálculo
-            worksheet.addRow(['Case Name', 'Case State', ...encabezados]);
+            worksheet.addRow(['Case Name', 'Case State', ...buildColumnsFieldsHeaders()]);
 
             // Agregar datos de cada JSON como una fila en la hoja de cálculo
             useCases.forEach((json) => {
                 const fila = [
                     json.case_name,
                     json.case_state.name,
-                    ...Object.values(convertirSeccionesEnColumnas(json.sections[0])),
+                    ...Object.values(fieldsSectionsToColumns(json.sections[0])),
                 ];
                 worksheet.addRow(fila);
             });
 
-            // Guardar el libro de Excel en un archivo temporal
             const nombreArchivoTemp = 'datos_temp.xlsx';
 
-            // Enviar el libro de Excel como respuesta
             res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             res.setHeader('Content-Disposition', `attachment; filename=${nombreArchivoTemp}`);
             await workbook.xlsx.write(res); // Utilizar res para escribir directamente en la respuesta HTTP
