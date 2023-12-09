@@ -24,7 +24,7 @@ export const FooterButtons = () => {
             }
             setIsSaving(false);
         }
-    }, [isSaving, updateLoading, updateError]);
+    }, [isSaving, updateLoading, updateError, form]);
 
     const handleSaveForm = () => {
         dispatch(updateUseCase(form));
