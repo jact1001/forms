@@ -1,9 +1,9 @@
 name: deploy dynamic-forms-api to EKS
 on:
   push:
-    branches: [ "mainx" ] # disabled
+    branches: [ "main" ] # disabled
   pull_request:
-    branches: [ "mainx" ] # disabled
+    branches: [ "main" ] # disabled
 
 jobs:
   deploy:
