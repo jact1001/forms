@@ -1,11 +1,5 @@
 import '../styles/section-header.scss';
-
-import { useDispatch } from "react-redux";
-
-import React, { ChangeEvent, useEffect } from "react";
-
-
-import { IOption, SelectWithCheckbox } from "../components/select-with-checkbox/src/SelectWithCheckbox";
+import React from "react";
 
 const defaultClass = 'form-section-header';
 

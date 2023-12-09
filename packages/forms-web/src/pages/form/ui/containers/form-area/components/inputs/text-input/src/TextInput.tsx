@@ -1,7 +1,6 @@
-import { IText, TField } from "../../../../../../../data/domain/IFormFields";
+import { IText } from "../../../../../../../data/domain/IFormFields";
 import { updateSectionField } from "../../../../../../../data/state/effects/form.effects";
 import '../styles/text-input.scss';
-import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
 

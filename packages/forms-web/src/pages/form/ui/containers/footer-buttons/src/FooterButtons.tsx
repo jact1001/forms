@@ -2,12 +2,9 @@ import '../styles/footer-buttons.scss';
 import { useDispatch } from "react-redux";
 
 import { updateUseCase } from "../../../../data/state/effects/form.effects";
-import {useHistory, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import { toast } from 'react-toastify';
 import { useFormStore } from '../../../../data/hooks/custom-typed-selector';
-import { validateForm } from '../../../../data/use-cases/use-validate-form';
-
 
 const defaultClass = 'form-use-case-footer-buttons';
 

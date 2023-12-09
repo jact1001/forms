@@ -1,7 +1,6 @@
 import '../styles/form-area.scss';
 import {SectionHeader} from "./FormArea.SectionHeader";
 import {SectionArea} from "./FormArea.SectionArea";
-import {TimeLine} from "../components/time-line/src/TimeLine";
 import { ISection } from '../../../../data/domain/IUseCase';
 
 const defaultClass = 'form-section-container';
