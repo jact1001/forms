@@ -1,4 +1,4 @@
-import {IAccess, ISection} from "../domain/IForm";
+import {ISection} from "../domain/IForm";
 import { IFormState } from "../state/reducers/form.reducer";
 
 export const addSection = (sectionId: string, sectionsState: ISection[], initialState:IFormState) => {
