@@ -5,21 +5,23 @@ import { Login } from "./pages/login/ui/src/Login";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAccessAccepted } from "./pages/login/data/state/effects/login.effects";
+import { Form } from "./pages/form/ui/src/Form";
 
 function App() {
 
     const dispatch = useDispatch();
-    const isAuthenticated = sessionStorage.getItem('session');
+    const session = sessionStorage.getItem('session');
 
     useEffect(() => {
-        if (isAuthenticated) {
+        if (session) {
             dispatch(setAccessAccepted());
         }
-    }, [dispatch, isAuthenticated]);
+    }, [dispatch, session]);
 
     return (
         <Router>
             <Switch>
+                <Route exact path='/form/:caseId?' component={Form} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/user-forms' component={UserForms} />
                 <Route exact path="/form-design/:formId?" component={FormDesign}/>

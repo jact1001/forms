@@ -10,10 +10,12 @@ export enum ActionType {
     GET_FORM_FAIL = 'GET_FORM_FAIL',
     UPDATE_FORM_NAME = 'UPDATE_FORM_NAME',
     ADD_SECTION_FIELD = 'ADD_SECTION_FIELD',
+    REMOVE_SECTION_FIELD = 'REMOVE_SECTION_FIELD',
     UPDATE_SECTION_ACCESS = 'UPDATE_SECTION_ACCESS',
     UPDATE_SECTION_FIELD = 'UPDATE_SECTION_FIELD',
     UPDATE_SECTION_NAME = 'UPDATE_SECTION_NAME',
     ADD_SECTION = 'ADD_SECTION',
+    REMOVE_SECTION = 'REMOVE_SECTION'
 }
 
 interface saveActionPending {
@@ -54,6 +56,11 @@ interface addSectionFieldAction {
     payload: {field: TField, sectionId: string};
 }
 
+interface removeSectionFieldAction {
+    type: ActionType.REMOVE_SECTION_FIELD;
+    payload: {fieldId: string, sectionId: string};
+}
+
 interface updateSectionAccessAction {
     type: ActionType.UPDATE_SECTION_ACCESS;
     payload: {access: IAccess[], sectionId: string};
@@ -66,6 +73,11 @@ interface updateSectionFieldAction {
 
 interface addSectionAction {
     type: ActionType.ADD_SECTION;
+    payload: string;
+}
+
+interface removeSectionAction {
+    type: ActionType.REMOVE_SECTION;
     payload: string;
 }
 
@@ -83,7 +95,9 @@ export type Action =
     getActionFail |
     updateFormNameAction |
     addSectionFieldAction |
+    removeSectionFieldAction |
     updateSectionAccessAction |
     updateSectionFieldAction |
     addSectionAction |
+    removeSectionAction |
     updateSectionName;

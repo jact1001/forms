@@ -9,8 +9,8 @@ export class UsersUseCase implements IUserApiPort, OnDestroy {
 
     constructor(private readonly usersService: UsersService) {}
 
-    public async getUsers(): Promise<IUser[]> {
-        return this.usersService.getUsers();
+    public async getUsers(email: string): Promise<IUser[]> {
+        return this.usersService.getUsers(email);
     }
 
     public async getUserByEmail(email: string): Promise<IUser> {

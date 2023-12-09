@@ -1,7 +1,7 @@
 import { Action, ActionType } from '../actions/login.actions';
 
 interface State {
-    isLogin: boolean
+    isLogin: boolean;
     loading: boolean;
     error: string | null;
 }

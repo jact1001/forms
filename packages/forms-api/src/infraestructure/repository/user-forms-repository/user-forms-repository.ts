@@ -12,7 +12,7 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
 
     public async saveUserForms (form: IForm, email: string, formCases: IFormCase[]) {
         const userForms = await this.model.findOne({ 'user_id': email });
-        const userForm: IUserForm = { form_id: form.id, form_name: form.form_name, cases: formCases }
+        const userForm: IUserForm = { form_id: form.id, form_name: form.form_name, cases: formCases, form_author: form.author }
         if (!userForms) {
             const newUserForms = new this.model({'user_id': email, forms: [userForm]});
             await newUserForms.save();
@@ -37,9 +37,7 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
 
     public async findUsersByFormId (formId: string, excludedUserId: string) {
         const users = await this.model.find({ 'forms.form_id': formId, user_id: { $ne: excludedUserId } }, 'user_id');
-        const userIds = users.map(user => user.user_id);
-        console.log(userIds);
-        return userIds;
+        return users.map(user => user.user_id);
     }
 
     public async addUseCase (formCase: IFormCase, formId: string, email: string) {

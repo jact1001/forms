@@ -1,0 +1,49 @@
+@import '../../../../index.scss';
+
+.forms-title {
+  &__title {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    background: $fa-color-blue-dark;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    padding: 15px 0;
+    width: 90%;
+
+    b {
+      font-size: 24px;
+      color: white;
+      margin-left: 20px;
+    }
+
+    p {
+      font-size: 20px;
+      color: white;
+      margin: 0 0 0 20px;
+    }
+  }
+
+  @media screen and (max-width: 455px) {
+
+    &__title {
+      padding: 5px;
+      b {
+        font-size: 25px;
+        margin-left: 5px;
+      }
+    }
+
+    &__icon-container {
+      padding-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 355px) {
+    &__title b {
+      font-size: 20px;
+    }
+  }
+
+}

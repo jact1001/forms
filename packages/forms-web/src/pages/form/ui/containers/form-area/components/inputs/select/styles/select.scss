@@ -1,0 +1,25 @@
+@import '../../../../../../../../../index';
+
+.form-select-group {
+    background-color: $fa-color-blue-light;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none;
+    color: $fa-color-white-primary;
+    display: flex;
+    font-size: 15px;
+    height: 35px;
+    margin-bottom: 10px;
+    outline: none;
+    padding: 7px 7px 7px 12px;
+    width: 430px;
+
+    &::placeholder {
+        color: $fa-color-gray-light;
+    }
+
+    &:focus {
+        border-bottom: 1px solid $fa-color-cyan-primary;
+    }
+
+}

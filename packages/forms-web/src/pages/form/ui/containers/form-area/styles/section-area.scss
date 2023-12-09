@@ -1,0 +1,19 @@
+@import '../../../../../../index';
+
+.form-use-case-section-area {
+    color: $fa-color-white-primary;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+
+    &__field-container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: left;
+        padding: 16px;
+        width: 100%;
+        max-width: 450px;
+    }
+}

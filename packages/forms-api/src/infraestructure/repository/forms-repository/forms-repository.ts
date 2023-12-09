@@ -1,8 +1,8 @@
-import { Inject, Injectable, OnDestroy } from "@tsed/common";
-import { MongooseModel } from "@tsed/mongoose";
-import { Form } from "./forms-schema";
-import { IFormRepositoryPort } from "../../../core/ports/forms-ports/forms-repository-port";
-import { IForm } from "../../../core/domain/form";
+import {Inject, Injectable, OnDestroy} from "@tsed/common";
+import {MongooseModel} from "@tsed/mongoose";
+import {Form} from "./forms-schema";
+import {IFormRepositoryPort} from "../../../core/ports/forms-ports/forms-repository-port";
+import {IForm} from "../../../core/domain/form";
 
 @Injectable()
 export class FormsRepository implements IFormRepositoryPort, OnDestroy {
@@ -10,13 +10,11 @@ export class FormsRepository implements IFormRepositoryPort, OnDestroy {
     private model: MongooseModel<Form>;
 
     public async findForms () {
-        const forms = await this.model.find().exec();
-        return forms;
+        return await this.model.find().exec();
     }
 
     public async findForm (formId: string) {
-        const form = await this.model.findOne({ id: formId }).exec();
-        return form;
+        return await this.model.findOne({id: formId}).exec();
     }
 
     public async saveForm (form: IForm) {
@@ -25,12 +23,11 @@ export class FormsRepository implements IFormRepositoryPort, OnDestroy {
     }
 
     public async updateForm (form: IForm) {
-        const formUpdated = await this.model.findOneAndUpdate(
-            { id: form.id },
-            { $set: form },
-            { new: true }
+        return await this.model.findOneAndUpdate(
+            {id: form.id},
+            {$set: form},
+            {new: true}
         ).exec();
-        return formUpdated;
     }
 
     $onDestroy(): void | Promise<any> {
