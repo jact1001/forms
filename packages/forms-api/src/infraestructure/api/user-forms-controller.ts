@@ -56,8 +56,6 @@ export class UserFormsController {
                 return Array.from(sectionsMapFields.values()).flatMap(array => array);
             }
 
-            console.log(buildColumnsFieldsHeaders());
-
             // Agregar encabezados a la hoja de cálculo
             worksheet.addRow(['Case Name', 'Case State', ...buildColumnsFieldsHeaders()]);
 
