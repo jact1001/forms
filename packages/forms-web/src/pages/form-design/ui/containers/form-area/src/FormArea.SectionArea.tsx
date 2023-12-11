@@ -41,6 +41,8 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
         dispatch(removeSectionField(fieldId, sectionId));
     }
 
+    console.info(isOver);
+
     return (
         <div className={defaultClass} ref={ drop }>
             {sectionFields.map((field: any) => {

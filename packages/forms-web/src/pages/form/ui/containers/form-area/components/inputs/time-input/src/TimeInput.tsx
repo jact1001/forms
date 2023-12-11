@@ -3,7 +3,6 @@ import { ITime } from '../../../../../../../data/domain/IFormFields';
 import { updateSectionField } from "../../../../../../../data/state/effects/form.effects";
 import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
-import TimeIcon from '../../../icons/time-icon';
 
 const defaultClass = 'form-use-case-time-input';
 

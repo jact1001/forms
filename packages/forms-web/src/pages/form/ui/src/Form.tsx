@@ -24,7 +24,7 @@ export const Form = () => {
 
     useEffect(() => {
         dispatch(findUseCase(caseId));
-    }, []);
+    }, [dispatch, caseId]);
 
     return (
         <>

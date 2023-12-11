@@ -1,4 +1,4 @@
-import { ISelect, IOptionValue } from "../../../../../../../data/domain/IFormFields";
+import { ISelect } from "../../../../../../../data/domain/IFormFields";
 import '../styles/select.scss';
 import { updateSectionField } from "../../../../../../../data/state/effects/form.effects";
 import { ChangeEvent } from 'react';

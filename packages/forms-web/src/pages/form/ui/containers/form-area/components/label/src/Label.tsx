@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import { ChangeEvent } from 'react';
-import { useDispatch } from 'react-redux';
-
 import '../styles/label.scss';
 
 const defaultClass = 'form-use-case-label';

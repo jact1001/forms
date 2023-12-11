@@ -1,7 +1,7 @@
 name: Deploy dynamic-forms-web to S3 - Cloudfront
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 

@@ -2,7 +2,7 @@ import {Injectable, OnDestroy, Scope} from "@tsed/common";
 import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 import {IFormCase, IUserForm, IUserForms} from "../domain/user-forms";
 import {IUseCase} from "../domain/use-case";
-import {IForm} from "../domain/form";
+import {IForm, ISection} from "../domain/form";
 import {UsersUseCase} from "../use-cases/users-use-case";
 import {UseCaseUseCase} from "../use-cases/use-case-use-case";
 import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
@@ -78,6 +78,14 @@ export class UserFormsService implements OnDestroy {
         await this.saveUseCaseToOtherUsers(newFormCase, userIds, formId);
         const userForms = await this.userFormsRepository.addUseCase(newFormCase, formId, email);
         return await this.setIsAuthorToForm(userForms, email);
+    }
+
+    public async exportUseCasesByFormId(formId: string, email: string) {
+        const userForms = await this.userFormsRepository.findUserForms(email);
+        if (userForms.forms.find((form) => form.form_id === formId)){
+            const useCases = await this.useCaseUseCase.getUseCasesByFormId(formId);
+            return useCases;
+        }
     }
 
     $onDestroy() {
