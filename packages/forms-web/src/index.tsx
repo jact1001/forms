@@ -10,6 +10,7 @@ import swDev from "./swDev";
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_CLIENT_ID || ' other value';
 
+console.log("result:", GOOGLE_CLIENT_ID)
 ReactDOM.render(
     <React.StrictMode>
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>

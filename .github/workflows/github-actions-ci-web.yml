@@ -33,7 +33,7 @@ jobs:
       - name: Build
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
-          REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_API_KEY }}
+          REACT_APP_CLIENT_ID: "bailando sabroso"
         run: cd packages/forms-web && npm run build
 
       #- name: Install AWS CLI
