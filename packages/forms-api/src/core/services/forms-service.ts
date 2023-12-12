@@ -48,6 +48,7 @@ export class FormsService implements OnDestroy {
         return {
             ...form,
             sections: form.sections.map((section:ISection) => {
+                delete section.id;
                 return {
                     ...section,
                     access: section.access.find((access) => access.userId === author) ? section.access : section.access.concat(newAccess)

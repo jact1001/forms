@@ -6,7 +6,7 @@ import { FormUseCase } from "./FormUseCase";
 import { IFormCase, IUserForm } from "../../data/domain/IUserForms";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUseCase } from "../../data/state/effects/user-forms.effects";
+import {addUseCase, downloadUserForm} from "../../data/state/effects/user-forms.effects";
 
 const defaultClass = 'form';
 
@@ -21,6 +21,10 @@ export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
 
     const editHandler = () => {
         history.push(`form-design/${form_id}`)
+    }
+
+    const download = () => {
+        dispatch(downloadUserForm(form_id));
     }
 
     const createCase = () => {
@@ -44,6 +48,7 @@ export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
                     </div>
                 </div>
                 <div className={`${defaultClass}__actions-container`}>
+                    <button className={`${defaultClass}__action-button`} onClick={download} disabled={!is_author} >Descargar casos</button>
                     <button className={`${defaultClass}__action-button`} onClick={editHandler} disabled={!is_author} >Editar formulario</button>
                     <button className={`${defaultClass}__action-button`} onClick={createCase} >Crear caso</button>
                     <div className={isExpanded ? `${defaultClass}__arrow-up` : `${defaultClass}__arrow-down`}>

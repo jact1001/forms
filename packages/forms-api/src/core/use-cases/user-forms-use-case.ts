@@ -26,6 +26,10 @@ export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
         return this.userFormService.createCase(userForm, formId, email);
     }
 
+    public async exportUseCasesByFormId(formId: string, email: string): Promise<any> {
+        return this.userFormService.exportUseCasesByFormId(formId, email);
+    }
+
     $onDestroy(): void | Promise<any> {
         throw new Error("Method not implemented.");
     }
