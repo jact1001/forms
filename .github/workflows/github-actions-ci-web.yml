@@ -27,13 +27,11 @@ jobs:
       - name: Install dependencies
         run: cd packages/forms-web && npm install
 
-      - name: Set Environment Variable
-        run: echo "REACT_APP_CLIENT_ID=${{ secrets.REACT_APP_CLIENT_ID }}" >> $GITHUB_ENV
-
       - name: Build
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
+          API_BASE_PATH: ${{ secrets.API_BASE_PATH }}
         run: cd packages/forms-web && npm run build
 
       #- name: Install AWS CLI
