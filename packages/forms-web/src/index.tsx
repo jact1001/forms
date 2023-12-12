@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import {store} from "./store";
 import swDev from "./swDev";
 
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '';
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_CLIENT_ID || ' other value';
 
 ReactDOM.render(
     <React.StrictMode>
