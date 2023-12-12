@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {store} from "./store";
-import swDev from "./swDev";
+//import swDev from "./swDev";
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '';
 
