@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import {store} from "./store";
 import swDev from "./swDev";
 
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_CLIENT_ID || ' other value';
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -20,5 +20,5 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
 );
-swDev();
+//swDev();
 reportWebVitals();
