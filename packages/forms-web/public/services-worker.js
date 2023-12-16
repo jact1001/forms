@@ -10,6 +10,16 @@ self.addEventListener('install', (event) => {
     );
 });
 
+self.addEventListener('message', function(event) {
+    if (event.data && event.data.command === 'online') {
+        // Manejar eventos cuando la conexión está online
+        console.log('Service Worker: La conexión está online');
+    } else if (event.data && event.data.command === 'offline') {
+        // Manejar eventos cuando la conexión está offline
+        console.log('Service Worker: La conexión está offline');
+    }
+});
+
 self.addEventListener('fetch', (event) => {
     const request = event.request;
     const requestUrl = new URL(request.url);
@@ -66,11 +76,14 @@ self.addEventListener('fetch', (event) => {
     }
 
     function getCaches () {
-        event.respondWith(
-            caches.match(request).then((response) => {
-                return response || fetch(request);
-            })
-        );
+        if (!navigator.onLine) {
+            console.log('estamos trayendo data de cache');
+            event.respondWith(
+                caches.match(request).then((response) => {
+                    return response || fetch(request);
+                })
+            );
+        }
     }
 
     apiCache();
