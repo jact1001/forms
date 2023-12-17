@@ -2,7 +2,6 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open('offline-cache').then((cache) => {
             return cache.addAll([
-                '/api/user-forms',
                 '/favicon.ico',
                 '/logo192.png',
                 '/manifest.json',
@@ -11,61 +10,85 @@ self.addEventListener('install', (event) => {
     );
 });
 
+self.addEventListener('message', function(event) {
+    if (event.data && event.data.command === 'online') {
+        // Manejar eventos cuando la conexión está online
+        console.log('Service Worker: La conexión está online');
+    } else if (event.data && event.data.command === 'offline') {
+        // Manejar eventos cuando la conexión está offline
+        console.log('Service Worker: La conexión está offline');
+    }
+});
+
 self.addEventListener('fetch', (event) => {
     const request = event.request;
     const requestUrl = new URL(request.url);
 
-    // Handle JSON responses
-    if (requestUrl.pathname === '/api/user-formsss') {
-        event.respondWith(
-            fetch(request).then((response) => {
-                // Clone the response to cache it
-                const clonedResponse = response.clone();
-
-                // Cache the response
-                caches.open('data-cache').then((cache) => {
-                    cache.put(request, clonedResponse);
-                });
-
-                return response;
-            }).catch(() => {
-                // If the network request fails, try to retrieve the response from cache
-                return caches.match(request);
-            })
-        );
-        return;
-    }
-
-    // Handle PNG files
-    if (requestUrl.pathname.endsWith('.png')) {
-        event.respondWith(
-            caches.match(request).then((response) => {
-                // If the PNG file is found in cache, return it
-                if (response) {
-                    return response;
-                }
-
-                // If the PNG file is not found in cache, fetch it from the network
-                return fetch(request).then((networkResponse) => {
-                    // Clone the response to cache it
-                    const clonedResponse = networkResponse.clone();
-
-                    // Cache the response
-                    caches.open('image-cache').then((cache) => {
+    function apiCache () {
+        if (requestUrl.pathname.includes('/api/')) {
+            event.respondWith(
+                fetch(request).then((response) => {
+                    const clonedResponse = response.clone();
+                    caches.open('data-cache').then((cache) => {
                         cache.put(request, clonedResponse);
                     });
-
-                    return networkResponse;
-                });
-            })
-        );
-        return;
+                    return response;
+                }).catch(() => {
+                    return caches.match(request);
+                })
+            );
+        }
     }
 
-    // For all other requests, use the default fetch behavior
-    event.respondWith(
-        caches.match(request).then((response) => {
-            return response || fetch(request);
-        })
-    );
+    function useCaseCache () {
+        if (requestUrl.pathname.includes('/form/')) {
+            event.respondWith(
+                fetch(request).then((response) => {
+                    const clonedResponse = response.clone();
+                    caches.open('data-cache').then((cache) => {
+                        cache.put(request, clonedResponse);
+                    });
+                    return response;
+                }).catch(() => {
+                    return caches.match(request);
+                })
+            );
+        }
+    }
+
+    function imageCache () {
+        if (requestUrl.pathname.endsWith('.png')) {
+            event.respondWith(
+                caches.match(request).then((response) => {
+                    if (response) {
+                        return response;
+                    }
+                    return fetch(request).then((networkResponse) => {
+                        const clonedResponse = networkResponse.clone();
+                        caches.open('image-cache').then((cache) => {
+                            cache.put(request, clonedResponse);
+                        });
+                        return networkResponse;
+                    });
+                })
+            );
+        }
+    }
+
+    function getCaches () {
+        if (!navigator.onLine) {
+            console.log('estamos trayendo data de cache');
+            event.respondWith(
+                caches.match(request).then((response) => {
+                    return response || fetch(request);
+                })
+            );
+        }
+    }
+
+    apiCache();
+    imageCache();
+    getCaches();
+    useCaseCache();
+
 });

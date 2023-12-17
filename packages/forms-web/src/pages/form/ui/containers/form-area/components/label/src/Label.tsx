@@ -8,11 +8,9 @@ interface ILabel {
 
 export const Label = ({label}:ILabel) => {
 
-
     return (
         <div className={defaultClass}>
             {label}
         </div>
     )
-
 }

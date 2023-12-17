@@ -1,15 +1,11 @@
 @import '../../../../../../../../../index';
 
-.radio-group {
+.form-radio-group {
     align-items: center;
     display: flex;
     gap: 20px;
     margin-bottom: 10px;
     text-align: left;
-
-    &__options-container {
-        width: 430px;
-    }
 
     &__radio {
         accent-color:  $fa-color-cyan-primary;

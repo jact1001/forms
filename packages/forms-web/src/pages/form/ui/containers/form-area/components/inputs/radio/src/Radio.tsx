@@ -4,7 +4,7 @@ import { updateSectionField } from "../../../../../../../data/state/effects/form
 import React, { ChangeEvent } from 'react';
 import { useDispatch } from "react-redux";
 
-const defaultClass = 'radio-group';
+const defaultClass = 'form-radio-group';
 
 interface IInputRadio {
     field: IRadio;
