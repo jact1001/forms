@@ -48,7 +48,6 @@ export class FormsService implements OnDestroy {
         return {
             ...form,
             sections: form.sections.map((section:ISection) => {
-                delete section.id;
                 return {
                     ...section,
                     access: section.access.find((access) => access.userId === author) ? section.access : section.access.concat(newAccess)
@@ -68,7 +67,6 @@ export class FormsService implements OnDestroy {
         const formUpdated = await this.setAccessSectionsToAuthor(form, email);
         const newForm = await this.formRepository.updateForm(formUpdated);
         const useCases = await this.caseUseCase.updateFormUseCases(newForm);
-        console.log('useCases: ', useCases);
         await this.createUserForms(newForm, useCases);
         return newForm;
     }

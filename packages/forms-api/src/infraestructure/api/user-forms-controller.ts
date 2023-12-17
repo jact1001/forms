@@ -43,11 +43,16 @@ export class UserFormsController {
                 const sectionsMapFields = new Map();
                 useCases.forEach((useCase) => {
                     useCase.sections.forEach((section) => {
-                        const sectionFilesNames = section.fields.map(field => field.label);
-                        const lastSectionFilesNames = sectionsMapFields.get(section.id);
+                        const sectionId = section.id.toString();
+                        console.log('sectionId: ', sectionId);
+                        const sectionFilesNames = section.fields.map(field => `${field.label} (${section.sectionName})`);
+                        console.log('sectionFilesNames: ', sectionFilesNames);
+                        const lastSectionFilesNames = sectionsMapFields.get(sectionId);
+                        console.log('lastSectionFilesNames: ', lastSectionFilesNames);
                         const newSections = lastSectionFilesNames ?
                             sectionFilesNames.concat(lastSectionFilesNames.filter(value => !sectionFilesNames.includes(value))): sectionFilesNames;
-                        sectionsMapFields.set(section.id.toString(), newSections);
+                        console.log('newSections: ', newSections);
+                        sectionsMapFields.set(sectionId, newSections);
                     })
                 });
                 return Array.from(sectionsMapFields.values()).flatMap(array => array);
