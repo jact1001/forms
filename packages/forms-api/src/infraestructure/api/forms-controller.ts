@@ -3,7 +3,6 @@ import { FormsUseCase } from "../../core/use-cases/forms-use-case";
 import { IForm } from "../../core/domain/form";
 import e, { Response as ExpressResponse } from 'express';
 import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
-import * as jwt from 'jsonwebtoken';
 
 @Controller("/forms")
 @UseBefore(AuthTokenMiddleware)

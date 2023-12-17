@@ -15,6 +15,11 @@ export class UsersController {
     public constructor(private readonly _usersUseCase: UsersUseCase) {}
     private googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
+    @Get('/health')
+    async health(): Promise<{ status: string }> {
+        return { status: 'OK' };
+    }
+
     @UseBefore(AuthTokenMiddleware)
     @Get("/")
     async getUsers(@Context() ctx: Context): Promise<IUser[]> {
