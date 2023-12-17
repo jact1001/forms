@@ -31,24 +31,20 @@ export const Select = ({field, sectionId}: ISelectProps) => {
     }
 
     return (
-    <>
-        <div >
-            <select 
-                id={ field_id }
-                className={`${defaultClass}`} 
-                onChange={ handleOnChange }
-            >
-                {values.map((value) => {
-                return (
-                    <option 
-                        value={value.text}  
-                    >
-                    {value.text}
-                    </option>
-                )
-        })}
-        </select>
-        </div>
-    </>
+        <select
+            id={ field_id }
+            className={`${defaultClass}`}
+            onChange={ handleOnChange }
+        >
+            {values.map((value) => {
+            return (
+                <option
+                    value={value.text}
+                >
+                {value.text}
+                </option>
+            )
+    })}
+    </select>
     )
 }

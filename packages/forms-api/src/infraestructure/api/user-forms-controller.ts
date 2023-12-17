@@ -29,6 +29,7 @@ export class UserFormsController {
         try {
             const email = ctx.get("email");
             const useCases: IUseCase[] = await this._userFormsUseCase.exportUseCasesByFormId(formId, email);
+            const formName = useCases.length && useCases[0].form_name;
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet('Datos');
             const fieldsSectionsToColumns = (section) => {
@@ -38,10 +39,6 @@ export class UserFormsController {
                 });
                 return columns;
             }
-
-            const primerSeccion = useCases[0].sections[0];
-            const encabezados = primerSeccion.fields.map(field => field.label);
-
             const buildColumnsFieldsHeaders = () => {
                 const sectionsMapFields = new Map();
                 useCases.forEach((useCase) => {
@@ -55,11 +52,7 @@ export class UserFormsController {
                 });
                 return Array.from(sectionsMapFields.values()).flatMap(array => array);
             }
-
-            // Agregar encabezados a la hoja de cálculo
             worksheet.addRow(['Case Name', 'Case State', ...buildColumnsFieldsHeaders()]);
-
-            // Agregar datos de cada JSON como una fila en la hoja de cálculo
             useCases.forEach((json) => {
                 const fila = [
                     json.case_name,
@@ -68,11 +61,9 @@ export class UserFormsController {
                 ];
                 worksheet.addRow(fila);
             });
-
-            const nombreArchivoTemp = 'datos_temp.xlsx';
-
+            const TempName = `${formName}.xlsx`;
             res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            res.setHeader('Content-Disposition', `attachment; filename=${nombreArchivoTemp}`);
+            res.setHeader('Content-Disposition', `attachment; filename=${TempName}`);
             await workbook.xlsx.write(res); // Utilizar res para escribir directamente en la respuesta HTTP
         } catch (error) {
             console.error('Error al generar el archivo Excel:', error);

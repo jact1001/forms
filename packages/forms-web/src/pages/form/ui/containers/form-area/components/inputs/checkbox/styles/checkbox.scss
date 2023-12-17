@@ -7,11 +7,11 @@
     box-shadow: none;
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 10px;
     text-align: left;
     padding: 7px 7px 7px 12px;
-    width: 430px;
     min-height: 35px;
 
     &__options-container {
