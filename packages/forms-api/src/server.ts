@@ -6,7 +6,7 @@ import {SignatureResponseFilter} from "./infraestructure/filters/signature-filte
 import * as rest from "./infraestructure/api";
 import * as cors from "cors";
 const MONGOOSE_URL = process.env.MONGOOSE_URL || '';
-
+const ENVIRONMENT = process.env.ENVIRONMENT || 'DEV';
 @Configuration(
     {
         rootDir: Path.resolve(__dirname, '../'),
@@ -48,7 +48,7 @@ export class Server {
             cors = require('cors');
 
         const corsOptions: cors.CorsOptions = {
-            origin: "http://localhost:3000",
+            origin: this.getAllowOrigins(),
             methods: ["GET", "POST", "PUT", "DELETE"],
             credentials: true,
         };
@@ -62,5 +62,14 @@ export class Server {
             .use(bodyParser.urlencoded({
                 extended: true
             }));
+    }
+    /**
+     * Return the origins allowed to use the API
+     * **/
+    private getAllowOrigins(): string {
+        if(ENVIRONMENT != "DEV"){
+            return "https://dsb471zsol61i.cloudfront.net"
+        }
+        return "http://localhost:3000"
     }
 }
