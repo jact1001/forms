@@ -17,7 +17,7 @@ in the root of the directory where the project was downloaded:
 ## Main packages
 The project has two defined components, Front-end and Back-end, which correspond to the following, respectively
 
-  * __forms-api__ runs at http://localhost:5001
+  * __forms-api__ runs at http://localhost:8080
   * __forms-web__ runs at http://localhost:3000
 
 
@@ -25,7 +25,7 @@ The project has two defined components, Front-end and Back-end, which correspond
 
 ## forms-api
 
-This project is build with Node Js and Express, and makes a REST API available. Ex: http://localhost:5001/
+This project is build with Node Js and Express, and makes a REST API available. Ex: http://localhost:8080/
 Run with the next lines:
 1. `cd packages/forms-api`
 2. `npm run start`
