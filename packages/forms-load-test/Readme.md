@@ -3,7 +3,14 @@
 ### linux
 `sudo apt-get install k6`
 
-### windows 
+### Mac
+`brew install k6`
+
+`export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"`
+
+`source ~/.zshrc`
+
+### windows
 https://dl.k6.io/msi/k6-latest-amd64.msi
 
 `choco install k6`
@@ -17,12 +24,12 @@ Inicializar el servidor de influxdb y grafana la primera vez
 docker run --ulimit nofile=66000:66000 -d --name docker-statsd-influxdb-grafana -p 3003:3003 -p 3004:8888 -p 8086:8086 -p 8125:8125/udp samuelebistoletti/docker-statsd-influxdb-grafana:latest
 ```
 
-Inicializar el servidor de influxdb y grafana 
+Inicializar el servidor de influxdb y grafana
 ```
 docker start docker-statsd-influxdb-grafana
 ```
 
-Cuando se trata de la primera ejecución es importante crear el data source en la url 
+Cuando se trata de la primera ejecución es importante crear el data source en la url
 http://localhost:3003/datasources en ese formulario de creación es importante seleccionar los siguientes campos:
 
 Name: Influx_db_challenge
