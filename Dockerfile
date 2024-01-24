@@ -7,7 +7,7 @@ COPY ./packages/forms-api /packages/forms-api
 
 RUN npm install
 RUN npm install ts-node
-RUN npm build
+RUN npm run build
 EXPOSE 8080
 
 
