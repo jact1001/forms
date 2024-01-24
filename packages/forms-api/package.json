@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/test-main.ts",
+    "start": "node test-server.js",
     "serve": "nodemon src/test-main.ts",
     "build": "tsc",
     "test": "echo testing node js project",
