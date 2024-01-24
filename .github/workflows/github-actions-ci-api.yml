@@ -52,3 +52,6 @@ jobs:
 
       - name: Apply HPA
         run: kubectl apply -f hpa.yaml
+
+      - name: Get services
+        run: kubectl get services
