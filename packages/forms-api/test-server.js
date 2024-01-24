@@ -16,7 +16,7 @@ const HOST = '0.0.0.0';
 const app = express();
 app.get('/', (req, res) => {
   res.statusCode = 200;
-  const msg = 'Hello from dynamic forms, this was awesome';
+  const msg = '¡Hola Mundo desde forms Johhny!';
   res.send(msg);
 });
 
