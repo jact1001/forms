@@ -10,6 +10,6 @@ RUN npm install ts-node
 
 EXPOSE 8080
 
-CMD [ "npm ", "start" ]
+#CMD [ "npm ", "start" ]
 #CMD [ "ts-node", "src/main.ts" ]
-#CMD [ "node", "test-server.js" ]
+CMD [ "node", "test-server.js" ]
