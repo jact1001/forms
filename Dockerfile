@@ -7,10 +7,11 @@ COPY ./packages/forms-api /packages/forms-api
 
 RUN npm install
 RUN npm install ts-node
-
+RUN npm build
 EXPOSE 8080
 
 
-#CMD [ "npm start " ]
-CMD [ "ts-node", "src/test-main.ts" ]
-#CMD [ "node", "test-server.js" ]
+#CMD [ "npm start " ] #No funciona
+#CMD [ "ts-node", "src/test-main.ts" ] #no funciona
+#CMD [ "node", "test-server.js" ] #si funciona
+CMD [ "node", "bin/test-main.js" ]
