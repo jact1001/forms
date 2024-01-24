@@ -5,6 +5,6 @@ export class HealthController {
 
     @Get('')
     async health(): Promise<{ status: string }> {
-        return { status: 'OK' };
+        return { status: 'OK.' };
     }
 }
