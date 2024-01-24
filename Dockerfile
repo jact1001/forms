@@ -14,4 +14,5 @@ EXPOSE 8080
 #CMD [ "npm start " ] #No funciona
 #CMD [ "ts-node", "src/test-main.ts" ] #no funciona
 #CMD [ "node", "test-server.js" ] #si funciona
-CMD [ "node", "bin/test-main.js" ]
+#CMD [ "node", "bin/test-main.js" ] #si funciona
+CMD [ "node", "bin/main.js" ]
