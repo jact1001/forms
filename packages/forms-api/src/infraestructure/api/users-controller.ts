@@ -38,8 +38,10 @@ export class UsersController {
                 maxAge: 3600000,
             });
             return res.status(200).json({success: true, session: loginToken});
-        } catch (error) {
-            return res.status(403).json({ error: 'Token invalido'+error });
+        } catch (error) {-
+            console.log('Token:', token);
+            console.log('GOOGLE_CLIENT_ID:', GOOGLE_CLIENT_ID);
+            return res.status(403).json({ error: 'Token invalido. ' + error });
         }
     }
 
