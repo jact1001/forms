@@ -39,7 +39,7 @@ export class UsersController {
             });
             return res.status(200).json({success: true, session: loginToken});
         } catch (error) {
-            return res.status(501).json({ error: 'Token invalido' });
+            return res.status(403).json({ error: 'Token invalido' });
         }
     }
 
