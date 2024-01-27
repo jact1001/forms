@@ -27,36 +27,26 @@ export class UsersController {
     @Post("/login")
     async login(@Request() request, @Context() ctx: Context, @Response() res: ExpressResponse): Promise<any> {
         const token = request.headers["authorization"].split(" ")[1];
-        let step = '0'
         let loginToken: any = "empty";
         try {
             const ticket = await this.googleClient.verifyIdToken({
                 idToken: token,
                 audience: GOOGLE_CLIENT_ID,
             });
-            step = '1'
             const {email, name, family_name} = ticket.getPayload();
-            step = '2'
             loginToken = jwt.sign(`${email}`, SECRET_KEY);
-            step = '3'
             await this._usersUseCase.saveUser({email: email, user_name: name, last_name: family_name});
-            step = '4'
             res.cookie("login", loginToken, {
                 httpOnly: true,
                 maxAge: 3600000,
             });
-            step = '5'
             return res.status(200).json({success: true, session: loginToken});
         } catch (error) {
             console.log('Token:', token);
             console.log('GOOGLE_CLIENT_ID:', GOOGLE_CLIENT_ID);
             return res.status(403).json(
                 {
-                    error: 'Token invalido. ' + error,
-                    token: token,
-                    clientId: GOOGLE_CLIENT_ID,
-                    step: step,
-                    loginToken: loginToken
+                    error: 'Token invalido. ' + error
                 }
             );
         }
