@@ -39,10 +39,10 @@ export const FormDesign = () => {
             <div className={defaultClass}>
                 <DndProvider backend={HTML5Backend} >
                     <SlideMenu>
-                        <SlideMenu.Logo />
                         <SlideMenu.FormTitle />
                         <SlideMenu.AddTitle />
                         <SlideMenu.DragInputMenu />
+                        <SlideMenu.Logo />
                     </SlideMenu>
                     { getError && <div>{getError}</div> }
                     { getLoading && <div>Cargando...</div> }

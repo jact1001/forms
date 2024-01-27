@@ -16,7 +16,11 @@ export class UseCaseService implements OnDestroy {
     }
 
     public async updateUseCase(useCase: IUseCase): Promise<IUseCase> {
-        return await this.useCaseRepository.updateUseCase(useCase);
+        const useCaseUpdated = {
+            ...useCase,
+            case_state: { id: 'in-progress', name: 'En Progreso'},
+        }
+        return await this.useCaseRepository.updateUseCase(useCaseUpdated);
     }
 
     public async getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase> {

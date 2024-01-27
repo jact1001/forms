@@ -17,7 +17,7 @@ export class Access implements IAccess {
 
 @Schema()
 export class Section implements ISection {
-    @ObjectID("id")
+    @Property("id")
     id: string;
     @Property()
     sectionName: string;

@@ -2,27 +2,24 @@
 
 .form-title {
     align-items: center;
-    background-color: $fa-color-gray-lighter;
     color: $fa-color-white-primary;
     display: flex;
-    font-size: 15px;
     justify-content: space-between;
     left: 0;
-    padding: 12px;
+    padding: 30px 12px;
     position: relative;
     text-align: center;
 
     input {
-        height: 42px;
+        height: 50px;
         width: 100%;
         padding: 0 16px;
         border-radius: 4px;
         background-color: $fa-color-white-primary ;
         border: none;
-        border-bottom: 1px solid $fa-color-gray-lighter;
         box-shadow: none;
         color: $fa-color-blue-light;
-        font-size: 15px;
+        font-size: 18px;
         outline: none;
     }
 }

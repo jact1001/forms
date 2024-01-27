@@ -54,7 +54,7 @@ export const SelectWithCheckbox = ({options, onSelect, selected}: SelectWithChec
     return (
         <div ref={dropdownRef}  className={defaultClass}>
             <button className={`${defaultClass}__select-button`} onClick={toggleDropdown}>
-                <span>Selecciona los usuarios</span>
+                <span>Diligenciadores del formulario</span>
                 <ArrowDownIcon />
             </button>
             {isOpen && (

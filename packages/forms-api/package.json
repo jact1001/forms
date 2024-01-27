@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node test-server.js",
-    "serve": "nodemon src/test-main.ts",
+    "start": "ts-node src/main.ts",
+    "serve": "nodemon src/main.ts",
     "build": "tsc",
     "test": "echo testing node js project",
-    "start:debug": "nodemon --watch \\\"src/**/*.ts\\\" --ignore \\\"node_modules/**/*\\\" --exec ts-node src/test-main.ts"
+    "start:debug": "nodemon --watch \\\"src/**/*.ts\\\" --ignore \\\"node_modules/**/*\\\" --exec ts-node src/main.ts"
   },
   "keywords": [],
   "author": "",

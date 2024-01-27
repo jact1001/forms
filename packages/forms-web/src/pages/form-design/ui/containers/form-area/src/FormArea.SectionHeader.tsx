@@ -56,7 +56,7 @@ export const SectionHeader = ({sectionName, access, sectionId, sectionsLength}: 
     return (
         <div className={defaultClass}>
             <SelectWithCheckbox selected={selected} options={dropdownOptions} onSelect={handleDropdownSelect} />
-            <input className={`${defaultClass}__section-name`} type="text" id="name-section" placeholder="Sección #1" required minLength={4} maxLength={120} value={sectionName} onChange={handleOnChange} />
+            <input className={`${defaultClass}__section-name`} type="text" id="name-section" placeholder={`Sección #${sectionsLength} - ingresa un nombre`} required minLength={4} maxLength={120} value={sectionName} onChange={handleOnChange} />
             {sectionsLength > 1 && <Delete onClick={() => handlerRemoveSection()} /> }
         </div>
 
