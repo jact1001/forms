@@ -46,9 +46,9 @@ export class UsersController {
             console.log('GOOGLE_CLIENT_ID:', GOOGLE_CLIENT_ID);
             return res.status(403).json(
                 {
-                    error: 'Token invalido. ' + error,
-                    name: GOOGLE_CLIENT_ID,
-                    test: SECRET_KEY
+                    error: 'Token invalido. ' + error
+                    //name: GOOGLE_CLIENT_ID,
+                    //test: SECRET_KEY
                 }
             );
         }
