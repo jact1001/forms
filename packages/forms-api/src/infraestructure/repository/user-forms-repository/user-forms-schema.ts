@@ -1,6 +1,6 @@
 import { Model, ObjectID, Schema } from "@tsed/mongoose";
 import { CollectionOf, Property } from "@tsed/schema";
-import {IUserForm, IFormCase, IUserForms, IUseCaseState} from "../../../core/domain/user-forms";
+import { IUserForm, IFormCase, IUserForms, IUseCaseState } from "../../../core/domain/user-forms";
 
 @Schema()
 export class UseCaseState implements IUseCaseState {

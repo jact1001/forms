@@ -1,9 +1,8 @@
 import { Model, ObjectID, Schema } from "@tsed/mongoose";
 import { CollectionOf, Property } from "@tsed/schema";
 import { IAccess, ISection } from "../../../core/domain/form";
-import { Checkbox, Date, Email, Number, Radio, Select, Text, TextArea, Time } from "../form-fields-repository/form-fields-schema";
 import { ICaseState, IUseCase } from "../../../core/domain/use-case";
-import {IField} from "../../../core/domain/form-fields";
+import { IField } from "../../../core/domain/form-fields";
 
 @Schema()
 export class Access implements IAccess {

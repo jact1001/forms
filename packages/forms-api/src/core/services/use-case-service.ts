@@ -2,25 +2,32 @@ import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { UseCaseRepository } from "../../infraestructure/repository/use-case-repository/use-case-repository";
 import { IUseCase } from "../domain/use-case";
 import {IForm} from "../domain/form";
+import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
+import {IFormCase} from "../domain/user-forms";
+import {UserFormsService} from "./user-forms-service";
+import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 
 @Injectable()
 @Scope('request')
 export class UseCaseService implements OnDestroy {
 
     constructor(
-        private readonly useCaseRepository: UseCaseRepository
+        private readonly useCaseRepository: UseCaseRepository,
+        private readonly userFormsRepository: UserFormsRepository
     ) {}
 
     public async saveUseCase(useCase: IUseCase): Promise<IUseCase> {
         return await this.useCaseRepository.saveUseCase(useCase);
     }
 
-    public async updateUseCase(useCase: IUseCase): Promise<IUseCase> {
-        const useCaseUpdated = {
-            ...useCase,
-            case_state: { id: 'in-progress', name: 'En Progreso'},
+    public async updateUseCase(useCase: IUseCase, email: string): Promise<IUseCase> {
+        const formsUseCase: IFormCase = {
+            case_id: useCase.id,
+            name: useCase.case_name,
+            state: useCase.case_state
         }
-        return await this.useCaseRepository.updateUseCase(useCaseUpdated);
+        await this.userFormsRepository.updateUseCase(formsUseCase, useCase.form_id, email);
+        return await this.useCaseRepository.updateUseCase(useCase);
     }
 
     public async getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase> {
@@ -41,7 +48,7 @@ export class UseCaseService implements OnDestroy {
         return await this.useCaseRepository.findUseCasesByFormId(formId);
     }
 
-    public async updateFormUseCases(form: IForm): Promise<IUseCase[]> {
+    public async updateFormUseCases(form: IForm, email: string): Promise<IUseCase[]> {
         const useCases = await this.useCaseRepository.findUseCasesByFormId(form.id);
         const updatedUseCases: IUseCase[] = [];
         for (const useCase of useCases) {
@@ -71,7 +78,7 @@ export class UseCaseService implements OnDestroy {
             };
 
             try {
-                const newUseCase = await this.updateUseCase(updatedUseCase);
+                const newUseCase = await this.updateUseCase(updatedUseCase, email);
                 updatedUseCases.push(newUseCase);
             } catch (error) {
                 console.error(`Error updating use case: ${error.message}`);

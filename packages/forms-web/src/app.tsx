@@ -5,7 +5,7 @@ import { Login } from "./pages/login/ui/src/Login";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAccessAccepted } from "./pages/login/data/state/effects/login.effects";
-import { Form } from "./pages/form/ui/src/Form";
+import { Form } from "./pages/use-case/ui/src/Form";
 
 function App() {
 

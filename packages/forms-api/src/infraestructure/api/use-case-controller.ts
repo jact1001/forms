@@ -22,7 +22,8 @@ export class UseCaseController {
 
     @Put("/")
     async updateUseCase(@BodyParams() data: IUseCase, @Context() ctx: Context): Promise<IUseCase> {
-        return await this._useCaseUseCase.updateUseCase(data);
+        const email = ctx.get("email");
+        return await this._useCaseUseCase.updateUseCase(data, email);
     }
 
 }

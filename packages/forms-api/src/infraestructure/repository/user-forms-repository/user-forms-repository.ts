@@ -48,6 +48,28 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
         return userForms;
     }
 
+    public async updateUseCase (formCase: IFormCase, formId: string, email: string) {
+        const userForms = await this.model.findOne({'user_id': email});
+
+        userForms.forms = userForms.forms.map((form) => {
+            if (form.form_id === formId) {
+                return {
+                    ...form,
+                    cases: form.cases.map((useCase: IFormCase) => {
+                        if (formCase.case_id === useCase.case_id.toString()){
+                            return formCase;
+                        }
+                        return useCase;
+                    })
+                }
+            }
+            return form;
+        });
+
+        await userForms.save();
+        return userForms;
+    }
+
     $onDestroy(): void | Promise<any> {
         throw new Error("Method not implemented.");
     }

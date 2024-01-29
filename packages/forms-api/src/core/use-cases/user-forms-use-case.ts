@@ -26,6 +26,10 @@ export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
         return this.userFormService.createCase(userForm, formId, email);
     }
 
+    public async updateUseCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms> {
+        return this.userFormService.updateFormUseCase(userForm, formId, email);
+    }
+
     public async exportUseCasesByFormId(formId: string, email: string): Promise<any> {
         return this.userFormService.exportUseCasesByFormId(formId, email);
     }
