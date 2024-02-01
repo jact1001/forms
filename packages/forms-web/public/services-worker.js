@@ -11,9 +11,35 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('message', function(event) {
+
+    function sendSaveData() {
+        return caches.open('save-cache').then((cache) => {
+            return cache.keys().then((keys) => {
+                return Promise.all(
+                    keys.map((key) => {
+                        return cache.match(key).then((response) => {
+                            if (response) {
+                                return fetch('http://localhost:8080/api/use-case', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: response.body,
+                                }).then(() => {
+                                    return cache.delete(key);
+                                });
+                            }
+                        });
+                    })
+                );
+            });
+        });
+    }
+
     if (event.data && event.data.command === 'online') {
         // Manejar eventos cuando la conexión está online
         console.log('Service Worker: La conexión está online');
+        sendSaveData();
     } else if (event.data && event.data.command === 'offline') {
         // Manejar eventos cuando la conexión está offline
         console.log('Service Worker: La conexión está offline');
@@ -21,6 +47,7 @@ self.addEventListener('message', function(event) {
 });
 
 self.addEventListener('fetch', (event) => {
+    console.log('ejecutando fetch...');
     const request = event.request;
     const requestUrl = new URL(request.url);
 
@@ -51,6 +78,18 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 }).catch(() => {
                     return caches.match(request);
+                })
+            );
+        }
+    }
+
+    function useCaseSaveCache () {
+        console.log('Request: ', requestUrl);
+        if (requestUrl.pathname.includes('/use-case')) {
+            console.log('guardando info de caso...')
+            event.waitUntil(
+                caches.open('save-cache').then((cache) => {
+                    return cache;
                 })
             );
         }
@@ -88,7 +127,8 @@ self.addEventListener('fetch', (event) => {
 
     apiCache();
     imageCache();
-    getCaches();
     useCaseCache();
+    useCaseSaveCache();
+    getCaches();
 
 });

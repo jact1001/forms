@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../styles/form.scss';
 import FormIcon from "../icons/FormIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
@@ -6,7 +6,7 @@ import { FormUseCase } from "./FormUseCase";
 import { IFormCase, IUserForm } from "../../data/domain/IUserForms";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {addUseCase, downloadUserForm} from "../../data/state/effects/user-forms.effects";
+import { addUseCase, downloadUserForm } from "../../data/state/effects/user-forms.effects";
 
 const defaultClass = 'form';
 
@@ -23,23 +23,26 @@ export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
         history.push(`form-design/${form_id}`)
     }
 
-    const download = () => {
+    const download = (event: any) => {
+        event.stopPropagation();
         dispatch(downloadUserForm(form_id));
     }
 
-    const createCase = () => {
+    const createCase = (event: any) => {
+        event.stopPropagation();
         const newUseCase: IFormCase = {
             name: `caso - ${cases?.length ? (cases?.length + 1) : 1}`,
             state: {id: 'pending', name: 'Pendiente'}
         }
         dispatch(addUseCase(newUseCase, form_id));
+        setIsExpanded(true);
     }
 
     return (
         <div className={defaultClass}>
 
             <button className={`${defaultClass}__arrow-button`} onClick={toggleCount}>
-                <div className={`${defaultClass}__name-icon`}>
+                <div className={`${defaultClass}__name-icon`} >
                     <div className={`${defaultClass}__icon`}>
                         <FormIcon/>
                     </div>

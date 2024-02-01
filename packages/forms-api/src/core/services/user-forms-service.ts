@@ -39,7 +39,9 @@ export class UserFormsService implements OnDestroy {
 
     public async getUserForms(email: string): Promise<IUserForms> {
         const userForms = await this.userFormsRepository.findUserForms(email);
-        return await this.setIsAuthorToForm(userForms, email);
+        if (userForms) {
+            return await this.setIsAuthorToForm(userForms, email);
+        } else {return userForms}
     }
 
     public async saveUserForms(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
@@ -86,6 +88,10 @@ export class UserFormsService implements OnDestroy {
             const useCases = await this.useCaseUseCase.getUseCasesByFormId(formId);
             return useCases;
         }
+    }
+
+    public async updateFormUseCase(formCase: IFormCase, formId: string, email: string) {
+        return await this.userFormsRepository.updateUseCase(formCase, formId, email);
     }
 
     $onDestroy() {

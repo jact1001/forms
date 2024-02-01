@@ -1,0 +1,19 @@
+@import '../../../../index.scss';
+
+.forms-container {
+  width: 100%;
+  height: auto;
+  padding-bottom: 30px;
+  background: $fa-color-gray-lighter;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 58px;
+  min-height: 580px;
+
+  &__return-container {
+      display: flex;
+      align-items: flex-start;
+      width: 80%;
+  }
+}
