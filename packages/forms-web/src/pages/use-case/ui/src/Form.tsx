@@ -29,9 +29,8 @@ export const Form = () => {
     return (
         <>
             <Header />
-            {loading ?
-                <div>cargando...</div> :
-                <div className={`${defaultClass}`}>
+            { loading && <div>cargando...</div> }
+            { !loading && <div className={`${defaultClass}`}>
                     <FormTitle formName={form?.form_name} caseName={form.case_name}/>
                     <FormArea sections={form?.sections}/>
                     <FooterButtons />
