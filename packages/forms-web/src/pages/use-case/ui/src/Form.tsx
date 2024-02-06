@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import '../styles/forms.scss';
 import { Header } from "../../../header/src/Header";
 import { useDispatch } from "react-redux";

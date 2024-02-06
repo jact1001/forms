@@ -6,8 +6,7 @@ self.addEventListener('install', (event) => {
                 '/logo192.png',
                 '/manifest.json',
                 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap',
-                'https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2',
-                '/user-forms'
+                'https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2'
             ]);
         })
     );
@@ -18,7 +17,7 @@ self.addEventListener('fetch', (event) => {
     const requestUrl = new URL(request.url);
 
     function apiCache () {
-        if ( navigator.onLine && (requestUrl.pathname.includes('/api/') || requestUrl.pathname.includes('/form/') || requestUrl.pathname.includes('/form-design/')) && request.method === 'GET') {
+        if ( navigator.onLine && (requestUrl.pathname.includes('/api/') || requestUrl.pathname.includes('/form/') || requestUrl.pathname.includes('/form-design/') || requestUrl.pathname.includes('/static/')) && request.method === 'GET') {
             event.respondWith(
                 fetch(request).then((response) => {
                     const clonedResponse = response.clone();

@@ -4,6 +4,8 @@ import { getUseCase, updateUseCaseService } from "../../../services/form-service
 import { TField } from '../../domain/IFormFields';
 import { IUseCase } from '../../domain/IUseCase';
 
+const USE_CASE_STORAGE_KEY = 'use-case-storage';
+
 export const updateSectionField = (field: TField, sectionId: string) => {
     return async  (dispatch: Dispatch<DetailAction>) => {
         dispatch({
@@ -19,7 +21,9 @@ export const findUseCase = (caseId: string) => {
             type: DetailActionTypes.QUERY_FORM_PENDING
         });
         try {
-            const data = await getUseCase(caseId);
+            const storedData = localStorage.getItem(USE_CASE_STORAGE_KEY+caseId);
+            const newData = storedData ? JSON.parse(storedData) : null;
+            const data = newData || (await getUseCase(caseId));
             dispatch({
                 type: DetailActionTypes.QUERY_FORM_SUCCESS,
                 payload: data
