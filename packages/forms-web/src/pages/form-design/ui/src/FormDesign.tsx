@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { getFormById } from "../../data/state/effects/form.effect";
 import { useDesignFormStore } from "../../data/hooks/custom-typed-selector";
 import { FooterButtons } from "../containers/footer-buttons/src/FooterButtons";
-import { Header } from "../../../header/src/Header";
+import { Header } from "../../../../components/header/src/Header";
 
 const defaultClass = 'form-design';
 
@@ -42,7 +42,6 @@ export const FormDesign = () => {
                         <SlideMenu.FormTitle />
                         <SlideMenu.AddTitle />
                         <SlideMenu.DragInputMenu />
-                        <SlideMenu.Logo />
                     </SlideMenu>
                     { getError && <div>{getError}</div> }
                     { getLoading && <div>Cargando...</div> }

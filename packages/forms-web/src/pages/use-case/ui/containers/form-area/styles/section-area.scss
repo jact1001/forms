@@ -4,7 +4,7 @@
     color: $fa-color-white-primary;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: start;
     width: 100%;
 
     &__field-container {
@@ -13,7 +13,12 @@
         align-items: flex-start;
         justify-content: left;
         padding: 16px;
+        margin: 0 24px 24px 0;
         width: 100%;
         max-width: 450px;
+
+        @media screen and (max-width: 930px) {
+            margin: 0 0 20px 0;
+        }
     }
 }

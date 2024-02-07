@@ -20,7 +20,7 @@ export const SectionArea = ({fields, sectionId}:ISectionArea) => {
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >
                         <Label label={field.label} />
-                        <Input key={field.label} field={field} sectionId={sectionId} />
+                        <Input key={field.form_field_id} field={field} sectionId={sectionId} />
                     </div>
             })}
         </div>

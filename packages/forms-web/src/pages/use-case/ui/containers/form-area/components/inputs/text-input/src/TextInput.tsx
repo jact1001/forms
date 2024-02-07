@@ -30,10 +30,10 @@ export const TextInput = ({field, sectionId}: ITextInput) => {
     return (
         <div className={`${defaultClass}`}>
             <input
-                type={ field.type }
-                className={ `${defaultClass}__text` }
-                placeholder={ field.placeholder }
-                value={ field.value }
+                type={field.type}
+                className={`${defaultClass}__text`}
+                placeholder={field.placeholder}
+                value={field.value}
                 onChange={handleOnChange}
                 required
             />

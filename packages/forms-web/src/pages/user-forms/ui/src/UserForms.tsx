@@ -3,7 +3,7 @@ import '../styles/user-forms.scss';
 import { FormTitle } from "./FormTitle";
 import { FormsList } from "./FormsList";
 import { Redirect } from "react-router-dom";
-import { Header } from "../../../header/src/Header";
+import { Header } from "../../../../components/header/src/Header";
 import { useDispatch } from "react-redux";
 import { findUserForms } from "../../data/state/effects/user-forms.effects";
 

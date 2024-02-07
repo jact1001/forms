@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../data/state/effects/login.effects";
 import { useLoginStore } from "../../data/hooks/custom-typed-selector";
+import Logo from "../../../../components/logo/src/Logo";
 
 const defaultClass = 'login'
 
@@ -37,6 +38,10 @@ export const Login = () => {
 
     return (
         <div className={defaultClass}>
+            <div className={`${defaultClass}__logo`}>
+                <Logo width='100' height='100' />
+                <span>DYNAMIC FORMS</span>
+            </div>
             <GoogleLogin
                 onSuccess={credentialResponse => onSuccessLogin(credentialResponse)}
                 onError={() => onErrorLogin()}

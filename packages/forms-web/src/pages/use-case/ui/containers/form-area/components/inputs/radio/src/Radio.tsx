@@ -41,9 +41,10 @@ export const Radio = ({field, sectionId}:IInputRadio) => {
                                     onChange={handleOnChange}
                                     className={`${defaultClass}__radio`}
                                     type={ type }
-                                    id={ option.id }
-                                    name={ field_id }
+                                    id={ option.id + field.form_field_id }
+                                    name={ option.id + field.form_field_id }
                                     value={ option.id }
+                                    checked={ option.id === field.value.id }
                                 />{option.text}
                             </label>
                         </div>

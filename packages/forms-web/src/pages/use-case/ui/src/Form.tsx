@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import '../styles/forms.scss';
-import { Header } from "../../../header/src/Header";
+import { Header } from "../../../../components/header/src/Header";
 import { useDispatch } from "react-redux";
 import { FormTitle } from "./FormTitle";
 import FormArea from "../containers/form-area/src/FormArea";

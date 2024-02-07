@@ -11,7 +11,7 @@ export const FormTitle = () => {
             <div className={`${defaultClass}__icon-container`}>
                 <FormIcon />
             </div>
-            <b>Mis Formularios</b>
+            <b>Formularios</b>
         </div>
     );
 };

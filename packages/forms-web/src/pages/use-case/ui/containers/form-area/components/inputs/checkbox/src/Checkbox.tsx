@@ -45,8 +45,8 @@ export const Checkbox = ({field, sectionId}:CheckboxProps) => {
                             <input
                                 type={ type }
                                 className={`${defaultClass}__checkbox`}
-                                id={ field_id + option.id }
-                                name={ field_id }
+                                id={ option.id + field.form_field_id }
+                                name={ field_id + field.form_field_id }
                                 value={ option.id }
                                 checked={Boolean(value.find((value)=>value.id === option.id))}
                                 onChange={ handleOnChange }

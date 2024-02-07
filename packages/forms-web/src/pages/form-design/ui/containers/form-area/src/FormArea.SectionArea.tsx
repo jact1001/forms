@@ -54,6 +54,7 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
                         {sectionFields.length > 1 && <Delete onClick={() => removeField(field.form_field_id)} />}
                     </div>
             })}
+            {sectionFields.length === 0 && <h4>Arrastra tus campos aquí...</h4>}
         </div>
     );
 }

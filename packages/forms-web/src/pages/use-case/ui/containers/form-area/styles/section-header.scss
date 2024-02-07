@@ -3,22 +3,15 @@
 .form-section-header {
     border-bottom: 0.1em solid $fa-color-blue-light;
     color: $fa-color-white-primary;
-    display: flex;
     width: 100%;
-    height: 80px;
-    justify-content: center;
+    padding-bottom: 24px;
     margin-bottom: 24px;
 
     &__section-name {
-        background-color: $fa-color-blue-light;
         border: 0;
-        border-radius: 10px;
-        color: $fa-color-white-primary;
-        font-size: 20px;
-        margin-bottom: 24px;
+        color: #fff;
+        font-size: 24px;
         outline: none;
-        padding: 0 16px;
-        width: 90%;
         display: flex;
         align-items: center;
     }

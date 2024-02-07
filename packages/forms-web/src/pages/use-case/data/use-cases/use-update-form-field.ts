@@ -5,7 +5,7 @@ export const updateFormField = (form:IUseCase, idSection:string, field:TField) =
     const newSections = form?.sections.map((section)=> {
         if(section.id===idSection){
             const newFiles = section.fields.map((fieldModified)=>{
-                if(fieldModified.field_id===field.field_id){
+                if(fieldModified.form_field_id === field.form_field_id){
                     return field;
                 }
                 return fieldModified;
