@@ -41,8 +41,6 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
         dispatch(removeSectionField(fieldId, sectionId));
     }
 
-    console.info(isOver);
-
     return (
         <div className={defaultClass} ref={ drop }>
             {sectionFields.map((field: any) => {
@@ -50,7 +48,7 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >
                         <Label field={field} sectionId={sectionId} />
-                        <Input key={field.label} sectionId={sectionId} {...field}/>
+                        <Input key={field.form_field_id} sectionId={sectionId} {...field}/>
                         {sectionFields.length > 1 && <Delete onClick={() => removeField(field.form_field_id)} />}
                     </div>
             })}

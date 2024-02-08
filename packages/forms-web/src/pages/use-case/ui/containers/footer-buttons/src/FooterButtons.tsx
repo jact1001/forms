@@ -42,7 +42,7 @@ export const FooterButtons = () => {
             window.removeEventListener('online', handleOnline);
             window.addEventListener('offline', handleOffLine);
         };
-    }, []);
+    }, [handleOnline]);
 
     useEffect(() => {
         if (isSaving && !updateLoading) {
@@ -60,7 +60,7 @@ export const FooterButtons = () => {
             }
             setIsSaving(false);
         }
-    }, [isSaving, updateLoading, updateError, form]);
+    }, [isSaving, updateLoading, updateError, form, isOnline]);
 
     const handleSaveForm = () => {
         dispatchRequest(form);

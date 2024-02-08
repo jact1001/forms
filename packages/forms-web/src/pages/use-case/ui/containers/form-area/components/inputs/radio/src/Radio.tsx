@@ -15,7 +15,7 @@ export const Radio = ({field, sectionId}:IInputRadio) => {
 
     const dispatch = useDispatch();
 
-    const {type, field_id, options}= field;
+    const { type, options }= field;
 
     const handleOnChange = ({ target: {value} }: ChangeEvent<HTMLInputElement>) => {
         const newValue=options.find((option)=>option.id===value)||options[0];
