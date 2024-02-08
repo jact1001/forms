@@ -63,13 +63,15 @@ export const Checkbox = ({sectionId = '0', ...fieldProps}: ICheckboxProps) => {
                             <input
                                 className={`${defaultClass}__checkbox`}
                                 type={type}
-                                id={value.id}
-                                name={value.text}
+                                id={value.id + fieldProps.form_field_id }
+                                name={value.text + fieldProps.form_field_id}
                                 disabled
                             />
                             <div className={`${defaultClass}__label`}>
                                 <div className={`${defaultClass}__label__input-line`} >
                                     <input
+                                        id={ value.id + fieldProps.form_field_id }
+                                        name={ value.text+ fieldProps.form_field_id }
                                         className={`${defaultClass}__label__input-text`}
                                         type='text'
                                         placeholder={option_placeholder}

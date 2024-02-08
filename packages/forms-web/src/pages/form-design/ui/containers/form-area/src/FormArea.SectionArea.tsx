@@ -21,7 +21,7 @@ interface SectionAreaProps {
 export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
 
     const dispatch = useDispatch();
-    const [ {isOver}, drop ] = useDrop(() => ({
+    const [ {}, drop ] = useDrop(() => ({
         accept: DRAG_INPUT,
         drop: (field) => addField(field),
         collect: (monitor) => ({
@@ -31,7 +31,7 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
 
     const addField = (field: any) => {
         const newField = {
-            ...field,
+            ...JSON.parse(JSON.stringify(field)),
             form_field_id: uuidv4()
         }
         dispatch(addSectionField(newField, sectionId));

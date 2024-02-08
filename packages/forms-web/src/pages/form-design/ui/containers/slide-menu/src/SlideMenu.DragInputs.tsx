@@ -16,7 +16,7 @@ export const SlideMenuDragInputs = () => {
     return (
         <div>
             { formFields && formFields?.fields.map(( field: any ) => {
-                return <DragInput key={ field.field_id } data={ field } />;
+                return <DragInput key={ field.field_id } data={field} />;
             })}
         </div>
     )
