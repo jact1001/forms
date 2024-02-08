@@ -26,7 +26,7 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
         accept: DRAG_INPUT,
         drop: (field) => addField(field),
         collect: (monitor) => ({
-            isOver: !!monitor.isOver()
+            isOver: monitor.isOver()
         }),
     }));
 
