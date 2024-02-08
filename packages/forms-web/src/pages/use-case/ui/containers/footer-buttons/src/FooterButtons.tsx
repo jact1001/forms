@@ -42,7 +42,7 @@ export const FooterButtons = () => {
             window.removeEventListener('online', handleOnline);
             window.addEventListener('offline', handleOffLine);
         };
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (isSaving && !updateLoading) {

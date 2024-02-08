@@ -21,6 +21,7 @@ interface SectionAreaProps {
 export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
 
     const dispatch = useDispatch();
+    /* eslint-disable no-empty-pattern */
     const [ {}, drop ] = useDrop(() => ({
         accept: DRAG_INPUT,
         drop: (field) => addField(field),
