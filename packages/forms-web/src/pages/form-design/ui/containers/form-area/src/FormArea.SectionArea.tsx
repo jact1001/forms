@@ -21,8 +21,7 @@ interface SectionAreaProps {
 export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
 
     const dispatch = useDispatch();
-    /* eslint-disable no-empty-pattern */
-    const [ {}, drop ] = useDrop(() => ({
+    const [ {isOver}, drop ] = useDrop(() => ({
         accept: DRAG_INPUT,
         drop: (field) => addField(field),
         collect: (monitor) => ({
@@ -41,6 +40,8 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
     const removeField = (fieldId: string) => {
         dispatch(removeSectionField(fieldId, sectionId));
     }
+
+    console.log(isOver);
 
     return (
         <div className={defaultClass} ref={ drop }>
