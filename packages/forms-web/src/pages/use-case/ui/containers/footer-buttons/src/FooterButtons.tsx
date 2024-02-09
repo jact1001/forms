@@ -18,32 +18,31 @@ export const FooterButtons = () => {
     const [isOnline, setIsOnline] = useState(navigator.onLine);
     const useCaseStorageKey = USE_CASE_STORAGE_KEY+form.id;
 
-    useEffect(() => {
-
-        const handleOnline = () => {
-            setIsOnline(true);
-            const storedData = localStorage.getItem(useCaseStorageKey);
-            const newData = storedData ? JSON.parse(storedData) : null;
-            if (newData) {
-                try {
-                    dispatchRequest(newData);
-                } catch (error) {
-                    toast.error("Error en la operación");
-                }
+    const handleOnline = () => {
+        setIsOnline(true);
+        const storedData = localStorage.getItem(useCaseStorageKey);
+        const newData = storedData ? JSON.parse(storedData) : null;
+        if (newData) {
+            try {
+                dispatchRequest(newData);
+            } catch (error) {
+                toast.error("Error en la operación");
             }
-        };
-
-        const handleOffLine = () => {
-            setIsOnline(false);
         }
+    };
 
+    const handleOffLine = () => {
+        setIsOnline(false);
+    }
+
+    useEffect(() => {
         window.addEventListener('online', handleOnline);
         window.addEventListener('offline', handleOffLine);
         return () => {
             window.removeEventListener('online', handleOnline);
             window.addEventListener('offline', handleOffLine);
         };
-    }, [useCaseStorageKey]);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (isSaving && !updateLoading) {
