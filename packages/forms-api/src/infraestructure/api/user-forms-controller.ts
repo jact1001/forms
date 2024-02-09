@@ -95,8 +95,6 @@ export class UserFormsController {
             console.error('Error al generar el archivo Excel:', error);
             res.status(500).send('Error al generar el archivo Excel');
         }
-
     }
-
 
 }

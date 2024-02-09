@@ -25,17 +25,33 @@ export class FormsService implements OnDestroy {
         return await this.formRepository.findForm(formId);
     }
 
-    private async saveSectionsUsers(form: IForm, useCases: IUseCase[]) {
-        const { sections } = form;
-        for (const section of sections) {
-            for (const access of section.access) {
-                await this.userFormsUseCase.saveUserForms(form, access.userId, useCases);
+    private async getFormUserIds(form: IForm) {
+        const uniqueUserIds = new Set<string>();
+        let hasAll = false;
+
+        for (const section of form.sections) {
+            for (const user of section.access) {
+                if (user.userId === 'all') {
+                    hasAll = true;
+                } else {
+                    uniqueUserIds.add(user.userId);
+                }
             }
+        }
+
+        if (hasAll) {
+            const users = await this.usersUseCase.getUsers('');
+            return users.map((user) => user.email);
+        } else {
+            return Array.from(uniqueUserIds);
         }
     }
 
     private async createUserForms(form: IForm, useCases: IUseCase[]){
-        await this.saveSectionsUsers(form, useCases);
+        const userIds = await this.getFormUserIds(form);
+        for (const userId of userIds) {
+            await this.userFormsUseCase.saveUserForm(form, userId, useCases);
+        }
     }
 
     private async setAccessSectionsToAuthor(form: IForm, author: string) {

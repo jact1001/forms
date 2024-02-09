@@ -2,9 +2,7 @@ import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { UseCaseRepository } from "../../infraestructure/repository/use-case-repository/use-case-repository";
 import { IUseCase } from "../domain/use-case";
 import {IForm} from "../domain/form";
-import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
 import {IFormCase} from "../domain/user-forms";
-import {UserFormsService} from "./user-forms-service";
 import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 
 @Injectable()

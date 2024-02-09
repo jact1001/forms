@@ -18,8 +18,8 @@ export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
         return this.userFormService.getUserForms(email);
     }
 
-    public async saveUserForms(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
-        return this.userFormService.saveUserForms(form, userId, useCases);
+    public async saveUserForm(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
+        return this.userFormService.saveUserForm(form, userId, useCases);
     }
 
     public async createCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms> {

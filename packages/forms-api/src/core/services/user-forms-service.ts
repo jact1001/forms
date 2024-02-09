@@ -2,7 +2,7 @@ import {Injectable, OnDestroy, Scope} from "@tsed/common";
 import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 import {IFormCase, IUserForm, IUserForms} from "../domain/user-forms";
 import {IUseCase} from "../domain/use-case";
-import {IForm, ISection} from "../domain/form";
+import {IForm} from "../domain/form";
 import {UsersUseCase} from "../use-cases/users-use-case";
 import {UseCaseUseCase} from "../use-cases/use-case-use-case";
 import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
@@ -44,22 +44,27 @@ export class UserFormsService implements OnDestroy {
         } else {return userForms}
     }
 
-    public async saveUserForms(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
+    public async saveUserForm(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
         const formCases: IFormCase[] = useCases.map((useCase) => {
             return {
                 case_id: useCase.id,
                 state: useCase.case_state,
                 name: useCase.case_name
             }
-        })
-        return await this.userFormsRepository.saveUserForms(form, userId, formCases);
+        });
+        const newUserForm: IUserForm = {
+            form_id: form.id,
+            form_name: form.form_name,
+            cases: formCases,
+            form_author: form.author
+        }
+        return await this.userFormsRepository.saveUserForm(form, userId, newUserForm);
     }
 
-    private async saveUseCase(formCase: IFormCase, formId: string): Promise<IUseCase>{
-        const form: IForm = await this.formsRepository.findForm(formId);
+    private async saveUseCase(formCase: IFormCase, form: IForm): Promise<IUseCase>{
         const useCase: IUseCase = {
             case_name: formCase.name,
-            form_id: formId,
+            form_id: form.id,
             form_name: form.form_name,
             case_state: { id: 'pending', name: 'Pendiente'},
             sections: form.sections
@@ -73,10 +78,33 @@ export class UserFormsService implements OnDestroy {
         }
     }
 
+    private async getFormUserIds(form: IForm, excludedUserId) {
+        const uniqueUserIds = new Set<string>();
+        let hasAll = false;
+
+        for (const section of form.sections) {
+            for (const user of section.access) {
+                if (user.userId === 'all') {
+                    hasAll = true;
+                } else if (user.userId !== excludedUserId) {
+                    uniqueUserIds.add(user.userId);
+                }
+            }
+        }
+
+        if (hasAll) {
+            const users = await this.usersUseCase.getUsers(excludedUserId);
+            return users.map((user) => user.email);
+        } else {
+            return Array.from(uniqueUserIds);
+        }
+    }
+
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
-        const newUseCase = await this.saveUseCase(formCase, formId);
+        const form: IForm = await this.formsRepository.findForm(formId);
+        const newUseCase = await this.saveUseCase(formCase, form);
         const newFormCase = {...formCase, case_id: newUseCase.id};
-        const userIds = await this.userFormsRepository.findUsersByFormId(formId, email);
+        const userIds = await this.getFormUserIds(form, email);
         await this.saveUseCaseToOtherUsers(newFormCase, userIds, formId);
         const userForms = await this.userFormsRepository.addUseCase(newFormCase, formId, email);
         return await this.setIsAuthorToForm(userForms, email);
