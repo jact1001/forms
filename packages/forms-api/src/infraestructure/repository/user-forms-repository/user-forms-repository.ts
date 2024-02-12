@@ -31,9 +31,13 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
 
     public async addUseCase (formCase: IFormCase, formId: string, email: string) {
         const userForms = await this.model.findOne({'user_id': email});
-        const form = userForms.forms.find((form) => form.form_id === formId);
-        form.cases.push(formCase);
-        await userForms.save();
+        if (userForms) {
+            const form = userForms.forms.find((form) => form.form_id === formId);
+            if (form) {
+                form.cases.push(formCase);
+                await userForms.save();
+            }
+        }
         return userForms;
     }
 

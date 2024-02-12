@@ -28,10 +28,23 @@ export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
         dispatch(downloadUserForm(form_id));
     }
 
+    const getDate = () => {
+        const newDate = new Date();
+        const dateFormat = new Intl.DateTimeFormat('es-CO', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        return dateFormat.format(newDate);
+    }
+
     const createCase = (event: any) => {
         event.stopPropagation();
         const newUseCase: IFormCase = {
-            name: `caso - ${cases?.length ? (cases?.length + 1) : 1}`,
+            name: `caso - ${cases?.length ? (cases?.length + 1) : 1} (${getDate()})`,
             state: {id: 'pending', name: 'Pendiente'}
         }
         dispatch(addUseCase(newUseCase, form_id));

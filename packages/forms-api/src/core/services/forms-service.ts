@@ -1,10 +1,10 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
 import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
 import {IAccess, IForm, ISection} from "../domain/form";
-import {UsersUseCase} from "../use-cases/users-use-case";
 import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
 import {UseCaseUseCase} from "../use-cases/use-case-use-case";
 import {IUseCase} from "../domain/use-case";
+import {UsersUseCase} from "../use-cases/users-use-case";
 
 @Injectable()
 @Scope('request')
@@ -40,7 +40,7 @@ export class FormsService implements OnDestroy {
         }
 
         if (hasAll) {
-            const users = await this.usersUseCase.getUsers('');
+            const users = await this.usersUseCase.getUsers('all');
             return users.map((user) => user.email);
         } else {
             return Array.from(uniqueUserIds);

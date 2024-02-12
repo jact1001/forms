@@ -37,7 +37,7 @@ export class UseCaseService implements OnDestroy {
             form_id: useCase.form_id,
             form_name: useCase.form_name,
             sections: useCase.sections.filter((section) => {
-                if (section.access.find((access) => access.userId === email)) return section;
+                if (section.access.find((access) => (access.userId === 'all' || access.userId === email))) return section;
             })
         }
     }
