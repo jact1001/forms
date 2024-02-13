@@ -26,3 +26,7 @@
     Ver los services del cluster
     kubectl logs dynamic-forms-7db8b74d88-s2mns --logs
     kubectl exec -it dynamic-forms-7db8b74d88-s2mns -- /bin/sh  --consola dinamica
+
+# Desplegar versión
+    1. Generar un despliegue
+    1. Actualizar url del EKS en cloudfront

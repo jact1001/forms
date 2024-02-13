@@ -56,5 +56,5 @@ jobs:
       - name: Get services
         run: kubectl get services
 
-      - name: Remove PODs
-        run: kubectl delete pods --all --all-namespaces
+#      - name: Remove PODs
+#        run: kubectl delete pods --all --all-namespaces
