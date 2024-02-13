@@ -1,3 +1,5 @@
+# Precondiciones
+
     brew tap weaveworks/tap
 
     brew tap weaveworks/tap
@@ -8,10 +10,17 @@
 
     Subir un cluster: (esperar 14 minutos)
     Create a repo dynamic-forms-rep over https://us-east-2.console.aws.amazon.com/ecr/repositories?region=us-east-2
-    # Crear un cluster
+# Crear un cluster
     eksctl create cluster --name dynamic-forms-eks1 --region us-east-2 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2
-    # Borrar el cluster
+
+# Crear un cluster economico
+    eksctl create cluster --name dynamic-forms-eks1 --region us-east-2 --nodegroup-name linux-nodes --node-type t3.micro --nodes-min 1 --nodes-max 2 --spot
+
+
+ # Borrar el cluster
     eksctl delete cluster --region=us-east-2 --name=dynamic-forms-eks1
+
+
     Install kubectl and execute kubectl get services
 
     Ver los services del cluster
