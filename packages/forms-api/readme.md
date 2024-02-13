@@ -21,7 +21,10 @@
     eksctl delete cluster --region=us-east-2 --name=dynamic-forms-eks1
 
 
-    Install kubectl and execute kubectl get services
+# Ver servicios en el cluster
+    Install kubectl and execute 
+    
+    kubectl get services
 
     Ver los services del cluster
     kubectl logs dynamic-forms-7db8b74d88-s2mns --logs
