@@ -5,9 +5,9 @@ const swDev = () => {
       navigator.serviceWorker.register(swUrl).then((registration) => {
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
         if (navigator.onLine) {
-          navigator.serviceWorker.controller.postMessage({ command: 'online' });
+          navigator.serviceWorker.controller?.postMessage({ command: 'online' });
         } else {
-          navigator.serviceWorker.controller.postMessage({ command: 'offline' });
+          navigator.serviceWorker.controller?.postMessage({ command: 'offline' });
         }
       }, (error) => {
         console.log('ServiceWorker registration failed: ', error);
@@ -16,12 +16,12 @@ const swDev = () => {
 
     window.addEventListener('online', function() {
       console.log('La conexión está online');
-      navigator.serviceWorker.controller.postMessage({ command: 'online' });
+      navigator.serviceWorker.controller?.postMessage({ command: 'online' });
     });
 
     window.addEventListener('offline', function() {
       console.log('La conexión está offline');
-      navigator.serviceWorker.controller.postMessage({ command: 'offline' });
+      navigator.serviceWorker.controller?.postMessage({ command: 'offline' });
     });
 
   }

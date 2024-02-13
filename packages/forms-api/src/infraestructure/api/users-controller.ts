@@ -42,8 +42,6 @@ export class UsersController {
             });
             return res.status(200).json({success: true, session: loginToken});
         } catch (error) {
-            console.log('Token:', token);
-            console.log('GOOGLE_CLIENT_ID:', GOOGLE_CLIENT_ID);
             return res.status(403).json(
                 {
                     error: 'Token invalido. ' + error

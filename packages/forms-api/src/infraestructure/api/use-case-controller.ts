@@ -1,4 +1,4 @@
-import {BodyParams, Context, Controller, Get, PathParams, Post, Put, Response, UseBefore} from "@tsed/common";
+import { BodyParams, Context, Controller, Get, PathParams, Put, Response, UseBefore } from "@tsed/common";
 import { UseCaseUseCase } from "../../core/use-cases/use-case-use-case";
 import e, { Response as ExpressResponse } from 'express';
 import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
@@ -22,7 +22,8 @@ export class UseCaseController {
 
     @Put("/")
     async updateUseCase(@BodyParams() data: IUseCase, @Context() ctx: Context): Promise<IUseCase> {
-        return await this._useCaseUseCase.updateUseCase(data);
+        const email = ctx.get("email");
+        return await this._useCaseUseCase.updateUseCase(data, email);
     }
 
 }

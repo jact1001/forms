@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSectionField } from '../../../../../../data/state/effects/form.effect';
@@ -15,19 +14,14 @@ interface LabelProps {
 export const Label = ( {field, sectionId}: LabelProps) => {
 
     const { label_placeholder } = field;
-    const [text, setText] = useState(field.label);
     const dispatch = useDispatch();
 
-    const updateStoreField = () => {
+    const handleOnChange = ({ target: {value} }: ChangeEvent<HTMLInputElement>) => {
         const newField = {
             ...field,
-            label: text
+            label: value
         }
         dispatch(updateSectionField(newField, sectionId));
-    }
-
-    const handleOnChange = ({ target: {value} }: ChangeEvent<HTMLInputElement>) => {
-        setText(value);
     }
 
     return (
@@ -37,9 +31,8 @@ export const Label = ( {field, sectionId}: LabelProps) => {
                     type='text'
                     className={`${defaultClass}__label-text`}
                     placeholder={label_placeholder}
-                    value={text}
+                    value={field.label}
                     onChange={handleOnChange}
-                    onBlur={updateStoreField}
                 />
                 <span className={`${defaultClass}__line`}/>
             </div>

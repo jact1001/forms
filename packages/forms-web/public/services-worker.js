@@ -5,19 +5,11 @@ self.addEventListener('install', (event) => {
                 '/favicon.ico',
                 '/logo192.png',
                 '/manifest.json',
+                'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap',
+                'https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2'
             ]);
         })
     );
-});
-
-self.addEventListener('message', function(event) {
-    if (event.data && event.data.command === 'online') {
-        // Manejar eventos cuando la conexión está online
-        console.log('Service Worker: La conexión está online');
-    } else if (event.data && event.data.command === 'offline') {
-        // Manejar eventos cuando la conexión está offline
-        console.log('Service Worker: La conexión está offline');
-    }
 });
 
 self.addEventListener('fetch', (event) => {
@@ -25,11 +17,11 @@ self.addEventListener('fetch', (event) => {
     const requestUrl = new URL(request.url);
 
     function apiCache () {
-        if (requestUrl.pathname.includes('/api/')) {
+        if ( navigator.onLine && (requestUrl.pathname.includes('/api/') || requestUrl.pathname.includes('/form/') || requestUrl.pathname.includes('/form-design/') || requestUrl.pathname.includes('/static/')) && request.method === 'GET') {
             event.respondWith(
                 fetch(request).then((response) => {
                     const clonedResponse = response.clone();
-                    caches.open('data-cache').then((cache) => {
+                    caches.open('offline-cache').then((cache) => {
                         cache.put(request, clonedResponse);
                     });
                     return response;
@@ -40,55 +32,19 @@ self.addEventListener('fetch', (event) => {
         }
     }
 
-    function useCaseCache () {
-        if (requestUrl.pathname.includes('/form/')) {
-            event.respondWith(
-                fetch(request).then((response) => {
-                    const clonedResponse = response.clone();
-                    caches.open('data-cache').then((cache) => {
-                        cache.put(request, clonedResponse);
-                    });
-                    return response;
-                }).catch(() => {
-                    return caches.match(request);
-                })
-            );
-        }
-    }
-
-    function imageCache () {
-        if (requestUrl.pathname.endsWith('.png')) {
+    function getCaches() {
+        if (!navigator.onLine) {
             event.respondWith(
                 caches.match(request).then((response) => {
                     if (response) {
                         return response;
                     }
-                    return fetch(request).then((networkResponse) => {
-                        const clonedResponse = networkResponse.clone();
-                        caches.open('image-cache').then((cache) => {
-                            cache.put(request, clonedResponse);
-                        });
-                        return networkResponse;
-                    });
-                })
-            );
-        }
-    }
-
-    function getCaches () {
-        if (!navigator.onLine) {
-            console.log('estamos trayendo data de cache');
-            event.respondWith(
-                caches.match(request).then((response) => {
-                    return response || fetch(request);
                 })
             );
         }
     }
 
     apiCache();
-    imageCache();
     getCaches();
-    useCaseCache();
 
 });

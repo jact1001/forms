@@ -21,17 +21,18 @@ interface SectionAreaProps {
 export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
 
     const dispatch = useDispatch();
-    const [ {isOver}, drop ] = useDrop(() => ({
+    /* eslint-disable no-empty-pattern */
+    const [ {}, drop ] = useDrop(() => ({
         accept: DRAG_INPUT,
         drop: (field) => addField(field),
         collect: (monitor) => ({
-            isOver: !!monitor.isOver()
+            isOver: monitor.isOver()
         }),
     }));
 
     const addField = (field: any) => {
         const newField = {
-            ...field,
+            ...JSON.parse(JSON.stringify(field)),
             form_field_id: uuidv4()
         }
         dispatch(addSectionField(newField, sectionId));
@@ -41,8 +42,6 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
         dispatch(removeSectionField(fieldId, sectionId));
     }
 
-    console.info(isOver);
-
     return (
         <div className={defaultClass} ref={ drop }>
             {sectionFields.map((field: any) => {
@@ -50,10 +49,11 @@ export const SectionArea = ({sectionFields, sectionId}: SectionAreaProps) => {
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >
                         <Label field={field} sectionId={sectionId} />
-                        <Input key={field.label} sectionId={sectionId} {...field}/>
+                        <Input key={field.form_field_id} sectionId={sectionId} {...field}/>
                         {sectionFields.length > 1 && <Delete onClick={() => removeField(field.form_field_id)} />}
                     </div>
             })}
+            {sectionFields.length === 0 && <h4>Arrastra tus campos aquí...</h4>}
         </div>
     );
 }

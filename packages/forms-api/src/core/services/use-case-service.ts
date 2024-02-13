@@ -2,20 +2,29 @@ import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { UseCaseRepository } from "../../infraestructure/repository/use-case-repository/use-case-repository";
 import { IUseCase } from "../domain/use-case";
 import {IForm} from "../domain/form";
+import {IFormCase} from "../domain/user-forms";
+import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 
 @Injectable()
 @Scope('request')
 export class UseCaseService implements OnDestroy {
 
     constructor(
-        private readonly useCaseRepository: UseCaseRepository
+        private readonly useCaseRepository: UseCaseRepository,
+        private readonly userFormsRepository: UserFormsRepository
     ) {}
 
     public async saveUseCase(useCase: IUseCase): Promise<IUseCase> {
         return await this.useCaseRepository.saveUseCase(useCase);
     }
 
-    public async updateUseCase(useCase: IUseCase): Promise<IUseCase> {
+    public async updateUseCase(useCase: IUseCase, email: string): Promise<IUseCase> {
+        const formsUseCase: IFormCase = {
+            case_id: useCase.id,
+            name: useCase.case_name,
+            state: useCase.case_state
+        }
+        await this.userFormsRepository.updateUseCase(formsUseCase, useCase.form_id, email);
         return await this.useCaseRepository.updateUseCase(useCase);
     }
 
@@ -28,7 +37,7 @@ export class UseCaseService implements OnDestroy {
             form_id: useCase.form_id,
             form_name: useCase.form_name,
             sections: useCase.sections.filter((section) => {
-                if (section.access.find((access) => access.userId === email)) return section;
+                if (section.access.find((access) => (access.userId === 'all' || access.userId === email))) return section;
             })
         }
     }
@@ -37,7 +46,7 @@ export class UseCaseService implements OnDestroy {
         return await this.useCaseRepository.findUseCasesByFormId(formId);
     }
 
-    public async updateFormUseCases(form: IForm): Promise<IUseCase[]> {
+    public async updateFormUseCases(form: IForm, email: string): Promise<IUseCase[]> {
         const useCases = await this.useCaseRepository.findUseCasesByFormId(form.id);
         const updatedUseCases: IUseCase[] = [];
         for (const useCase of useCases) {
@@ -67,7 +76,7 @@ export class UseCaseService implements OnDestroy {
             };
 
             try {
-                const newUseCase = await this.updateUseCase(updatedUseCase);
+                const newUseCase = await this.updateUseCase(updatedUseCase, email);
                 updatedUseCases.push(newUseCase);
             } catch (error) {
                 console.error(`Error updating use case: ${error.message}`);

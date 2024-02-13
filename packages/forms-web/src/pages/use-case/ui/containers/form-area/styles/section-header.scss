@@ -1,0 +1,18 @@
+@import '../../../../../../index';
+
+.form-section-header {
+    border-bottom: 0.1em solid $fa-color-blue-light;
+    color: $fa-color-white-primary;
+    width: 100%;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+
+    &__section-name {
+        border: 0;
+        color: #fff;
+        font-size: 24px;
+        outline: none;
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,7 +1,4 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import { UsersService } from "../services/users-service";
-import { IUserApiPort } from "../ports/users-ports/users-api-port";
-import { IUser } from "../domain/user";
 import {IUserFormsApiPort} from "../ports/user-forms-ports/user-forms-port";
 import {IFormCase, IUserForms} from "../domain/user-forms";
 import {UserFormsService} from "../services/user-forms-service";
@@ -18,12 +15,20 @@ export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
         return this.userFormService.getUserForms(email);
     }
 
-    public async saveUserForms(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
-        return this.userFormService.saveUserForms(form, userId, useCases);
+    public async saveUserForm(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
+        return this.userFormService.saveUserForm(form, userId, useCases);
+    }
+
+    public async createDefaultUserForms(email: string): Promise<string> {
+        return this.userFormService.createDefaultUserForms(email);
     }
 
     public async createCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms> {
         return this.userFormService.createCase(userForm, formId, email);
+    }
+
+    public async updateUseCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms> {
+        return this.userFormService.updateFormUseCase(userForm, formId, email);
     }
 
     public async exportUseCasesByFormId(formId: string, email: string): Promise<any> {

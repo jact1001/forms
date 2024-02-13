@@ -14,8 +14,8 @@ export class UseCaseUseCase implements IUseCasePort, OnDestroy {
         return this.useCaseService.saveUseCase(useCase);
     }
 
-    public async updateUseCase(useCase: IUseCase): Promise<IUseCase> {
-        return this.useCaseService.updateUseCase(useCase);
+    public async updateUseCase(useCase: IUseCase, email: string): Promise<IUseCase> {
+        return this.useCaseService.updateUseCase(useCase, email);
     }
 
     public async getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase> {
@@ -26,8 +26,8 @@ export class UseCaseUseCase implements IUseCasePort, OnDestroy {
         return this.useCaseService.getUseCasesByFormId(formId);
     }
 
-    public async updateFormUseCases(form: IForm): Promise<IUseCase[]> {
-        return this.useCaseService.updateFormUseCases(form);
+    public async updateFormUseCases(form: IForm, email: string): Promise<IUseCase[]> {
+        return this.useCaseService.updateFormUseCases(form, email);
     }
 
     $onDestroy(): void | Promise<any> {
