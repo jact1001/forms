@@ -14,7 +14,6 @@
 https://dl.k6.io/msi/k6-latest-amd64.msi
 
 `choco install k6`
-ç
 
 
 
