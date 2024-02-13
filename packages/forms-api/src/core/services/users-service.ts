@@ -22,9 +22,16 @@ export class UsersService implements OnDestroy {
 
     public async saveUser(user: IUser): Promise<IUser> {
         const userExist: IUser = await this.userRepository.findUserByEmail(user.email);
-        if (!userExist) return await this.userRepository.saveUser(user);
+        let newUser: IUser;
+
+        if (!userExist) {
+            newUser = await this.userRepository.saveUser(user);
+        } else {
+            newUser = userExist;
+        }
+
         await this.userFormsUseCase.createDefaultUserForms(user.email);
-        return userExist;
+        return newUser;
     }
 
     $onDestroy() {
