@@ -14,6 +14,13 @@
 https://dl.k6.io/msi/k6-latest-amd64.msi
 
 `choco install k6`
+ç
+
+
+
+### Ejecutar k6 sin grafana
+
+    k6 run load-test.js
 
 Al ejecutar la prueba, K6 recolecta los resultados y los almacena en influxdb para luego poder ser revisados en un tablero como grafana
 en http://localhost:3000.

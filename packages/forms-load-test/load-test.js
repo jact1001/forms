@@ -2,7 +2,7 @@ import http from 'k6/http';
 import {check, sleep} from 'k6';
 
 export const data = {
-    base_url: "http://ac05030b079cb406e8de00450fe0153a-1143428750.us-east-2.elb.amazonaws.com/",
+    base_url: "https://dsb471zsol61i.cloudfront.net/api/health",
     path: ""
 }
 
