@@ -9,4 +9,10 @@
     position: fixed;
     left: 0;
     top: 59px;
+
+    @media screen and (max-height: 800px) {
+        max-height: 800px;
+        overflow-y: auto;
+        padding-bottom: 59px;
+    }
 }
