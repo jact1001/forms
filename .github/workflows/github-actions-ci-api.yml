@@ -39,7 +39,7 @@ jobs:
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
       - name: Update kube config
-        run: aws eks update-kubeconfig --name dynamic-forms-eks1
+        run: aws eks update-kubeconfig --name dynamic-forms-eks2
 
       - name: Deploy to EKS
         run: |
@@ -56,5 +56,5 @@ jobs:
       - name: Get services
         run: kubectl get services
 
-#      - name: Remove PODs
-#        run: kubectl delete pods --all --all-namespaces
+      - name: Remove PODs
+        run: kubectl delete pods --all --all-namespaces
