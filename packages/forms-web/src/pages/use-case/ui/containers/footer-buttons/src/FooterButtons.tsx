@@ -16,7 +16,7 @@ export const FooterButtons = () => {
     const [isSaving, setIsSaving] = useState(false);
     const {form, updateLoading, updateError} = useFormStore((state) => state.form);
     const [isOnline, setIsOnline] = useState(navigator.onLine);
-    const [useCaseStorageKey, setUseCaseStorageKey] = useState(USE_CASE_STORAGE_KEY+form.id);
+    const [useCaseStorageKey] = useState(USE_CASE_STORAGE_KEY + form.id);
 
     const handleOnline = () => {
         setIsOnline(true);
