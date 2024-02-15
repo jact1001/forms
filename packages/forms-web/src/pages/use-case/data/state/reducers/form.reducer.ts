@@ -2,7 +2,6 @@ import {Action, ActionType} from '../actions/form.actions';
 import {IUseCase} from '../../domain/IUseCase';
 import {updateFormField} from "../../use-cases/use-update-form-field";
 
-
 interface State {
     form: IUseCase ;
     loading: boolean;
@@ -39,6 +38,7 @@ const formReducer = (state: State = initialState, action: Action): State => {
             return {
                 ...state,
                 loading: false,
+                error: null,
                 form: action.payload,
             }
         case ActionType.QUERY_FORM_FAIL:
@@ -55,6 +55,7 @@ const formReducer = (state: State = initialState, action: Action): State => {
         case ActionType.UPDATE_FORM_SUCCESS:
             return {
                 ...state,
+                updateError: null,
                 updateLoading: false,
                 form: action.payload,
             }

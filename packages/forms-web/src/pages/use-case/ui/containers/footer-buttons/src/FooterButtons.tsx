@@ -16,7 +16,7 @@ export const FooterButtons = () => {
     const [isSaving, setIsSaving] = useState(false);
     const {form, updateLoading, updateError} = useFormStore((state) => state.form);
     const [isOnline, setIsOnline] = useState(navigator.onLine);
-    const useCaseStorageKey = USE_CASE_STORAGE_KEY+form.id;
+    const [useCaseStorageKey, setUseCaseStorageKey] = useState(USE_CASE_STORAGE_KEY+form.id);
 
     const handleOnline = () => {
         setIsOnline(true);
@@ -51,11 +51,11 @@ export const FooterButtons = () => {
                     toast.error("Error en la operación, intentalo de nuevo");
                 } else {
                     localStorage.setItem(useCaseStorageKey, JSON.stringify(form));
-                    toast.error("No tienes internet, ya guardamos tus datos");
+                    toast.error("No tienes internet, pero ya guardamos tus datos");
                 }
 
             } else if (form.id) {
-                toast.success("Operación exitosa");
+                toast.success("Operación exitosa, se guardaron tus cambios");
                 localStorage.removeItem(useCaseStorageKey);
             }
             setIsSaving(false);
