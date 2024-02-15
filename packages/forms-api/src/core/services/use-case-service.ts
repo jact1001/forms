@@ -33,6 +33,7 @@ export class UseCaseService implements OnDestroy {
         return {
             id: useCase.id,
             case_name: useCase.case_name,
+            case_creator: useCase.case_creator ?? '',
             case_state: useCase.case_state,
             form_id: useCase.form_id,
             form_name: useCase.form_name,
@@ -69,6 +70,7 @@ export class UseCaseService implements OnDestroy {
             const updatedUseCase: IUseCase = {
                 id: useCase.id,
                 case_name: useCase.case_name,
+                case_creator: useCase.case_creator ?? '',
                 case_state: useCase.case_state,
                 form_id: useCase.form_id,
                 form_name: useCase.form_name,

@@ -114,9 +114,10 @@ export class UserFormsService implements OnDestroy {
         };
     }
 
-    private async saveUseCase(formCase: IFormCase, form: IForm): Promise<IUseCase>{
+    private async saveUseCase(formCase: IFormCase, form: IForm, email: string): Promise<IUseCase>{
         const useCase: IUseCase = {
             case_name: formCase.name,
+            case_creator: email,
             form_id: form.id,
             form_name: form.form_name,
             case_state: { id: 'pending', name: 'Pendiente'},
@@ -157,7 +158,7 @@ export class UserFormsService implements OnDestroy {
 
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
         const form: IForm = await this.formsRepository.findForm(formId);
-        const newUseCase = await this.saveUseCase(formCase, form);
+        const newUseCase = await this.saveUseCase(formCase, form, email);
         const newFormCase = {...formCase, case_id: newUseCase.id};
         const userIds = await this.getFormUserIds(form, email);
         await this.saveUseCaseToOtherUsers(newFormCase, userIds, formId);
