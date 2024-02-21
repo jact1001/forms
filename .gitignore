@@ -18,3 +18,4 @@ packages/forms-api/.env
 
 packages/forms-web/.env
 bin/
+.env
