@@ -12,15 +12,20 @@ datasource db {
 }
 
 model Access {
-  userId String @id
+  userId   String @id
   userName String
-  // permission String[]
+}
+
+model Section {
+  id           String @id
+  section_name String
+  author       Form   @relation(fields: [section_name], references: [form_name])
 }
 
 model Form {
-  id String @id
-  form_name String
-  state String
-  author String
-  // sections: Section[];
+  id        String    @id
+  form_name String    @unique
+  state     String
+  author    String
+  sections  Section[]
 }
