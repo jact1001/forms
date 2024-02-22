@@ -11,6 +11,7 @@
 `source ~/.zshrc`
 
 ### windows
+Descargamos al ultima version y la instalamos
 https://dl.k6.io/msi/k6-latest-amd64.msi
 
 `choco install k6`
@@ -20,6 +21,18 @@ https://dl.k6.io/msi/k6-latest-amd64.msi
 ### Ejecutar k6 sin grafana
 
     k6 run load-test.js
+
+
+### Ejecutar k6 con grafana auto contenido
+Setear una variable de entorno:
+Lo malo, no me deja personalizar el dashboard
+K6_WEB_DASHBOARD=true 
+y ejecutar:
+
+    k6 run load-test.js
+
+
+### Instalar grafana con docker y luego integrar el output de k6
 
 Al ejecutar la prueba, K6 recolecta los resultados y los almacena en influxdb para luego poder ser revisados en un tablero como grafana
 en http://localhost:3000.

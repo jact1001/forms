@@ -18,17 +18,18 @@ export const options = {
 
 export default function () {
     const urlHealth = `${data.base_url}${health}`;
-    const resHealth = http.get(urlHealth);
     const urlForms = `${data.base_url}${userForms}`;
-
     const params = {
         headers: {
             'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
         },
     };
+
+    const resHealth = http.get(urlHealth);
     const resForms = http.get(urlForms, params);
 
-    check(resHealth, {'status was 200': (r) => r.status == 200});
-    check(resForms, {'status was 200': (r) => r.status == 200});
+    check(resHealth, {'status was 200': (r) => r.status === 200});
+    check(resForms, {'status was 200': (r) => r.status === 200});
+    check(resForms, {'status was Other': (r) => r.status !== 200});
     sleep(1);
 }
