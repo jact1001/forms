@@ -78,7 +78,7 @@ export class FormsService implements OnDestroy {
     public async saveForm(form: IForm, email: string): Promise<IForm> {
         const formUpdated = await this.setAccessSectionsToAuthor(form, email);
         const newForm = await this.formRepository.saveForm({author: email, ...formUpdated});
-        await this.formRepositorySQL.saveForm({author: email, ...formUpdated});
+        await this.formRepositorySQL.saveForm({...formUpdated, id: newForm.id, author: email});
         await this.createUserForms(newForm,[]);
         return newForm;
     }
