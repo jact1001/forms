@@ -4,26 +4,33 @@ import {IFormRepositoryPort} from "../../../core/ports/forms-ports/forms-reposit
 import {IForm} from "../../../core/domain/form";
 
 const prisma = new PrismaClient()
+
 @Injectable()
 export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
 
 
-    public async findForms () {
+    public async findForms() {
         prisma.form.findMany()
         return null
     }
 
-    public async findForm (formId: string) {
+    public async findForm(formId: string) {
+        let result = await prisma.form.findUnique({
+            where: {
+                id: formId,
+            }
+        })
+        console.log("result", result);
         return null
     }
 
-    public async saveForm (form: IForm) {
-        prisma.form.create({data:form}).then();
-       return null
+    public async saveForm(form: IForm) {
+        prisma.form.create({data: form}).then();
+        return null
     }
 
-    public async updateForm (form: IForm) {
-      return null
+    public async updateForm(form: IForm) {
+        return null
     }
 
     async $onDestroy(): Promise<void | Promise<any>> {
