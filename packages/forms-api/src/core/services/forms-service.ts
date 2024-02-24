@@ -5,13 +5,14 @@ import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
 import {UseCaseUseCase} from "../use-cases/use-case-use-case";
 import {IUseCase} from "../domain/use-case";
 import {UsersUseCase} from "../use-cases/users-use-case";
+import {FormsRepositorySQL} from "../../infraestructure/repository/forms-repository-sql/forms-repository-sql";
 
 @Injectable()
 @Scope('request')
 export class FormsService implements OnDestroy {
 
     constructor(
-        private readonly formRepositorySQL: FormsRepository,
+        private readonly formRepositorySQL: FormsRepositorySQL,
         private readonly formRepository: FormsRepository,
         private readonly usersUseCase: UsersUseCase,
         private readonly userFormsUseCase: UserFormsUseCase,
@@ -23,6 +24,7 @@ export class FormsService implements OnDestroy {
     }
 
     public async getFormById(formId: string): Promise<IForm> {
+         await this.formRepositorySQL.findForm(formId);
         return await this.formRepository.findForm(formId);
     }
 
