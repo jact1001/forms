@@ -18,6 +18,7 @@ export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
     }
 
     public async saveForm (form: IForm) {
+        prisma.form.create({data:form}).then();
        return null
     }
 

@@ -11,6 +11,7 @@ import {UsersUseCase} from "../use-cases/users-use-case";
 export class FormsService implements OnDestroy {
 
     constructor(
+        private readonly formRepositorySQL: FormsRepository,
         private readonly formRepository: FormsRepository,
         private readonly usersUseCase: UsersUseCase,
         private readonly userFormsUseCase: UserFormsUseCase,
@@ -75,6 +76,7 @@ export class FormsService implements OnDestroy {
     public async saveForm(form: IForm, email: string): Promise<IForm> {
         const formUpdated = await this.setAccessSectionsToAuthor(form, email);
         const newForm = await this.formRepository.saveForm({author: email, ...formUpdated});
+        await this.formRepositorySQL.saveForm({author: email, ...formUpdated});
         await this.createUserForms(newForm,[]);
         return newForm;
     }
