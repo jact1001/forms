@@ -19,7 +19,7 @@ model Access {
 model Section {
   id           String @id
   section_name String
-  author       Form   @relation(fields: [section_name], references: [form_name])
+  //author       Form   @relation(fields: [section_name], references: [form_name])
 }
 
 model Form {
@@ -27,5 +27,5 @@ model Form {
   form_name String    @unique
   state     String
   author    String
-  sections  Section[]
+  //sections  Section[]
 }
