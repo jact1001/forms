@@ -30,3 +30,6 @@ model Form {
   author    String
   sections  Section[]
 }
+
+// Es necesario borrar la carpeta migrations para hacer cambios
+// Despues de cambiar un modelo se debe ejecutar npx prisma migrate dev --name init
