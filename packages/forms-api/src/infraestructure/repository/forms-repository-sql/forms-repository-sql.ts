@@ -25,18 +25,23 @@ export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
     }
 
     public async saveForm(form: IForm) {
-        const newForm = {
-            id: form.id,
-            form_name: form.form_name,
-            state: form.state,
-            author: form.author/*,
-            sections: [{
+
+        prisma.form.create({
+            data: {
                 id: form.id,
-                section_name: 'test',
-                author: form.author
-            }]*/
-        }
-        prisma.form.create({data: newForm}).then();
+                form_name: form.form_name,
+                state: form.state,
+                author: form.author,
+                sections: {
+                    create: [{
+                        id: form.id,
+                        section_name: form.sections[0].sectionName
+                        //form_id:form.id
+                    }
+                    ]
+                }
+            }
+        }).then();
         return null
     }
 
