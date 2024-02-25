@@ -2,6 +2,16 @@
 GET http://localhost:8080/api/health
 Accept: application/json
 
+# SQL asociados
+--diseño de formularios
+select * from form;
+select * from section;
+select * from field;
+
+--diligenciamiento de casos
+select * from useCase;
+select * from usecasesection;
+select * from usecasefield;
 
 ### Send request to create a dynamic form
 POST http://localhost:8080/api/forms
@@ -10,7 +20,7 @@ X-Access-Token:eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIK
 
 {
   "state": "",
-  "form_name": "prueba Ivan 6",
+  "form_name": "prueba Ivan 7",
   "sections": [
     {
       "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",

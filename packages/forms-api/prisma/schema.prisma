@@ -25,10 +25,20 @@ model Form {
 }
 
 model Section {
-  id           String @id @default(cuid())
+  id           String  @id @default(cuid())
   section_name String
-  form         Form   @relation(fields: [form_id], references: [id])
+  access       String
+  fields       Field[]
+  form         Form    @relation(fields: [form_id], references: [id])
   form_id      String
+}
+
+model Field {
+  field_id      String  @id @default(cuid())
+  form_field_id String
+  content       String
+  section       Section @relation(fields: [section_id], references: [id])
+  section_id    String
 }
 
 model UseCase {
@@ -42,14 +52,15 @@ model UseCase {
 }
 
 model UseCaseSection {
-  id           String  @id @default(cuid())
+  id           String         @id @default(cuid())
   section_name String
-  use_case     UseCase @relation(fields: [use_case_id], references: [id])
+  access       String
+  use_case     UseCase        @relation(fields: [use_case_id], references: [id])
   use_case_id  String
-  fields       Field[]
+  fields       UseCaseField[]
 }
 
-model Field {
+model UseCaseField {
   field_id            String         @id @default(cuid())
   form_field_id       String
   content             String

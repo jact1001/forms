@@ -31,7 +31,14 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                 sections: {
                     create: currentCase.sections.map((section: ISection) => ({
                         id: section.id,
-                        section_name: section.sectionName
+                        section_name: section.sectionName,
+                        access: JSON.stringify(section.access),
+                        fields: {
+                            create: section.fields.map((field: IField) => ({
+                                form_field_id: field.field_id,
+                                content: JSON.stringify(field)
+                            }))
+                        }
                     }))
                 }
             }
