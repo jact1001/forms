@@ -1,14 +1,12 @@
 import {Injectable, OnDestroy} from "@tsed/common";
 import {PrismaClient} from "@prisma/client";
 import {IFormRepositoryPort} from "../../../core/ports/forms-ports/forms-repository-port";
-import {IForm} from "../../../core/domain/form";
+import {IForm, ISection} from "../../../core/domain/form";
 
 const prisma = new PrismaClient()
 
 @Injectable()
 export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
-
-
     public async findForms() {
         prisma.form.findMany()
         return null
@@ -25,20 +23,17 @@ export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
     }
 
     public async saveForm(form: IForm) {
-
-        prisma.form.create({
+        prisma.form.create( {
             data: {
                 id: form.id,
                 form_name: form.form_name,
                 state: form.state,
                 author: form.author,
                 sections: {
-                    create: [{
+                    create: form.sections.map((section:ISection) => ({
                         id: form.id,
-                        section_name: form.sections[0].sectionName
-                        //form_id:form.id
-                    }
-                    ]
+                        section_name: section.sectionName
+                    }))
                 }
             }
         }).then();

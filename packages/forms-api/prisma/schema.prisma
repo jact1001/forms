@@ -16,19 +16,45 @@ model Access {
   userName String
 }
 
+model Form {
+  id        String    @id @default(cuid())
+  form_name String    @unique
+  state     String
+  author    String
+  sections  Section[]
+}
+
 model Section {
-  id           String @id
+  id           String @id @default(cuid())
   section_name String
   form         Form   @relation(fields: [form_id], references: [id])
   form_id      String
 }
 
-model Form {
-  id        String    @id
-  form_name String    @unique
-  state     String
-  author    String
-  sections  Section[]
+model UseCase {
+  id           String           @id @default(cuid())
+  case_name    String
+  case_state   String
+  case_creator String
+  form_id      String
+  form_name    String
+  sections     UseCaseSection[]
+}
+
+model UseCaseSection {
+  id           String  @id @default(cuid())
+  section_name String
+  useCase      UseCase @relation(fields: [use_case_id], references: [id])
+  use_case_id  String
+  Field        Field[]
+}
+
+model Field {
+  field_id      String         @id @default(cuid())
+  form_field_id String
+  content       String
+  section       UseCaseSection @relation(fields: [section_id], references: [id])
+  section_id    String
 }
 
 // Es necesario borrar la carpeta migrations para hacer cambios

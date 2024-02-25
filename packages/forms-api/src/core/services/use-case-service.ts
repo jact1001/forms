@@ -4,6 +4,7 @@ import { IUseCase } from "../domain/use-case";
 import {IForm} from "../domain/form";
 import {IFormCase} from "../domain/user-forms";
 import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
+import {UseCaseRepositorySQL} from "../../infraestructure/repository/use-case-repository/use-case-repository-sql";
 
 @Injectable()
 @Scope('request')
@@ -11,11 +12,14 @@ export class UseCaseService implements OnDestroy {
 
     constructor(
         private readonly useCaseRepository: UseCaseRepository,
+        private readonly useCaseRepositorySQL: UseCaseRepositorySQL,
         private readonly userFormsRepository: UserFormsRepository
     ) {}
 
     public async saveUseCase(useCase: IUseCase): Promise<IUseCase> {
-        return await this.useCaseRepository.saveUseCase(useCase);
+        const result = await this.useCaseRepository.saveUseCase(useCase);
+        await this.useCaseRepositorySQL.saveUseCase({...useCase, id: result.id});
+        return result;
     }
 
     public async updateUseCase(useCase: IUseCase, email: string): Promise<IUseCase> {

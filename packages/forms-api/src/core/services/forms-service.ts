@@ -5,7 +5,7 @@ import {UserFormsUseCase} from "../use-cases/user-forms-use-case";
 import {UseCaseUseCase} from "../use-cases/use-case-use-case";
 import {IUseCase} from "../domain/use-case";
 import {UsersUseCase} from "../use-cases/users-use-case";
-import {FormsRepositorySQL} from "../../infraestructure/repository/forms-repository-sql/forms-repository-sql";
+import {FormsRepositorySQL} from "../../infraestructure/repository/forms-repository/forms-repository-sql";
 
 @Injectable()
 @Scope('request')
