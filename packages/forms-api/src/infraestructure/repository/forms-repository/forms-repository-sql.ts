@@ -25,13 +25,12 @@ export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
     public async saveForm(form: IForm) {
         prisma.form.create( {
             data: {
-                id: form.id,
                 form_name: form.form_name,
                 state: form.state,
                 author: form.author,
                 sections: {
                     create: form.sections.map((section:ISection) => ({
-                        id: form.id,
+                        id: section.id,
                         section_name: section.sectionName
                     }))
                 }
