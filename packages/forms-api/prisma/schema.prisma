@@ -12,8 +12,8 @@ datasource db {
 }
 
 model Access {
-  userId   String @id
-  userName String
+  userId    String @id
+  user_name String
 }
 
 model Form {
@@ -44,17 +44,17 @@ model UseCase {
 model UseCaseSection {
   id           String  @id @default(cuid())
   section_name String
-  useCase      UseCase @relation(fields: [use_case_id], references: [id])
+  use_case     UseCase @relation(fields: [use_case_id], references: [id])
   use_case_id  String
-  Field        Field[]
+  fields       Field[]
 }
 
 model Field {
-  field_id      String         @id @default(cuid())
-  form_field_id String
-  content       String
-  section       UseCaseSection @relation(fields: [section_id], references: [id])
-  section_id    String
+  field_id            String         @id @default(cuid())
+  form_field_id       String
+  content             String
+  use_case_section    UseCaseSection @relation(fields: [use_case_section_id], references: [id])
+  use_case_section_id String
 }
 
 // Es necesario borrar la carpeta migrations para hacer cambios

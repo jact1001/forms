@@ -1,6 +1,6 @@
-import { Injectable, OnDestroy, Scope } from "@tsed/common";
-import { UseCaseRepository } from "../../infraestructure/repository/use-case-repository/use-case-repository";
-import { IUseCase } from "../domain/use-case";
+import {Injectable, OnDestroy, Scope} from "@tsed/common";
+import {UseCaseRepository} from "../../infraestructure/repository/use-case-repository/use-case-repository";
+import {IUseCase} from "../domain/use-case";
 import {IForm} from "../domain/form";
 import {IFormCase} from "../domain/user-forms";
 import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
@@ -14,7 +14,8 @@ export class UseCaseService implements OnDestroy {
         private readonly useCaseRepository: UseCaseRepository,
         private readonly useCaseRepositorySQL: UseCaseRepositorySQL,
         private readonly userFormsRepository: UserFormsRepository
-    ) {}
+    ) {
+    }
 
     public async saveUseCase(useCase: IUseCase): Promise<IUseCase> {
         const result = await this.useCaseRepository.saveUseCase(useCase);
@@ -29,7 +30,9 @@ export class UseCaseService implements OnDestroy {
             state: useCase.case_state
         }
         await this.userFormsRepository.updateUseCase(formsUseCase, useCase.form_id, email);
-        return await this.useCaseRepository.updateUseCase(useCase);
+        const result = await this.useCaseRepository.updateUseCase(useCase);
+        await this.useCaseRepositorySQL.updateUseCase(useCase);
+        return result;
     }
 
     public async getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase> {

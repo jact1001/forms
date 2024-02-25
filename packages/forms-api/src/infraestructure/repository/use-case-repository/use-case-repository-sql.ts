@@ -5,6 +5,7 @@ import {IUseCaseRepositoryPort} from "../../../core/ports/use-case-ports/use-cas
 import {ICaseState, IUseCase} from "../../../core/domain/use-case";
 import {PrismaClient} from "@prisma/client";
 import {ISection} from "../../../core/domain/form";
+import {IField} from "../../../core/domain/form-fields";
 
 const prisma = new PrismaClient()
 
@@ -29,7 +30,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                 form_name: currentCase.form_name,
                 sections: {
                     create: currentCase.sections.map((section: ISection) => ({
-                        id: "sdsd",
+                        id: section.id,
                         section_name: section.sectionName
                     }))
                 }
@@ -39,7 +40,28 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
     }
 
     public async updateUseCase(useCase: IUseCase) {
-        //prisma.useCase.update({})
+        prisma.useCase.update({
+            where: {
+                id: useCase.id
+            },
+            data: {
+                sections: {
+                    update: useCase.sections.map((section: ISection) => ({
+                        where: {id: section.id},
+                        data: {
+                            section_name: section.sectionName,
+                            fields: {
+                                create: section.fields.map((field: IField) => ({
+                                    // id: field.field_id,
+                                    form_field_id: field.field_id,
+                                    content: JSON.stringify(field)
+                                }))
+                            }
+                        }
+                    }))
+                }
+            }
+        }).then();
         return null;
     }
 
