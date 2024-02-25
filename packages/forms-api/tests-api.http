@@ -3,11 +3,51 @@ GET http://localhost:8080/api/health
 Accept: application/json
 
 
-### Send request with dynamic variables in request's body
+### Send request to create a dynamic form
 POST http://localhost:8080/api/forms
 Content-Type: application/json
 X-Access-Token:eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
 
-{"state":"","form_name":"prueba MMMM","sections":[{"id":"8904ec8e-3fb7-468b-95e8-d0118f5902eb","access":[{"userName":"Hernan Geovanni Taimal Narvaez","userId":"htaimal@gmail.com","permission":["write"]},{"userName":"Ricar Patiño","userId":"patinoricar@gmail.com","permission":["write"]}],"fields":[{"field_id":"0001","is_required":true,"type":"text","label":"aswa","name":"Texto","placeholder":"Texto corto","max_length":"120","label_placeholder":"Escribe aquí el nombre de tu campo","option_placeholder":"Escribe tu opción","value":"","form_field_id":"77f8be48-dec5-4727-9ccc-3bdc6e0a6a55"}],"sectionName":"section3"}]}
+{
+  "state": "",
+  "form_name": "prueba Ivan 1",
+  "sections": [
+    {
+      "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",
+      "access": [
+        {
+          "userName": "Hernan Geovanni Taimal Narvaez",
+          "userId": "htaimal@gmail.com",
+          "permission": [
+            "write"
+          ]
+        },
+        {
+          "userName": "Ricar Patiño",
+          "userId": "patinoricar@gmail.com",
+          "permission": [
+            "write"
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "field_id": "0001",
+          "is_required": true,
+          "type": "text",
+          "label": "Mi label",
+          "name": "Texto",
+          "placeholder": "Texto corto",
+          "max_length": "120",
+          "label_placeholder": "Escribe aquí el nombre de tu campo",
+          "option_placeholder": "Escribe tu opción",
+          "value": "",
+          "form_field_id": "77f8be48-dec5-4727-9ccc-3bdc6e0a6a55"
+        }
+      ],
+      "sectionName": "section 3"
+    }
+  ]
+}
 ###
 
