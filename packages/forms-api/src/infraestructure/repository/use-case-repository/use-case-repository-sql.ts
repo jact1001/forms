@@ -47,7 +47,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
     }
 
     public async updateUseCase(useCase: IUseCase) {
-        prisma.useCase.update({
+        const result = await prisma.useCase.update({
             where: {
                 id: useCase.id
             },
@@ -58,18 +58,42 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                         data: {
                             section_name: section.sectionName,
                             fields: {
-                                create: section.fields.map((field: IField) => ({
+                                update: section.fields.map((field: IField) => ({
                                     // id: field.field_id,
-                                    form_field_id: field.field_id,
-                                    content: JSON.stringify(field)
+                                    where: {field_id: field.field_id},
+                                    data: {
+                                        form_field_id: field.form_field_id,
+                                        content: JSON.stringify(field)
+                                    }
                                 }))
                             }
                         }
                     }))
                 }
+            },
+            select: {
+                id: true,
+                case_name: true,
+                case_state: true,
+                case_creator: true,
+                form_id: true,
+                form_name: true,
+                sections: true
             }
-        }).then();
-        return null;
+        })
+        return {
+            ...result,
+            case_state: JSON.parse(result.case_state),
+            sections: result.sections.map((section) => {
+                const sectioN: ISection = {
+                    ...section,
+                    sectionName: section.section_name,
+                    access: JSON.parse(section.access),
+                    fields: null
+                }
+                return sectioN;
+            })
+        }
     }
 
     $onDestroy(): void | Promise<any> {
