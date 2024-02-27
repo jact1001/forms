@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, Scope } from "@tsed/common";
 import { UseCaseRepository } from "../../infraestructure/repository/use-case-repository/use-case-repository";
 import { IUseCase } from "../domain/use-case";
-import {IForm} from "../domain/form";
+import {IForm, ISection} from "../domain/form";
 import {IFormCase} from "../domain/user-forms";
 import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
 
@@ -51,16 +51,23 @@ export class UseCaseService implements OnDestroy {
         const useCases = await this.useCaseRepository.findUseCasesByFormId(form.id);
         const updatedUseCases: IUseCase[] = [];
         for (const useCase of useCases) {
+            let newSections: ISection[] = [...form.sections];
             const updatedSections = useCase.sections.map((useCaseSection) => {
-                const matchingSection = form.sections.find((section, index) => useCaseSection.id.toString() === section.id.toString());
-                if (matchingSection) {
+                const matchingSectionPosition = newSections.findIndex((section, index) => useCaseSection.id.toString() === section.id.toString());
+                if (matchingSectionPosition !== -1) {
+                    const matchingSection = newSections[matchingSectionPosition];
+                    newSections.splice(matchingSectionPosition, 1);
                     return {
                         id: useCaseSection.id,
                         sectionName: matchingSection.sectionName,
                         access: matchingSection.access,
-                        fields: useCaseSection.fields.map((field) =>
-                            field?.value ? field : matchingSection.fields.find((f) => f.form_field_id === field.form_field_id) || field
-                        )
+                        fields: [
+                            ...useCaseSection.fields.map(field => {
+                                const matchingField = matchingSection.fields.find(f => f.form_field_id === field.form_field_id);
+                                return matchingField && !field.value ? matchingField : field.value ? field : undefined;
+                            }).filter(field => field !== undefined),
+                            ...matchingSection.fields.filter(field => !useCaseSection.fields.some(f => f.form_field_id === field.form_field_id))
+                        ]
                     };
                 } else {
                     return useCaseSection;
@@ -74,7 +81,7 @@ export class UseCaseService implements OnDestroy {
                 case_state: useCase.case_state,
                 form_id: useCase.form_id,
                 form_name: useCase.form_name,
-                sections: updatedSections
+                sections: [...updatedSections, ...newSections]
             };
 
             try {
