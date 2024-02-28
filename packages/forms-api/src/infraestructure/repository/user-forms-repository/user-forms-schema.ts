@@ -17,6 +17,8 @@ export class FormCase implements IFormCase {
     @Property()
     state: UseCaseState;
     @Property()
+    case_creator: string;
+    @Property()
     name: string;
 }
 

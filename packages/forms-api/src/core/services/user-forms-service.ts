@@ -49,7 +49,8 @@ export class UserFormsService implements OnDestroy {
             return {
                 case_id: useCase.id,
                 state: useCase.case_state,
-                name: useCase.case_name
+                name: useCase.case_name,
+                case_creator: useCase.case_creator
             }
         });
         const newUserForm: IUserForm = {
@@ -101,7 +102,8 @@ export class UserFormsService implements OnDestroy {
         return useCases.map((useCase) => ({
             case_id: useCase.id,
             state: useCase.case_state,
-            name: useCase.case_name
+            name: useCase.case_name,
+            case_creator: useCase.case_creator
         }));
     }
 
@@ -159,7 +161,7 @@ export class UserFormsService implements OnDestroy {
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
         const form: IForm = await this.formsRepository.findForm(formId);
         const newUseCase = await this.saveUseCase(formCase, form, email);
-        const newFormCase = {...formCase, case_id: newUseCase.id};
+        const newFormCase = {...formCase, case_id: newUseCase.id, case_creator: newUseCase.case_creator};
         const userIds = await this.getFormUserIds(form, email);
         await this.saveUseCaseToOtherUsers(newFormCase, userIds, formId);
         const userForms = await this.userFormsRepository.addUseCase(newFormCase, formId, email);

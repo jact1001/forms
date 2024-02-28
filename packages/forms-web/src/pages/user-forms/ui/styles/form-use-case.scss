@@ -30,7 +30,7 @@
     flex-direction: row;
   }
 
-  &__name-status{
+  &__name-status {
     display: block;
     padding: 15px;
     font-size: 22px;
@@ -38,6 +38,17 @@
     color: white;
     font-weight: normal;
     margin-left: 40px;
+  }
+
+  &__creator {
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 110px;
+    text-align: left;
   }
 
   @media screen and (max-width: 800px) {

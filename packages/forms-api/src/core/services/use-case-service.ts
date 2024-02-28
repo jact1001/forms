@@ -22,7 +22,8 @@ export class UseCaseService implements OnDestroy {
         const formsUseCase: IFormCase = {
             case_id: useCase.id,
             name: useCase.case_name,
-            state: useCase.case_state
+            state: useCase.case_state,
+            case_creator: useCase.case_creator
         }
         await this.userFormsRepository.updateUseCase(formsUseCase, useCase.form_id, email);
         return await this.useCaseRepository.updateUseCase(useCase);
