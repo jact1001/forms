@@ -19,8 +19,8 @@ export class UseCaseService implements OnDestroy {
 
     public async saveUseCase(useCase: IUseCase): Promise<IUseCase> {
         const result = await this.useCaseRepository.saveUseCase(useCase);
-        await this.useCaseRepositorySQL.saveUseCase({...useCase, id: result.id});
-        return result;
+        const tempTest = await this.useCaseRepositorySQL.saveUseCase({...useCase, id: result.id});
+        return tempTest;
     }
 
     public async updateUseCase(useCase: IUseCase, email: string): Promise<IUseCase> {

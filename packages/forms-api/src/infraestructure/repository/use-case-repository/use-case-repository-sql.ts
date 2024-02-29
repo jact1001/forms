@@ -20,8 +20,10 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
     }
 
     public async saveUseCase(currentCase: IUseCase) {
-        prisma.useCase.create({
-            data: {
+        const result = await prisma.useCase.upsert({
+            where:{id: currentCase.id},
+            update:{},
+            create: {
                 id: currentCase.id,
                 case_name: currentCase.case_name,
                 case_state: JSON.stringify(currentCase.case_state),
@@ -35,16 +37,43 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                         access: JSON.stringify(section.access),
                         fields: {
                             create: section.fields.map((field: IField) => ({
-                                form_field_id: field.field_id,
+                                form_field_id: field.form_field_id,
                                 content: JSON.stringify(field)
                             }))
                         }
                     }))
                 }
+            },
+            select: {
+                id: true,
+                case_name: true,
+                case_state: true,
+                case_creator: true,
+                form_id: true,
+                form_name: true,
+                sections: true
             }
-        }).then();
-        return null;
+        });
+
+        return {
+            id:result.id,
+            case_name: result.case_name,
+            case_state: JSON.parse(result.case_state),
+            case_creator: result.case_creator,
+            form_id: result.form_id,
+            form_name: result.form_name,
+            sections: result.sections.map((section) => {
+                const sectioN: ISection = {
+                    ...section,
+                    sectionName: section.section_name,
+                    access: JSON.parse(section.access),
+                    fields: null
+                }
+                return sectioN;
+            })
+        }
     }
+
 
     public async updateUseCase(useCase: IUseCase) {
         const result = await prisma.useCase.update({
