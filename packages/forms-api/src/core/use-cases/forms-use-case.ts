@@ -1,13 +1,12 @@
 import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import { FormsService } from "../services/forms-service";
-import { IFormApiPort } from "../ports/forms-ports/forms-api-port";
-import { IForm } from "../domain/form";
+import {IFormApiPort} from "../ports/forms-ports/forms-api-port";
+import {IForm} from "../domain/form";
+import {IFormsService} from "../services/i-forms-service";
 
-@Injectable()
-@Scope('request')
 export class FormsUseCase implements IFormApiPort, OnDestroy {
 
-    constructor(private readonly formsService: FormsService) {}
+    constructor(private readonly formsService: IFormsService) {
+    }
 
     public async getForms(): Promise<IForm[]> {
         return this.formsService.getForms();

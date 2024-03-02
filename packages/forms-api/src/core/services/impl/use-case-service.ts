@@ -1,26 +1,22 @@
-import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import {UseCaseRepository} from "../../infraestructure/repository/use-case-repository/use-case-repository";
-import {IUseCase} from "../domain/use-case";
-import {IForm} from "../domain/form";
-import {IFormCase} from "../domain/user-forms";
-import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
-import {UseCaseRepositorySQL} from "../../infraestructure/repository/use-case-repository/use-case-repository-sql";
+import {OnDestroy} from "@tsed/common";
+import {IUseCase} from "../../domain/use-case";
+import {IForm} from "../../domain/form";
+import {IFormCase} from "../../domain/user-forms";
+import {IUseCaseService} from "../i-use-case-service";
+import {IUseCaseRepositoryPort} from "../../ports/use-case-ports/use-case-repository-port";
+import {IUserFormsRepositoryPort} from "../../ports/user-forms-ports/user-forms-repository-port";
 
-@Injectable()
-@Scope('request')
-export class UseCaseService implements OnDestroy {
+export class UseCaseService implements IUseCaseService, OnDestroy {
 
     constructor(
-        private readonly useCaseRepository: UseCaseRepository,
-        private readonly useCaseRepositorySQL: UseCaseRepositorySQL,
-        private readonly userFormsRepository: UserFormsRepository
+        private readonly useCaseRepository: IUseCaseRepositoryPort,
+        private readonly userFormsRepository: IUserFormsRepositoryPort
     ) {
     }
 
     public async saveUseCase(useCase: IUseCase): Promise<IUseCase> {
         const result = await this.useCaseRepository.saveUseCase(useCase);
-        const tempTest = await this.useCaseRepositorySQL.saveUseCase({...useCase, id: result.id});
-        return tempTest;
+        return result;
     }
 
     public async updateUseCase(useCase: IUseCase, email: string): Promise<IUseCase> {
@@ -30,9 +26,7 @@ export class UseCaseService implements OnDestroy {
             state: useCase.case_state
         }
         await this.userFormsRepository.updateUseCase(formsUseCase, useCase.form_id, email);
-        const result = await this.useCaseRepository.updateUseCase(useCase);
-        await this.useCaseRepositorySQL.updateUseCase(useCase);
-        return result;
+        return await this.useCaseRepository.updateUseCase(useCase);
     }
 
     public async getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase> {

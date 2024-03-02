@@ -1,28 +1,29 @@
-import {Injectable, OnDestroy, Scope} from "@tsed/common";
-import {UserFormsRepository} from "../../infraestructure/repository/user-forms-repository/user-forms-repository";
-import {IFormCase, IUserForm, IUserForms} from "../domain/user-forms";
-import {IUseCase} from "../domain/use-case";
-import {IForm} from "../domain/form";
-import {UseCaseUseCase} from "../use-cases/use-case-use-case";
-import {FormsRepository} from "../../infraestructure/repository/forms-repository/forms-repository";
-import {UsersRepository} from "../../infraestructure/repository/users-repository/users-repository";
+import {OnDestroy} from "@tsed/common";
+import {IFormCase, IUserForm, IUserForms} from "../../domain/user-forms";
+import {IUseCase} from "../../domain/use-case";
+import {IForm} from "../../domain/form";
 
-@Injectable()
-@Scope('request')
-export class UserFormsService implements OnDestroy {
+import {IUserFormsService} from "../i-user-forms-service";
+import {IUserFormsRepositoryPort} from "../../ports/user-forms-ports/user-forms-repository-port";
+import {IFormRepositoryPort} from "../../ports/forms-ports/forms-repository-port";
+import {IUserRepositoryPort} from "../../ports/users-ports/users-repository-port";
+import {IUseCasePort} from "../../ports/use-case-ports/use-case-port";
+
+export class UserFormsService implements IUserFormsService, OnDestroy {
 
     constructor(
-        private readonly userFormsRepository: UserFormsRepository,
-        private readonly formsRepository: FormsRepository,
-        private readonly usersRepository: UsersRepository,
-        private readonly useCaseUseCase: UseCaseUseCase
-    ) {}
+        private readonly userFormsRepository: IUserFormsRepositoryPort,
+        private readonly formsRepository: IFormRepositoryPort,
+        private readonly usersRepository: IUserRepositoryPort,
+        private readonly useCaseUseCase: IUseCasePort
+    ) {
+    }
 
     private async setIsAuthorToForm(userForms: IUserForms, userSession: string) {
         const userFormsUpdated: IUserForms = {
             user_id: userForms.user_id,
             forms: userForms.forms.map((form: IUserForm) => {
-                if (form.form_author === userSession){
+                if (form.form_author === userSession) {
                     return {
                         form_id: form.form_id,
                         form_name: form.form_name,
@@ -41,7 +42,9 @@ export class UserFormsService implements OnDestroy {
         const userForms = await this.userFormsRepository.findUserForms(email);
         if (userForms) {
             return await this.setIsAuthorToForm(userForms, email);
-        } else {return userForms}
+        } else {
+            return userForms
+        }
     }
 
     public async saveUserForm(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
@@ -61,7 +64,7 @@ export class UserFormsService implements OnDestroy {
         return await this.userFormsRepository.saveUserForm(form, userId, newUserForm);
     }
 
-    public async createDefaultUserForms(email: string){
+    public async createDefaultUserForms(email: string) {
         try {
             const formsWithAll = await this.getFormsWithAllAccess();
             const userForms = await this.userFormsRepository.findUserForms(email);
@@ -114,13 +117,13 @@ export class UserFormsService implements OnDestroy {
         };
     }
 
-    private async saveUseCase(formCase: IFormCase, form: IForm, email: string): Promise<IUseCase>{
+    private async saveUseCase(formCase: IFormCase, form: IForm, email: string): Promise<IUseCase> {
         const useCase: IUseCase = {
             case_name: formCase.name,
             case_creator: email,
             form_id: form.id,
             form_name: form.form_name,
-            case_state: { id: 'pending', name: 'Pendiente'},
+            case_state: {id: 'pending', name: 'Pendiente'},
             sections: form.sections
         }
         return await this.useCaseUseCase.saveUseCase(useCase);
@@ -168,7 +171,7 @@ export class UserFormsService implements OnDestroy {
 
     public async exportUseCasesByFormId(formId: string, email: string) {
         const userForms = await this.userFormsRepository.findUserForms(email);
-        if (userForms.forms.find((form) => form.form_id === formId)){
+        if (userForms.forms.find((form) => form.form_id === formId)) {
             return await this.useCaseUseCase.getUseCasesByFormId(formId);
         }
     }

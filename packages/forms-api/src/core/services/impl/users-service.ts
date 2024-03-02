@@ -1,16 +1,16 @@
-import { Injectable, OnDestroy, Scope } from "@tsed/common";
-import { UsersRepository } from "../../infraestructure/repository/users-repository/users-repository";
-import { IUser } from "../domain/user";
-import { UserFormsUseCase } from "../use-cases/user-forms-use-case";
+import {OnDestroy} from "@tsed/common";
+import {IUser} from "../../domain/user";
+import {IUsersService} from "../i-users-service";
+import {IUserRepositoryPort} from "../../ports/users-ports/users-repository-port";
+import {IUserFormsApiPort} from "../../ports/user-forms-ports/user-forms-port";
 
-@Injectable()
-@Scope('request')
-export class UsersService implements OnDestroy {
+export class UsersService implements IUsersService, OnDestroy {
 
     constructor(
-        private readonly userRepository: UsersRepository,
-        private readonly userFormsUseCase: UserFormsUseCase,
-    ) {}
+        private readonly userRepository: IUserRepositoryPort,
+        private readonly userFormsUseCase: IUserFormsApiPort,
+    ) {
+    }
 
     public async getUsers(email: string): Promise<IUser[]> {
         return await this.userRepository.findUsers(email);

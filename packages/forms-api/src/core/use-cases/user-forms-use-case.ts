@@ -1,15 +1,14 @@
-import {Injectable, OnDestroy, Scope} from "@tsed/common";
+import {OnDestroy} from "@tsed/common";
 import {IUserFormsApiPort} from "../ports/user-forms-ports/user-forms-port";
 import {IFormCase, IUserForms} from "../domain/user-forms";
-import {UserFormsService} from "../services/user-forms-service";
 import {IForm} from "../domain/form";
 import {IUseCase} from "../domain/use-case";
+import {IUserFormsService} from "../services/i-user-forms-service";
 
-@Injectable()
-@Scope('request')
 export class UserFormsUseCase implements IUserFormsApiPort, OnDestroy {
 
-    constructor(private readonly userFormService: UserFormsService) {}
+    constructor(private readonly userFormService: IUserFormsService) {
+    }
 
     public async getUserForms(email: string): Promise<IUserForms> {
         return this.userFormService.getUserForms(email);

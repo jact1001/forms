@@ -4,4 +4,5 @@ export interface IUseCaseRepositoryPort {
     findUseCase(useCaseId, email): Promise<IUseCase>;
     saveUseCase(useCase): Promise<IUseCase>;
     updateUseCase(useCase): Promise<IUseCase>;
+    findUseCasesByFormId(formId: string): Promise<IUseCase[]>;
 }
