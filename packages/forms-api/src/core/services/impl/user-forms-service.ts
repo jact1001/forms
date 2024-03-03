@@ -2,19 +2,18 @@ import {OnDestroy} from "@tsed/common";
 import {IFormCase, IUserForm, IUserForms} from "../../domain/user-forms";
 import {IUseCase} from "../../domain/use-case";
 import {IForm} from "../../domain/form";
-
 import {IUserFormsService} from "../i-user-forms-service";
 import {IUserFormsRepositoryPort} from "../../ports/user-forms-ports/user-forms-repository-port";
-import {IFormRepositoryPort} from "../../ports/forms-ports/forms-repository-port";
-import {IUserRepositoryPort} from "../../ports/users-ports/users-repository-port";
 import {IUseCasePort} from "../../ports/use-case-ports/use-case-port";
+import {IFormApiPort} from "../../ports/forms-ports/forms-api-port";
+import {IUserApiPort} from "../../ports/users-ports/users-api-port";
 
 export class UserFormsService implements IUserFormsService, OnDestroy {
 
     constructor(
         private readonly userFormsRepository: IUserFormsRepositoryPort,
-        private readonly formsRepository: IFormRepositoryPort,
-        private readonly usersRepository: IUserRepositoryPort,
+        private readonly formUseCase: IFormApiPort,
+        private readonly userUseCase: IUserApiPort,
         private readonly useCaseUseCase: IUseCasePort
     ) {
     }
@@ -91,7 +90,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
     }
 
     private async getFormsWithAllAccess() {
-        const allForms = await this.formsRepository.findForms();
+        const allForms = await this.formUseCase.getForms();
         return allForms.filter((form) => {
             return form.sections.some((section) => {
                 return section.access.some((acc) => acc.userId === 'all');
@@ -150,7 +149,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
         }
 
         if (hasAll) {
-            const users = await this.usersRepository.findUsers(excludedUserId);
+            const users = await this.userUseCase.getUsers(excludedUserId);
             return users.filter((user) => {
                 return user.email !== 'all';
             }).map((user) => user.email);
@@ -160,7 +159,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
     }
 
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
-        const form: IForm = await this.formsRepository.findForm(formId);
+        const form: IForm = await this.formUseCase.getFormById(formId);
         const newUseCase = await this.saveUseCase(formCase, form, email);
         const newFormCase = {...formCase, case_id: newUseCase.id};
         const userIds = await this.getFormUserIds(form, email);
