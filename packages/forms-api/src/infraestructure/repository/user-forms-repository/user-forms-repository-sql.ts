@@ -6,7 +6,7 @@ import {IFormCase, IUserForm} from "../../../core/domain/user-forms";
 import {IForm} from "../../../core/domain/form";
 
 @Injectable()
-export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy {
+export class UserFormsRepositorySQL implements IUserFormsRepositoryPort, OnDestroy {
     @Inject(UserForms)
     private model: MongooseModel<UserForms>;
 

@@ -25,10 +25,6 @@ export class UseCaseUseCase implements IUseCasePort, OnDestroy {
         return this.useCaseService.getUseCasesByFormId(formId);
     }
 
-    public async updateFormUseCases(form: IForm, email: string): Promise<IUseCase[]> {
-        return this.useCaseService.updateFormUseCases(form, email);
-    }
-
     $onDestroy(): void | Promise<any> {
         throw new Error("Method not implemented.");
     }

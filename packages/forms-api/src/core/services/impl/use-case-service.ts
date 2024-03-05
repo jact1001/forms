@@ -48,46 +48,6 @@ export class UseCaseService implements IUseCaseService, OnDestroy {
         return await this.useCaseRepository.findUseCasesByFormId(formId);
     }
 
-    public async updateFormUseCases(form: IForm, email: string): Promise<IUseCase[]> {
-        const useCases = await this.useCaseRepository.findUseCasesByFormId(form.id);
-        const updatedUseCases: IUseCase[] = [];
-        for (const useCase of useCases) {
-            const updatedSections = useCase.sections.map((useCaseSection) => {
-                const matchingSection = form.sections.find((section, index) => useCaseSection.id.toString() === section.id.toString());
-                if (matchingSection) {
-                    return {
-                        id: useCaseSection.id,
-                        sectionName: matchingSection.sectionName,
-                        access: matchingSection.access,
-                        fields: useCaseSection.fields.map((field) =>
-                            field?.value ? field : matchingSection.fields.find((f) => f.form_field_id === field.form_field_id) || field
-                        )
-                    };
-                } else {
-                    return useCaseSection;
-                }
-            });
-
-            const updatedUseCase: IUseCase = {
-                id: useCase.id,
-                case_name: useCase.case_name,
-                case_creator: useCase.case_creator ?? '',
-                case_state: useCase.case_state,
-                form_id: useCase.form_id,
-                form_name: useCase.form_name,
-                sections: updatedSections
-            };
-
-            try {
-                const newUseCase = await this.updateUseCase(updatedUseCase, email);
-                updatedUseCases.push(newUseCase);
-            } catch (error) {
-                console.error(`Error updating use case: ${error.message}`);
-            }
-        }
-        return updatedUseCases;
-    }
-
     $onDestroy() {
         console.log('Service destroyed');
     }

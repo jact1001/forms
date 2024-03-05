@@ -1,6 +1,4 @@
 import {Inject, Injectable, OnDestroy} from "@tsed/common";
-import {MongooseModel} from "@tsed/mongoose";
-import {UseCase} from "./use-case-schema";
 import {IUseCaseRepositoryPort} from "../../../core/ports/use-case-ports/use-case-repository-port";
 import {ICaseState, IUseCase} from "../../../core/domain/use-case";
 import {PrismaClient} from "@prisma/client";

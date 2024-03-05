@@ -25,9 +25,9 @@ export class FormFieldsController {
     async getField( @Context() ctx: Context): Promise<IFormFields> {
         const email = ctx.get("email");
         if(email == "jact1001@gmail.com"){
-            return await this._formFieldsUseCase.getFormFields();
+            return await this._formFieldsUseCaseSQL.getFormFields();
         }
-        return await this._formFieldsUseCaseSQL.getFormFields();
+        return await this._formFieldsUseCase.getFormFields();
     }
 
 }

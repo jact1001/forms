@@ -46,23 +46,6 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
         }
     }
 
-    public async saveUserForm(form: IForm, userId: string, useCases: IUseCase[]): Promise<IUserForms> {
-        const formCases: IFormCase[] = useCases.map((useCase) => {
-            return {
-                case_id: useCase.id,
-                state: useCase.case_state,
-                name: useCase.case_name
-            }
-        });
-        const newUserForm: IUserForm = {
-            form_id: form.id,
-            form_name: form.form_name,
-            cases: formCases,
-            form_author: form.author
-        }
-        return await this.userFormsRepository.saveUserForm(form, userId, newUserForm);
-    }
-
     public async createDefaultUserForms(email: string) {
         try {
             const formsWithAll = await this.getFormsWithAllAccess();
@@ -74,7 +57,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
             for (const form of formsToAdd) {
                 const formCases = await this.getFormCases(form.id);
                 const newUserForm = this.buildUserForm(form, formCases);
-                await this.userFormsRepository.saveUserForm(form, email, newUserForm);
+                await this.userFormsRepository.saveUserForm(email, newUserForm);
             }
             return 'ok';
         } catch (error) {
