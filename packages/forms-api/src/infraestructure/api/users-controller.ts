@@ -5,6 +5,12 @@ import {Response as ExpressResponse} from "express";
 import {OAuth2Client} from "google-auth-library";
 import * as jwt from 'jsonwebtoken';
 import {AuthTokenMiddleware} from "../middlewares/auth-middleware";
+import {IUserApiPort} from "../../core/ports/users-ports/users-api-port";
+import {UsersRepository} from "../repository/users-repository/users-repository";
+import {UsersService} from "../../core/services/impl/users-service";
+import {FormsRepository} from "../repository/forms-repository/forms-repository";
+import {UserFormsRepository} from "../repository/user-forms-repository/user-forms-repository";
+import {UseCaseRepository} from "../repository/use-case-repository/use-case-repository";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 const SECRET_KEY = process.env.SECRET_KEY || '';
@@ -12,7 +18,15 @@ const SECRET_KEY = process.env.SECRET_KEY || '';
 @Controller("/users")
 export class UsersController {
 
-    public constructor(private readonly _usersUseCase: UsersUseCase) {
+    private _usersUseCase: IUserApiPort;
+
+    public constructor() {
+        const userRepository = new UsersRepository();
+        const formRepository = new FormsRepository();
+        const userFormsRepository = new UserFormsRepository();
+        const caseRepository = new UseCaseRepository();
+        const userService = new UsersService(userRepository, userFormsRepository, caseRepository, formRepository);
+        this._usersUseCase = new UsersUseCase(userService);
     }
 
     private googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);

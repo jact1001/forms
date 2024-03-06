@@ -46,59 +46,6 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
         }
     }
 
-    public async createDefaultUserForms(email: string) {
-        try {
-            const formsWithAll = await this.getFormsWithAllAccess();
-            const userForms = await this.userFormsRepository.findUserForms(email);
-            let formsToAdd: IForm[] = formsWithAll;
-            if (userForms) {
-                formsToAdd = this.filterFormsForUser(formsWithAll, userForms);
-            }
-            for (const form of formsToAdd) {
-                const formCases = await this.getFormCases(form.id);
-                const newUserForm = this.buildUserForm(form, formCases);
-                await this.userFormsRepository.saveUserForm(email, newUserForm);
-            }
-            return 'ok';
-        } catch (error) {
-            console.error('Error al crear el formularios predeterminados para el usuario:', error);
-            throw error;
-        }
-    }
-
-    private filterFormsForUser(allForms: IForm[], userForms: IUserForms): IForm[] {
-        return allForms.filter((form) => {
-            return !userForms.forms.some((userForm) => form.id === userForm.form_id);
-        });
-    }
-
-    private async getFormsWithAllAccess() {
-        const allForms = await this.formUseCase.getForms();
-        return allForms.filter((form) => {
-            return form.sections.some((section) => {
-                return section.access.some((acc) => acc.userId === 'all');
-            });
-        });
-    }
-
-    private async getFormCases(formId: string): Promise<IFormCase[]> {
-        const useCases = await this.useCaseUseCase.getUseCasesByFormId(formId);
-        return useCases.map((useCase) => ({
-            case_id: useCase.id,
-            state: useCase.case_state,
-            name: useCase.case_name
-        }));
-    }
-
-    private buildUserForm(form: IForm, formCases: IFormCase[]): IUserForm {
-        return {
-            form_id: form.id,
-            form_name: form.form_name,
-            cases: formCases,
-            form_author: form.author
-        };
-    }
-
     private async saveUseCase(formCase: IFormCase, form: IForm, email: string): Promise<IUseCase> {
         const useCase: IUseCase = {
             case_name: formCase.name,

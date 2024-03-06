@@ -24,7 +24,7 @@ export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
     }
 
     public async saveForm(form: IForm) {
-        prisma.form.create({
+        /*const result = await prisma.form.create({
             data: {
                 form_name: form.form_name,
                 state: form.state,
@@ -42,12 +42,12 @@ export class FormsRepositorySQL implements IFormRepositoryPort, OnDestroy {
                     }))
                 }
             }
-        }).then();
-        return null
+        });*/
+        return null;
     }
 
     public async updateForm(form: IForm) {
-        return null
+        return null;
     }
 
     async $onDestroy(): Promise<void | Promise<any>> {
