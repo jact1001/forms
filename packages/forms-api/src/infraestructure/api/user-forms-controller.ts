@@ -38,7 +38,7 @@ export class UserFormsController {
         const userFormService = new UserFormsService(userFormsRepository, formsRepository, usersRepository, useCaseRepository)
         this._userFormsUseCase = new UserFormsUseCase(userFormService);
 
-        const userFormServiceSQL = new UserFormsService(userFormsRepositorySQL, formsRepositorySQL, usersRepositorySQL, useCaseRepositorySQL)
+        const userFormServiceSQL = new UserFormsService(userFormsRepository, formsRepository, usersRepository, useCaseRepositorySQL)
         this._userFormsUseCaseSQL = new UserFormsUseCase(userFormServiceSQL);
     }
 
@@ -51,11 +51,8 @@ export class UserFormsController {
     @Post("/use-case")
     async createCase(@BodyParams() {useCase, formId}, @Context() ctx: Context): Promise<IUserForms> {
         const email = ctx.get("email");
-        if (email == "jact1001@gmail.com") {
-            return await this._userFormsUseCaseSQL.createCase(useCase, formId, email);
-        }
-        return await this._userFormsUseCase.createCase(useCase, formId, email);
-    }
+        return await this._userFormsUseCaseSQL.createCase(useCase, formId, email);
+     }
 
     @Get("/export/:formId")
     async export(@PathParams('formId') formId: string, @Response() res: ExpressResponse, @Context() ctx: Context): Promise<any> {
