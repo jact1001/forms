@@ -20,12 +20,12 @@ export class UsersController {
 
     private _usersUseCase: IUserApiPort;
 
-    public constructor() {
-        const userRepository = new UsersRepository();
-        const formRepository = new FormsRepository();
-        const userFormsRepository = new UserFormsRepository();
-        const caseRepository = new UseCaseRepository();
-        const userService = new UsersService(userRepository, userFormsRepository, caseRepository, formRepository);
+    public constructor(private usersRepository: UsersRepository,
+                       private formRepository: FormsRepository,
+                       private userFormsRepository: UserFormsRepository,
+                       private caseRepository: UseCaseRepository
+    ) {
+        const userService = new UsersService(this.usersRepository, userFormsRepository, caseRepository, formRepository);
         this._usersUseCase = new UsersUseCase(userService);
     }
 

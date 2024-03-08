@@ -17,14 +17,12 @@ export class UseCaseController {
     private _useCaseUseCase: IUseCasePort;
     private _useCaseUseCaseSQL: IUseCasePort;
 
-    public constructor() {
-        const useCaseRepository = new UseCaseRepository();
-        const userFormsRepository = new UserFormsRepository();
+    public constructor(private useCaseRepository: UseCaseRepository,
+                       private userFormsRepository: UserFormsRepository,
+                       private useCaseRepositorySQL: UseCaseRepositorySQL,
+                       private userFormsRepositorySQL: UserFormsRepositorySQL) {
         const service = new UseCaseService(useCaseRepository, userFormsRepository);
         this._useCaseUseCase = new UseCaseUseCase(service);
-
-        const useCaseRepositorySQL = new UseCaseRepositorySQL();
-        const userFormsRepositorySQL = new UserFormsRepositorySQL();
         const serviceSQL = new UseCaseService(useCaseRepositorySQL, userFormsRepositorySQL);
         this._useCaseUseCaseSQL = new UseCaseUseCase(serviceSQL);
     }
