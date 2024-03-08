@@ -1,9 +1,10 @@
-import {Inject, Injectable, OnDestroy} from "@tsed/common";
+import {Injectable, OnDestroy} from "@tsed/common";
 import {IUseCaseRepositoryPort} from "../../../core/ports/use-case-ports/use-case-repository-port";
-import {ICaseState, IUseCase} from "../../../core/domain/use-case";
+import {IUseCase} from "../../../core/domain/use-case";
 import {PrismaClient} from "@prisma/client";
 import {ISection} from "../../../core/domain/form";
 import {IField} from "../../../core/domain/form-fields";
+import { uuid } from 'uuidv4';
 
 const prisma = new PrismaClient()
 
@@ -20,7 +21,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
     public async saveUseCase(currentCase: IUseCase) {
         const result = await prisma.useCase.create({
             data: {
-                id: currentCase.id,
+                id: uuid(),
                 case_name: currentCase.case_name,
                 case_state: JSON.stringify(currentCase.case_state),
                 case_creator: currentCase.case_creator,
@@ -28,12 +29,12 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                 form_name: currentCase.form_name,
                 sections: {
                     create: currentCase.sections.map((section: ISection) => ({
-                        id: section.id,
+                        id: uuid(),
                         section_name: section.sectionName,
                         access: JSON.stringify(section.access),
                         fields: {
                             create: section.fields.map((field: IField) => ({
-                                form_field_id: field.form_field_id,
+                                form_field_id: uuid(),
                                 content: JSON.stringify(field)
                             }))
                         }
@@ -52,7 +53,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
         });
 
         return {
-            id:result.id,
+            // id:result.id,
             case_name: result.case_name,
             case_state: JSON.parse(result.case_state),
             case_creator: result.case_creator,
