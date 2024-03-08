@@ -1,17 +1,46 @@
 import {BodyParams, Context, Controller, Get, PathParams, Post, Response, UseBefore} from "@tsed/common";
-import { IUserForms } from "../../core/domain/user-forms";
-import { UserFormsUseCase } from "../../core/use-cases/user-forms-use-case";
-import { AuthTokenMiddleware } from "../middlewares/auth-middleware";
-import { Response as ExpressResponse } from "express";
+import {IUserForms} from "../../core/domain/user-forms";
+import {UserFormsUseCase} from "../../core/use-cases/user-forms-use-case";
+import {AuthTokenMiddleware} from "../middlewares/auth-middleware";
+import {Response as ExpressResponse} from "express";
 import * as ExcelJS from 'exceljs';
-import { IUseCase } from "../../core/domain/use-case";
-import { ISection } from "../../core/domain/form";
+import {IUseCase} from "../../core/domain/use-case";
+import {ISection} from "../../core/domain/form";
+import {IUserFormsApiPort} from "../../core/ports/user-forms-ports/user-forms-port";
+import {UserFormsService} from "../../core/services/impl/user-forms-service";
+import {UseCaseRepository} from "../repository/use-case-repository/use-case-repository";
+import {UserFormsRepository} from "../repository/user-forms-repository/user-forms-repository";
+import {UsersRepository} from "../repository/users-repository/users-repository";
+import {FormsRepository} from "../repository/forms-repository/forms-repository";
+import {UserFormsRepositorySQL} from "../repository/user-forms-repository/user-forms-repository-sql";
+import {FormsRepositorySQL} from "../repository/forms-repository/forms-repository-sql";
+import {UsersRepositorySQL} from "../repository/users-repository/users-repository-sql";
+import {UseCaseRepositorySQL} from "../repository/use-case-repository/use-case-repository-sql";
 
 @Controller("/user-forms")
 @UseBefore(AuthTokenMiddleware)
 export class UserFormsController {
 
-    public constructor(private readonly _userFormsUseCase: UserFormsUseCase) {}
+
+    private _userFormsUseCase: IUserFormsApiPort
+    private _userFormsUseCaseSQL: IUserFormsApiPort
+
+    public constructor(
+        private userFormsRepository: UserFormsRepository,
+        private formsRepository: FormsRepository,
+        private usersRepository: UsersRepository,
+        private useCaseRepository: UseCaseRepository,
+        private userFormsRepositorySQL: UserFormsRepositorySQL,
+        private formsRepositorySQL: FormsRepositorySQL,
+        private usersRepositorySQL: UsersRepositorySQL,
+        private useCaseRepositorySQL: UseCaseRepositorySQL
+    ) {
+        const userFormService = new UserFormsService(userFormsRepository, formsRepository, usersRepository, useCaseRepository)
+        this._userFormsUseCase = new UserFormsUseCase(userFormService);
+
+        const userFormServiceSQL = new UserFormsService(userFormsRepositorySQL, formsRepositorySQL, usersRepositorySQL, useCaseRepositorySQL)
+        this._userFormsUseCaseSQL = new UserFormsUseCase(userFormService);
+    }
 
     @Get("/")
     async getUserForms(@Context() ctx: Context): Promise<IUserForms> {
@@ -20,7 +49,7 @@ export class UserFormsController {
     }
 
     @Post("/use-case")
-    async createCase(@BodyParams() { useCase, formId }, @Context() ctx: Context): Promise<IUserForms> {
+    async createCase(@BodyParams() {useCase, formId}, @Context() ctx: Context): Promise<IUserForms> {
         const email = ctx.get("email");
         return await this._userFormsUseCase.createCase(useCase, formId, email);
     }
@@ -72,7 +101,7 @@ export class UserFormsController {
                         const sectionId = section.id.toString();
                         const sectionFilesNames = section.fields.map(field => `${field.label} (${section.sectionName})`);
                         const lastSectionFilesNames = sectionsMapFields.get(sectionId);
-                        const newSections = lastSectionFilesNames ? sectionFilesNames.concat(lastSectionFilesNames.filter(value => !sectionFilesNames.includes(value))): sectionFilesNames;
+                        const newSections = lastSectionFilesNames ? sectionFilesNames.concat(lastSectionFilesNames.filter(value => !sectionFilesNames.includes(value))) : sectionFilesNames;
                         sectionsMapFields.set(sectionId, newSections);
                     })
                 });

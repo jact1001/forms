@@ -7,14 +7,17 @@ import {IUserFormsRepositoryPort} from "../../ports/user-forms-ports/user-forms-
 import {IUseCasePort} from "../../ports/use-case-ports/use-case-port";
 import {IFormApiPort} from "../../ports/forms-ports/forms-api-port";
 import {IUserApiPort} from "../../ports/users-ports/users-api-port";
+import {IFormRepositoryPort} from "../../ports/forms-ports/forms-repository-port";
+import {IUserRepositoryPort} from "../../ports/users-ports/users-repository-port";
+import {IUseCaseRepositoryPort} from "../../ports/use-case-ports/use-case-repository-port";
 
 export class UserFormsService implements IUserFormsService, OnDestroy {
 
     constructor(
         private readonly userFormsRepository: IUserFormsRepositoryPort,
-        private readonly formUseCase: IFormApiPort,
-        private readonly userUseCase: IUserApiPort,
-        private readonly useCaseUseCase: IUseCasePort
+        private readonly formRepository: IFormRepositoryPort,
+        private readonly userRepository: IUserRepositoryPort,
+        private readonly useCaseRepository: IUseCaseRepositoryPort
     ) {
     }
 
@@ -55,7 +58,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
             case_state: {id: 'pending', name: 'Pendiente'},
             sections: form.sections
         }
-        return await this.useCaseUseCase.saveUseCase(useCase);
+        return await this.useCaseRepository.saveUseCase(useCase);
     }
 
     private async saveUseCaseToOtherUsers(formCase: IFormCase, userIds: string[], formId: string) {
@@ -79,7 +82,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
         }
 
         if (hasAll) {
-            const users = await this.userUseCase.getUsers(excludedUserId);
+            const users = await this.userRepository.findUsers(excludedUserId);
             return users.filter((user) => {
                 return user.email !== 'all';
             }).map((user) => user.email);
@@ -89,7 +92,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
     }
 
     public async createCase(formCase: IFormCase, formId: string, email: string): Promise<IUserForms> {
-        const form: IForm = await this.formUseCase.getFormById(formId);
+        const form: IForm = await this.formRepository.findForm(formId);
         const newUseCase = await this.saveUseCase(formCase, form, email);
         const newFormCase = {...formCase, case_id: newUseCase.id};
         const userIds = await this.getFormUserIds(form, email);
@@ -101,7 +104,7 @@ export class UserFormsService implements IUserFormsService, OnDestroy {
     public async exportUseCasesByFormId(formId: string, email: string) {
         const userForms = await this.userFormsRepository.findUserForms(email);
         if (userForms.forms.find((form) => form.form_id === formId)) {
-            return await this.useCaseUseCase.getUseCasesByFormId(formId);
+            return await this.useCaseRepository.findUseCasesByFormId(formId);
         }
     }
 
