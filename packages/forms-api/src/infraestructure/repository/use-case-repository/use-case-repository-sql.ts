@@ -52,7 +52,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
         });
 
         return {
-            id:result.id,
+           // id:new mongoose.Types.ObjectId(result.id),
             case_name: result.case_name,
             case_state: JSON.parse(result.case_state),
             case_creator: result.case_creator,
