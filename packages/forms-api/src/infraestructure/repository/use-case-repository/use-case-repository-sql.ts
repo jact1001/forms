@@ -11,7 +11,39 @@ const prisma = new PrismaClient()
 @Injectable()
 export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
     public async findUseCase(useCaseId: string, email: string) {
-        return null;
+        const result = await prisma.useCase
+            .findUnique({
+                where: {
+                    id: useCaseId
+                },
+                select: {
+                    id: true,
+                    case_name: true,
+                    case_creator: true,
+                    case_state: true,
+                    form_id: true,
+                    form_name: true,
+                    sections: true
+                }
+            });
+
+        return {
+            id: result.id,
+            case_name: result.case_name,
+            case_creator: result.case_creator,
+            case_state: JSON.parse(result.case_state),
+            form_id: result.form_id,
+            form_name: result.form_name,
+            sections: result.sections.map((section) => {
+                const sectioN: ISection = {
+                    ...section,
+                    sectionName: section.section_name,
+                    access: JSON.parse(section.access),
+                    fields: null
+                }
+                return sectioN;
+            })
+        }
     }
 
     public async findUseCasesByFormId(formId: string) {
