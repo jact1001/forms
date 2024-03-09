@@ -68,5 +68,33 @@ model UseCaseField {
   use_case_section_id String
 }
 
+// user-forms
+
+model UserForms {
+  id      String     @id @default(cuid())
+  user_id String
+  forms   UserForm[]
+}
+
+model UserForm {
+  id            String     @id @default(cuid())
+  form_id       String
+  form_name     String
+  form_author   String
+  is_author     String
+  cases         FormCase[]
+  user_forms    UserForms  @relation(fields: [user_forms_id], references: [id])
+  user_forms_id String
+}
+
+model FormCase {
+  id           String   @id @default(cuid())
+  case_id      String
+  state        String
+  name         String
+  user_form    UserForm @relation(fields: [user_form_id], references: [id])
+  user_form_id String
+}
+
 // Es necesario borrar la carpeta migrations para hacer cambios
 // Despues de cambiar un modelo se debe ejecutar npx prisma migrate dev --name init

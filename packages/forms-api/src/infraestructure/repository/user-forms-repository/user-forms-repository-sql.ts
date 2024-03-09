@@ -1,15 +1,31 @@
-import {Inject, Injectable, OnDestroy} from "@tsed/common";
+import {Injectable, OnDestroy} from "@tsed/common";
 
 import {IUserFormsRepositoryPort} from "../../../core/ports/user-forms-ports/user-forms-repository-port";
 import {IFormCase, IUserForm} from "../../../core/domain/user-forms";
-import {IForm} from "../../../core/domain/form";
+// import {PrismaClient} from "@prisma/client";
+
+// const prisma = new PrismaClient()
 
 @Injectable()
 export class UserFormsRepositorySQL implements IUserFormsRepositoryPort, OnDestroy {
 
 
     public async saveUserForm(email: string, userForm: IUserForm) {
-        return null;
+        /*const userForms = await prisma.userForms.findMany({
+            where: {                user_id: email            }
+        });
+        if(!userForms){
+            const newUserForms = await prisma.userForms.create({
+                data:{
+
+                }
+            })
+        }
+
+        return {
+
+        }*/
+        return null
     }
 
     public async addUseCase(formCase: IFormCase, formId: string, email: string) {
