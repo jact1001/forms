@@ -15,7 +15,7 @@ export const SectionArea = ({fields, sectionId}:ISectionArea) => {
 
     return (
         <div className={defaultClass} >
-            {fields.map((field)=>{
+            {fields?.map((field)=>{
                 const Input = inputsType[`${field.type}`];
                 return Input &&
                     <div className={`${defaultClass}__field-container`} >

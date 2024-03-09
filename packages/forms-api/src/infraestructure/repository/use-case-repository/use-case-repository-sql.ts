@@ -96,7 +96,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                     ...section,
                     sectionName: section.section_name,
                     access: JSON.parse(section.access),
-                    fields: null
+                    fields: []
                 }
                 return sectioN;
             })
