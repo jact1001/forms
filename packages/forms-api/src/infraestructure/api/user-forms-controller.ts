@@ -45,14 +45,23 @@ export class UserFormsController {
     @Get("/")
     async getUserForms(@Context() ctx: Context): Promise<IUserForms> {
         const email = ctx.get("email");
-        return await this._userFormsUseCase.getUserForms(email);
+        if (email == "jact1001@gmail.com") {
+            return await this._userFormsUseCaseSQL.getUserForms(email);
+        } else {
+            return await this._userFormsUseCase.getUserForms(email);
+        }
+
     }
 
     @Post("/use-case")
     async createCase(@BodyParams() {useCase, formId}, @Context() ctx: Context): Promise<IUserForms> {
         const email = ctx.get("email");
-        return await this._userFormsUseCaseSQL.createCase(useCase, formId, email);
-     }
+        if (email == "jact1001@gmail.com") {
+            return await this._userFormsUseCaseSQL.createCase(useCase, formId, email);
+        } else {
+            return await this._userFormsUseCase.createCase(useCase, formId, email);
+        }
+    }
 
     @Get("/export/:formId")
     async export(@PathParams('formId') formId: string, @Response() res: ExpressResponse, @Context() ctx: Context): Promise<any> {

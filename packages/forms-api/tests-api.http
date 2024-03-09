@@ -76,6 +76,11 @@ Content-Type: application/json
   "formId": "65db446f5f0cf0eaff62f9bc"
 }
 
+
+### GET load case
+GET http://localhost:8080/api/use-case/65de9e5ba0356d7b806762ad
+x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+
 ### Update  case
 PUT http://localhost:8080/api/use-case
 Accept: application/json, text/plain, */*
