@@ -64,7 +64,57 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
     }
 
     public async findUseCasesByFormId(formId: string) {
-        return null;
+        const results = await prisma.useCase.findMany({
+            where: {
+                form_id: formId
+            },
+            select: {
+                id: true,
+                case_name: true,
+                case_creator: true,
+                case_state: true,
+                form_id: true,
+                form_name: true,
+                sections: {
+                    select: {
+                        id: true,
+                        access: true,
+                        section_name: true,
+                        fields: true
+                    }
+                }
+            }
+        });
+        return results.map((r) => {
+            const result: IUseCase = {
+                id: r.id,
+                case_name: r.case_name,
+                case_creator: r.case_creator,
+                case_state: JSON.parse(r.case_state),
+                form_id: r.form_id,
+                form_name: r.form_name,
+                sections: r.sections.map((s) => {
+                    const section: ISection = {
+                        ...s,
+                        sectionName: s.section_name,
+                        access: JSON.parse(s.access),
+                        fields: s.fields.map((f) => {
+                            const content = JSON.parse(f.content)
+                            const field: IField =
+                                {
+                                    ...content,
+                                    field_id: f.field_id,
+                                    form_field_id: f.form_field_id,
+                                    isRequired: content.isRequired
+                                }
+                            return field
+                        })
+                    }
+                    return section;
+                })
+            }
+            return result;
+        })
     }
 
     public async saveUseCase(currentCase: IUseCase) {

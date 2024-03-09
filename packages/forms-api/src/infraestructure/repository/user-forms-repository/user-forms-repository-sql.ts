@@ -1,6 +1,5 @@
 import {Inject, Injectable, OnDestroy} from "@tsed/common";
-import {MongooseModel} from "@tsed/mongoose";
-import {UserForms} from "./user-forms-schema";
+
 import {IUserFormsRepositoryPort} from "../../../core/ports/user-forms-ports/user-forms-repository-port";
 import {IFormCase, IUserForm} from "../../../core/domain/user-forms";
 import {IForm} from "../../../core/domain/form";
