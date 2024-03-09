@@ -4,7 +4,7 @@ import {IUseCase} from "../../../core/domain/use-case";
 import {PrismaClient} from "@prisma/client";
 import {ISection} from "../../../core/domain/form";
 import {IField} from "../../../core/domain/form-fields";
-import { uuid } from 'uuidv4';
+import {uuid} from 'uuidv4';
 
 const prisma = new PrismaClient()
 
@@ -23,7 +23,14 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                     case_state: true,
                     form_id: true,
                     form_name: true,
-                    sections: true
+                    sections: {
+                        select: {
+                            id: true,
+                            access: true,
+                            section_name: true,
+                            fields: true
+                        }
+                    }
                 }
             });
 
@@ -34,14 +41,24 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
             case_state: JSON.parse(result.case_state),
             form_id: result.form_id,
             form_name: result.form_name,
-            sections: result.sections.map((section) => {
-                const sectioN: ISection = {
-                    ...section,
-                    sectionName: section.section_name,
-                    access: JSON.parse(section.access),
-                    fields: null
+            sections: result.sections.map((s) => {
+                const section: ISection = {
+                    ...s,
+                    sectionName: s.section_name,
+                    access: JSON.parse(s.access),
+                    fields: s.fields.map((f) => {
+                        const content = JSON.parse(f.content)
+                        const field: IField =
+                            {
+                                ...content,
+                                field_id: f.field_id,
+                                form_field_id: f.form_field_id,
+                                isRequired: content.isRequired
+                            }
+                        return field
+                    })
                 }
-                return sectioN;
+                return section;
             })
         }
     }
@@ -80,25 +97,42 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                 case_creator: true,
                 form_id: true,
                 form_name: true,
-                sections: true
+                sections: {
+                    select: {
+                        id: true,
+                        access: true,
+                        section_name: true,
+                        fields: true
+                    }
+                }
             }
         });
 
         return {
-            id:result.id,
+            id: result.id,
             case_name: result.case_name,
             case_state: JSON.parse(result.case_state),
             case_creator: result.case_creator,
             form_id: result.form_id,
             form_name: result.form_name,
-            sections: result.sections.map((section) => {
-                const sectioN: ISection = {
-                    ...section,
-                    sectionName: section.section_name,
-                    access: JSON.parse(section.access),
-                    fields: []
+            sections: result.sections.map((s) => {
+                const section: ISection = {
+                    ...s,
+                    sectionName: s.section_name,
+                    access: JSON.parse(s.access),
+                    fields: s.fields.map((f) => {
+                        const content = JSON.parse(f.content)
+                        const field: IField =
+                            {
+                                ...content,
+                                field_id: f.field_id,
+                                form_field_id: f.form_field_id,
+                                isRequired: content.isRequired
+                            }
+                        return field
+                    })
                 }
-                return sectioN;
+                return section;
             })
         }
     }
@@ -130,7 +164,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                 }
             },
             select: {
-                id: true,
+                // id: true,
                 case_name: true,
                 case_state: true,
                 case_creator: true,
@@ -142,14 +176,14 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
         return {
             ...result,
             case_state: JSON.parse(result.case_state),
-            sections: result.sections.map((section) => {
-                const sectioN: ISection = {
-                    ...section,
-                    sectionName: section.section_name,
-                    access: JSON.parse(section.access),
+            sections: result.sections.map((s) => {
+                const section: ISection = {
+                    ...s,
+                    sectionName: s.section_name,
+                    access: JSON.parse(s.access),
                     fields: null
                 }
-                return sectioN;
+                return section;
             })
         }
     }
