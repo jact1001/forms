@@ -53,7 +53,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
     public async saveUseCase(currentCase: IUseCase) {
         const result = await prisma.useCase.create({
             data: {
-                id: uuid(),
+                id: currentCase.id,
                 case_name: currentCase.case_name,
                 case_state: JSON.stringify(currentCase.case_state),
                 case_creator: currentCase.case_creator,
@@ -85,7 +85,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
         });
 
         return {
-            // id:result.id,
+            id:result.id,
             case_name: result.case_name,
             case_state: JSON.parse(result.case_state),
             case_creator: result.case_creator,

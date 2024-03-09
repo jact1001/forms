@@ -23,7 +23,7 @@ export class UseCaseController {
                        private userFormsRepositorySQL: UserFormsRepositorySQL) {
         const service = new UseCaseService(useCaseRepository, userFormsRepository);
         this._useCaseUseCase = new UseCaseUseCase(service);
-        const serviceSQL = new UseCaseService(useCaseRepositorySQL, userFormsRepositorySQL);
+        const serviceSQL = new UseCaseService(useCaseRepositorySQL, userFormsRepository);
         this._useCaseUseCaseSQL = new UseCaseUseCase(serviceSQL);
     }
 
@@ -34,7 +34,7 @@ export class UseCaseController {
         if (email == "jact1001@gmail.com") {
             useCase = await this._useCaseUseCaseSQL.getUseCasesByUseCaseId(caseId, email);
         } else {
-            useCase = await this._useCaseUseCase.getUseCasesByUseCaseId(caseId, email);
+            useCase = await this._useCaseUseCaseSQL.getUseCasesByUseCaseId(caseId, email);
         }
         if (!useCase) {
             return res.status(404).json({error: `El caso de uso con el ID: ${caseId} no pudo ser encontrado`});
