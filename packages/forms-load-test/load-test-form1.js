@@ -6,6 +6,9 @@ const health = "/health"
 const createCase = "/user-forms/use-case"
 const useCase = "/use-case/"
 const updateCase = "/use-case"
+const currentDateTime = new Date().toISOString();
+
+
 
 export const data = {
     //base_url: "https://dsb471zsol61i.cloudfront.net/api"
@@ -15,7 +18,7 @@ export const data = {
 
 export const options = {
     stages: [
-        {duration: '10s', target: 20},
+        {duration: '10s', target: 10},
         //{duration: '1m10s', target: 10},
         //{duration: '5s', target: 0},
     ],
@@ -37,7 +40,7 @@ export default function () {
     const createCasePayload=JSON.stringify(
         {
             "useCase": {
-                "name": "caso - x (01/03/2024, 04:43:32 p.m.)",
+                "name": "caso - x ("+currentDateTime+")",
                 "state": {
                     "id": "pending",
                     "name": "Terminado"
@@ -113,9 +116,10 @@ export default function () {
     //const resUpdateCase = http.post(urlUpdateCase,updateCasePayload, params);
 
 
-    check(resHealth, {'status was 200': (r) => r.status === 200});
-    check(resCreateCase, {'status was 200': (r) => r.status === 200});
-    check(resCreateCase, {'status was Other': (r) => r.status !== 200});
+    check(resHealth, {'Health was 200': (r) => r.status === 200});
+    check(resHealth, {'Health was Other': (r) => r.status !== 200});
+    check(resCreateCase, {'Create Case was 200': (r) => r.status === 200});
+    check(resCreateCase, {'Create Case was Other': (r) => r.status !== 200});
     //check(resUpdateCase, {'status was 200': (r) => r.status === 200});
     //check(resUpdateCase, {'status was Other': (r) => r.status !== 200});
     sleep(1);
