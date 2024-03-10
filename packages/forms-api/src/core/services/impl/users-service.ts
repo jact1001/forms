@@ -32,7 +32,8 @@ export class UsersService implements IUsersService, OnDestroy {
         return useCases.map((useCase) => ({
             case_id: useCase.id,
             state: useCase.case_state,
-            name: useCase.case_name
+            name: useCase.case_name,
+            case_creator: useCase.case_creator
         }));
     }
 
