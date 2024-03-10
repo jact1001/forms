@@ -1,14 +1,14 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
-
+import { Trend, Rate } from 'k6/metrics';
 
 const health = "/health"
 const createCase = "/user-forms/use-case"
-const useCase = "/use-case/"
 const updateCase = "/use-case"
 const currentDateTime = new Date().toISOString();
 
-
+let myTrend = new Trend('my_custom_trend');
+let myRate = new Rate('my_custom_rate');
 
 export const data = {
     //base_url: "https://dsb471zsol61i.cloudfront.net/api"
@@ -27,8 +27,6 @@ export const options = {
 export default function () {
     const urlHealth = `${data.base_url}${health}`;
     const urlCreateCase = `${data.base_url}${createCase}`;
-    const urlUseCase = `${data.base_url}${useCase}`;
-    const urlUpdateCase = `${data.base_url}${updateCase}`;
 
     const params = {
         headers: {
@@ -40,7 +38,7 @@ export default function () {
     const createCasePayload=JSON.stringify(
         {
             "useCase": {
-                "name": "caso - x ("+currentDateTime+")",
+                "name": "caso - Este Si ("+currentDateTime+")",
                 "state": {
                     "id": "pending",
                     "name": "Terminado"
@@ -108,18 +106,46 @@ export default function () {
         }
     );
 
-
     const resHealth = http.get(urlHealth);
     const resCreateCase = http.post(urlCreateCase,createCasePayload, params);
-    //const resUseCase = http.get(urlUseCase+resCreateCase.);
 
     //const resUpdateCase = http.post(urlUpdateCase,updateCasePayload, params);
-
 
     check(resHealth, {'Health was 200': (r) => r.status === 200});
     check(resHealth, {'Health was Other': (r) => r.status !== 200});
     check(resCreateCase, {'Create Case was 200': (r) => r.status === 200});
     check(resCreateCase, {'Create Case was Other': (r) => r.status !== 200});
+
+    // If the response status is 200, call another service and retrieve the entity ID
+    if (resCreateCase.status === 200) {
+        // Parse the response body as JSON
+        const responseBody = resCreateCase.json();
+
+        // Extract the entity ID from the response body
+        const formId = responseBody.forms[0].form_id; // Replace 'id' with the actual key in the response body
+        const useCase = `/use-case/${formId}`
+
+        const urlUseCase = `${data.base_url}${useCase}`;
+        const urlUpdateCase = `${data.base_url}${updateCase}`;
+
+        console.log("URLUSECASE***********"+urlUseCase);
+        // Call another service using the entity ID
+        // const anotherResponse = http.get(`https://example.com/api/entity/${entityId}`);
+        sleep(1);
+        const resUseCase = http.get(urlUseCase,params);
+        // Perform additional checks or actions with the 'anotherResponse'
+        console.log("RESPONSEBODY*****"+JSON.stringify(resUseCase));
+        console.log("*********************************")
+
+        check(resUseCase, {'Get Case was 200': (r) => r.status === 200});
+        check(resUseCase, {'Get Case was Other': (r) => r.status !== 200});
+
+    }
+
+    // Record custom metrics
+    myTrend.add(resCreateCase.timings.duration);
+    myRate.add(resCreateCase.status === 200);
+
     //check(resUpdateCase, {'status was 200': (r) => r.status === 200});
     //check(resUpdateCase, {'status was Other': (r) => r.status !== 200});
     sleep(1);
