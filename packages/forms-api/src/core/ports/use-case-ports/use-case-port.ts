@@ -5,7 +5,9 @@ export interface IUseCasePort {
 
     getUseCasesByFormId(formId): Promise<IUseCase[]>;
 
-    getUseCasesByUseCaseId(caseId: string, email: any): Promise<IUseCase>;
+    getUseCasesByUseCaseId(caseId: string, email: string): Promise<IUseCase>;
 
-    updateUseCase(data: IUseCase, email: any): Promise<IUseCase>;
+    updateUseCase(data: IUseCase, email: string): Promise<IUseCase>;
+
+    createCase(data: IUseCase, email: string): Promise<IUseCase>;
 }
