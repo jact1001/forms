@@ -72,7 +72,8 @@ export class UseCaseService implements IUseCaseService, OnDestroy {
         const newFormCase = {
             state: newUseCase.case_state,
             name: newUseCase.case_name,
-            case_id: newUseCase.id
+            case_id: newUseCase.id,
+            case_creator: newUseCase.case_creator
         };
         const userIds = await this.getFormUserIds(form, email);
         await this.saveUseCaseToOtherUsers(newFormCase, userIds, formId);
@@ -84,7 +85,8 @@ export class UseCaseService implements IUseCaseService, OnDestroy {
         const formsUseCase: IFormCase = {
             case_id: useCase.id,
             name: useCase.case_name,
-            state: useCase.case_state
+            state: useCase.case_state,
+            case_creator: useCase.case_creator
         }
         await this.userFormsRepository.updateUseCase(formsUseCase, useCase.form_id, email);
         return await this.useCaseRepository.updateUseCase(useCase);

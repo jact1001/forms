@@ -5,6 +5,7 @@ export interface IUseCaseState {
 
 export interface IFormCase {
     case_id: string;
+    case_creator: string;
     state: IUseCaseState;
     name: string;
 }

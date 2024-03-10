@@ -56,7 +56,8 @@ export class FormsService implements IFormsService, OnDestroy {
             return {
                 case_id: useCase.id,
                 state: useCase.case_state,
-                name: useCase.case_name
+                name: useCase.case_name,
+                case_creator: useCase.case_creator
             }
         });
         const newUserForm: IUserForm = {
@@ -104,26 +105,34 @@ export class FormsService implements IFormsService, OnDestroy {
         const formsUseCase: IFormCase = {
             case_id: useCase.id,
             name: useCase.case_name,
-            state: useCase.case_state
+            state: useCase.case_state,
+            case_creator: useCase.case_creator
         }
         await this.userFormsRepository.updateUseCase(formsUseCase, useCase.form_id, email);
         return await this.useCaseRepository.updateUseCase(useCase);
     }
 
-    private async updateFormUseCases(form: IForm, email: string): Promise<IUseCase[]> {
+    public async updateFormUseCases(form: IForm, email: string): Promise<IUseCase[]> {
         const useCases = await this.useCaseRepository.findUseCasesByFormId(form.id);
         const updatedUseCases: IUseCase[] = [];
         for (const useCase of useCases) {
+            let newSections: ISection[] = [...form.sections];
             const updatedSections = useCase.sections.map((useCaseSection) => {
-                const matchingSection = form.sections.find((section, index) => useCaseSection.id.toString() === section.id.toString());
-                if (matchingSection) {
+                const matchingSectionPosition = newSections.findIndex((section, index) => useCaseSection.id.toString() === section.id.toString());
+                if (matchingSectionPosition !== -1) {
+                    const matchingSection = newSections[matchingSectionPosition];
+                    newSections.splice(matchingSectionPosition, 1);
                     return {
                         id: useCaseSection.id,
                         sectionName: matchingSection.sectionName,
                         access: matchingSection.access,
-                        fields: useCaseSection.fields.map((field) =>
-                            field?.value ? field : matchingSection.fields.find((f) => f.form_field_id === field.form_field_id) || field
-                        )
+                        fields: [
+                            ...useCaseSection.fields.map(field => {
+                                const matchingField = matchingSection.fields.find(f => f.form_field_id === field.form_field_id);
+                                return matchingField && !field.value ? matchingField : field.value ? field : undefined;
+                            }).filter(field => field !== undefined),
+                            ...matchingSection.fields.filter(field => !useCaseSection.fields.some(f => f.form_field_id === field.form_field_id))
+                        ]
                     };
                 } else {
                     return useCaseSection;
@@ -137,7 +146,7 @@ export class FormsService implements IFormsService, OnDestroy {
                 case_state: useCase.case_state,
                 form_id: useCase.form_id,
                 form_name: useCase.form_name,
-                sections: updatedSections
+                sections: [...updatedSections, ...newSections]
             };
 
             try {

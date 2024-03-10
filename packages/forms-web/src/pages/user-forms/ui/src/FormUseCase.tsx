@@ -7,7 +7,7 @@ import { IFormCase } from "../../data/domain/IUserForms";
 const defaultClass = 'form-use-case';
 interface SlideFormProps extends IFormCase {}
 
-export const FormUseCase = ({name, state, case_id:id }: SlideFormProps) =>  {
+export const FormUseCase = ({name, state, case_id:id, case_creator }: SlideFormProps) =>  {
 
     const openCase = () => {
         const domain = window.location.origin;
@@ -19,7 +19,7 @@ export const FormUseCase = ({name, state, case_id:id }: SlideFormProps) =>  {
         <div className={`${defaultClass}__button-content`}>
             <button onClick={openCase} className={`${defaultClass}__button-option`}>
                 <div className={`${defaultClass}__name-status-container`}>
-                    <b className={`${defaultClass}__name-status`}>{name}</b>
+                    <b className={`${defaultClass}__name-status`}>{name} <span className={`${defaultClass}__creator`}>{case_creator?.split('@')[0]}</span></b>
                     <StatusUseCase statusCase={state}/>
                 </div>
                 <ArrowUpRightIcon/>

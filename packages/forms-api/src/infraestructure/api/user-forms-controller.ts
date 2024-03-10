@@ -97,7 +97,7 @@ export class UserFormsController {
                 let columns = {};
                 sections.forEach((section) => {
                     section.fields.forEach((field) => {
-                        columns[field.label] = getTextValue(field.value);
+                        columns[`${field.label} (${section.sectionName})`] = getTextValue(field.value);
                     });
                 })
                 return columns;
