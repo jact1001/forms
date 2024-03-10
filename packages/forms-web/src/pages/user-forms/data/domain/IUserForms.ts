@@ -11,7 +11,7 @@ export interface IFormCase {
 export interface IUserForm {
     form_id: string;
     form_name: string;
-    cases?: IFormCase [];
+    cases: IFormCase [];
     is_author: boolean;
 }
 
