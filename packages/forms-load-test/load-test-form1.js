@@ -15,6 +15,63 @@ export const data = {
     base_url: "http://localhost:8080/api"
 
 }
+function createUpdateCaseBody(caseId, name) {
+    return {
+        "id": caseId,
+        "case_name": name,
+        "case_creator": "rtaimal@gmail.com",
+        "case_state": {
+            "id": "in-progress",
+            "name": "En Progreso"
+        },
+        "form_id": "65db446f5f0cf0eaff62f9bc",
+        "form_name": "prueba Ivan 7",
+        "sections": [
+            {
+                "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",
+                "sectionName": "section 3",
+                "access": [
+                    {
+                        "userId": "htaimal@gmail.com",
+                        "userName": "Hernan Geovanni Taimal Narvaez",
+                        "permission": [
+                            "write"
+                        ]
+                    },
+                    {
+                        "userId": "patinoricar@gmail.com",
+                        "userName": "Ricar Patiño",
+                        "permission": [
+                            "write"
+                        ]
+                    },
+                    {
+                        "userId": "rtaimal@gmail.com",
+                        "userName": "Iván Ricardo Taimal Narváez",
+                        "permission": [
+                            "write"
+                        ]
+                    }
+                ],
+                "fields": [
+                    {
+                        "field_id": "0001",
+                        "is_required": true,
+                        "type": "text",
+                        "label": "Mi label",
+                        "name": "Texto",
+                        "placeholder": "Texto corto",
+                        "max_length": "120",
+                        "label_placeholder": "Escribe aquí el nombre de tu campo",
+                        "option_placeholder": "Escribe tu opción",
+                        "value": "ivan taimal",
+                        "form_field_id": "77f8be48-dec5-4727-9ccc-3bdc6e0a6a55"
+                    }
+                ]
+            }
+        ]
+    };
+}
 
 export const options = {
     stages: [
@@ -38,74 +95,16 @@ export default function () {
     const createCasePayload=JSON.stringify(
     {
             "useCase": {
-                "case_name": "caso - Este Si ("+currentDateTime+")",
+                "case_name": "caso - Deberitas Deberitas ("+currentDateTime+")",
                 "form_id": "65db446f5f0cf0eaff62f9bc"
             }
          }
     );
 
-    const updateCasePayload=JSON.stringify(
-        {
-            "id": "65db45055f0cf0eaff62fa83",
-            "case_name": "caso - 1 (25/02/2024, 08:47:49 a.m.)",
-            "case_creator": "rtaimal@gmail.com",
-            "case_state": {
-                "id": "in-progress",
-                "name": "En Progreso"
-            },
-            "form_id": "65db446f5f0cf0eaff62f9bc",
-            "form_name": "prueba Ivan 7",
-            "sections": [
-                {
-                    "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",
-                    "sectionName": "section 3",
-                    "access": [
-                        {
-                            "userId": "htaimal@gmail.com",
-                            "userName": "Hernan Geovanni Taimal Narvaez",
-                            "permission": [
-                                "write"
-                            ]
-                        },
-                        {
-                            "userId": "patinoricar@gmail.com",
-                            "userName": "Ricar Patiño",
-                            "permission": [
-                                "write"
-                            ]
-                        },
-                        {
-                            "userId": "rtaimal@gmail.com",
-                            "userName": "Iván Ricardo Taimal Narváez",
-                            "permission": [
-                                "write"
-                            ]
-                        }
-                    ],
-                    "fields": [
-                        {
-                            "field_id": "0001",
-                            "is_required": true,
-                            "type": "text",
-                            "label": "Mi label",
-                            "name": "Texto",
-                            "placeholder": "Texto corto",
-                            "max_length": "120",
-                            "label_placeholder": "Escribe aquí el nombre de tu campo",
-                            "option_placeholder": "Escribe tu opción",
-                            "value": "ivan taimal",
-                            "form_field_id": "77f8be48-dec5-4727-9ccc-3bdc6e0a6a55"
-                        }
-                    ]
-                }
-            ]
-        }
-    );
+
 
     const resHealth = http.get(urlHealth);
     const resCreateCase = http.post(urlCreateCase,createCasePayload, params);
-
-    //const resUpdateCase = http.post(urlUpdateCase,updateCasePayload, params);
 
     check(resHealth, {'Health was 200': (r) => r.status === 200});
     check(resHealth, {'Health was Other': (r) => r.status !== 200});
@@ -118,23 +117,33 @@ export default function () {
         const responseBody = resCreateCase.json();
 
         // Extract the entity ID from the response body
-        const caseId = responseBody.id; // Replace 'id' with the actual key in the response body
+        const caseId = responseBody.id;
+        const caseName= responseBody.case_name;
         const useCase = `/use-case/${caseId}`
-
         const urlUseCase = `${data.base_url}${useCase}`;
-        const urlUpdateCase = `${data.base_url}${updateCase}`;
 
-        console.log("URLUSECASE***********"+urlUseCase);
         // Call another service using the entity ID
         // const anotherResponse = http.get(`https://example.com/api/entity/${entityId}`);
-        sleep(1);
         const resUseCase = http.get(urlUseCase,params);
         // Perform additional checks or actions with the 'anotherResponse'
-        console.log("RESPONSEBODY*****"+JSON.stringify(resUseCase));
-        console.log("*********************************")
-
         check(resUseCase, {'Get Case was 200': (r) => r.status === 200});
         check(resUseCase, {'Get Case was Other': (r) => r.status !== 200});
+
+        const urlUpdateCase = `${data.base_url}${updateCase}`;
+
+        const updateCasePayload=JSON.stringify(createUpdateCaseBody(caseId,caseName));
+        const resUpdateCase = http.put(urlUpdateCase,updateCasePayload, params);
+        if (resUpdateCase.status !== 200) {
+            console.log("ERRORCASEID***********"+caseId);
+            console.log("RESPONSEBODY*****" + JSON.stringify(resUpdateCase));
+            console.log("*********************************");
+        }else{
+            console.log("OKCASEID***********"+caseId);
+
+        }
+        // Perform additional checks or actions with the 'anotherResponse'
+        check(resUpdateCase, {'Update Case was 200': (r) => r.status === 200});
+        check(resUpdateCase, {'Update Case was Other': (r) => r.status !== 200});
 
     }
 
@@ -142,7 +151,5 @@ export default function () {
     myTrend.add(resCreateCase.timings.duration);
     myRate.add(resCreateCase.status === 200);
 
-    //check(resUpdateCase, {'status was 200': (r) => r.status === 200});
-    //check(resUpdateCase, {'status was Other': (r) => r.status !== 200});
     sleep(1);
 }
