@@ -52,7 +52,7 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
                 return {
                     ...form,
                     cases: form.cases.map((useCase: IFormCase) => {
-                        if (formCase.case_id === useCase.case_id.toString()){
+                        if (formCase.case_id === useCase.case_id){
                             return formCase;
                         }
                         return useCase;
