@@ -3,7 +3,7 @@ import {check, sleep} from 'k6';
 import { Trend, Rate } from 'k6/metrics';
 
 const health = "/health"
-const createCase = "/user-forms/use-case"
+const createCase = "/use-case"
 const updateCase = "/use-case"
 const currentDateTime = new Date().toISOString();
 
@@ -36,16 +36,12 @@ export default function () {
     };
 
     const createCasePayload=JSON.stringify(
-        {
+    {
             "useCase": {
-                "name": "caso - Este Si ("+currentDateTime+")",
-                "state": {
-                    "id": "pending",
-                    "name": "Terminado"
-                }
-            },
-            "formId": "65db446f5f0cf0eaff62f9bc"
-        }
+                "case_name": "caso - Este Si ("+currentDateTime+")",
+                "form_id": "65db446f5f0cf0eaff62f9bc"
+            }
+         }
     );
 
     const updateCasePayload=JSON.stringify(
@@ -122,8 +118,8 @@ export default function () {
         const responseBody = resCreateCase.json();
 
         // Extract the entity ID from the response body
-        const formId = responseBody.forms[0].form_id; // Replace 'id' with the actual key in the response body
-        const useCase = `/use-case/${formId}`
+        const caseId = responseBody.id; // Replace 'id' with the actual key in the response body
+        const useCase = `/use-case/${caseId}`
 
         const urlUseCase = `${data.base_url}${useCase}`;
         const urlUpdateCase = `${data.base_url}${updateCase}`;

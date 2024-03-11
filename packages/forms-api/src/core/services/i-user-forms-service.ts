@@ -4,8 +4,6 @@ import {IUseCase} from "../domain/use-case";
 export interface IUserFormsService {
     getUserForms(email: string): Promise<IUserForms>;
 
-    createCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms>;
-
     updateFormUseCase(userForm: IFormCase, formId: string, email: string): Promise<IUserForms>;
 
     exportUseCasesByFormId(formId: string, email: string): Promise<IUseCase[]>;

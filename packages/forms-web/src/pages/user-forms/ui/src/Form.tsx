@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addUseCase, downloadUserForm } from "../../data/state/effects/user-forms.effects";
 import {IUseCase} from "../../../use-case/data/domain/IUseCase";
 import {ICase} from "../../data/domain/ICase";
+import {useUserFormsStore} from "../../data/hooks/custom-typed-selector";
 
 const defaultClass = 'form';
 
@@ -16,6 +17,7 @@ export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const { createUseCaseLoading } = useUserFormsStore((state) => state.userForms);
     const [isExpanded, setIsExpanded] = useState(true);
     const toggleCount = () => {
         setIsExpanded(!isExpanded);
@@ -65,7 +67,7 @@ export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
                 <div className={`${defaultClass}__actions-container`}>
                     <button className={`${defaultClass}__action-button`} onClick={download} disabled={!is_author} >Descargar casos</button>
                     <button className={`${defaultClass}__action-button`} onClick={editHandler} disabled={!is_author} >Editar formulario</button>
-                    <button className={`${defaultClass}__action-button`} onClick={createCase} >Crear caso</button>
+                    <button className={`${defaultClass}__action-button`} onClick={createCase} disabled={createUseCaseLoading}>Crear caso</button>
                     <div className={isExpanded ? `${defaultClass}__arrow-up` : `${defaultClass}__arrow-down`}>
                         <ArrowDownIcon/>
                     </div>

@@ -61,19 +61,15 @@ X-Access-Token:eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIK
 }
 
 ### POST create case
-POST http://localhost:8080/api/user-forms/use-case
+POST http://localhost:8080/api/use-case
 x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
 Content-Type: application/json
 
 {
   "useCase": {
-    "name": "caso - x (01/03/2024, 04:43:32 p.m.)",
-    "state": {
-      "id": "pending",
-      "name": "Terminado"
-    }
-  },
-  "formId": "65db446f5f0cf0eaff62f9bc"
+    "case_name": "caso - 100 (10/03/2024)",
+    "form_id": "65db446f5f0cf0eaff62f9bc"
+  }
 }
 
 
@@ -142,5 +138,3 @@ Content-Type: application/json
     }
   ]
 }
-
-
