@@ -29,7 +29,7 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
         return userForms;
     }
 
-    public async addUseCase (formCase: IFormCase, formId: string, email: string) {
+    public async addUseCaseDeprecated (formCase: IFormCase, formId: string, email: string) {
         const userForms = await this.model.findOne({'user_id': email});
         if (userForms) {
             const form = userForms.forms.find((form) => form.form_id === formId);
@@ -41,11 +41,21 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
         return userForms;
     }
 
+    public async addUseCase(formCase: IFormCase, formId: string, email: string) {
+        const updatedUserForms = await this.model.findOneAndUpdate(
+            { 'user_id': email, 'forms.form_id': formId },
+            { $push: { 'forms.$.cases': formCase } },
+            { new: true }
+        ).exec();
+
+        return updatedUserForms;
+    }
+
     public async findUserForms (email: string) {
         return await this.model.findOne({'user_id': email}).exec();
     }
 
-    public async updateUseCase (formCase: IFormCase, formId: string, email: string) {
+    public async updateUseCaseDeprecated (formCase: IFormCase, formId: string, email: string) {
         const userForms = await this.model.findOne({'user_id': email});
         userForms.forms = userForms.forms.map((form) => {
             if (form.form_id === formId) {
@@ -63,6 +73,17 @@ export class UserFormsRepository implements IUserFormsRepositoryPort, OnDestroy 
         });
         await userForms.save();
         return userForms;
+    }
+
+
+    public async updateUseCase(formCase: IFormCase, formId: string, email: string) {
+        const updatedUserForms = await this.model.findOneAndUpdate(
+            { 'user_id': email, 'forms.form_id': formId, 'forms.cases.case_id': formCase.case_id },
+            { $set: { 'forms.$[outer].cases.$[inner]': formCase } },
+            { arrayFilters: [{ 'outer.form_id': formId }, { 'inner.case_id': formCase.case_id }], new: true }
+        ).exec();
+
+        return updatedUserForms;
     }
 
     $onDestroy(): void | Promise<any> {
