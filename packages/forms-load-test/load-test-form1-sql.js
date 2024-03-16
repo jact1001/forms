@@ -18,20 +18,23 @@ export const data = {
 function createUpdateCaseBody(caseId, name, useCase) {
     const fieldId=useCase.sections[0].fields[0].field_id;
     const formFieldId=useCase.sections[0].fields[0].form_field_id;
+    const sectionId=useCase.sections[0].id;
+    const formId="65f613e049c657819feffc9f";
     return {
         "id": caseId,
         "case_name": name,
-        "case_creator": "rtaimal@gmail.com",
+        "case_creator": "htaimal@gmail.com",
         "case_state": {
             "id": "in-progress",
             "name": "En Progreso"
         },
-        "form_id": "65db446f5f0cf0eaff62f9bc",
-        "form_name": "prueba Ivan 7",
+        "form_id": formId,
+        "form_name": "Formulario SQL",
         "sections": [
             {
-                "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",
-                "sectionName": "section 3",
+                "id": sectionId,
+                "sectionName": "section 1 SQL",
+                "section_name": "section 1 SQL",
                 "access": [
                     {
                         "userId": "htaimal@gmail.com",
@@ -66,7 +69,7 @@ function createUpdateCaseBody(caseId, name, useCase) {
                         "max_length": "120",
                         "label_placeholder": "Escribe aquí el nombre de tu campo",
                         "option_placeholder": "Escribe tu opción",
-                        "value": "Geovanni Taimal",
+                        "value": "Listos SQLField",
                         "form_field_id": formFieldId
                     }
                 ]
@@ -97,8 +100,8 @@ export default function () {
     const createCasePayload=JSON.stringify(
     {
             "useCase": {
-                "case_name": "caso - Deberitas Completas ("+currentDateTime+")",
-                "form_id": "65db446f5f0cf0eaff62f9bc"
+                "case_name": "Estamos Listos- Deberitas SQLCase ("+currentDateTime+")",
+                "form_id": "65f613e049c657819feffc9f"
             }
          }
     );
@@ -134,18 +137,18 @@ export default function () {
         const urlUpdateCase = `${data.base_url}${updateCase}`;
 
         const useCaseResponse = resUseCase.json();
-        seResponse,null,2));
+
+        console.log("PREVIOUSUPDATEBODY*****" + JSON.stringify(useCaseResponse,null,2));
 
         const updateCasePayload=JSON.stringify(createUpdateCaseBody(caseId,caseName,useCaseResponse));
         const resUpdateCase = http.put(urlUpdateCase,updateCasePayload, params);
         if (resUpdateCase.status !== 200) {
-            console.log("UPDATEERRORCASEID******
-        console.log("PREVIOUSUPDATEBODY*****" + JSON.stringify(useCa*****"+caseId);
+            console.log("UPDATEERRORCASEID***********"+caseId);
             console.log("UPDATERESPONSEBODY*****" + JSON.stringify(resUpdateCase,null,2));
-            console.log("/n/n");
+            console.log("  ");
             console.log("*********************************");
         }else{
-            console.log("/n/n");
+            console.log("  ");
             console.log("OKCASEID***********"+caseId);
 
         }
@@ -156,7 +159,7 @@ export default function () {
     }else
     {
         console.log("CREATERESPONSEBODY*****" + JSON.stringify(resCreateCase,null,2));
-        console.log("/n/n");
+        console.log("  ");
         console.log("*********************************");
 
     }

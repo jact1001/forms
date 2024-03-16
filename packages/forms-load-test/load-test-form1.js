@@ -134,10 +134,13 @@ export default function () {
         const updateCasePayload=JSON.stringify(createUpdateCaseBody(caseId,caseName));
         const resUpdateCase = http.put(urlUpdateCase,updateCasePayload, params);
         if (resUpdateCase.status !== 200) {
-            console.log("ERRORCASEID***********"+caseId);
-            console.log("RESPONSEBODY*****" + JSON.stringify(resUpdateCase));
+            console.log("UPDATEERRORCASEID***********"+caseId);
+            console.log("UPDATERESPONSEBODY*****" + JSON.stringify(resUpdateCase,null,2));
+            console.log("   ");
+            console.log("   ");
             console.log("*********************************");
         }else{
+            console.log("  ");
             console.log("OKCASEID***********"+caseId);
 
         }
@@ -145,7 +148,14 @@ export default function () {
         check(resUpdateCase, {'Update Case was 200': (r) => r.status === 200});
         check(resUpdateCase, {'Update Case was Other': (r) => r.status !== 200});
 
+    }else
+    {
+        console.log("CREATERESPONSEBODY*****" + JSON.stringify(resCreateCase,null,2));
+        console.log("  ");
+        console.log("*********************************");
+
     }
+
 
     // Record custom metrics
     myTrend.add(resCreateCase.timings.duration);
