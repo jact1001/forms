@@ -11,6 +11,7 @@ import {UseCaseRepositorySQL} from "../repository/use-case-repository/use-case-r
 import {IUserForms} from "../../core/domain/user-forms";
 import {FormsRepository} from "../repository/forms-repository/forms-repository";
 import {UsersRepository} from "../repository/users-repository/users-repository";
+import { GroupSql } from '../util/groups-sql';
 
 @Controller("/use-case")
 @UseBefore(AuthTokenMiddleware)
@@ -32,39 +33,33 @@ export class UseCaseController {
         this._useCaseUseCaseSQL = new UseCaseUseCase(serviceSQL);
     }
 
+    private handlerUserCase (email: string): IUseCasePort {
+        if (GroupSql.belongsToGroupSql(email)) return this._useCaseUseCaseSQL;
+        return this._useCaseUseCase;
+    }
+
     @Get("/:caseId")
     async getUseCaseById(@PathParams('caseId') caseId: string, @Response() res: ExpressResponse, @Context() ctx: Context): Promise<e.Response<string, Record<string, IUseCase>>> {
         const email = ctx.get("email");
-        let useCase;
-        if (email == "jact1001@gmail.com") {
-            useCase = await this._useCaseUseCaseSQL.getUseCasesByUseCaseId(caseId, email);
-        } else {
-            useCase = await this._useCaseUseCase.getUseCasesByUseCaseId(caseId, email);
-        }
+        const useCase = await this.handlerUserCase(email).getUseCasesByUseCaseId(caseId, email);
+        
         if (!useCase) {
             return res.status(404).json({error: `El caso de uso con el ID: ${caseId} no pudo ser encontrado`});
         }
+
         return res.status(200).json(useCase);
     }
 
     @Post("/")
     async createCase(@BodyParams() {useCase}, @Context() ctx: Context): Promise<IUseCase> {
         const email = ctx.get("email");
-        if (email == "jact1001@gmail.com") {
-            return await this._useCaseUseCaseSQL.createCase(useCase, email);
-        } else {
-            return await this._useCaseUseCase.createCase(useCase, email);
-        }
+        return await this.handlerUserCase(email).createCase(useCase, email);
     }
 
     @Put("/")
     async updateUseCase(@BodyParams() data: IUseCase, @Context() ctx: Context): Promise<IUseCase> {
         const email = ctx.get("email");
-        if (email == "jact1001@gmail.com") {
-            return await this._useCaseUseCaseSQL.updateUseCase(data, email);
-        } else {
-            return await this._useCaseUseCase.updateUseCase(data, email);
-        }
+        return await this.handlerUserCase(email).updateUseCase(data, email);
     }
 
 }
