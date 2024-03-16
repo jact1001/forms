@@ -1,7 +1,7 @@
 import {IUser} from "../../domain/user";
 
 export interface IUserApiPort {
-    getUsers(email): Promise<IUser[]>;
-    saveUser(form): Promise<IUser>;
-    getUserByEmail(email): Promise<IUser>;
+    getUsers(email: string): Promise<IUser[]>;
+    saveUser(user: IUser): Promise<IUser>;
+    getUserByEmail(email: string): Promise<IUser>;
 }

@@ -7,6 +7,8 @@ import {FormFieldsRepository} from "../repository/form-fields-repository/form-fi
 import {FormFieldsService} from "../../core/services/impl/form-fields-service";
 import {FormFieldsRepositorySQL} from "../repository/form-fields-repository/form-fields-repository-sql";
 
+import { GroupSql } from '../util/groups-sql';
+
 @Controller("/form-fields")
 @UseBefore(AuthTokenMiddleware)
 export class FormFieldsController {
@@ -21,13 +23,14 @@ export class FormFieldsController {
         this._formFieldsUseCaseSQL = new FormFieldsUseCase(serviceSQL)
     }
 
+    private handlerUserCase (email: string): IFormFieldsApiPort {
+        if (GroupSql.belongsToGroupSql(email)) return this._formFieldsUseCaseSQL;
+        return this._formFieldsUseCase;
+    }
+
     @Get("/")
     async getField(@Context() ctx: Context): Promise<IFormFields> {
-        const email = ctx.get("email");
-        if (email == "jact1001@gmail.com") {
-            return await this._formFieldsUseCaseSQL.getFormFields();
-        }
-        return await this._formFieldsUseCase.getFormFields();
+        return await this.handlerUserCase(ctx.get("email")).getFormFields();
     }
 
 }

@@ -14,6 +14,8 @@ import {UserFormsRepositorySQL} from "../repository/user-forms-repository/user-f
 import {UseCaseRepositorySQL} from "../repository/use-case-repository/use-case-repository-sql";
 import {IFormApiPort} from "../../core/ports/forms-ports/forms-api-port";
 
+import { GroupSql } from "../util/groups-sql";
+
 @Controller("/forms")
 @UseBefore(AuthTokenMiddleware)
 export class FormsController {
@@ -34,16 +36,18 @@ export class FormsController {
         this._formsUseCase = new FormsUseCase(formService);
         const formServiceSql = new FormsService(formRepositorySql, userRepositorySql, userFormsRepositorySql, caseRepositorySql);
         this._formsUseCaseSql = new FormsUseCase(formServiceSql);
+    }    
+    
+    private handlerFormCase (email: string): IFormApiPort {
+        if (GroupSql.belongsToGroupSql(email)) return this._formsUseCaseSql;
+        return this._formsUseCase;
     }
 
     @Get("/:formId")
     async getFormById(@Context() ctx: Context, @PathParams('formId') formId: string, @Response() res: ExpressResponse): Promise<e.Response<any, Record<string, any>>> {
         const email = ctx.get("email");
-        let form = null;
-        if (email == "jact1001@gmail.com") {
-            form = await this._formsUseCaseSql.getFormById(formId);
-        }
-        form = await this._formsUseCase.getFormById(formId);
+        const form = await this.handlerFormCase(email).getFormById(formId);
+
         if (!form) {
             return res.status(404).json({error: `El formulario con el ID: ${formId} no pudo ser encontrado`});
         }
@@ -53,19 +57,13 @@ export class FormsController {
     @Post("/")
     async saveForm(@BodyParams() data: IForm, @Context() ctx: Context): Promise<IForm> {
         const email = ctx.get("email");
-        if (email == "jact1001@gmail.com") {
-            return await this._formsUseCaseSql.saveForm(data, email);
-        }
-        return await this._formsUseCase.saveForm(data, email);
+        return await this.handlerFormCase(email).saveForm(data, email);
     }
 
     @Put("/:formId")
     async updateForm(@BodyParams() data: IForm, @Context() ctx: Context): Promise<IForm> {
         const email = ctx.get("email");
-        if (email == "jact1001@gmail.com") {
-            return await this._formsUseCaseSql.updateForm(data, email);
-        }
-        return await this._formsUseCase.updateForm(data, email);
+        return await this.handlerFormCase(email).updateForm(data,email);
     }
 
 }

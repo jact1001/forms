@@ -38,6 +38,8 @@
     "nodemon": "2.0.20",
     "prisma": "^5.10.2",
     "ts-node": "10.9.1",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "await-to-js": "3.0.0",
+    "@faker-js/faker": "8.4.1"
   }
 }
