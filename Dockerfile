@@ -16,6 +16,5 @@ EXPOSE 8080
 #CMD [ "ts-node", "src/test-main.ts" ] #no funciona
 #CMD [ "node", "test-server.js" ] #si funciona
 #CMD [ "node", "bin/test-main.js" ] #si funciona
-#CMD ["npx", "prisma", "migrate", "dev"]
-#CMD ["npx", "prisma", "migrate", "dev" , "--name" , "init","&&","node", "bin/main.js" ]
-CMD ["node", "bin/main.js" ]
+CMD ["npx", "prisma", "migrate", "dev" , "--name" , "init"]
+CMD [ "node", "bin/main.js" ]
