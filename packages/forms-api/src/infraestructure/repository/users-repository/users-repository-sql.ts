@@ -63,7 +63,7 @@ export class UsersRepositorySQL implements IUserRepositoryPort, OnDestroy {
         return Promise.reject(new Error(msg));
       }
 
-      console.log(`response ${user}`);
+      console.log(`response  ${user}`);
 
       if (!user) return Promise.resolve(null)
   
