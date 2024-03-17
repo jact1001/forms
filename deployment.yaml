@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dynamic-forms
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: dynamic-forms
@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
         - name: dynamic-forms-container
-          image: 624534814971.dkr.ecr.us-east-2.amazonaws.com/dynamic-forms-rep:1.1          
+          image: 624534814971.dkr.ecr.us-east-2.amazonaws.com/dynamic-forms-rep:1.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-
