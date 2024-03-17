@@ -1,22 +1,11 @@
 import http from 'k6/http';
-import {check, sleep} from 'k6';
-import { Trend, Rate } from 'k6/metrics';
-import { createCasePayload } from "./payloads/create-case";
-import { useUpdateCasePayload } from "./payloads/update-case";
+import { check, sleep } from 'k6';
+import { createCasePayload } from './payloads/create-case';
+import { useUpdateCasePayload } from './payloads/update-case';
 
-const health = "/health"
-const createCase = "/use-case"
-const updateCase = "/use-case"
-const currentDateTime = new Date().toISOString();
-
-let myTrend = new Trend('my_custom_trend');
-let myRate = new Rate('my_custom_rate');
-
-export const data = {
-    //base_url: "https://dsb471zsol61i.cloudfront.net/api"
-    base_url: "http://localhost:8080/api"
-
-}
+const health = "/health";
+const createCase = "/use-case";
+const updateCase = "/use-case";
 
 export const options = {
     stages: [
@@ -25,6 +14,11 @@ export const options = {
         //{duration: '5s', target: 0},
     ],
 };
+export const data = {
+    base_url: "https://dsb471zsol61i.cloudfront.net/api"
+    //base_url: "http://localhost:8080/api"
+
+}
 
 export default function () {
     const urlHealth = `${data.base_url}${health}`;
@@ -32,14 +26,16 @@ export default function () {
 
     const params = {
         headers: {
-            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            //'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            'x-access-token':'eyJhbGciOiJIUzI1NiJ9.aHRhaW1hbEBnbWFpbC5jb20.6COG6IiwHvgp1WN70vQ9FdpVEXEtpwu6Jjxsj7QBSmU',
             'Content-Type': 'application/json'
         },
     };
 
     const formId = '65c4f9606117d5945107d1ff';
     const resHealth = http.get(urlHealth);
-    const resCreateCase = http.post(urlCreateCase, createCasePayload(formId), params);
+    const createRq=createCasePayload(formId);
+    const resCreateCase = http.post(urlCreateCase, createRq, params);
 
     check(resHealth, {'Health was 200': (r) => r.status === 200});
     check(resHealth, {'Health was Other': (r) => r.status !== 200});
@@ -85,16 +81,15 @@ export default function () {
 
     }else
     {
+        console.log("*********************************");
+        console.log("  ");
+        console.log("CREATE RQ*****" + JSON.stringify(createRq,null,2));
+        console.log("  ");
         console.log("CREATERESPONSEBODY*****" + JSON.stringify(resCreateCase,null,2));
         console.log("  ");
         console.log("*********************************");
 
     }
-
-
-    // Record custom metrics
-    myTrend.add(resCreateCase.timings.duration);
-    myRate.add(resCreateCase.status === 200);
 
     sleep(1);
 }
