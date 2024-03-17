@@ -15,7 +15,8 @@ packages/forms-api/.env
 
 */build/
 **/build/*
-
+**/migrations/*
+**/prisma/*.db
 packages/forms-web/.env
 bin/
 .env

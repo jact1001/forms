@@ -1,5 +1,5 @@
 export interface IFormCase {
-    id?: string;
+    case_id?: string;
     case_creator?: string;
     name: string;
     state: {
@@ -11,7 +11,7 @@ export interface IFormCase {
 export interface IUserForm {
     form_id: string;
     form_name: string;
-    cases?: IFormCase [];
+    cases: IFormCase [];
     is_author: boolean;
 }
 

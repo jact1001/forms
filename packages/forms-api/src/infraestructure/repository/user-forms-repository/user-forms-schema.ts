@@ -12,7 +12,7 @@ export class UseCaseState implements IUseCaseState {
 
 @Schema()
 export class FormCase implements IFormCase {
-    @ObjectID("id")
+    @Property()
     case_id: string;
     @Property()
     state: UseCaseState;

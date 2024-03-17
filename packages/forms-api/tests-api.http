@@ -1,3 +1,140 @@
 ### GET request with a header
 GET http://localhost:8080/api/health
 Accept: application/json
+
+# SQL asociados
+--diseño de formularios
+select * from form;
+select * from section;
+select * from field;
+
+--diligenciamiento de casos
+select * from useCase;
+select * from usecasesection;
+select * from usecasefield;
+
+### Send request to create a dynamic form
+POST http://localhost:8080/api/forms
+Content-Type: application/json
+X-Access-Token:eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+
+{
+  "state": "",
+  "form_name": "prueba Ivan 7",
+  "sections": [
+    {
+      "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",
+      "access": [
+        {
+          "userName": "Hernan Geovanni Taimal Narvaez",
+          "userId": "htaimal@gmail.com",
+          "permission": [
+            "write"
+          ]
+        },
+        {
+          "userName": "Ricar Patiño",
+          "userId": "patinoricar@gmail.com",
+          "permission": [
+            "write"
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "field_id": "0001",
+          "is_required": true,
+          "type": "text",
+          "label": "Mi label",
+          "name": "Texto",
+          "placeholder": "Texto corto",
+          "max_length": "120",
+          "label_placeholder": "Escribe aquí el nombre de tu campo",
+          "option_placeholder": "Escribe tu opción",
+          "value": "",
+          "form_field_id": "77f8be48-dec5-4727-9ccc-3bdc6e0a6a55"
+        }
+      ],
+      "sectionName": "section 3"
+    }
+  ]
+}
+
+### POST create case
+POST http://localhost:8080/api/use-case
+x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+Content-Type: application/json
+
+{
+  "useCase": {
+    "case_name": "caso - 100 (10/03/2024)",
+    "form_id": "65db446f5f0cf0eaff62f9bc"
+  }
+}
+
+
+### GET load case
+GET http://localhost:8080/api/use-case/65de9e5ba0356d7b806762ad
+x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+
+### Update  case
+PUT http://localhost:8080/api/use-case
+Accept: application/json, text/plain, */*
+x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+Content-Type: application/json
+
+{
+  "id": "65db45055f0cf0eaff62fa83",
+  "case_name": "caso - 1 (25/02/2024, 08:47:49 a.m.)",
+  "case_creator": "rtaimal@gmail.com",
+  "case_state": {
+    "id": "in-progress",
+    "name": "En Progreso"
+  },
+  "form_id": "65db446f5f0cf0eaff62f9bc",
+  "form_name": "prueba Ivan 7",
+  "sections": [
+    {
+      "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",
+      "sectionName": "section 3",
+      "access": [
+        {
+          "userId": "htaimal@gmail.com",
+          "userName": "Hernan Geovanni Taimal Narvaez",
+          "permission": [
+            "write"
+          ]
+        },
+        {
+          "userId": "patinoricar@gmail.com",
+          "userName": "Ricar Patiño",
+          "permission": [
+            "write"
+          ]
+        },
+        {
+          "userId": "rtaimal@gmail.com",
+          "userName": "Iván Ricardo Taimal Narváez",
+          "permission": [
+            "write"
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "field_id": "0001",
+          "is_required": true,
+          "type": "text",
+          "label": "Mi label",
+          "name": "Texto",
+          "placeholder": "Texto corto",
+          "max_length": "120",
+          "label_placeholder": "Escribe aquí el nombre de tu campo",
+          "option_placeholder": "Escribe tu opción",
+          "value": "ivan taimal",
+          "form_field_id": "77f8be48-dec5-4727-9ccc-3bdc6e0a6a55"
+        }
+      ]
+    }
+  ]
+}

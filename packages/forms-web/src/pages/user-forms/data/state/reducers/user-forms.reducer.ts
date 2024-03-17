@@ -1,5 +1,6 @@
 import { Action, ActionType } from '../actions/user-forms.actions';
 import { IUserForms } from "../../domain/IUserForms";
+import { setCaseToForm } from "../../use-cases/use-set-case-to-form";
 
 interface State {
     userForms: IUserForms | null;
@@ -49,7 +50,7 @@ const userFormsReducer = (state: State = initialState, action: Action): State =>
             return {
                 ...state,
                 createUseCaseLoading: false,
-                userForms: action.payload,
+                userForms: state.userForms ? setCaseToForm(state.userForms, action.payload) : state.userForms,
                 error: null
             }
         case ActionType.CREATE_USE_CASE_FAIL:

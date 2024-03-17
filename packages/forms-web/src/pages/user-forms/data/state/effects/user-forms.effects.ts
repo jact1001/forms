@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { ActionType as UserFormsActionTypes, Action as DetailAction } from '../actions/user-forms.actions';
-import {createUseCase, download, getUserForms} from "../../../services/user-forms-services";
-import { IFormCase } from "../../domain/IUserForms";
+import { createUseCase, download, getUserForms } from "../../../services/user-forms-services";
+import { ICase } from "../../domain/ICase";
 
 export const findUserForms = () => {
     return async (dispatch: Dispatch<DetailAction>) => {
@@ -47,13 +47,13 @@ export const downloadUserForm = (formId: string) => {
     }
 }
 
-export const addUseCase = (useCase: IFormCase, formId: string) => {
+export const addUseCase = (useCase: ICase) => {
     return async (dispatch: Dispatch<DetailAction>) => {
         dispatch({
             type: UserFormsActionTypes.CREATE_USE_CASE_PENDING
         });
         try {
-            const data = await createUseCase(useCase, formId);
+            const data = await createUseCase(useCase);
             dispatch({
                 type: UserFormsActionTypes.CREATE_USE_CASE_SUCCESS,
                 payload: data

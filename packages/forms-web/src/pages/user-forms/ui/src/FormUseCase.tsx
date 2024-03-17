@@ -7,7 +7,7 @@ import { IFormCase } from "../../data/domain/IUserForms";
 const defaultClass = 'form-use-case';
 interface SlideFormProps extends IFormCase {}
 
-export const FormUseCase = ({name, state, id, case_creator }: SlideFormProps) =>  {
+export const FormUseCase = ({name, state, case_id:id, case_creator }: SlideFormProps) =>  {
 
     const openCase = () => {
         const domain = window.location.origin;

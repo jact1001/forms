@@ -12,20 +12,103 @@ datasource db {
 }
 
 model Access {
-  userId   String @id
-  userName String
-}
-
-model Section {
-  id           String @id
-  section_name String
-  author       Form   @relation(fields: [section_name], references: [form_name])
+  userId    String @id
+  user_name String
 }
 
 model Form {
-  id        String    @id
+  id        String    @id @default(cuid())
   form_name String    @unique
   state     String
   author    String
   sections  Section[]
 }
+
+model Section {
+  id           String  @id @default(cuid())
+  section_name String
+  access       String
+  fields       Field[]
+  form         Form    @relation(fields: [form_id], references: [id])
+  form_id      String
+}
+
+model Field {
+  field_id      String  @id @default(cuid())
+  form_field_id String
+  content       String
+  section       Section @relation(fields: [section_id], references: [id])
+  section_id    String
+}
+
+model UseCase {
+  id           String           @id @default(cuid())
+  case_name    String
+  case_state   String
+  case_creator String
+  form_id      String
+  form_name    String
+  sections     UseCaseSection[]
+}
+
+model UseCaseSection {
+  id           String         @id @default(cuid())
+  section_name String
+  access       String
+  use_case     UseCase        @relation(fields: [use_case_id], references: [id])
+  use_case_id  String
+  fields       UseCaseField[]
+}
+
+model UseCaseField {
+  field_id            String         @id @default(cuid())
+  form_field_id       String
+  content             String
+  use_case_section    UseCaseSection @relation(fields: [use_case_section_id], references: [id])
+  use_case_section_id String
+}
+
+model UserForms {
+  id      String     @id @default(cuid())
+  user_id String
+  forms   UserForm[]
+}
+
+model UserForm {
+  id            String     @id @default(cuid())
+  form_id       String
+  form_name     String
+  form_author   String
+  is_author     String
+  cases         FormCase[]
+  user_forms    UserForms  @relation(fields: [user_forms_id], references: [id])
+  user_forms_id String
+}
+
+model FormCase {
+  id           String   @id @default(cuid())
+  case_id      String
+  state        String
+  name         String
+  user_form    UserForm @relation(fields: [user_form_id], references: [id])
+  user_form_id String
+}
+
+model Role {
+  id    String @id @default(cuid())
+  name  String
+  users User[]
+}
+
+model User {
+  id        String @id @default(cuid())
+  number_id   String
+  user_name String
+  last_name String
+  email     String
+  role      Role   @relation(fields: [role_id], references: [id])
+  role_id   String
+}
+
+// Es necesario borrar la carpeta migrations para hacer cambios
+// Despues de cambiar un modelo se debe ejecutar npx prisma migrate dev --name init

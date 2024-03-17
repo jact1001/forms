@@ -1,7 +1,7 @@
-import { IUserForms } from "../../domain/user-forms";
+import {IUserForms} from "../../domain/user-forms";
+import {IUseCase} from "../../domain/use-case";
 
 export interface IUserFormsApiPort {
     getUserForms(email: string): Promise<IUserForms>;
-    saveUserForm(form, user, useCases): Promise<IUserForms>;
-    createDefaultUserForms(email: string): Promise<string>;
+    exportUseCasesByFormId(formId: string, email: string): Promise<IUseCase[]>;
 }
