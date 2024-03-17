@@ -20,7 +20,7 @@ export class UserAdapter {
       last_name: user.last_name,
       email: user.email,
       number_id: user.number_id,
-      role: this.mapToRole(user.role),
+      role: JSON.stringify(user.role),
     };
 
     return data;

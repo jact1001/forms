@@ -16,10 +16,7 @@ export class UsersRepositorySQL implements IUserRepositoryPort, OnDestroy {
           email: {
             notIn: [email]
           }
-        },
-        include: {
-          role: true,
-        },
+        }
       };
   
       const [err, listUser] = await to(this.prisma.user.findMany(option));
@@ -38,7 +35,7 @@ export class UsersRepositorySQL implements IUserRepositoryPort, OnDestroy {
 
   public async saveUser(user: IUser): Promise<IUser> {
     const data = UserAdapter.toPrismaCreate(user);
-    const [err, response] = await to(this.prisma.user.create({ data }));
+    const [err, response] = await to(this.prisma.user.create({data:{ ...data, number_id:"for_test" }}));
 
     if (err) {
       const msg: string = `Error save-repository-sql save-form ${err.message}`;
@@ -46,7 +43,7 @@ export class UsersRepositorySQL implements IUserRepositoryPort, OnDestroy {
       return Promise.reject(new Error(msg));
     }
 
-    return Promise.resolve(response);
+    return Promise.resolve({...response, role:null});
   }
 
   public async findUserByEmail(email: string): Promise<IUser> {
@@ -55,10 +52,7 @@ export class UsersRepositorySQL implements IUserRepositoryPort, OnDestroy {
     const option = {
         where: {
           email,
-        },
-        include: {
-          role: true,
-        },
+        }
       };
   
       const [err, user] = await to(this.prisma.user.findFirst(option));
@@ -71,7 +65,7 @@ export class UsersRepositorySQL implements IUserRepositoryPort, OnDestroy {
 
       console.log(`response ${user}`);
 
-      if (!user) return Promise.reject(new Error(`user with the email ${email} not found`))
+      if (!user) return Promise.resolve(null)
   
       return Promise.resolve(UserAdapter.toIUser(user));
   }
