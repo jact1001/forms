@@ -1,6 +1,5 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
-import { Trend, Rate } from 'k6/metrics';
 import { useUpdateCasePayload } from './payloads/update-case';
 import {createCasePayload} from "./payloads/create-case";
 
@@ -9,12 +8,9 @@ const createCase = "/use-case"
 const updateCase = "/use-case"
 const currentDateTime = new Date().toISOString();
 
-let myTrend = new Trend('my_custom_trend');
-let myRate = new Rate('my_custom_rate');
-
 export const data = {
-    //base_url: "https://dsb471zsol61i.cloudfront.net/api"
-    base_url: "http://localhost:8080/api"
+    base_url: "https://dsb471zsol61i.cloudfront.net/api"
+   // base_url: "http://localhost:8080/api"
 
 }
 
@@ -25,6 +21,11 @@ export const options = {
         //{duration: '5s', target: 0},
     ],
 };
+export const data = {
+    base_url: "https://dsb471zsol61i.cloudfront.net/api"
+    //base_url: "http://localhost:8080/api"
+
+}
 
 export default function () {
     const urlHealth = `${data.base_url}${health}`;
@@ -32,7 +33,8 @@ export default function () {
 
     const params = {
         headers: {
-            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            //'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            'x-access-token':'eyJhbGciOiJIUzI1NiJ9.aHRhaW1hbEBnbWFpbC5jb20.6COG6IiwHvgp1WN70vQ9FdpVEXEtpwu6Jjxsj7QBSmU',
             'Content-Type': 'application/json'
         },
     };
@@ -90,11 +92,6 @@ export default function () {
         console.log("*********************************");
 
     }
-
-
-    // Record custom metrics
-    myTrend.add(resCreateCase.timings.duration);
-    myRate.add(resCreateCase.status === 200);
 
     sleep(1);
 }
