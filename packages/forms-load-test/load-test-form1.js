@@ -1,77 +1,11 @@
 import http from 'k6/http';
-import {check, sleep} from 'k6';
-import { Trend, Rate } from 'k6/metrics';
+import { check, sleep } from 'k6';
+import { createCasePayload } from './payloads/create-case.js';
+import { useUpdateCasePayload } from './payloads/update-case.js';
 
-const health = "/health"
-const createCase = "/use-case"
-const updateCase = "/use-case"
-const currentDateTime = new Date().toISOString();
-
-let myTrend = new Trend('my_custom_trend');
-let myRate = new Rate('my_custom_rate');
-
-export const data = {
-    //base_url: "https://dsb471zsol61i.cloudfront.net/api"
-    base_url: "http://localhost:8080/api"
-
-}
-function createUpdateCaseBody(caseId, name) {
-    return {
-        "id": caseId,
-        "case_name": name,
-        "case_creator": "rtaimal@gmail.com",
-        "case_state": {
-            "id": "in-progress",
-            "name": "En Progreso"
-        },
-        "form_id": "65db446f5f0cf0eaff62f9bc",
-        "form_name": "prueba Ivan 7",
-        "sections": [
-            {
-                "id": "8904ec8e-3fb7-468b-95e8-d0118f5902eb",
-                "sectionName": "section 3",
-                "access": [
-                    {
-                        "userId": "htaimal@gmail.com",
-                        "userName": "Hernan Geovanni Taimal Narvaez",
-                        "permission": [
-                            "write"
-                        ]
-                    },
-                    {
-                        "userId": "patinoricar@gmail.com",
-                        "userName": "Ricar Patiño",
-                        "permission": [
-                            "write"
-                        ]
-                    },
-                    {
-                        "userId": "rtaimal@gmail.com",
-                        "userName": "Iván Ricardo Taimal Narváez",
-                        "permission": [
-                            "write"
-                        ]
-                    }
-                ],
-                "fields": [
-                    {
-                        "field_id": "0001",
-                        "is_required": true,
-                        "type": "text",
-                        "label": "Mi label",
-                        "name": "Texto",
-                        "placeholder": "Texto corto",
-                        "max_length": "120",
-                        "label_placeholder": "Escribe aquí el nombre de tu campo",
-                        "option_placeholder": "Escribe tu opción",
-                        "value": "ivan taimal",
-                        "form_field_id": "77f8be48-dec5-4727-9ccc-3bdc6e0a6a55"
-                    }
-                ]
-            }
-        ]
-    };
-}
+const health = "/health";
+const createCase = "/use-case";
+const updateCase = "/use-case";
 
 export const options = {
     stages: [
@@ -80,6 +14,11 @@ export const options = {
         //{duration: '5s', target: 0},
     ],
 };
+export const data = {
+    base_url: "https://dsb471zsol61i.cloudfront.net/api"
+    //base_url: "http://localhost:8080/api"
+
+}
 
 export default function () {
     const urlHealth = `${data.base_url}${health}`;
@@ -87,24 +26,16 @@ export default function () {
 
     const params = {
         headers: {
-            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            //'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            'x-access-token':'eyJhbGciOiJIUzI1NiJ9.aHRhaW1hbEBnbWFpbC5jb20.6COG6IiwHvgp1WN70vQ9FdpVEXEtpwu6Jjxsj7QBSmU',
             'Content-Type': 'application/json'
         },
     };
 
-    const createCasePayload=JSON.stringify(
-    {
-            "useCase": {
-                "case_name": "caso - Deberitas Deberitas ("+currentDateTime+")",
-                "form_id": "65db446f5f0cf0eaff62f9bc"
-            }
-         }
-    );
-
-
-
+    const formId = '65c4f9606117d5945107d1ff';
     const resHealth = http.get(urlHealth);
-    const resCreateCase = http.post(urlCreateCase,createCasePayload, params);
+    const createRq=createCasePayload(formId);
+    const resCreateCase = http.post(urlCreateCase, createRq, params);
 
     check(resHealth, {'Health was 200': (r) => r.status === 200});
     check(resHealth, {'Health was Other': (r) => r.status !== 200});
@@ -131,7 +62,7 @@ export default function () {
 
         const urlUpdateCase = `${data.base_url}${updateCase}`;
 
-        const updateCasePayload=JSON.stringify(createUpdateCaseBody(caseId,caseName));
+        const updateCasePayload=JSON.stringify(useUpdateCasePayload(caseId,caseName, formId));
         const resUpdateCase = http.put(urlUpdateCase,updateCasePayload, params);
         if (resUpdateCase.status !== 200) {
             console.log("UPDATEERRORCASEID***********"+caseId);
@@ -150,16 +81,15 @@ export default function () {
 
     }else
     {
+        console.log("*********************************");
+        console.log("  ");
+        console.log("CREATE RQ*****" + JSON.stringify(createRq,null,2));
+        console.log("  ");
         console.log("CREATERESPONSEBODY*****" + JSON.stringify(resCreateCase,null,2));
         console.log("  ");
         console.log("*********************************");
 
     }
-
-
-    // Record custom metrics
-    myTrend.add(resCreateCase.timings.duration);
-    myRate.add(resCreateCase.status === 200);
 
     sleep(1);
 }

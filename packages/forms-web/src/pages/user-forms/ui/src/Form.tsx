@@ -3,13 +3,12 @@ import '../styles/form.scss';
 import FormIcon from "../icons/FormIcon";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 import { FormUseCase } from "./FormUseCase";
-import { IFormCase, IUserForm } from "../../data/domain/IUserForms";
+import { IUserForm } from "../../data/domain/IUserForms";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUseCase, downloadUserForm } from "../../data/state/effects/user-forms.effects";
-import {IUseCase} from "../../../use-case/data/domain/IUseCase";
-import {ICase} from "../../data/domain/ICase";
-import {useUserFormsStore} from "../../data/hooks/custom-typed-selector";
+import { ICase } from "../../data/domain/ICase";
+import { useUserFormsStore } from "../../data/hooks/custom-typed-selector";
 
 const defaultClass = 'form';
 
