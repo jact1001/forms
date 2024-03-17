@@ -1,18 +1,12 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
-import { useUpdateCasePayload } from './payloads/update-case';
-import {createCasePayload} from "./payloads/create-case";
+import { useUpdateCasePayload } from './payloads/update-case.js';
+import {createCasePayload} from "./payloads/create-case.js";
 
 const health = "/health"
 const createCase = "/use-case"
 const updateCase = "/use-case"
 const currentDateTime = new Date().toISOString();
-
-export const data = {
-    base_url: "https://dsb471zsol61i.cloudfront.net/api"
-   // base_url: "http://localhost:8080/api"
-
-}
 
 export const options = {
     stages: [
@@ -41,7 +35,8 @@ export default function () {
 
     const formId = '65c4f9606117d5945107d1ff';
     const resHealth = http.get(urlHealth);
-    const resCreateCase = http.post(urlCreateCase, createCasePayload(formId), params);
+    const createRq=createCasePayload(formId);
+    const resCreateCase = http.post(urlCreateCase, createRq, params);
 
     check(resHealth, {'Health was 200': (r) => r.status === 200});
     check(resHealth, {'Health was Other': (r) => r.status !== 200});
@@ -87,6 +82,10 @@ export default function () {
 
     }else
     {
+        console.log("*********************************");
+        console.log("  ");
+        console.log("CREATE RQ*****" + JSON.stringify(createRq,null,2));
+        console.log("  ");
         console.log("CREATERESPONSEBODY*****" + JSON.stringify(resCreateCase,null,2));
         console.log("  ");
         console.log("*********************************");
