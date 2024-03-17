@@ -7,6 +7,7 @@ COPY ./packages/forms-api /packages/forms-api
 
 RUN npm install
 RUN npm install ts-node
+RUN npx prisma migrate dev --name init
 RUN npm run build
 EXPOSE 8080
 
