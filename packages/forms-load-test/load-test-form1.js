@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { createCasePayload } from './payloads/create-case';
-import { useUpdateCasePayload } from './payloads/update-case';
+import { createCasePayload } from './payloads/create-case.js';
+import { useUpdateCasePayload } from './payloads/update-case.js';
 
 const health = "/health";
 const createCase = "/use-case";
