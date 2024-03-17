@@ -28,7 +28,7 @@ model Form {
 model Section {
   id           String  @id @default(cuid())
   section_name String
-  access       String
+  access       String  @db.VarChar(2000)
   fields       Field[]
   form         Form    @relation(fields: [form_id], references: [id])
   form_id      String
@@ -55,7 +55,7 @@ model UseCase {
 model UseCaseSection {
   id           String         @id @default(cuid())
   section_name String
-  access       String
+  access       String         @db.VarChar(2000)
   use_case     UseCase        @relation(fields: [use_case_id], references: [id])
   use_case_id  String
   fields       UseCaseField[]
