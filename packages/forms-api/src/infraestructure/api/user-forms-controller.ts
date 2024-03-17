@@ -17,6 +17,8 @@ import {FormsRepositorySQL} from "../repository/forms-repository/forms-repositor
 import {UsersRepositorySQL} from "../repository/users-repository/users-repository-sql";
 import {UseCaseRepositorySQL} from "../repository/use-case-repository/use-case-repository-sql";
 
+import { GroupSql } from '../util/groups-sql';
+
 @Controller("/user-forms")
 @UseBefore(AuthTokenMiddleware)
 export class UserFormsController {
@@ -38,15 +40,15 @@ export class UserFormsController {
         this._userFormsUseCaseSQL = new UserFormsUseCase(userFormServiceSQL);
     }
 
+    private handlerUserCase (email: string): IUserFormsApiPort {
+        if (GroupSql.belongsToGroupSql(email)) return this._userFormsUseCaseSQL;
+        return this._userFormsUseCase;
+    }
+
     @Get("/")
     async getUserForms(@Context() ctx: Context): Promise<IUserForms> {
         const email = ctx.get("email");
-        if (email == "jact1001@gmail.com") {
-            return await this._userFormsUseCaseSQL.getUserForms(email);
-        } else {
-            return await this._userFormsUseCase.getUserForms(email);
-        }
-
+        return await this.handlerUserCase(email).getUserForms(email);
     }
 
     @Get("/export/:formId")

@@ -1,7 +1,7 @@
 import { IUser } from "../../domain/user";
 
 export interface IUserRepositoryPort {
-    findUsers(email): Promise<IUser[]>;
-    saveUser(user): Promise<IUser>;
+    findUsers(email: string): Promise<IUser[]>;
+    saveUser(user: IUser): Promise<IUser>;
     findUserByEmail(email: string): Promise<IUser>;
 }
