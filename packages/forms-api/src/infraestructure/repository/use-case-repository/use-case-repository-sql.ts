@@ -214,7 +214,7 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                 }
             },
             select: {
-                // id: true,
+                id: true,
                 case_name: true,
                 case_state: true,
                 case_creator: true,
