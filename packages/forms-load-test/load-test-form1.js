@@ -6,12 +6,13 @@ import { useUpdateCasePayload } from './payloads/update-case.js';
 const health = "/health";
 const createCase = "/use-case";
 const updateCase = "/use-case";
+let i=0;
 
 export const options = {
     stages: [
-        {duration: '10s', target: 10},
-        //{duration: '1m10s', target: 10},
-        //{duration: '5s', target: 0},
+        {duration: '1m', target: 10},
+        {duration: '3m', target: 10},
+        {duration: '1m', target: 0},
     ],
 };
 export const data = {
@@ -33,12 +34,14 @@ export default function () {
     };
 
     const formId = '65c4f9606117d5945107d1ff';
-    const resHealth = http.get(urlHealth);
-    const createRq=createCasePayload(formId);
+    i++;
+    const createRq=createCasePayload(formId,i);
+    // const resHealth = http.get(urlHealth);
     const resCreateCase = http.post(urlCreateCase, createRq, params);
+    sleep(1);
 
-    check(resHealth, {'Health was 200': (r) => r.status === 200});
-    check(resHealth, {'Health was Other': (r) => r.status !== 200});
+    //check(resHealth, {'Health was 200': (r) => r.status === 200});
+    //check(resHealth, {'Health was Other': (r) => r.status !== 200});
     check(resCreateCase, {'Create Case was 200': (r) => r.status === 200});
     check(resCreateCase, {'Create Case was Other': (r) => r.status !== 200});
 

@@ -1,11 +1,13 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
-import { Trend, Rate } from 'k6/metrics';
+import { createCasePayload } from './payloads/create-case.js';
+import { useUpdateCasePayload } from './payloads/update-case-sql.js';
 
 const health = "/health"
 const createCase = "/use-case"
 const updateCase = "/use-case"
 const currentDateTime = new Date().toISOString();
+let i=0;
 
 export const data = {
     base_url: "https://dsb471zsol61i.cloudfront.net/api"
@@ -16,9 +18,9 @@ export const data = {
 
 export const options = {
     stages: [
-        {duration: '10s', target: 10},
-        //{duration: '1m10s', target: 10},
-        //{duration: '5s', target: 0},
+        {duration: '1m', target: 15},
+        {duration: '3m', target: 15},
+        {duration: '1m', target: 0},
     ],
 };
 
@@ -28,25 +30,21 @@ export default function () {
 
     const params = {
         headers: {
-            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            //'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.amFjdDEwMDFAZ21haWwuY29t.Z5rrmon-5N6YbCpnz_B_8WhhJsGBUW1tpR2D0Q-aAd8',
             'Content-Type': 'application/json'
         },
     };
 
-    const createCasePayload=JSON.stringify(
-    {
-            "useCase": {
-                "case_name": "Estamos Listos- Deberitas SQLCase ("+currentDateTime+")",
-                "form_id": "65f613e049c657819feffc9f"
-            }
-         }
-    );
+    const formId = '65c4f9606117d5945107d122';
+    i++;
+    const createRq=createCasePayload(formId,i);
+    //const resHealth = http.get(urlHealth);
+    const resCreateCase = http.post(urlCreateCase,createRq, params);
+    sleep(1);
 
-    const resHealth = http.get(urlHealth);
-    const resCreateCase = http.post(urlCreateCase,createCasePayload, params);
-
-    check(resHealth, {'Health was 200': (r) => r.status === 200});
-    check(resHealth, {'Health was Other': (r) => r.status !== 200});
+    //check(resHealth, {'Health was 200': (r) => r.status === 200});
+    //check(resHealth, {'Health was Other': (r) => r.status !== 200});
     check(resCreateCase, {'Create Case was 200': (r) => r.status === 200});
     check(resCreateCase, {'Create Case was Other': (r) => r.status !== 200});
 
@@ -72,13 +70,13 @@ export default function () {
 
         const useCaseResponse = resUseCase.json();
 
-        console.log("PREVIOUSUPDATEBODY*****" + JSON.stringify(useCaseResponse,null,2));
+       // console.log("PREVIOUSUPDATEBODY*****" + JSON.stringify(useCaseResponse,null,2));
 
-        const updateCasePayload=JSON.stringify(createUpdateCaseBody(caseId,caseName,useCaseResponse));
+        const updateCasePayload=JSON.stringify(useUpdateCasePayload(caseId,caseName,formId,useCaseResponse));
         const resUpdateCase = http.put(urlUpdateCase,updateCasePayload, params);
         if (resUpdateCase.status !== 200) {
             console.log("UPDATEERRORCASEID***********"+caseId);
-            console.log("UPDATERESPONSEBODY*****" + JSON.stringify(resUpdateCase,null,2));
+          //  console.log("UPDATERESPONSEBODY*****" + JSON.stringify(resUpdateCase,null,2));
             console.log("  ");
             console.log("*********************************");
         }else{
@@ -99,67 +97,4 @@ export default function () {
     }
 
     sleep(1);
-}
-
-function createUpdateCaseBody(caseId, name, useCase) {
-    const fieldId=useCase.sections[0].fields[0].field_id;
-    const formFieldId=useCase.sections[0].fields[0].form_field_id;
-    const sectionId=useCase.sections[0].id;
-    const formId="65f613e049c657819feffc9f";
-    return {
-        "id": caseId,
-        "case_name": name,
-        "case_creator": "htaimal@gmail.com",
-        "case_state": {
-            "id": "in-progress",
-            "name": "En Progreso"
-        },
-        "form_id": formId,
-        "form_name": "Formulario SQL",
-        "sections": [
-            {
-                "id": sectionId,
-                "sectionName": "section 1 SQL",
-                "section_name": "section 1 SQL",
-                "access": [
-                    {
-                        "userId": "htaimal@gmail.com",
-                        "userName": "Hernan Geovanni Taimal Narvaez",
-                        "permission": [
-                            "write"
-                        ]
-                    },
-                    {
-                        "userId": "patinoricar@gmail.com",
-                        "userName": "Ricar Patiño",
-                        "permission": [
-                            "write"
-                        ]
-                    },
-                    {
-                        "userId": "rtaimal@gmail.com",
-                        "userName": "Iván Ricardo Taimal Narváez",
-                        "permission": [
-                            "write"
-                        ]
-                    }
-                ],
-                "fields": [
-                    {
-                        "field_id": fieldId,
-                        "is_required": true,
-                        "type": "text",
-                        "label": "Mi label",
-                        "name": "Texto",
-                        "placeholder": "Texto corto",
-                        "max_length": "120",
-                        "label_placeholder": "Escribe aquí el nombre de tu campo",
-                        "option_placeholder": "Escribe tu opción",
-                        "value": "Listos SQLField",
-                        "form_field_id": formFieldId
-                    }
-                ]
-            }
-        ]
-    };
 }
