@@ -4,7 +4,7 @@ import { IRole, IUser } from "src/core/domain/user";
 export class UserAdapter {
   private static mapToRole(
     data: IRole
-  ): Prisma.RoleCreateNestedOneWithoutUsersInput {
+  ): any {
     if (!data) return {} as any;
 
     return {
