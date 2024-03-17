@@ -1,4 +1,4 @@
-export const useUpdateCasePayload = (caseId: string, name: string, formId: string) => {
+export const useUpdateCasePayload = (caseId, name, formId) => {
     return {
         "id": caseId,
         "case_name": name,

@@ -1,8 +1,8 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
 import { Trend, Rate } from 'k6/metrics';
-import { useUpdateCasePayload } from './payloads/update-case';
-import {createCasePayload} from "./payloads/create-case";
+import { createCasePayload } from "./payloads/create-case";
+import { useUpdateCasePayload } from "./payloads/update-case";
 
 const health = "/health"
 const createCase = "/use-case"
