@@ -22,6 +22,7 @@ export class UseCaseRepository implements IUseCaseRepositoryPort, OnDestroy {
             const newForm = new this.model(useCase);
             return await newForm.save();
         } catch (error) {
+            console.log('data con error:', useCase);
             throw new Error(`Error al guardar el caso de uso: ${error}`);
         }
     }
@@ -34,6 +35,7 @@ export class UseCaseRepository implements IUseCaseRepositoryPort, OnDestroy {
                 {new: true}
             ).exec();
         } catch (error) {
+            console.log('data con error:', useCase);
             throw new Error(`Error al guardar el caso de uso: ${error}`);
         }
     }

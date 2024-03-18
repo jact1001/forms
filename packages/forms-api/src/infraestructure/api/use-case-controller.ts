@@ -56,6 +56,7 @@ export class UseCaseController {
             const email = ctx.get("email");
             return await this.handlerUserCase(email).createCase(useCase, email);
         } catch (err) {
+            console.log('data con error:', useCase);
             console.log('error en controller createCase', err);
         }
     }
@@ -66,6 +67,7 @@ export class UseCaseController {
             const email = ctx.get("email");
             return await this.handlerUserCase(email).updateUseCase(data, email);
         } catch (err) {
+            console.log('data con error:', data);
             console.log('error en controller updateCase', err);
         }
     }
