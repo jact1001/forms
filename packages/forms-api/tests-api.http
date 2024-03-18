@@ -16,7 +16,7 @@ select * from usecasefield;
 ### Send request to create a dynamic form
 POST http://localhost:8080/api/forms
 Content-Type: application/json
-X-Access-Token:eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+X-Access-Token:
 
 {
   "state": "",
@@ -62,7 +62,7 @@ X-Access-Token:eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIK
 
 ### POST create case
 POST http://localhost:8080/api/use-case
-x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+x-access-token:
 Content-Type: application/json
 
 {
@@ -75,12 +75,12 @@ Content-Type: application/json
 
 ### GET load case
 GET http://localhost:8080/api/use-case/65de9e5ba0356d7b806762ad
-x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+x-access-token:
 
 ### Update  case
 PUT http://localhost:8080/api/use-case
 Accept: application/json, text/plain, */*
-x-access-token: eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk
+x-access-token:
 Content-Type: application/json
 
 {

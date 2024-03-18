@@ -26,8 +26,8 @@ export default function () {
 
     const params = {
         headers: {
-            //'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
-            'x-access-token':'eyJhbGciOiJIUzI1NiJ9.aHRhaW1hbEBnbWFpbC5jb20.6COG6IiwHvgp1WN70vQ9FdpVEXEtpwu6Jjxsj7QBSmU',
+            //'x-access-token': '',
+            'x-access-token':'',
             'Content-Type': 'application/json'
         },
     };

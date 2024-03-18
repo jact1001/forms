@@ -21,7 +21,7 @@ export default function () {
     const urlForms = `${data.base_url}${userForms}`;
     const params = {
         headers: {
-            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
+            'x-access-token': '',
         },
     };
 
