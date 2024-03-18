@@ -42,7 +42,7 @@ export class UseCaseController {
     async getUseCaseById(@PathParams('caseId') caseId: string, @Response() res: ExpressResponse, @Context() ctx: Context): Promise<e.Response<string, Record<string, IUseCase>>> {
         const email = ctx.get("email");
         const useCase = await this.handlerUserCase(email).getUseCasesByUseCaseId(caseId, email);
-        
+
         if (!useCase) {
             return res.status(404).json({error: `El caso de uso con el ID: ${caseId} no pudo ser encontrado`});
         }
@@ -52,14 +52,22 @@ export class UseCaseController {
 
     @Post("/")
     async createCase(@BodyParams() {useCase}, @Context() ctx: Context): Promise<IUseCase> {
-        const email = ctx.get("email");
-        return await this.handlerUserCase(email).createCase(useCase, email);
+        try {
+            const email = ctx.get("email");
+            return await this.handlerUserCase(email).createCase(useCase, email);
+        } catch (err) {
+            console.log('error en controller createCase', err);
+        }
     }
 
     @Put("/")
     async updateUseCase(@BodyParams() data: IUseCase, @Context() ctx: Context): Promise<IUseCase> {
-        const email = ctx.get("email");
-        return await this.handlerUserCase(email).updateUseCase(data, email);
+        try {
+            const email = ctx.get("email");
+            return await this.handlerUserCase(email).updateUseCase(data, email);
+        } catch (err) {
+            console.log('error en controller updateCase', err);
+        }
     }
 
 }

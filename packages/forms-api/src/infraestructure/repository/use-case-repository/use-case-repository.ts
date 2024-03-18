@@ -17,17 +17,25 @@ export class UseCaseRepository implements IUseCaseRepositoryPort, OnDestroy {
         return  await this.model.find({ form_id: formId.toString() }).exec();
     }
 
-    public async saveUseCase (useCase: IUseCase) {
-        const newForm = new this.model(useCase);
-        return await newForm.save();
+    public async saveUseCase(useCase: IUseCase): Promise<IUseCase> {
+        try {
+            const newForm = new this.model(useCase);
+            return await newForm.save();
+        } catch (error) {
+            throw new Error(`Error al guardar el caso de uso: ${error}`);
+        }
     }
 
     public async updateUseCase (useCase: IUseCase) {
-        return await this.model.findOneAndUpdate(
-            {id: useCase.id},
-            {$set: useCase},
-            {new: true}
-        ).exec();
+        try {
+            return await this.model.findOneAndUpdate(
+                {id: useCase.id},
+                {$set: useCase},
+                {new: true}
+            ).exec();
+        } catch (error) {
+            throw new Error(`Error al guardar el caso de uso: ${error}`);
+        }
     }
 
     $onDestroy(): void | Promise<any> {
