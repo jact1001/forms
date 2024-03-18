@@ -14,6 +14,7 @@ in the root of the directory where the project was downloaded:
 3. `npx lerna bootstrap --hoist`
 4. `npm run start`
 
+
 ## Main packages
 The project has two defined components, Front-end and Back-end, which correspond to the following, respectively
 
