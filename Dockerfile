@@ -8,6 +8,7 @@ COPY ./packages/forms-api /packages/forms-api
 RUN npm install
 RUN npm install prisma -g
 RUN npm install ts-node
+RUN npm run prebuild
 RUN npm run build
 EXPOSE 8080
 
@@ -16,6 +17,5 @@ EXPOSE 8080
 #CMD [ "ts-node", "src/test-main.ts" ] #no funciona
 #CMD [ "node", "test-server.js" ] #si funciona
 #CMD [ "node", "bin/test-main.js" ] #si funciona
-#CMD ["npx", "prisma", "migrate", "dev"]
-#CMD ["npx", "prisma", "migrate", "dev" , "--name" , "init","&&","node", "bin/main.js" ]
-CMD ["node", "bin/main.js" ]
+#CMD ["npx", "prisma", "migrate", "dev" , "--name" , "init"]
+CMD [ "node", "bin/main.js" ]

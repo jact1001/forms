@@ -20,7 +20,7 @@ export class FormFieldsController {
         const service = new FormFieldsService(repository)
         this._formFieldsUseCase = new FormFieldsUseCase(service)
         const serviceSQL = new FormFieldsService(repositorySQL)
-        this._formFieldsUseCaseSQL = new FormFieldsUseCase(serviceSQL)
+        this._formFieldsUseCaseSQL = new FormFieldsUseCase(service)
     }
 
     private handlerUserCase (email: string): IFormFieldsApiPort {

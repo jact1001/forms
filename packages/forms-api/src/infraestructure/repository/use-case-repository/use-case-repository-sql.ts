@@ -214,13 +214,20 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                 }
             },
             select: {
-                // id: true,
+                id: true,
                 case_name: true,
                 case_state: true,
                 case_creator: true,
                 form_id: true,
                 form_name: true,
-                sections: true
+                sections: {
+                    select: {
+                        id: true,
+                        access: true,
+                        section_name: true,
+                        fields: true
+                    }
+                }
             }
         })
         return {
@@ -231,7 +238,17 @@ export class UseCaseRepositorySQL implements IUseCaseRepositoryPort, OnDestroy {
                     ...s,
                     sectionName: s.section_name,
                     access: JSON.parse(s.access),
-                    fields: null
+                    fields: s.fields.map((f) => {
+                        const content = JSON.parse(f.content)
+                        const field: IField =
+                            {
+                                ...content,
+                                field_id: f.field_id,
+                                form_field_id: f.form_field_id,
+                                isRequired: content.isRequired
+                            }
+                        return field
+                    })
                 }
                 return section;
             })

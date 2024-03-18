@@ -28,7 +28,7 @@ model Form {
 model Section {
   id           String  @id @default(cuid())
   section_name String
-  access       String
+  access       String  @db.VarChar(2000)
   fields       Field[]
   form         Form    @relation(fields: [form_id], references: [id])
   form_id      String
@@ -37,7 +37,7 @@ model Section {
 model Field {
   field_id      String  @id @default(cuid())
   form_field_id String
-  content       String
+  content       String  @db.VarChar(2000)
   section       Section @relation(fields: [section_id], references: [id])
   section_id    String
 }
@@ -55,7 +55,7 @@ model UseCase {
 model UseCaseSection {
   id           String         @id @default(cuid())
   section_name String
-  access       String
+  access       String         @db.VarChar(2000)
   use_case     UseCase        @relation(fields: [use_case_id], references: [id])
   use_case_id  String
   fields       UseCaseField[]
@@ -64,7 +64,7 @@ model UseCaseSection {
 model UseCaseField {
   field_id            String         @id @default(cuid())
   form_field_id       String
-  content             String
+  content             String         @db.VarChar(2000)
   use_case_section    UseCaseSection @relation(fields: [use_case_section_id], references: [id])
   use_case_section_id String
 }
@@ -96,19 +96,17 @@ model FormCase {
 }
 
 model Role {
-  id    String @id @default(cuid())
-  name  String
-  users User[]
+  id   String @id @default(cuid())
+  name String
 }
 
 model User {
-  id        String @id @default(cuid())
-  number_id String
+  id        String  @id @default(cuid())
+  number_id String?
   user_name String
   last_name String
   email     String
-  role      Role   @relation(fields: [role_id], references: [id])
-  role_id   String
+  role      String?
 }
 
 // Es necesario borrar la carpeta migrations para hacer cambios
