@@ -3,7 +3,7 @@ export const useUpdateCasePayload = (caseId, name, formId, useCase) => {
     let newUseCase={
         "id": caseId,
         "case_name": name,
-        "case_creator": "jact1001@gmail.com",
+        "case_creator": "htaimal@gmail.com",
         "case_state": {
             "id": "in-progress",
             "name": "En Progreso"

@@ -18,8 +18,8 @@ export const data = {
 
 export const options = {
     stages: [
-        {duration: '1m', target: 15},
-        {duration: '3m', target: 15},
+        {duration: '1m', target: 100},
+        {duration: '3m', target: 100},
         {duration: '1m', target: 0},
     ],
 };
@@ -31,7 +31,8 @@ export default function () {
     const params = {
         headers: {
             //'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.cnRhaW1hbEBnbWFpbC5jb20.P_cPzXaUw8fuoOGAIrIKKhTiFgbEYzo-WdoJhjqnvRk',
-            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.amFjdDEwMDFAZ21haWwuY29t.Z5rrmon-5N6YbCpnz_B_8WhhJsGBUW1tpR2D0Q-aAd8',
+            //'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.amFjdDEwMDFAZ21haWwuY29t.Z5rrmon-5N6YbCpnz_B_8WhhJsGBUW1tpR2D0Q-aAd8',//tokenSQL
+            'x-access-token': 'eyJhbGciOiJIUzI1NiJ9.aHRhaW1hbEBnbWFpbC5jb20.6COG6IiwHvgp1WN70vQ9FdpVEXEtpwu6Jjxsj7QBSmU',
             'Content-Type': 'application/json'
         },
     };
