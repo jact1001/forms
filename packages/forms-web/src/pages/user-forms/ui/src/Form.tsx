@@ -17,7 +17,7 @@ export const Form = ({ form_name, cases, form_id, is_author }:IUserForm) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { createUseCaseLoading } = useUserFormsStore((state) => state.userForms);
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
     const toggleCount = () => {
         setIsExpanded(!isExpanded);
     };

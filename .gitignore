@@ -20,3 +20,4 @@ packages/forms-api/.env
 packages/forms-web/.env
 bin/
 .env
+/AWSCLIV2.pkg
